@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -212,50 +218,140 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Question Answer component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    Student([Student])
-    Teacher([Teacher/Author])
-    Grader([Grader])
+sequenceDiagram
+    participant Author
+    participant W as Question Answer Widget
+    participant UI as UI Layer
+    participant RTE as Rich Text Editor
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
     
-    subgraph "Question Answer Use Cases"
-        UC1[Read Question]
-        UC2[Type Answer]
-        UC3[Format Text]
-        UC4[Check Length]
-        UC5[Submit Answer]
-        UC6[View Feedback]
-        UC7[Create Question]
-        UC8[Set Rubric]
-        UC9[Configure Validation]
-        UC10[Grade Answer]
-        UC11[Provide Feedback]
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Question Text
+    Author->>W: Select Answer Type
+    alt Short Answer
+        Author->>W: Set Character Limit (default 150)
+        W->>UI: Configure Single-line Input
+    else Long Answer
+        Author->>W: Set Character Limit (default 5000)
+        W->>UI: Configure Textarea
+    else RTE (Rich Text)
+        Author->>W: Select Editor Type (Basic/Jodit)
+        Author->>W: Set Character Limit (default 5000)
+        alt Basic RTE
+            W->>UI: Configure Cazary Editor
+        else Jodit RTE
+            W->>UI: Configure Jodit Editor
+            Author->>W: Select Subject (ELA/Math/Science)
+        end
+        opt Math Support
+            Author->>W: Enable MathLive
+        end
     end
+    opt Answer Validation
+        Author->>W: Enable allowResponse
+        Author->>W: Enter Correct Answers
+        Author->>W: Enable Exact Match (optional)
+        Author->>W: Configure Feedback
+    end
+    opt Custom Keyboard
+        Author->>W: Enable Custom Keyboard
+        Author->>W: Select Language (FRA/ESP/GER/MATH)
+    end
+    W->>UI: Save Configuration
     
-    Student --> UC1
-    Student --> UC2
-    Student --> UC3
-    Student --> UC4
-    Student --> UC5
-    Student --> UC6
-    
-    Teacher --> UC7
-    Teacher --> UC8
-    Teacher --> UC9
-    
-    Grader --> UC10
-    Grader --> UC11
-    
-    UC1 --> UC2
-    UC2 --> UC5
-    UC5 --> UC6
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Question
+    alt Short Answer
+        W->>UI: Display Single-line Input
+        Student->>UI: Type Answer
+        W->>UI: Show Character Count
+        alt Character Limit Reached
+            W->>UI: Prevent Further Input
+        end
+    else Long Answer
+        W->>UI: Display Textarea
+        Student->>UI: Type Multi-line Answer
+        W->>UI: Show Character Count
+    else RTE
+        alt Basic RTE
+            W->>RTE: Initialize Cazary
+            RTE->>UI: Display Basic Toolbar
+        else Jodit RTE
+            W->>RTE: Initialize Jodit
+            RTE->>UI: Display Full Toolbar
+        end
+        Student->>RTE: Format Text
+        Student->>UI: Apply Styling
+        opt Math Equations
+            Student->>RTE: Click Math Button
+            RTE->>RTE: Open MathLive Editor
+            Student->>RTE: Enter Equation
+            RTE->>UI: Render LaTeX
+        end
+    end
+    opt Custom Keyboard Active
+        W->>UI: Display Keyboard Panel
+        Student->>UI: Click Special Character
+        UI->>W: Insert Character
+    end
+    W->>SCORM: Save Draft Response
+    SCORM->>SCORM: Store latency data
+    alt Validation Enabled
+        Student->>W: Submit Answer
+        W->>V: Validate Response
+        V->>V: Normalize Answer
+        V->>V: Split by Pipe Separator
+        loop For Each Valid Answer
+            alt Exact Match Mode
+                V->>V: Exact String Compare
+            else Flexible Match
+                V->>V: Case-insensitive Compare
+                V->>V: Trim Whitespace
+            end
+        end
+        V-->>W: Return Validation Result
+        alt Correct
+            W->>UI: Display Success Feedback
+            W->>UI: Apply Green Border
+            W->>UI: Disable Input
+        else Incorrect
+            W->>UI: Display Error Feedback
+            W->>UI: Apply Red Border
+        end
+    else No Validation
+        Student->>W: Submit Response
+        W->>UI: Confirm Submission
+        W->>UI: Disable Input
+    end
+    W->>SCORM: Save Final Response
+    W->>SCORM: Set Completion Status
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

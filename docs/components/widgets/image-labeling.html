@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -206,49 +212,129 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Image Labeling component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    Student([Student])
-    Teacher([Teacher/Author])
+sequenceDiagram
+    participant Author
+    participant W as Image Labeling Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
     
-    subgraph "Image Labeling Use Cases"
-        UC1[View Image]
-        UC2[Drag Label]
-        UC3[Drop on Hotspot]
-        UC4[Reposition Label]
-        UC5[Remove Label]
-        UC6[Submit Answer]
-        UC7[Check Feedback]
-        UC8[Create Hotspots]
-        UC9[Add Labels]
-        UC10[Set Correct Answers]
-        UC11[Configure Snap]
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Upload Base Image
+    W->>API: Upload Image
+    API-->>W: Return Image URL
+    Author->>W: Select Label Type (Number/Text)
+    alt Number Type
+        Author->>W: Select Shape (Circle/Square)
+        Author->>W: Select Arrow Type
+        Author->>W: Add Label
+        W->>UI: Create Numbered Label
+        Author->>UI: Drag Label to Position
+        Author->>W: Enter Label Text
+        Author->>W: Draw Arrow to Target
+        W->>UI: Render Arrow Line
+        opt Multiple Arrows
+            Author->>W: Add Second Arrow Point
+            Author->>W: Add Third Arrow Point
+        end
+    else Text Type
+        Author->>W: Add Label
+        W->>UI: Create Text Box
+        Author->>W: Enter Label Text
+        Author->>UI: Drag Label to Position
+        Author->>UI: Resize Text Box
+        opt With Arrow
+            Author->>W: Enable Arrow
+            Author->>W: Draw Arrow to Target
+        end
+    end        Author->>W: Set Colors (Label/Text/Arrow)
+    loop For Multiple Labels
+        Author->>W: Add and Position Label
     end
+    Author->>W: Set Max Attempts
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    Student --> UC1
-    Student --> UC2
-    Student --> UC3
-    Student --> UC4
-    Student --> UC5
-    Student --> UC6
-    Student --> UC7
-    
-    Teacher --> UC8
-    Teacher --> UC9
-    Teacher --> UC10
-    Teacher --> UC11
-    
-    UC1 --> UC2
-    UC2 --> UC3
-    UC3 --> UC6
-    UC6 --> UC7
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Base Image
+    alt Number Type
+        W->>UI: Render Drop Zones on Image
+        W->>UI: Render Numbered Labels (randomized)
+        W->>UI: Create Draggables
+        W->>UI: Initialize jQuery UI Draggable
+        Student->>UI: Drag Number Label
+        Student->>UI: Drop on Target Zone
+        UI->>W: Handle Drop Event
+        W->>UI: Place Label in Zone
+        W->>UI: Remove from Available List
+    else Text Type
+        W->>UI: Render Empty Drop Zones
+        W->>UI: Render Text Labels (randomized)
+        Student->>UI: Drag Text Label
+        Student->>UI: Drop on Target
+        UI->>W: Handle Drop
+        W->>UI: Place Label
+    end
+    W->>SCORM: Save Current State
+    loop Label All Targets
+        Student->>UI: Drag and Drop Labels
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate Label Positions
+    loop For Each Label
+        V->>V: Check Drop Zone Match
+        V->>V: Verify Label Placement
+    end
+    V-->>W: Return Validation Results
+    alt All Correct
+        W->>UI: Display Success Message
+        W->>UI: Apply Green Highlights
+        W->>UI: Disable Dragging
+    else Some/All Incorrect
+        W->>UI: Display Error Message
+        W->>UI: Apply Red to Incorrect
+        W->>UI: Apply Green to Correct
+        alt Attempts Remaining
+            W->>UI: Enable Try Again
+            Student->>W: Try Again
+            W->>UI: Clear Incorrect Labels
+            W->>UI: Return to Available List
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Auto-place All Labels Correctly
+        W->>UI: Disable Dragging
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

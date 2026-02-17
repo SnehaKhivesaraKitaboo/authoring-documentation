@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -216,50 +222,134 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Group Activity component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    Student([Student])
-    Leader([Group Leader])
-    Teacher([Teacher/Author])
+sequenceDiagram
+    participant Author
+    participant W as Group Activity Widget
+    participant UI as UI Layer
+    participant Child as Child Widgets
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
     
-    subgraph "Group Activity Use Cases"
-        UC1[Join Group]
-        UC2[Complete Part]
-        UC3[Submit Work]
-        UC4[View Progress]
-        UC5[Coordinate Team]
-        UC6[Review Submissions]
-        UC7[Share Resources]
-        UC8[Create Activity]
-        UC9[Monitor Groups]
-        UC10[Assign Roles]
-        UC11[Provide Feedback]
+    Note over Author,Child: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Select Style (Vertical/Horizontal/Worked Example)
+    Author->>W: Drag Widget to Drop Zone
+    W->>UI: Create Widget Container
+    loop Add Child Widgets (up to 35)
+        Author->>W: Drop Assessment Widget
+        alt MCQ
+            W->>Child: Initialize MCQ Widget
+            Author->>Child: Configure MCQ
+        else FIB
+            W->>Child: Initialize FIB Widget
+            Author->>Child: Configure FIB
+        else True/False
+            W->>Child: Initialize T/F Widget
+            Author->>Child: Configure T/F
+        else Match-the-Pairs
+            W->>Child: Initialize MTP Widget
+            Author->>Child: Configure MTP
+        else Other Assessment Widget
+            W->>Child: Initialize Widget
+            Author->>Child: Configure Widget
+        end
+        Author->>W: Save Widget Configuration
     end
+    Author->>W: Set Max Attempts
+    Author->>W: Configure Buttons (Show Me, Reset, Try Again)
+    opt Gradable Activity
+        Author->>W: Enable Gradable Mode
+        Author->>W: Set Time Limit
+        Author->>W: Set Passing Score
+    end
+    W->>UI: Save Group Configuration
     
-    Student --> UC1
-    Student --> UC2
-    Student --> UC3
-    Student --> UC4
-    
-    Leader --> UC5
-    Leader --> UC6
-    Leader --> UC7
-    
-    Teacher --> UC8
-    Teacher --> UC9
-    Teacher --> UC10
-    Teacher --> UC11
-    
-    UC1 --> UC2
-    UC2 --> UC3
-    UC5 --> UC6
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Container
+    alt Style: Horizontal Slider
+        W->>UI: Initialize Slider Navigation
+        W->>UI: Display Question 1
+    else Style: Vertical
+        W->>UI: Stack All Questions
+    else Style: Worked Example
+        W->>UI: Two-Column Layout
+    end
+    opt Gradable Activity
+        W->>UI: Start Timer
+        W->>UI: Display Timer
+    end
+    loop For Each Child Widget
+        Student->>Child: Interact with Widget
+        Child->>Child: Process Student Input
+        Child->>W: Report State
+        W->>SCORM: Save Individual State
+    end
+    alt Horizontal Style
+        Student->>UI: Click Next/Previous
+        UI->>W: Navigate Questions
+        W->>UI: Display Question
+    end
+    Student->>W: Submit All Answers
+    W->>V: Validate All Child Widgets
+    loop For Each Child Widget
+        V->>Child: Validate Widget
+        Child-->>V: Return Result
+        V->>V: Calculate Score
+    end
+    V-->>W: Return Overall Results
+    W->>UI: Display Feedback Alert
+    W->>UI: Show Questions Attempted
+    W->>UI: Show Correct Count
+    W->>UI: Show Incorrect Count
+    W->>UI: Show Partial Count
+    alt All Correct
+        W->>UI: Display Success Message
+    else Some Incorrect
+        W->>UI: Display Error Message
+        alt Attempts Remaining
+            W->>UI: Enable Try Again
+            Student->>W: Try Again
+            W->>UI: Reset Incorrect Answers
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        loop For Each Child Widget
+            W->>Child: Reveal Answer
+            Child->>UI: Display Correct Answer
+        end
+    end
+    W->>SCORM: Save Final Group State
+    W->>SCORM: Save Completion Status
+    opt Gradable Activity
+        W->>SCORM: Save Score
+        W->>SCORM: Save Time Taken
+    end
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

@@ -48,6 +48,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -141,46 +147,139 @@ classDiagram
           </div>
         </div>
       </section>
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "Match Pairs System"
-        UC1(("Select Item"))
-        UC2(("Create Connection"))
-        UC3(("Remove Connection"))
-        UC4(("Validate Pairs"))
-        UC5(("Create Activity"))
-        UC6(("Define Pairs"))
-        UC7(("Shuffle Items"))
+sequenceDiagram
+    participant Author
+    participant W as Match The Pairs Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Pair (2-10 pairs)
+    loop For Each Pair
+        Author->>W: Configure Column A
+        alt Text Mode
+            Author->>W: Enter Text Content
+        else Image Mode
+            Author->>W: Upload Image
+            W->>API: Upload Image
+            API-->>W: Return URL
+            Author->>W: Set Display Mode
+        end
+        Author->>W: Configure Column B
+        Author->>W: Set Content Type
+        opt Individual Feedback
+            Author->>W: Enable Feedback
+            Author->>W: Enter Correct Feedback
+            Author->>W: Enter Incorrect Feedback
+        end
     end
+    Author->>W: Select Style (mtpStyle1-4)
+    Author->>W: Set Max Attempts
+    Author->>W: Enable Shuffle Column B
+    Author->>W: Configure Generic Feedback
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
-    
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Learner --> UC4
-    Author --> UC5
-    Author --> UC6
-    Author --> UC7
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Column A
+    W->>UI: Render Column B
+    alt Shuffle Enabled
+        W->>W: Randomize Column B Order
+        W->>UI: Display Shuffled Column B
+    end
+    W->>UI: Create SVG Canvas for Lines
+    W->>UI: Initialize jQuery Draggable
+    alt Drag Interaction
+        Student->>UI: Drag Circle from Column A
+        UI->>W: Track Drag Position
+        Student->>UI: Drop on Column B Item
+        UI->>W: Handle Drop
+        W->>UI: Draw SVG Line
+        W->>UI: Display Connection
+    else Click Interaction
+        Student->>UI: Click Column A Item
+        UI->>W: Mark as Selected
+        W->>UI: Highlight Selection
+        Student->>UI: Click Column B Item
+        UI->>W: Create Match
+        W->>UI: Draw SVG Line
+    end
+    W->>SCORM: Save Current State
+    loop Match All Pairs
+        Student->>UI: Create Connections
+        W->>SCORM: Update State
+    end
+    opt Remove Connection
+        Student->>UI: Click Line
+        UI->>W: Handle Line Click
+        W->>UI: Remove Line
+        W->>UI: Clear Connection
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate All Matches
+    loop For Each Pair
+        V->>V: Check Column A to Column B Match
+        V->>V: Compare with Correct Pairing
+    end
+    V-->>W: Return Validation Results
+    alt Individual Feedback Enabled
+        loop For Each Pair
+            alt Correct Match
+                W->>UI: Display Correct Feedback
+                W->>UI: Green Line
+            else Incorrect Match
+                W->>UI: Display Incorrect Feedback
+                W->>UI: Red Line
+            end
+        end
+    else Generic Feedback
+        alt All Correct
+            W->>UI: Display Generic Success
+            W->>UI: All Lines Green
+        else Some Incorrect
+            W->>UI: Display Generic Error
+            W->>UI: Color-code Lines
+        end
+    end
+    alt Attempts Remaining
+        W->>UI: Enable Try Again
+        Student->>W: Try Again
+        W->>UI: Clear Incorrect Lines
+        W->>UI: Keep Correct Lines
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Draw All Correct Lines
+        W->>UI: Disable Interaction
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Views two columns of items, clicks or drags to create connections between related items, modifies connections if needed, submits for validation, and receives feedback on correct/incorrect matches.</li>
-                <li><strong>Author:</strong> Creates pairs of related items, defines correct matches, controls whether items are shuffled, and configures visual layout and interaction style.</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

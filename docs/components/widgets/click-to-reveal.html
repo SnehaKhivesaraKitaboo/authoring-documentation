@@ -70,6 +70,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -159,46 +165,81 @@ classDiagram
           </div>
         </div>
       </section>
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "Click to Reveal System"
-        UC1(("Click Trigger"))
-        UC2(("Reveal Content"))
-        UC3(("Hide Content"))
-        UC4(("Toggle Panel"))
-        UC5(("Create Panels"))
-        UC6(("Configure Mode"))
-        UC7(("Set Animation"))
+sequenceDiagram
+    participant Author
+    participant W as Click to Reveal Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Header Text
+    Author->>W: Enter Instruction Text
+    Author->>W: Enter Description Text (hidden content)
+    Author->>W: Select Style (CTR_Style1-4)
+    Author->>W: Configure Button Label
+    Author->>W: Select Media Type
+    alt Image Selected
+        Author->>W: Upload Image
+        W->>API: Upload Image
+        API-->>W: Return Image URL
+    else Video Selected
+        Author->>W: Upload/Link Video
+        W->>API: Save Video Reference
+    else Audio Selected
+        Author->>W: Upload Audio
+        W->>API: Save Audio File
     end
+    Author->>W: Select Media Placement
+    Author->>W: Set Colors/Appearance
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
-    
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Learner --> UC4
-    Author --> UC5
-    Author --> UC6
-    Author --> UC7
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,UI: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Header
+    W->>UI: Render Instruction
+    W->>UI: Render Reveal Button
+    W->>UI: Hide Description Content
+    W->>UI: Hide Media (if present)
+    Student->>UI: Click Reveal Button
+    UI->>W: Handle Button Click
+    W->>UI: Show Description Content
+    W->>UI: Animate Content Reveal
+    alt Media Present
+        W->>UI: Display Media
+        alt Video
+            W->>UI: Initialize Video.js Player
+            Student->>UI: Play Video
+        else Audio
+            W->>UI: Initialize Audio Player
+            Student->>UI: Play Audio
+        end
+    end
+    W->>UI: Hide Reveal Button
+    Student->>W: Read Revealed Content
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Clicks on triggers or buttons to reveal hidden content, controls the pace of information disclosure, and can hide/show panels as needed for review.</li>
-                <li><strong>Author:</strong> Creates reveal panels with triggers and hidden content, configures reveal mode (toggle, accordion, sequential), and sets animation styles for smooth transitions.</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

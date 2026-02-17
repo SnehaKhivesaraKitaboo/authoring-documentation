@@ -48,6 +48,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -131,44 +137,132 @@ classDiagram
           </div>
         </div>
       </section>
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "FIB Component System"
-        UC1(("Fill in Blanks"))
-        UC2(("Validate Answers"))
-        UC3(("Get Feedback"))
-        UC4(("Create FIB Activity"))
-        UC5(("Configure Blanks"))
-        UC6(("Set Alternatives"))
+sequenceDiagram
+    participant Author
+    participant W as FIB Widget
+    participant UI as UI Layer
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Select FIB Type (Text/Dropdown/Drag-Drop)
+    Author->>W: Enter Sentence
+    Author->>W: Position Cursor
+    Author->>W: Click Insert Blank
+    alt Dropdown Type
+        W->>UI: Insert Dropdown Element
+        Author->>W: Add Options (2-6)
+        Author->>W: Set Correct Option
+        loop Add Distractors
+            Author->>W: Enter Distractor Text
+        end
+    else Text Input Type
+        W->>UI: Insert Input Field
+        Author->>W: Enter Correct Answer(s)
+        Author->>W: Add Alternatives (pipe-separated)
+        Author->>W: Set Case Sensitivity
+    else Drag-Drop Type
+        W->>UI: Insert Drop Zone
+        Author->>W: Enter Correct Answer
+        Author->>W: Add Distractors
+        W->>UI: Create Draggable Options
     end
+    loop For Multiple Blanks
+        Author->>W: Insert Additional Blanks
+        Author->>W: Configure Each Blank
+    end
+    Author->>W: Set Max Attempts
+    Author->>W: Configure Feedback
+    W->>UI: Save Configuration
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
-    
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Author --> UC4
-    Author --> UC5
-    Author --> UC6
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Sentences with Blanks
+    alt Dropdown Type
+        W->>UI: Render Dropdown Lists
+        W->>UI: Randomize Options
+        Student->>UI: Select Option from Dropdown
+        UI->>W: Record Selection
+    else Text Input Type
+        W->>UI: Render Input Fields
+        Student->>UI: Type Answer
+        UI->>W: Store Input
+    else Drag-Drop Type
+        W->>UI: Render Drop Zones
+        W->>UI: Render Draggable Options
+        W->>UI: Randomize Options
+        W->>UI: Initialize jQuery Draggable
+        Student->>UI: Drag Option
+        Student->>UI: Drop on Blank
+        UI->>W: Handle Drop
+        W->>UI: Place Option in Blank
+    end
+    W->>SCORM: Save Current State
+    loop Fill All Blanks
+        Student->>W: Provide Answers
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate All Blanks
+    loop For Each Blank
+        alt Dropdown
+            V->>V: Compare Selected Index
+        else Text Input
+            V->>V: Normalize Answer
+            V->>V: Compare with Alternatives
+            alt Case Sensitive
+                V->>V: Exact Match
+            else Case Insensitive
+                V->>V: Lowercase Comparison
+            end
+        else Drag-Drop
+            V->>V: Compare Dropped Item ID
+        end
+    end
+    V-->>W: Return Validation Results
+    alt All Correct
+        W->>UI: Display Success Message
+        W->>UI: Apply Green Checkmarks
+    else Some/All Incorrect
+        W->>UI: Display Error Message
+        W->>UI: Apply Red X to Incorrect
+        W->>UI: Apply Green Checkmarks to Correct
+        alt Attempts Remaining
+            W->>UI: Enable Try Again
+            Student->>W: Try Again
+            W->>UI: Clear Incorrect Answers
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Display Correct Answers
+        W->>UI: Fill All Blanks
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Reads the sentence, identifies blanks, selects or types answers, submits for validation, and reviews feedback with correct answers.</li>
-                <li><strong>Author:</strong> Creates sentences with blanks, defines correct answers and alternatives, configures interaction mode (text/dropdown/drag), and sets validation rules.</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

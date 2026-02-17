@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -213,48 +219,79 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Sidebar component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    User([User/Student])
-    Author([Content Author])
+sequenceDiagram
+    participant Author
+    participant W as Sidebar Widget
+    participant UI as UI Layer
+    participant Student
     
-    subgraph "Sidebar Use Cases"
-        UC1[Toggle Sidebar]
-        UC2[Switch Panels]
-        UC3[View Resources]
-        UC4[Navigate Links]
-        UC5[Read Content]
-        UC6[Take Notes]
-        UC7[Create Sidebar]
-        UC8[Add Panels]
-        UC9[Add Content]
-        UC10[Configure Position]
-        UC11[Set Auto-hide]
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Header Text
+    Author->>W: Enter Body Content Text
+    opt Inline Images
+        Author->>W: Insert Image in Content
+        W->>UI: Embed Image
     end
+    Author->>W: Set Default State (Expanded/Collapsed)
+    Author->>W: Select Outline Mode
+    Author->>W: Set Background Color
+    Author->>W: Set Accent Color
+    W->>UI: Save Configuration
     
-    User --> UC1
-    User --> UC2
-    User --> UC3
-    User --> UC4
-    User --> UC5
-    User --> UC6
-    
-    Author --> UC7
-    Author --> UC8
-    Author --> UC9
-    Author --> UC10
-    Author --> UC11
-    
-    UC1 --> UC2
-    UC2 --> UC3
-    UC3 --> UC5
+    Note over Student,UI: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    alt Default Collapsed
+        W->>UI: Render Header Only
+        W->>UI: Display Right Arrow Icon
+        W->>UI: Hide Content (height: 0)
+        Student->>UI: Click Header/Icon
+        UI->>W: Handle Click Event
+        W->>UI: Toggle Checkbox State
+        W->>UI: Animate Expand (CSS transition)
+        W->>UI: Change Icon to Down Arrow
+        W->>UI: Display Content (height: auto)
+    else Default Expanded
+        W->>UI: Render Header
+        W->>UI: Display Down Arrow Icon
+        W->>UI: Display Content (visible)
+        Student->>UI: Click Header/Icon
+        UI->>W: Handle Click Event
+        W->>UI: Toggle Checkbox State
+        W->>UI: Animate Collapse (CSS transition)
+        W->>UI: Change Icon to Right Arrow
+        W->>UI: Hide Content (height: 0)
+    end
+    opt Math Equations in Content
+        W->>UI: Render LaTeX Equations
+    end
+    Student->>W: Read Content
+    Student->>UI: Click Header Again
+    UI->>W: Toggle State
+    W->>UI: Animate Transition
+    Note right of Student: Pure CSS-based toggle<br/>No SCORM state saving<br/>Informational only
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

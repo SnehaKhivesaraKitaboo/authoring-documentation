@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -212,46 +218,102 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Graphic Organizer component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    User([User/Student])
-    Author([Content Author])
+sequenceDiagram
+    participant Author
+    participant W as Graphic Organizer Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant SCORM as SCORM API
     
-    subgraph "Graphic Organizer Use Cases"
-        UC1[Create Nodes]
-        UC2[Connect Nodes]
-        UC3[Categorize Items]
-        UC4[Move Elements]
-        UC5[Edit Content]
-        UC6[Add Labels]
-        UC7[Export Organizer]
-        UC8[Import Template]
-        UC9[Apply Styling]
-        UC10[Validate Structure]
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Upload Base Image
+    W->>API: Upload Image
+    API-->>W: Return Image URL
+    Author->>W: Set Alt Text
+    Author->>W: Click Add Hotspot
+    W->>UI: Create Draggable Hotspot
+    W->>UI: Enable Resize Handles
+    Author->>UI: Drag Hotspot to Position
+    Author->>UI: Resize Hotspot
+    Author->>W: Click Hotspot to Configure
+    W->>UI: Show Hotspot Settings
+    Author->>W: Enter Header Label
+    Author->>W: Enter Answer Text
+    Author->>W: Set Character Limit
+    Author->>W: Set Background Color
+    Author->>W: Set Outline Color
+    Author->>W: Set Lock for Student (optional)
+    opt Advanced Formatting
+        Author->>W: Enable Jodit Editor
     end
+    loop For Multiple Hotspots
+        Author->>W: Add Hotspot
+        Author->>W: Configure Hotspot
+    end
+    Author->>W: Select Label Type
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    User --> UC1
-    User --> UC2
-    User --> UC3
-    User --> UC4
-    User --> UC5
-    User --> UC6
-    
-    Author --> UC7
-    Author --> UC8
-    Author --> UC9
-    Author --> UC10
-    
-    UC1 --> UC5
-    UC2 --> UC6
-    UC3 --> UC9
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Base Image
+    W->>UI: Render Hotspot Overlays
+    Student->>UI: Click Hotspot
+    UI->>W: Handle Hotspot Click
+    W->>UI: Open Input Modal
+    W->>UI: Show Header Label
+    alt Advanced Formatting Enabled
+        W->>UI: Initialize Jodit Editor
+        Student->>UI: Enter Formatted Text
+        opt Math Equations
+            Student->>UI: Insert Math Equation
+            UI->>W: Launch MathLive Editor
+        end
+    else Basic Input
+        W->>UI: Show Textarea
+        Student->>UI: Enter Text
+        W->>UI: Show Character Count
+    end
+    alt Hotspot Locked
+        W->>UI: Display Read-Only Content
+    else Hotspot Editable
+        Student->>W: Enter Answer
+        W->>SCORM: Save Hotspot Data
+    end
+    Student->>UI: Close Modal
+    UI->>W: Save Input
+    W->>UI: Update Hotspot State
+    loop For Each Hotspot
+        Student->>UI: Click and Fill Hotspot
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit (if enabled)
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

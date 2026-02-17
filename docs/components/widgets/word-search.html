@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -224,51 +230,142 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Word Search component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    Student([Student])
-    Teacher([Teacher/Author])
+sequenceDiagram
+    participant Author
+    participant W as Word Search Widget
+    participant UI as UI Layer
+    participant Puzzle as Puzzle Engine
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
     
-    subgraph "Word Search Use Cases"
-        UC1[View Grid]
-        UC2[View Word List]
-        UC3[Select Cells]
-        UC4[Find Word]
-        UC5[Highlight Word]
-        UC6[Clear Selection]
-        UC7[Check Progress]
-        UC8[Create Puzzle]
-        UC9[Add Words]
-        UC10[Set Grid Size]
-        UC11[Configure Directions]
-        UC12[Set Difficulty]
+    Note over Author,Puzzle: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Word (up to 13 words)
+    loop For Each Word
+        Author->>W: Enter Word (max 13 chars)
+        W->>W: Validate Word Length
+        W->>W: Convert to Uppercase
     end
+    Author->>W: Generate Puzzle
+    W->>Puzzle: Initialize wordfind.js
+    Puzzle->>Puzzle: Create 13x13 Grid
+    loop For Each Word
+        Puzzle->>Puzzle: Find Valid Position
+        alt Horizontal Placement
+            Puzzle->>Puzzle: Place Left-to-Right
+        else Vertical Placement
+            Puzzle->>Puzzle: Place Top-to-Bottom
+        else Diagonal Placement
+            Puzzle->>Puzzle: Place Diagonally
+        end
+    end
+    Puzzle->>Puzzle: Fill Empty Cells with Random Letters
+    Puzzle-->>W: Return Puzzle Grid
+    W->>UI: Display Puzzle
+    W->>UI: Display Word List
+    Author->>W: Set Max Attempts
+    Author->>W: Toggle Show Words
+    Author->>W: Set Appearance Color
+    opt Shuffle Puzzle
+        Author->>W: Click Shuffle
+        W->>Puzzle: Regenerate Puzzle
+        Puzzle-->>W: New Grid
+        W->>UI: Update Display
+    end
+    W->>UI: Save Configuration
     
-    Student --> UC1
-    Student --> UC2
-    Student --> UC3
-    Student --> UC4
-    Student --> UC5
-    Student --> UC6
-    Student --> UC7
-    
-    Teacher --> UC8
-    Teacher --> UC9
-    Teacher --> UC10
-    Teacher --> UC11
-    Teacher --> UC12
-    
-    UC1 --> UC3
-    UC3 --> UC4
-    UC4 --> UC5
-    UC5 --> UC7
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Puzzle Grid (13x13)
+    alt Show Words Enabled
+        W->>UI: Display Word List
+    end
+    W->>UI: Initialize wordfindgame.js
+    W->>UI: Bind Mouse/Touch Events
+    Student->>UI: Click First Letter
+    UI->>W: Mark Start Position
+    W->>UI: Highlight Selected Cell
+    Student->>UI: Drag to Last Letter
+    UI->>W: Track Selection Path
+    W->>UI: Highlight Selection Path
+    Student->>UI: Release Mouse/Touch
+    UI->>W: Complete Selection
+    W->>V: Validate Selection
+    V->>V: Get Selected Letters
+    V->>V: Form Word from Path
+    V->>V: Check Against Word List
+    V->>V: Verify Orientation (H/V/Diagonal)
+    alt Word Found
+        V-->>W: Valid Word Match
+        W->>UI: Apply Permanent Highlight
+        W->>UI: Strike Through Word in List
+        W->>UI: Add 'solved' Class
+        W->>SCORM: Save Found Word
+        alt All Words Found
+            W->>UI: Display Success Message
+            W->>UI: Disable Further Selection
+        end
+    else Invalid Selection
+        V-->>W: No Match
+        W->>UI: Clear Selection Highlight
+    end
+    loop Find All Words
+        Student->>UI: Select Letters
+        W->>V: Validate
+        W->>SCORM: Update State
+    end
+    opt Submit Clicked
+        Student->>W: Submit
+        W->>V: Check Completion
+        alt All Words Found
+            W->>UI: Display Success
+            W->>SCORM: Save Complete Status
+        else Incomplete
+            W->>UI: Show Words Remaining
+            alt Attempts Remaining
+                W->>UI: Enable Try Again
+            end
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        loop For Each Word
+            W->>UI: Auto-highlight Word
+            W->>UI: Strike Through in List
+        end
+        W->>UI: Disable Interaction
+    end
+    opt Reset Clicked
+        Student->>W: Reset
+        W->>UI: Clear All Highlights
+        W->>UI: Restore Word List
+        W->>UI: Enable Interaction
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

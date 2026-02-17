@@ -49,6 +49,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -223,48 +229,116 @@ classDiagram
         </div>
       </section>
 
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
         <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Use Case Diagram</h2>
-          </div>
           <div class="card__content">
-            <p>User interactions with the Table GO component:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    Student([Student])
-    Teacher([Teacher/Author])
+sequenceDiagram
+    participant Author
+    participant W as Table GO Widget
+    participant UI as UI Layer
+    participant Student
+    participant RTE as Jodit Editor
+    participant SCORM as SCORM API
     
-    subgraph "Table GO Use Cases"
-        UC1[View Table]
-        UC2[Enter Data]
-        UC3[Edit Cell]
-        UC4[Navigate Cells]
-        UC5[Copy/Paste]
-        UC6[Submit Table]
-        UC7[Create Table]
-        UC8[Add Rows/Columns]
-        UC9[Set Headers]
-        UC10[Configure Validation]
-        UC11[Apply Styling]
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Show Create Table Dialog
+    Author->>W: Enter Row Count
+    Author->>W: Enter Column Count
+    Author->>W: Create Table
+    W->>UI: Generate Table Structure
+    W->>UI: Render Table Grid
+    loop Configure Table
+        Author->>UI: Click Cell
+        UI->>W: Select Cell
+        Author->>W: Enter Cell Content
+        opt Advanced Formatting
+            Author->>W: Enable Jodit Editor
+            W->>RTE: Initialize Rich Text Editor
+            Author->>RTE: Format Cell Content
+        end
+        opt Merge Cells
+            Author->>UI: Select Multiple Cells
+            Author->>W: Merge Cells
+            W->>UI: Combine Cells
+            W->>W: Store Merge Metadata
+        end
+        opt Student Editable Cell
+            Author->>W: Enable for Student
+            W->>W: Mark Cell as Editable
+            Author->>W: Set Placeholder Text
+        end
     end
+    Author->>W: Select Style Theme (1-4)
+    Author->>W: Set Header Row Color
+    Author->>W: Enable Row Alternation
+    Author->>W: Set Alternating Colors
+    Author->>W: Configure Vertical Lines
+    Author->>W: Set Column Alignment
+    opt Resize Columns
+        Author->>UI: Drag Column Border
+        UI->>W: Adjust Column Width
+    end
+    Author->>W: Enable Submit (optional)
+    W->>UI: Save Configuration
     
-    Student --> UC1
-    Student --> UC2
-    Student --> UC3
-    Student --> UC4
-    Student --> UC5
-    Student --> UC6
-    
-    Teacher --> UC7
-    Teacher --> UC8
-    Teacher --> UC9
-    Teacher --> UC10
-    Teacher --> UC11
-    
-    UC1 --> UC2
-    UC2 --> UC3
-    UC3 --> UC6
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Table Structure
+    W->>UI: Apply Selected Style Theme
+    W->>UI: Apply Colors and Formatting
+    alt Submit Enabled (Interactive Mode)
+        loop For Each Editable Cell
+            W->>UI: Highlight Editable Cells
+            Student->>UI: Click Editable Cell
+            UI->>W: Focus Cell
+            alt Basic Input
+                W->>UI: Enable Contenteditable
+                Student->>W: Enter Text
+            else Advanced Formatting
+                W->>RTE: Initialize Jodit
+                RTE->>UI: Display Toolbar
+                Student->>RTE: Enter Formatted Content
+                opt Math Equations
+                    Student->>RTE: Insert Equation
+                    RTE->>UI: Render Math
+                end
+            end
+            W->>SCORM: Save Cell Data
+        end
+        Student->>W: Submit Table
+        W->>SCORM: Save Final Table State
+        W->>UI: Disable Editing
+        W->>UI: Show Confirmation
+    else Display Only Mode
+        W->>UI: Render Static Table
+        Note right of Student: Read-only display<br/>No interaction enabled
+    end
+    opt Reset Clicked
+        Student->>W: Reset Table
+        W->>UI: Clear Editable Cells
+        W->>UI: Restore Placeholder Text
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
             </div>
           </div>
         </div>

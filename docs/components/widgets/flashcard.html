@@ -48,6 +48,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -137,46 +143,102 @@ classDiagram
           </div>
         </div>
       </section>
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "Flashcard System"
-        UC1(("View Card Front"))
-        UC2(("Flip Card"))
-        UC3(("Navigate Cards"))
-        UC4(("Mark as Known"))
-        UC5(("Create Cards"))
-        UC6(("Set Difficulty"))
-        UC7(("Configure Mode"))
+sequenceDiagram
+    participant Author
+    participant W as Flashcard Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Flashcard (2-20 cards)
+    loop For Each Card
+        Author->>W: Configure Front Card
+        alt Text Mode
+            Author->>W: Enter Front Text (150 chars)
+        else Media Mode
+            Author->>W: Select Media Type
+            alt Image
+                Author->>W: Upload Image
+                W->>API: Upload Image
+                API-->>W: Return URL
+            else Video
+                Author->>W: Upload/Link Video
+                W->>API: Save Video
+            else Audio
+                Author->>W: Upload Audio
+                W->>API: Save Audio
+            end
+            Author->>W: Add Title/Caption
+        end
+        Author->>W: Configure Back Card
+        Author->>W: Set Content (Text/Media)
     end
+    Author->>W: Select Style (Style-1/Style-2)
+    Author->>W: Set Card Color
+    Author->>W: Configure Auto-Play (optional)
+    Author->>W: Set Pause Duration
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
-    
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Learner --> UC4
-    Author --> UC5
-    Author --> UC6
-    Author --> UC7
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,UI: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render First Card (Front Face)
+    W->>UI: Initialize Slider
+    alt Style-2 Selected
+        W->>UI: Display Progress Bar
+    end
+    Student->>UI: Click Card to Flip
+    UI->>W: Handle Flip Event
+    W->>UI: Animate Card Flip
+    W->>UI: Show Back Face
+    alt Media on Back
+        W->>UI: Initialize Media Player
+    end
+    Student->>UI: Click Card Again
+    UI->>W: Handle Flip Event
+    W->>UI: Flip to Front Face
+    Student->>UI: Click Next Arrow
+    UI->>W: Navigate to Next Card
+    W->>UI: Transition to Next Card
+    alt Style-2 Active
+        W->>UI: Update Progress Bar
+    end
+    alt Auto-Play Enabled
+        W->>W: Start Auto-Play Timer
+        loop Auto Progression
+            W->>UI: Advance to Next Card
+            W->>UI: Update Progress
+        end
+    end
+    Student->>UI: Click Previous Arrow
+    UI->>W: Navigate to Previous Card
+    W->>UI: Show Previous Card
+    Student->>UI: Click Slide Indicator
+    UI->>W: Jump to Specific Card
+    W->>UI: Display Selected Card
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Views the front of a flashcard, attempts to recall the answer, flips to see the back, navigates through the deck, and marks cards as known or for review.</li>
-                <li><strong>Author:</strong> Creates flashcard content with front and back text, organizes cards into decks, sets difficulty levels, and configures study mode (sequential, random, spaced repetition).</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

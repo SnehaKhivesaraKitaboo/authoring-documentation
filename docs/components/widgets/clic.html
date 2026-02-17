@@ -83,6 +83,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -175,46 +181,62 @@ classDiagram
           </div>
         </div>
       </section>
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "CLIC Component System"
-        UC1(("Click Hotspot"))
-        UC2(("View Content"))
-        UC3(("Explore Regions"))
-        UC4(("Complete Sequence"))
-        UC5(("Create Hotspots"))
-        UC6(("Link Content"))
-        UC7(("Configure Mode"))
-    end
+sequenceDiagram
+    participant Author
+    participant W as CLIC Widget
+    participant UI as UI Layer
+    participant Student
+    participant CLIC as CLIC Server
+    participant Iframe
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Configuration Form
+    Author->>W: Enter CLIC UID
+    Author->>W: Enter Instance Name
+    W->>W: Validate Form Fields
+    Author->>W: Submit Configuration
+    W->>W: Set issubmitted = true
+    W->>UI: Hide Form, Show Iframe
+    W->>UI: Save Configuration
     
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Learner --> UC4
-    Author --> UC5
-    Author --> UC6
-    Author --> UC7
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,Iframe: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>W: Build CLIC URL
+    W->>W: baseUrl + ?clicid=UID&instancename=NAME
+    W->>Iframe: Create Iframe Element
+    Iframe->>CLIC: Load CLIC Component
+    CLIC->>CLIC: Load library.js
+    CLIC->>CLIC: Load polyfills.js
+    CLIC->>CLIC: Load styles.css
+    CLIC-->>Iframe: Render CLIC Content
+    Iframe->>UI: Display CLIC Component
+    Student->>Iframe: Interact with CLIC
+    Note right of Student: All interactions handled<br/>by CLIC system internally
+    Iframe->>CLIC: Send Interaction Data
+    CLIC->>CLIC: Process Student Input
+    CLIC-->>Iframe: Return Results
+    Iframe->>Student: Display Feedback
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Explores interactive content by clicking hotspots, views associated information or media, explores all regions for discovery-based learning.</li>
-                <li><strong>Author:</strong> Creates clickable hotspot regions on images or backgrounds, links content to each hotspot, and configures interaction modes (single, multiple, or ordered sequence).</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

@@ -48,6 +48,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -128,46 +134,137 @@ classDiagram
           </div>
         </div>
       </section>
+      
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">User interactions and workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "True/False System"
-        UC1(("Read Statement"))
-        UC2(("Select Answer"))
-        UC3(("Submit Response"))
-        UC4(("View Explanation"))
-        UC5(("Create Questions"))
-        UC6(("Set Correct Answer"))
-        UC7(("Add Explanation"))
+sequenceDiagram
+    participant Author
+    participant W as True/False Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Question Text
+    Author->>W: Configure Option 1 (True)
+    Author->>W: Configure Option 2 (False)
+    opt Customize Labels
+        Author->>W: Change True Label
+        Author->>W: Change False Label
     end
+    opt Add Media to Question
+        Author->>W: Select Media Type
+        alt Image
+            Author->>W: Upload Image
+            W->>API: Upload Image
+            API-->>W: Return URL
+        else Video
+            Author->>W: Upload/Link Video
+            W->>API: Save Video
+        else Audio
+            Author->>W: Upload Audio
+            W->>API: Save Audio
+        end
+    end
+    Author->>W: Set Correct Answer
+    opt Individual Feedback
+        Author->>W: Enable Feedback
+        Author->>W: Enter Correct Feedback
+        Author->>W: Enter Incorrect Feedback
+    end
+    Author->>W: Select Style (Card 1-3 / Full Bleed 1-3)
+    Author->>W: Set Max Attempts
+    Author->>W: Configure Generic Feedback
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
     
-    Learner[👤 Learner]:::actor
-    Author[👤 Author]:::actor
-    
-    Learner --> UC1
-    Learner --> UC2
-    Learner --> UC3
-    Learner --> UC4
-    Author --> UC5
-    Author --> UC6
-    Author --> UC7
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Question
+    alt Media Present
+        W->>UI: Display Image/Video/Audio
+        alt Video
+            W->>UI: Initialize Video Player
+        else Audio
+            W->>UI: Initialize Audio Player
+        end
+    end
+    W->>UI: Render True Option
+    W->>UI: Render False Option
+    W->>UI: Display Radio Buttons
+    Student->>UI: Click True
+    UI->>W: Select True Option
+    W->>UI: Deselect False
+    W->>UI: Highlight True
+    W->>UI: Enable Submit Button
+    W->>SCORM: Save Selection
+    opt Change Answer
+        Student->>UI: Click False
+        UI->>W: Select False Option
+        W->>UI: Deselect True
+        W->>UI: Highlight False
+        W->>SCORM: Update Selection
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate Selection
+    V->>V: Compare with Correct Answer
+    V-->>W: Return Result
+    alt Individual Feedback Enabled
+        alt Correct
+            W->>UI: Display Correct Feedback
+            W->>UI: Apply Green Highlight
+            W->>UI: Show Checkmark
+        else Incorrect
+            W->>UI: Display Incorrect Feedback
+            W->>UI: Apply Red Highlight
+            W->>UI: Show X Mark
+        end
+    else Generic Feedback
+        alt Correct
+            W->>UI: Display Generic Success
+            W->>UI: Green Styling
+        else Incorrect
+            W->>UI: Display Generic Error
+            W->>UI: Red Styling
+        end
+    end
+    alt Attempts Remaining
+        W->>UI: Enable Try Again
+        Student->>W: Try Again
+        W->>UI: Clear Selection
+        W->>UI: Reset Visual State
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Select Correct Answer
+        W->>UI: Display Explanation
+        W->>UI: Disable Selection
+    end
+    W->>SCORM: Save Final State
+    W->>SCORM: Save Score
+    SCORM-->>W: State Persisted
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Learner:</strong> Reads a statement, evaluates its validity, selects True or False, submits the answer, and reviews feedback with explanations for correct answers.</li>
-                <li><strong>Author:</strong> Creates true/false statements, sets the correct answer, provides explanations for why statements are true or false, and configures feedback display options.</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>

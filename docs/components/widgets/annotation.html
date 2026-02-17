@@ -151,6 +151,12 @@
             </svg>
             Use Cases
           </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
           <a href="#features" class="quick-link">
             <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -263,64 +269,61 @@ classDiagram
         </div>
       </section>
       
-      <!-- Use Case Diagram Section -->
+      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
         <div class="section__header">
           <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
           </svg>
-          <h2 class="section__title">Use Case Diagram</h2>
+          <h2 class="section__title">Sequence Diagram</h2>
         </div>
         <div class="card">
           <div class="card__content">
-            <p class="mb-md">This diagram illustrates the user interactions and system workflows:</p>
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
             <div class="mermaid">
-graph TB
-    subgraph "Annotation System"
-        UC1(("Create<br/>Annotation"))
-        UC2(("Edit<br/>Annotation"))
-        UC3(("Delete<br/>Annotation"))
-        UC4(("Highlight<br/>Text"))
-        UC5(("Add<br/>Comment"))
-        UC6(("View<br/>Annotations"))
-        UC7(("Export<br/>Annotations"))
-        UC8(("Search<br/>Annotations"))
+sequenceDiagram
+    participant Author
+    participant W as Annotation Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant SCORM as SCORM API
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enable Highlights/Outlines
+    Author->>W: Select Colors (up to 5 each)
+    Author->>W: Add Custom Labels
+    Author->>W: Set Alt Text
+    W->>W: Validate Configuration
+    W->>API: Update Annotation Metadata
+    API->>API: Save colorObj to activityMetadata
+    API-->>W: Configuration Saved
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Annotation Options
+    UI->>Student: Display Color Palette
+    Student->>W: Select Text
+    W->>UI: Show Annotation Menu
+    Student->>W: Choose Highlight/Outline Color
+    W->>UI: Apply Annotation Style
+    W->>SCORM: Save Annotation State
+    SCORM-->>W: State Persisted
+    Student->>W: Continue Annotating
+    loop Multiple Annotations
+        Student->>W: Select and Annotate Text
+        W->>SCORM: Update State
     end
-    
-    Student[👤 Student]:::actor
-    Teacher[👤 Teacher]:::actor
-    Reviewer[👤 Reviewer]:::actor
-    
-    Student --> UC1
-    Student --> UC4
-    Student --> UC5
-    Student --> UC6
-    Student --> UC8
-    
-    Teacher --> UC1
-    Teacher --> UC2
-    Teacher --> UC3
-    Teacher --> UC4
-    Teacher --> UC5
-    Teacher --> UC6
-    Teacher --> UC7
-    
-    Reviewer --> UC6
-    Reviewer --> UC7
-    Reviewer --> UC8
-    
-    UC1 -.-> UC4
-    UC2 -.-> UC6
-    UC5 -.-> UC1
-    
-    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
             </div>
             <div class="mt-lg">
-              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Interaction Flow:</h4>
               <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-                <li><strong>Student:</strong> Select text → Create annotation → Add highlights → Add comments → View all annotations</li>
-                <li><strong>Teacher:</strong> Review content → Add annotations → Highlight key points → Manage all annotations → Export for review</li>
-                <li><strong>Reviewer:</strong> View annotations → Search specific annotations → Export summary</li>
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
               </ul>
             </div>
           </div>
