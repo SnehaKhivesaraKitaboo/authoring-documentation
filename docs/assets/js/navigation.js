@@ -25,9 +25,13 @@ class Navigation {
   init() {
     this.setupNavigationLinks();
     this.setupCollapsibleSections();
+    this.setupGroupDropdowns();
+    this.setupCategorySections();
     this.setupSearch();
     this.setupMobileToggle();
     this.highlightCurrentPage();
+    this.restoreGroupDropdownStates();
+    this.restoreCategorySectionStates();
   }
 
   /**
@@ -76,6 +80,163 @@ class Navigation {
         this.toggleSection(button);
       });
     });
+  }
+
+  /**
+   * Setup group dropdown toggles
+   */
+  setupGroupDropdowns() {
+    const groupToggles = document.querySelectorAll('.nav-group__toggle');
+    
+    groupToggles.forEach(toggle => {
+      // Initialize with expanded state
+      toggle.setAttribute('aria-expanded', 'true');
+      
+      // Add click event listener
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.toggleGroupDropdown(toggle);
+      });
+    });
+  }
+
+  /**
+   * Toggle a group dropdown
+   * @param {HTMLElement} toggle - Toggle button
+   */
+  toggleGroupDropdown(toggle) {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    const targetId = toggle.dataset.target;
+    const targetList = document.getElementById(targetId);
+    
+    if (!targetList) return;
+    
+    // Toggle aria-expanded attribute
+    toggle.setAttribute('aria-expanded', !isExpanded);
+    
+    // Save state to localStorage
+    this.saveGroupDropdownState(targetId, !isExpanded);
+  }
+
+  /**
+   * Save group dropdown state
+   * @param {string} groupId - Group identifier
+   * @param {boolean} isExpanded - Expansion state
+   */
+  saveGroupDropdownState(groupId, isExpanded) {
+    try {
+      const states = JSON.parse(localStorage.getItem('nav-group-states') || '{}');
+      states[groupId] = isExpanded;
+      localStorage.setItem('nav-group-states', JSON.stringify(states));
+    } catch (e) {
+      console.warn('Could not save group dropdown state:', e);
+    }
+  }
+
+  /**
+   * Restore group dropdown states from localStorage
+   */
+  restoreGroupDropdownStates() {
+    const groupToggles = document.querySelectorAll('.nav-group__toggle');
+    
+    groupToggles.forEach(toggle => {
+      const targetId = toggle.dataset.target;
+      const savedState = this.getGroupDropdownState(targetId);
+      
+      if (savedState !== null) {
+        toggle.setAttribute('aria-expanded', savedState);
+      }
+    });
+  }
+
+  /**
+   * Get group dropdown state from localStorage
+   * @param {string} groupId - Group identifier
+   * @returns {boolean|null}
+   */
+  getGroupDropdownState(groupId) {
+    try {
+      const states = JSON.parse(localStorage.getItem('nav-group-states') || '{}');
+      return states[groupId] !== undefined ? states[groupId] : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /**
+   * Setup category section toggles (for dashboard)
+   */
+  setupCategorySections() {
+    const categoryToggles = document.querySelectorAll('.category-section__header[data-target]');
+    
+    categoryToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        this.toggleCategorySection(toggle);
+      });
+    });
+  }
+
+  /**
+   * Toggle a category section
+   * @param {HTMLElement} toggle - The category section header button
+   */
+  toggleCategorySection(toggle) {
+    const targetId = toggle.dataset.target;
+    const targetGrid = document.getElementById(targetId);
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    
+    if (!targetGrid) return;
+    
+    // Toggle state
+    toggle.setAttribute('aria-expanded', !isExpanded);
+    
+    // Save state to localStorage
+    this.saveCategorySectionState(targetId, !isExpanded);
+  }
+
+  /**
+   * Save category section state to localStorage
+   * @param {string} categoryId - Category section ID
+   * @param {boolean} isExpanded - Whether the section is expanded
+   */
+  saveCategorySectionState(categoryId, isExpanded) {
+    try {
+      const states = JSON.parse(localStorage.getItem('category-section-states') || '{}');
+      states[categoryId] = isExpanded;
+      localStorage.setItem('category-section-states', JSON.stringify(states));
+    } catch (e) {
+      console.warn('Failed to save category section state:', e);
+    }
+  }
+
+  /**
+   * Restore category section states from localStorage
+   */
+  restoreCategorySectionStates() {
+    const categoryToggles = document.querySelectorAll('.category-section__header[data-target]');
+    
+    categoryToggles.forEach(toggle => {
+      const targetId = toggle.dataset.target;
+      const savedState = this.getCategorySectionState(targetId);
+      
+      if (savedState !== null) {
+        toggle.setAttribute('aria-expanded', savedState);
+      }
+    });
+  }
+
+  /**
+   * Get category section state from localStorage
+   * @param {string} categoryId - Category section ID
+   * @returns {boolean|null} Saved state or null if not found
+   */
+  getCategorySectionState(categoryId) {
+    try {
+      const states = JSON.parse(localStorage.getItem('category-section-states') || '{}');
+      return states[categoryId] !== undefined ? states[categoryId] : null;
+    } catch (e) {
+      return null;
+    }
   }
 
   /**

@@ -60,8 +60,13 @@
       
       <!-- Layout Components -->
       <div class="nav-group">
-        <div class="nav-group__title">Layout</div>
-        <ul class="nav-list">
+        <button class="nav-group__toggle" data-target="layout-group">
+          <span class="nav-group__title">Layout Components</span>
+          <svg class="nav-group__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <ul class="nav-list" id="layout-group">
           <li class="nav-item">
             <a href="components/layout/layout.html" class="nav-item__link">
               <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,8 +80,13 @@
       
       <!-- Widget Components -->
       <div class="nav-group">
-        <div class="nav-group__title">Widgets</div>
-        <ul class="nav-list">
+        <button class="nav-group__toggle" data-target="widget-group">
+          <span class="nav-group__title">Widget Components</span>
+          <svg class="nav-group__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <ul class="nav-list" id="widget-group">
           <li class="nav-item">
             <a href="components/widgets/annotation.html" class="nav-item__link">
               <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,14 +328,17 @@
       
       <!-- Layout Components Section -->
       <section class="category-section">
-        <div class="category-section__header">
+        <button class="category-section__header" data-target="layout-components-grid" aria-expanded="true">
           <h2 class="category-section__title">
             Layout Components
             <span class="category-section__count">(1)</span>
           </h2>
-        </div>
+          <svg class="category-section__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         
-        <div class="dashboard-grid">
+        <div class="dashboard-grid" id="layout-components-grid">
           <a href="components/layout/layout.html" class="component-card">
             <div class="component-card__icon">⬜</div>
             <h3 class="component-card__title">Layout Component</h3>
@@ -344,14 +357,17 @@
       
       <!-- Widget Components Section -->
       <section class="category-section">
-        <div class="category-section__header">
+        <button class="category-section__header" data-target="widget-components-grid" aria-expanded="true">
           <h2 class="category-section__title">
             Widget Components
             <span class="category-section__count">(24)</span>
           </h2>
-        </div>
+          <svg class="category-section__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
         
-        <div class="dashboard-grid">
+        <div class="dashboard-grid" id="widget-components-grid">
           <a href="components/widgets/annotation.html" class="component-card">
             <div class="component-card__icon">💬</div>
             <h3 class="component-card__title">Annotation</h3>
