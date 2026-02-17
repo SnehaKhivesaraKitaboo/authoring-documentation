@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorize | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+    <div class="sidebar__search">
+      <div class="search-box">
+        <svg class="search-box__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input type="text" class="search-box__input" placeholder="Search components...">
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="nav-group">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-item__link">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <span class="nav-item__text">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Categorize</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Categorize</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Categorize Component</h1>
+        <p class="page-subtitle">Drag-and-drop interface for categorizing items into different groups.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Categorize component allows users to organize items into categories through an intuitive drag-and-drop interface.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class CategorizeComponent {
+        -categories: Array~Category~
+        -items: Array~Item~
+        -dragState: DragState
+        -userPlacements: Map
+        -correctPlacements: Map
+        +initialize()
+        +onDragStart(itemId)
+        +onDragOver(categoryId)
+        +onDrop(itemId, categoryId)
+        +validatePlacements()
+        +checkCorrectness()
+        +provideFeedback()
+        +reset()
+    }
+    
+    class Category {
+        -id: String
+        -name: String
+        -items: Array~Item~
+        -maxItems: Number
+        -color: String
+        +addItem(item)
+        +removeItem(itemId)
+        +render()
+        +highlight()
+    }
+    
+    class Item {
+        -id: String
+        -content: String
+        -correctCategory: String
+        -currentCategory: String
+        -isDragging: Boolean
+        +render()
+        +moveTo(category)
+    }
+    
+    class DragState {
+        -draggedItem: Item
+        -sourceCategory: Category
+        -targetCategory: Category
+        +reset()
+    }
+    
+    class ValidationEngine {
+        +validatePlacement()
+        +calculateScore()
+        +highlightCorrect()
+        +highlightIncorrect()
+    }
+    
+    CategorizeComponent "1" --> "*" Category : manages
+    CategorizeComponent "1" --> "*" Item : contains
+    CategorizeComponent --> DragState : tracks
+    CategorizeComponent --> ValidationEngine : validates with
+    Category "1" --> "*" Item : holds
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Categorize System"
+        UC1(("Drag Item"))
+        UC2(("Drop into Category"))
+        UC3(("Reorganize Items"))
+        UC4(("Validate Grouping"))
+        UC5(("Create Categories"))
+        UC6(("Define Items"))
+        UC7(("Set Correct Grouping"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Views items and category containers, drags items from the source area, drops items into appropriate categories, rearranges as needed, and submits for validation with feedback on correct groupings.</li>
+                <li><strong>Author:</strong> Creates category labels and definitions, adds items to be categorized, defines which category each item belongs to, and configures visual appearance and validation rules.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> LoadCategorize[Load Categorize Template]
+    LoadCategorize --> SetCategories[Configure 2-4 Categories]
+    SetCategories --> NameCategories[Set Category Names/Colors]
+    NameCategories --> AddItems[Add Items 0-10 per Category]
+    AddItems --> ItemType{Item Type}
+    ItemType -->|Text| AddText[Add Text Content]
+    ItemType -->|Image| AddImage[Upload Image with Alt Text]
+    AddText --> AssignCorrect[Assign to Correct Category]
+    AddImage --> AssignCorrect
+    AssignCorrect --> ChooseStyle[Select Visual Style 1-6]
+    ChooseStyle --> ConfigSettings[Configure Attempts, Feedback]
+    ConfigSettings --> SaveCategorize[Save Configuration]
+    
+    SaveCategorize --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderCategories[Display Empty Categories]
+    RenderCategories --> RenderItems[Display Shuffled Items]
+    RenderItems --> StudentDrag{Student Drags Item}
+    StudentDrag --> ValidateDrop{Valid Drop Zone?}
+    ValidateDrop -->|No| RejectDrop[Reject Drop, Keep in Place]
+    ValidateDrop -->|Yes| AcceptDrop[Move Item to Category]
+    AcceptDrop --> RemoveItem[Remove from Item Pool]
+    RemoveItem --> CheckAllPlaced{All Items Placed?}
+    CheckAllPlaced -->|No| StudentDrag
+    CheckAllPlaced -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateAnswers[Compare Items vs Correct Categories]
+    ValidateAnswers --> CheckCorrectness{All Correct?}
+    CheckCorrectness -->|Yes| ShowSuccess[Show Green Borders, Checkmarks]
+    CheckCorrectness -->|No| ShowErrors[Show Red Borders on Incorrect]
+    ShowSuccess --> ShowFeedback[Display Feedback Message]
+    ShowErrors --> ShowFeedback
+    ShowFeedback --> DecrementAttempts[Decrement Attempt Counter]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Items]
+    ClearIncorrect --> ReturnItems[Return to Item Pool]
+    ReturnItems --> StudentDrag
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAnswers[Show All Correct Placements]
+    RevealAnswers --> DisableInteraction[Disable All Interactions]
+    DisableInteraction --> SaveFinalState[Save Final State to SCORM]
+    
+    ShowSuccess --> SaveFinalState
+    
+    AcceptDrop --> DataFlow[Data Flow: DOM → Model]
+    DataFlow --> UpdateState[Update categoryMappings Object]
+    UpdateState --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors create 2-4 categories with custom names and colors, add text or image items (0-10 per category), assign correct categories, and select from 6 visual styles.</li>
+                <li><strong>Student Flow:</strong> Students drag items from a shuffled pool into appropriate category containers, with visual feedback for drop validation and completion tracking.</li>
+                <li><strong>Validation:</strong> Upon submission, items are validated against correct categories with visual indicators (green checkmarks for correct, red borders for incorrect) and attempt-based feedback.</li>
+                <li><strong>Data Flow:</strong> Category mappings are stored in the DOM model, synchronized with SCORM for persistence, with Try Again clearing incorrect items or Show Me revealing all correct placements.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Categorize/CATEGORIZE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

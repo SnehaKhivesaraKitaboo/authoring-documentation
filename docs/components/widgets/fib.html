@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fill in the Blank (FIB) | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Fill in the Blank (FIB)</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Fill in the Blank (FIB)</h1>
+        <p class="page-subtitle">Text-based fill-in-the-blank questions with validation.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Fill in the Blank (FIB) component provides an interactive learning experience where users complete sentences by filling in missing words or phrases. It supports multiple interaction modes including text input, dropdown selection, and drag-and-drop.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class FIBComponent {
+        -sentences: Array~Sentence~
+        -blanks: Array~Blank~
+        -interactionMode: InteractionMode
+        -userAnswers: Map
+        -correctAnswers: Map
+        +initialize()
+        +addSentence(text)
+        +insertBlank(position)
+        +validateAnswer(blankId)
+        +checkAllAnswers()
+        +provideFeedback()
+        +reset()
+    }
+    
+    class Blank {
+        -id: String
+        -correctAnswer: String
+        -alternatives: Array~String~
+        -userAnswer: String
+        -position: Number
+        -caseSensitive: Boolean
+        +render()
+        +validate()
+        +showFeedback()
+        +acceptInput()
+    }
+    
+    class InteractionMode {
+        <<enumeration>>
+        DROPDOWN
+        TEXT_INPUT
+        DRAG_DROP
+    }
+    
+    class ValidationEngine {
+        +validateExact()
+        +validatePartial()
+        +checkAlternatives()
+        +provideFeedback()
+    }
+    
+    FIBComponent "1" --> "*" Blank : contains
+    FIBComponent --> InteractionMode : uses
+    FIBComponent --> ValidationEngine : validates with
+    Blank --> ValidationEngine : uses
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "FIB Component System"
+        UC1(("Fill in Blanks"))
+        UC2(("Validate Answers"))
+        UC3(("Get Feedback"))
+        UC4(("Create FIB Activity"))
+        UC5(("Configure Blanks"))
+        UC6(("Set Alternatives"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Author --> UC4
+    Author --> UC5
+    Author --> UC6
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Reads the sentence, identifies blanks, selects or types answers, submits for validation, and reviews feedback with correct answers.</li>
+                <li><strong>Author:</strong> Creates sentences with blanks, defines correct answers and alternatives, configures interaction mode (text/dropdown/drag), and sets validation rules.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitFIB[Initialize FIB Editor]
+    InitFIB --> AddSentences[Add Sentences 1-10]
+    AddSentences --> InsertBlank[Insert Blank in Sentence]
+    InsertBlank --> ChooseType{Choose Blank Type}
+    ChooseType -->|Dropdown| ConfigDropdown[Add Dropdown Options]
+    ChooseType -->|Text Input| ConfigText[Set Correct Answer Text]
+    ChooseType -->|Drag-Drop| ConfigDrag[Add Draggable Items]
+    
+    ConfigDropdown --> AddOptions[Add Options 2-6]
+    AddOptions --> SetCorrectDD[Mark Correct Option]
+    SetCorrectDD --> NextBlank
+    
+    ConfigText --> SetCorrectText[Set Correct Answer]
+    SetCorrectText --> ConfigCase{Case Sensitive?}
+    ConfigCase --> NextBlank
+    
+    ConfigDrag --> AddDragItems[Add Draggable Items]
+    AddDragItems --> SetCorrectDrag[Set Correct Item]
+    SetCorrectDrag --> NextBlank{More Blanks?}
+    
+    NextBlank -->|Yes| InsertBlank
+    NextBlank -->|No| ConfigSettings[Configure Attempts, Feedback]
+    ConfigSettings --> ChooseStyle[Select Visual Style]
+    ChooseStyle --> SaveFIB[Save Configuration]
+    
+    SaveFIB --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderSentences[Display Sentences with Blanks]
+    RenderSentences --> CheckMode{Blank Type}
+    CheckMode -->|Dropdown| ShowDropdowns[Display Dropdown Menus]
+    CheckMode -->|Text| ShowTextInputs[Display Text Input Boxes]
+    CheckMode -->|Drag-Drop| ShowDragItems[Display Draggable Items]
+    
+    ShowDropdowns --> StudentSelectDD{Student Selects from Dropdown}
+    ShowTextInputs --> StudentTypeText{Student Types Answer}
+    ShowDragItems --> StudentDragItem{Student Drags Item to Blank}
+    
+    StudentSelectDD --> FillBlank[Fill Blank with Selection]
+    StudentTypeText --> FillBlank
+    StudentDragItem --> ValidateDrop{Valid Drop Zone?}
+    ValidateDrop -->|Yes| FillBlank
+    ValidateDrop -->|No| RejectDrop[Reject Drop]
+    RejectDrop --> StudentDragItem
+    
+    FillBlank --> MarkFilled[Mark Blank as Filled]
+    MarkFilled --> CheckAllFilled{All Blanks Filled?}
+    CheckAllFilled -->|No| CheckMode
+    CheckAllFilled -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateBlanks[Validate Each Blank]
+    ValidateBlanks --> LoopBlanks[Loop Through Blanks]
+    LoopBlanks --> CompareAnswer{Answer Correct?}
+    CompareAnswer -->|Yes| MarkCorrectBlank[Show Green Border, Checkmark]
+    CompareAnswer -->|No| MarkIncorrectBlank[Show Red Border, Cross]
+    MarkCorrectBlank --> NextBlankCheck{More Blanks?}
+    MarkIncorrectBlank --> NextBlankCheck
+    NextBlankCheck -->|Yes| LoopBlanks
+    NextBlankCheck -->|No| CalculateScore[Calculate Score]
+    
+    CalculateScore --> ShowFeedback[Display Feedback]
+    ShowFeedback --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
+    CheckAttempts -->|All Correct| FinalSave
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Blanks]
+    ClearIncorrect --> CheckMode
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAnswers[Show All Correct Answers]
+    RevealAnswers --> FinalSave[Save Final State to SCORM]
+    
+    FillBlank --> DataFlow[Data Flow: Answer → Model]
+    DataFlow --> UpdateAnswers[Update blankAnswers Array]
+    UpdateAnswers --> SyncState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors create sentences (1-10) with blanks, choose input types (dropdown, text input, or drag-drop), configure options (2-6 for dropdowns), set correct answers with optional case sensitivity, and apply visual styles.</li>
+                <li><strong>Student Flow:</strong> Students fill blanks by selecting from dropdowns, typing text answers, or dragging items into drop zones, with validation preventing invalid interactions and enabling submission when complete.</li>
+                <li><strong>Validation:</strong> Each blank is validated against correct answers with visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect), calculated scoring, and attempt-based progression.</li>
+                <li><strong>Data Flow:</strong> Blank answers are stored in an array and synchronized with SCORM, with Try Again clearing only incorrect blanks or Show Me revealing all correct solutions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Fill in the Blank (FIB)/FIB_Component_Technical_Documentation.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

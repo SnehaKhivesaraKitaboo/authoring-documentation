@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multiple Choice Question (MCQ) Component - Standard assessment component">
+  <title>Multiple Choice Question (MCQ) | Documentation Portal</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid for Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+    
+    <div class="sidebar__search">
+      <div class="search-box">
+        <svg class="search-box__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input type="text" class="search-box__input" placeholder="Search components...">
+      </div>
+    </div>
+    
+    <nav class="sidebar__nav">
+      <div class="nav-group">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-item__link">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <span class="nav-item__text">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="nav-group">
+        <div class="nav-group__title">Widgets</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="annotation.html" class="nav-item__link">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+              </svg>
+              <span class="nav-item__text">Annotation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="carousel.html" class="nav-item__link">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span class="nav-item__text">Carousel</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="mcq.html" class="nav-item__link active">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+              <span class="nav-item__text">Multiple Choice (MCQ)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="sidebar__footer">
+      <a href="#" class="sidebar__footer-link">
+        <svg class="sidebar__footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Help &amp; Support
+      </a>
+    </div>
+  </aside>
+  
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">Multiple Choice Question (MCQ)</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">MCQ</span>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Component Overview -->
+      <section class="section">
+        <h1 class="page-title">Multiple Choice Question (MCQ)</h1>
+        <p class="page-subtitle">
+          Standard multiple-choice question component supporting single and multiple correct answers with immediate feedback and validation.
+        </p>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+          <a href="#technical" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            Technical Details
+          </a>
+        </div>
+      </section>
+      
+      <!-- Overview Section -->
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>
+              The Multiple Choice Question (MCQ) component is a versatile assessment tool that presents learners with a question 
+              and multiple answer options. It supports both single-select (radio buttons) and multi-select (checkboxes) formats, 
+              making it suitable for various assessment scenarios.
+            </p>
+            <p class="mt-md">
+              <strong>Use Cases:</strong>
+            </p>
+            <ul>
+              <li>Knowledge checks and quizzes</li>
+              <li>Formative assessments</li>
+              <li>Practice exercises</li>
+              <li>Self-paced learning validation</li>
+              <li>Prerequisite testing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <!-- UML Class Diagram Section -->
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the class structure and relationships of the MCQ Component:</p>
+            <div class="mermaid">
+classDiagram
+    class MCQComponent {
+        -questionText: String
+        -instructionText: String
+        -options: Array~MCQOption~
+        -correctAnswers: Array~String~
+        -userAnswers: Array~String~
+        -mode: SelectionMode
+        -styles: StyleSettings
+        -attempts: Number
+        -maxAttempts: Number
+        -score: Number
+        +initialize()
+        +renderQuestion()
+        +renderOptions()
+        +selectOption(optionId)
+        +deselectOption(optionId)
+        +validateAnswer()
+        +calculateScore()
+        +showFeedback(type)
+        +reset()
+        +shuffleOptions()
+        +exportResults()
+    }
+    
+    class MCQOption {
+        -id: String
+        -text: String
+        -mediaUrl: String
+        -mediaType: MediaType
+        -isCorrect: Boolean
+        -feedback: String
+        +render()
+        +select()
+        +deselect()
+        +highlight()
+    }
+    
+    class SelectionMode {
+        <<enumeration>>
+        SINGLE_SELECT
+        MULTIPLE_SELECT
+    }
+    
+    class MediaType {
+        <<enumeration>>
+        IMAGE
+        VIDEO
+        AUDIO
+        NONE
+    }
+    
+    class FeedbackManager {
+        -genericCorrect: String
+        -genericIncorrect: String
+        -optionFeedbacks: Map
+        +showGenericFeedback(correct)
+        +showOptionFeedback(optionId)
+        +clearFeedback()
+    }
+    
+    class StyleSettings {
+        -labelType: LabelType
+        -styleVariant: StyleVariant
+        -colorScheme: String
+        +applyStyles()
+        +updateTheme(theme)
+    }
+    
+    MCQComponent "1" --> "*" MCQOption : contains
+    MCQComponent --> SelectionMode : uses
+    MCQComponent --> FeedbackManager : uses
+    MCQComponent --> StyleSettings : has
+    MCQOption --> MediaType : has
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Use Case Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates user interactions and workflows with the MCQ component:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "MCQ Assessment System"
+        UC1((\"Answer<br/>Question\"))
+        UC2((\"View<br/>Feedback\"))
+        UC3((\"Try<br/>Again\"))
+        UC4((\"Submit<br/>Answer\"))
+        UC5((\"Review<br/>Correct Answer\"))
+        UC6((\"Configure<br/>Question\"))
+        UC7((\"Add<br/>Media\"))
+        UC8((\"Set<br/>Styles\"))
+        UC9((\"View<br/>Analytics\"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Instructor[👤 Instructor]:::actor
+    Author[👤 Content Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC5
+    
+    Author --> UC6
+    Author --> UC7
+    Author --> UC8
+    
+    Instructor --> UC9
+    Instructor --> UC5
+    
+    UC1 --> UC4
+    UC4 --> UC2
+    UC2 -.-> UC3
+    UC3 -.-> UC1
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Read question → Select option(s) → Submit answer → View feedback → Try again (if incorrect) → Review correct answer</li>
+                <li><strong>Content Author:</strong> Configure question text → Add options → Set correct answers → Add media (images/video) → Apply styles → Set feedback messages</li>
+                <li><strong>Instructor:</strong> View learner responses → Analyze performance metrics → Review correct/incorrect patterns</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitMCQ[Initialize MCQ Editor]
+    InitMCQ --> SetQuestion[Set Question Text]
+    SetQuestion --> AddMedia{Add Media?}
+    AddMedia -->|Yes| UploadMedia[Upload Image/Video/Audio]
+    AddMedia -->|No| AddOptions
+    UploadMedia --> AddOptions[Add Options 2-6]
+    AddOptions --> ConfigOption[Configure Each Option]
+    ConfigOption --> SetOptionText[Set Option Text/Image]
+    SetOptionText --> NextOption{More Options?}
+    NextOption -->|Yes| ConfigOption
+    NextOption -->|No| SelectType{Single or Multiple Select?}
+    SelectType -->|Single| MarkOneCorrect[Mark 1 Correct Answer]
+    SelectType -->|Multiple| MarkMultiCorrect[Mark Multiple Correct]
+    MarkOneCorrect --> ChooseStyle
+    MarkMultiCorrect --> ChooseStyle[Select Visual Style 1-6]
+    ChooseStyle --> SelectLabel[Select Label Type A-B/1-2/None]
+    SelectLabel --> ConfigFeedback[Configure Feedback Options]
+    ConfigFeedback --> SetAttempts[Set Max Attempts]
+    SetAttempts --> SaveMCQ[Save Configuration]
+    
+    SaveMCQ --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayQuestion[Display Question Text]
+    DisplayQuestion --> ShowMedia{Media Present?}
+    ShowMedia -->|Yes| RenderMedia[Render Image/Video/Audio]
+    ShowMedia -->|No| ShowOptions
+    RenderMedia --> ShowOptions[Display Answer Options]
+    ShowOptions --> CheckSelectType{Selection Type}
+    CheckSelectType -->|Single| ShowRadio[Show Radio Buttons]
+    CheckSelectType -->|Multiple| ShowCheckbox[Show Checkboxes]
+    ShowRadio --> StudentSelect{Student Selects Option}
+    ShowCheckbox --> StudentSelect
+    StudentSelect --> MarkChoice[Mark Selection]
+    MarkChoice --> CheckRequired{Required Selections Made?}
+    CheckRequired -->|No| StudentSelect
+    CheckRequired -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateAnswers[Compare Selected vs Correct]
+    ValidateAnswers --> CheckSingle{Single or Multiple?}
+    CheckSingle -->|Single| ValidateSingle[Check Single Selection]
+    CheckSingle -->|Multiple| ValidateMultiple[Check All Selections]
+    ValidateSingle --> AllCorrect{All Correct?}
+    ValidateMultiple --> AllCorrect
+    AllCorrect -->|Yes| ShowCorrectFeedback[Show Correct Visual Feedback]
+    AllCorrect -->|No| ShowIncorrectFeedback[Show Incorrect Visual Feedback]
+    ShowCorrectFeedback --> ApplyGreen[Green Borders, Checkmarks]
+    ShowIncorrectFeedback --> ApplyRed[Red for Wrong, Green for Correct]
+    ApplyGreen --> ShowMessage
+    ApplyRed --> ShowMessage[Display Feedback Message]
+    ShowMessage --> ShowIndividualFB{Individual Feedback Enabled?}
+    ShowIndividualFB -->|Yes| DisplayOptionFeedback[Show Per-Option Feedback]
+    ShowIndividualFB -->|No| DecrementAttempts
+    DisplayOptionFeedback --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
+    CheckAttempts -->|All Correct| FinalSave
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearSelections[Clear All Selections]
+    ClearSelections --> ResetVisuals[Reset Visual Feedback]
+    ResetVisuals --> StudentSelect
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> HighlightCorrect[Highlight All Correct Answers]
+    HighlightCorrect --> DisableInteraction[Disable All Interactions]
+    DisableInteraction --> FinalSave[Save Final State to SCORM]
+    
+    MarkChoice --> DataFlow[Data Flow: Selection → Model]
+    DataFlow --> UpdateChoicesArray[Update selectedChoices Array]
+    UpdateChoicesArray --> SyncState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors set question text with optional media (image, video, audio), add options (2-6) with text or images, mark correct answer(s) for single or multiple selection types, select from 6 visual styles and label types (A-B, 1-2, none), and configure per-option and generic feedback.</li>
+                <li><strong>Student Flow:</strong> Students view questions with media, select answers using radio buttons (single) or checkboxes (multiple), with submit enabled when required selections are made.</li>
+                <li><strong>Validation:</strong> Answers are validated with comprehensive visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect), supporting both individual option feedback and overall feedback messages.</li>
+                <li><strong>Data Flow:</strong> Selected choices are tracked in an array and synchronized with SCORM, with Try Again clearing all selections and resetting visuals, or Show Me highlighting all correct answers and disabling interaction.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Feature Specification Section (Markdown) -->
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <!-- Markdown content will be rendered here -->
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Technical Details Section -->
+      <section class="section" id="technical">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <h2 class="section__title">Technical Details</h2>
+        </div>
+        
+        <div class="tech-details">
+          <div class="tech-details__grid">
+            <div class="tech-details__item">
+              <div class="tech-details__label">Component Type</div>
+              <div class="tech-details__value">Assessment Widget</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Category</div>
+              <div class="tech-details__value">Question/Answer</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Status</div>
+              <div class="tech-details__value">Active</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Accessibility</div>
+              <div class="tech-details__value">WCAG 2.1 AACompliant</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Features List -->
+      <section class="section">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Key Features</h2>
+        </div>
+        
+        <div class="feature-list">
+          <ul class="feature-list__items">
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div class="feature-list__content">
+                <div class="feature-list__name">Single & Multiple Answer Support</div>
+                <div class="feature-list__description">Configure for single correct answer (radio) or multiple correct answers (checkbox)</div>
+              </div>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div class="feature-list__content">
+                <div class="feature-list__name">Rich Media Support</div>
+                <div class="feature-list__description">Include images, audio, and video in both questions and answer options</div>
+              </div>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div class="feature-list__content">
+                <div class="feature-list__name">Immediate Feedback</div>
+                <div class="feature-list__description">Provide instant correctness feedback with customizable messages and explanations</div>
+              </div>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div class="feature-list__content">
+                <div class="feature-list__name">Randomization Options</div>
+                <div class="feature-list__description">Randomize answer order to prevent pattern memorization</div>
+              </div>
+            </li>
+            <li class="feature-list__item">
+              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div class="feature-list__content">
+                <div class="feature-list__name">Retry Functionality</div>
+                <div class="feature-list__description">Allow learners to retry questions with configurable attempt limits</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Dependencies Section -->
+      <section class="section" id="dependencies">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+          </svg>
+          <h2 class="section__title">Dependencies</h2>
+        </div>
+        
+        <div class="dependencies">
+          <div class="dependencies__list">
+            <div class="dependency-tag">
+              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span>Base Component</span>
+            </div>
+            <div class="dependency-tag">
+              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span>Validation Module</span>
+            </div>
+            <div class="dependency-tag">
+              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span>Feedback System</span>
+            </div>
+            <div class="dependency-tag">
+              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span>Media Player</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Code Reference Section -->
+      <section class="section" id="code">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Code Reference</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p><strong>Implementation Location:</strong></p>
+            <pre><code>Components/Widgets/Multiple Choice Question (MCQ)/</code></pre>
+            
+            <p class="mt-md"><strong>Key Files:</strong></p>
+            <ul>
+              <li><code>MCQ_COMPONENT_TECHNICAL_DOCUMENTATION.md</code> - Technical specification</li>
+              <li><code>Prompt messages (MCQ).md</code> - User-facing messages and prompts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  
+  <script>
+    // Load and render feature specification from markdown file
+    document.addEventListener('DOMContentLoaded', () => {
+      // Path to the actual markdown documentation file
+      const markdownFilePath = '../../../Components/Widgets/Multiple Choice Question (MCQ)/MCQ_COMPONENT_TECHNICAL_DOCUMENTATION.md';
+      
+      // Render the markdown file
+      renderMarkdown(markdownFilePath, 'feature-specification')
+        .catch(error => {
+          console.error('Error loading documentation:', error);
+          document.getElementById('feature-specification').innerHTML = `
+            <div class="alert alert-info">
+              <strong>Documentation File:</strong><br>
+              This section will automatically load content from:<br>
+              <code>${markdownFilePath}</code>
+              <p class="mt-md">
+                The component will render your existing Markdown documentation files without modification.
+                Simply ensure the file path is correct and the file is accessible.
+              </p>
+            </div>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>

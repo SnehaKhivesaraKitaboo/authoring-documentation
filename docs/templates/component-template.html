@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{COMPONENT_NAME} - Component Documentation">
+  <title>{COMPONENT_NAME} | Documentation Portal</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- Sidebar (same as index.html) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+    
+    <div class="sidebar__search">
+      <div class="search-box">
+        <svg class="search-box__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input type="text" class="search-box__input" placeholder="Search components...">
+      </div>
+    </div>
+    
+    <nav class="sidebar__nav">
+      <div class="nav-group">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-item__link">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <span class="nav-item__text">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Add navigation groups here -->
+    </nav>
+    
+    <div class="sidebar__footer">
+      <a href="#" class="sidebar__footer-link">
+        <svg class="sidebar__footer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Help &amp; Support
+      </a>
+    </div>
+  </aside>
+  
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">{COMPONENT_NAME}</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#{CATEGORY}" class="breadcrumb__link">{CATEGORY}</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">{COMPONENT_NAME}</span>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Component Overview -->
+      <section class="section">
+        <h1 class="page-title">{COMPONENT_NAME}</h1>
+        <p class="page-subtitle">{COMPONENT_DESCRIPTION}</p>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Diagram
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+          <a href="#technical" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            Technical Details
+          </a>
+        </div>
+      </section>
+      
+      <!-- Overview Section -->
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>{OVERVIEW_TEXT}</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- UML Diagram Section -->
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Diagram</h2>
+        </div>
+        <div class="uml-diagram">
+          <div class="uml-diagram__content">
+            <div class="uml-diagram__placeholder">
+              UML diagram will be displayed here<br>
+              <small>Add your diagram image or embed Mermaid/PlantUML code</small>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Feature Specification Section (Markdown) -->
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <!-- Markdown content will be rendered here -->
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Technical Details Section -->
+      <section class="section" id="technical">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <h2 class="section__title">Technical Details</h2>
+        </div>
+        
+        <div class="tech-details">
+          <div class="tech-details__grid">
+            <div class="tech-details__item">
+              <div class="tech-details__label">Component Type</div>
+              <div class="tech-details__value">{COMPONENT_TYPE}</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Category</div>
+              <div class="tech-details__value">{CATEGORY}</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Status</div>
+              <div class="tech-details__value">Active</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Documentation</div>
+              <div class="tech-details__value">Complete</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Dependencies Section -->
+      <section class="section" id="dependencies">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+          </svg>
+          <h2 class="section__title">Dependencies</h2>
+        </div>
+        
+        <div class="dependencies">
+          <div class="dependencies__list">
+            <div class="dependency-tag">
+              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+              <span>Base Component</span>
+            </div>
+            <!-- Add more dependencies as needed -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- Code Reference Section (Optional) -->
+      <section class="section" id="code">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Code Reference</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>Implementation files location:</p>
+            <pre><code>/Components/{CATEGORY}/{COMPONENT_FOLDER}/</code></pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  
+  <script>
+    // Load and render feature specification from markdown file
+    document.addEventListener('DOMContentLoaded', () => {
+      // Replace this with the actual path to your markdown file
+      const markdownFilePath = '../../../{MD_FILE_PATH}';
+      
+      // Render the markdown file
+      renderMarkdown(markdownFilePath, 'feature-specification')
+        .catch(error => {
+          console.error('Error loading documentation:', error);
+          document.getElementById('feature-specification').innerHTML = `
+            <div class="alert alert-warning">
+              <strong>Note:</strong> Feature specification documentation file not found.<br>
+              Expected location: <code>${markdownFilePath}</code>
+            </div>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MTP Multiple | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">MTP Multiple</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">MTP Multiple Component</h1>
+        <p class="page-subtitle">Multiple matching pairs with advanced grouping capabilities.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The MTP Multiple component extends the basic matching pairs concept with support for multiple matching sets, groups, and parallel matching activities in a single interface.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "MTP Multiple System"
+        MTP[MTP Multiple Container]
+        Groups[Group Manager]
+        Sets[Matching Sets]
+        Pairs[Pair Manager]
+        Validation[Multi-Validation]
+        
+        MTP --> Groups
+        MTP --> Sets
+        MTP --> Validation
+        
+        Groups --> G1[Group 1: Science]
+        Groups --> G2[Group 2: Math]
+        Groups --> G3[Group 3: History]
+        
+        Sets --> Set1[Set 1: Terms]
+        Sets --> Set2[Set 2: Images]
+        Sets --> Set3[Set 3: Mixed]
+        
+        Sets --> Pairs
+        
+        Pairs --> P1[Pair 1]
+        Pairs --> P2[Pair 2]
+        Pairs --> P3[Pair 3]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the multiple matching sets and grouping system:</p>
+            <div class="mermaid">
+classDiagram
+    class MTPMultiple {
+        +String componentId
+        +GroupManager groupManager
+        +Array~MatchingSet~ matchingSets
+        +ValidationSystem validation
+        +initialize()
+        +render()
+        +validateAll()
+        +getResults()
+    }
+    
+    class GroupManager {
+        +Array~Group~ groups
+        +addGroup()
+        +removeGroup()
+        +getGroup()
+        +reorderGroups()
+    }
+    
+    class Group {
+        +String groupId
+        +String title
+        +String description
+        +Array~String~ setIds
+        +Number sequence
+        +render()
+        +validate()
+    }
+    
+    class MatchingSet {
+        +String setId
+        +String groupId
+        +Array~Item~ leftItems
+        +Array~Item~ rightItems
+        +Array~Match~ matches
+        +Boolean allowMultiple
+        +shuffle()
+        +render()
+        +validate()
+    }
+    
+    class Item {
+        +String itemId
+        +String content
+        +String type
+        +String side
+        +String matchedWith
+        +Boolean isMatched
+        +render()
+    }
+    
+    class Match {
+        +String leftItemId
+        +String rightItemId
+        +Boolean isCorrect
+        +validate()
+        +remove()
+    }
+    
+    class ValidationSystem {
+        +validateSet()
+        +validateGroup()
+        +validateAll()
+        +calculateGroupScore()
+        +calculateTotalScore()
+        +provideFeedback()
+    }
+    
+    class DragDropHandler {
+        +Item draggedItem
+        +startDrag()
+        +onDrag()
+        +drop()
+        +cancelDrag()
+    }
+    
+    class ScoreManager {
+        +Object scores
+        +calculateSetScore()
+        +calculateGroupScore()
+        +getTotalScore()
+        +getProgress()
+    }
+    
+    MTPMultiple --> GroupManager
+    MTPMultiple --> MatchingSet
+    MTPMultiple --> ValidationSystem
+    MTPMultiple --> ScoreManager
+    GroupManager --> Group
+    Group --> MatchingSet
+    MatchingSet --> Item
+    MatchingSet --> Match
+    MatchingSet --> DragDropHandler
+    Match --> Item
+    ValidationSystem --> MatchingSet
+    ScoreManager --> Group
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="usecase">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Use Case Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>User interactions with the MTP Multiple component:</p>
+            <div class="mermaid">
+graph TB
+    Student([Student])
+    Teacher([Teacher/Author])
+    
+    subgraph "MTP Multiple Use Cases"
+        UC1[View Groups]
+        UC2[Match Pairs in Set]
+        UC3[Complete Group]
+        UC4[Switch Between Sets]
+        UC5[Unmatch Items]
+        UC6[Submit Answers]
+        UC7[View Group Score]
+        UC8[Create Groups]
+        UC9[Add Matching Sets]
+        UC10[Configure Rules]
+        UC11[Set Scoring]
+    end
+    
+    Student --> UC1
+    Student --> UC2
+    Student --> UC3
+    Student --> UC4
+    Student --> UC5
+    Student --> UC6
+    Student --> UC7
+    
+    Teacher --> UC8
+    Teacher --> UC9
+    Teacher --> UC10
+    Teacher --> UC11
+    
+    UC1 --> UC2
+    UC2 --> UC3
+    UC3 --> UC6
+    UC6 --> UC7
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitMTPM[Initialize MTP Multiple]
+    InitMTPM --> ChoiceMode{Choose Pairing Mode}
+    ChoiceMode -->|1-to-1| SetSingle[Single Choice Mode]
+    ChoiceMode -->|1-to-n| SetMultiple[Multiple Choice Mode]
+    SetSingle --> AddPairs
+    SetMultiple --> AddPairs[Add Pairs 2-20]
+    AddPairs --> ConfigPair[Configure Each Pair]
+    ConfigPair --> SetColA[Set Column A Content]
+    SetColA --> ColAType{Type}
+    ColAType -->|Text| AddTextA[Add Text]
+    ColAType -->|Image| AddImageA[Upload Image]
+    AddTextA --> SetColB
+    AddImageA --> SetColB[Set Column B Items]
+    SetColB --> AddColBItems[Add 1-3 Items for Column B]
+    AddColBItems --> ColBType{Type}
+    ColBType -->|Text| AddTextB[Add Text]
+    ColBType -->|Image| AddImageB[Upload Image]
+    AddTextB --> LinkCorrect
+    AddImageB --> LinkCorrect[Link Correct Associations]
+    LinkCorrect --> NextPair{More Pairs?}
+    NextPair -->|Yes| ConfigPair
+    NextPair -->|No| ChooseStyle[Select Style 1-4]
+    ChooseStyle --> ConfigSettings[Configure Settings]
+    ConfigSettings --> SaveMTPM[Save Configuration]
+    
+    SaveMTPM --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderColumns[Render Columns A & B]
+    RenderColumns --> CheckShuffle{Shuffle Column B?}
+    CheckShuffle -->|Yes| ShuffleColumnB[Shuffle Column B Items]
+    CheckShuffle -->|No| DisplayColumns
+    ShuffleColumnB --> DisplayColumns[Display Both Columns]
+    DisplayColumns --> ShowDots[Show Connection Dots]
+    ShowDots --> StudentConnect{Student Connects}
+    
+    StudentConnect -->|Drag| DragDot[Drag Dot from A to B]
+    StudentConnect -->|Click| ClickSequence[Click A, then Click B]
+    DragDot --> DrawLine[Draw SVG Connection Line]
+    ClickSequence --> DrawLine
+    DrawLine --> StoreMapping[Store Connection Mapping]
+    StoreMapping --> CheckMode{Pairing Mode}
+    CheckMode -->|1-to-1| CheckSingleComplete{All A Items Connected?}
+    CheckMode -->|1-to-n| CheckMultipleComplete{All A Items Have 1-3 Connections?}
+    CheckSingleComplete -->|No| StudentConnect
+    CheckSingleComplete -->|Yes| EnableSubmit[Enable Submit]
+    CheckMultipleComplete -->|No| StudentConnect
+    CheckMultipleComplete -->|Yes| EnableSubmit
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateConnections[Validate All Connections]
+    ValidateConnections --> LoopPairs[Loop Through Each Pair]
+    LoopPairs --> CheckPairConnections{Connections Correct?}
+    CheckPairConnections -->|All Correct| MarkPairCorrect[Green Border, Checkmark]
+    CheckPairConnections -->|Partial/Incorrect| MarkPairIncorrect[Red Border, Cross]
+    MarkPairCorrect --> ShowPairFB{Individual Feedback?}
+    MarkPairIncorrect --> ShowPairFB
+    ShowPairFB -->|Yes| DisplayPairFeedback[Show Pair-Specific Feedback]
+    ShowPairFB -->|No| NextPairVal
+    DisplayPairFeedback --> NextPairVal{More Pairs?}
+    NextPairVal -->|Yes| LoopPairs
+    NextPairVal -->|No| CalculateScore[Calculate Overall Score]
+    
+    CalculateScore --> ShowGenericFB{Generic Feedback?}
+    ShowGenericFB -->|Yes| DisplayGeneric[Show Overall Feedback Message]
+    ShowGenericFB -->|No| DecrementAttempts
+    DisplayGeneric --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
+    CheckAttempts -->|All Correct| SaveFinal
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrectLines[Clear Incorrect Connection Lines]
+    ClearIncorrectLines --> StudentConnect
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> DrawAllCorrect[Draw All Correct Connections]
+    DrawAllCorrect --> SaveFinal[Save Final State to SCORM]
+    
+    StoreMapping --> DataFlow[Data Flow: Connections → Model]
+    DataFlow --> UpdateMappingObject[Update pairMappings Object]
+    UpdateMappingObject --> TrackLineColors[Track Line States]
+    TrackLineColors --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors choose pairing mode (1-to-1 or 1-to-n), create pairs (2-20) with text or image content in both columns, add multiple Column B items (1-3) per Column A item, link correct associations, and select from 4 visual styles.</li>
+                <li><strong>Student Flow:</strong> Students connect items by dragging dots or clicking sequential pairs, creating multiple connections per Column A item in 1-to-n mode, with SVG lines visualizing all relationships.</li>
+                <li><strong>Validation:</strong> Connections are validated with support for partial correctness in 1-to-n mode, displaying visual feedback (green/checkmarks for all correct, red/crosses for incorrect or partial), with both individual pair and generic feedback options.</li>
+                <li><strong>Data Flow:</strong> Pair mappings object tracks all connections with line states, synchronized with SCORM, with Try Again clearing only incorrect lines or Show Me drawing all correct connections across complex 1-to-many relationships.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/MTP Multiple/MTP_MULTIPLE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

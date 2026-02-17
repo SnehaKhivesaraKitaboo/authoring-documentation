@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click to Reveal | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="nav-group">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-item__link">
+              <span class="nav-item__text">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Click to Reveal</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Click to Reveal</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Click to Reveal Component</h1>
+        <p class="page-subtitle">Hide and reveal content sections with interactive click actions.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Click to Reveal component provides an interactive way to progressively disclose information. Users click triggers or buttons to reveal hidden content, making it ideal for step-by-step instructions, spoilers, and gradual information disclosure.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class ClickToRevealComponent {
+        -reveals: Array~RevealPanel~
+        -revealMode: RevealMode
+        -animationStyle: AnimationStyle
+        +initialize()
+        +revealContent(panelId)
+        +hideContent(panelId)
+        +toggleContent(panelId)
+        +revealAll()
+        +hideAll()
+        +reset()
+    }
+    
+    class RevealPanel {
+        -id: String
+        -trigger: Trigger
+        -content: Content
+        -isRevealed: Boolean
+        -animationDuration: Number
+        +reveal()
+        +hide()
+        +toggle()
+        +animate()
+    }
+    
+    class Trigger {
+        -text: String
+        -icon: String
+        -position: Position
+        +render()
+        +onClick()
+    }
+    
+    class Content {
+        -html: String
+        -media: Media
+        +render()
+        +show()
+        +hide()
+    }
+    
+    class RevealMode {
+        <<enumeration>>
+        TOGGLE
+        ACCORDION
+        SEQUENTIAL
+    }
+    
+    ClickToRevealComponent "1" --> "*" RevealPanel : manages
+    ClickToRevealComponent --> RevealMode : uses
+    RevealPanel --> Trigger : has
+    RevealPanel --> Content : contains
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Click to Reveal System"
+        UC1(("Click Trigger"))
+        UC2(("Reveal Content"))
+        UC3(("Hide Content"))
+        UC4(("Toggle Panel"))
+        UC5(("Create Panels"))
+        UC6(("Configure Mode"))
+        UC7(("Set Animation"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Clicks on triggers or buttons to reveal hidden content, controls the pace of information disclosure, and can hide/show panels as needed for review.</li>
+                <li><strong>Author:</strong> Creates reveal panels with triggers and hidden content, configures reveal mode (toggle, accordion, sequential), and sets animation styles for smooth transitions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitCTR[Initialize Click to Reveal]
+    InitCTR --> AddSections[Add Reveal Sections 1-10]
+    AddSections --> ConfigSection[Configure Each Section]
+    ConfigSection --> SetQuestion[Set Question/Trigger Text]
+    SetQuestion --> SetAnswer[Set Hidden Answer Content]
+    SetAnswer --> AddMedia{Add Media?}
+    AddMedia -->|Yes| UploadMedia[Upload Image/Video/Audio]
+    AddMedia -->|No| ChooseStyle
+    UploadMedia --> ChooseStyle[Select Visual Style 1-4]
+    ChooseStyle --> ConfigLayout[Configure Layout Options]
+    ConfigLayout --> SaveCTR[Save Configuration]
+    
+    SaveCTR --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderCollapsed[Display All Sections Collapsed]
+    RenderCollapsed --> ShowTriggers[Show Click Trigger Buttons]
+    ShowTriggers --> StudentClick{Student Clicks Trigger}
+    StudentClick --> ExpandSection[Expand Selected Section]
+    ExpandSection --> RevealContent[Display Hidden Content]
+    RevealContent --> PlayMedia{Media Present?}
+    PlayMedia -->|Yes| InitMedia[Initialize Media Player]
+    PlayMedia -->|No| TrackView
+    InitMedia --> TrackView[Track Section Viewed]
+    TrackView --> WaitAction[Wait for Next Action]
+    
+    WaitAction --> NextAction{Next Action}
+    NextAction -->|Click Another| CollapseOthers{Accordion Mode?}
+    NextAction -->|Click Same| CollapseSection[Collapse Current Section]
+    CollapseOthers -->|Yes| CollapseAll[Collapse Other Sections]
+    CollapseOthers -->|No| KeepOpen[Keep Others Open]
+    CollapseAll --> ExpandSection
+    KeepOpen --> ExpandSection
+    CollapseSection --> HideContent[Hide Section Content]
+    HideContent --> ShowTriggers
+    
+    TrackView --> DataFlow[Data Flow: View State → Model]
+    DataFlow --> UpdateViewed[Update Viewed Sections Array]
+    UpdateViewed --> CheckComplete{All Sections Viewed?}
+    CheckComplete -->|Yes| MarkComplete[Mark Activity Complete]
+    CheckComplete -->|No| SaveProgress
+    MarkComplete --> SaveProgress[Save Progress to SCORM]
+    SaveProgress --> NextAction
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors create reveal sections (1-10) with trigger text and hidden content, optionally add media (images, videos, audio), and select from 4 visual styles with layout customization.</li>
+                <li><strong>Student Flow:</strong> Students click trigger buttons to expand sections and reveal hidden content, with accordion or multi-expand modes supporting flexible navigation patterns.</li>
+                <li><strong>Validation:</strong> Non-assessed content delivery focuses on exploration tracking, marking sections as viewed and checking completion status when all sections have been accessed.</li>
+                <li><strong>Data Flow:</strong> Tracks viewed sections array and completion progress, persisting view state to SCORM with media initialization for embedded audio/video players.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Click to Reveal/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

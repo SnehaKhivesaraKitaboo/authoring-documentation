@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIC Component | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+    <div class="sidebar__search">
+      <div class="search-box">
+        <svg class="search-box__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input type="text" class="search-box__input" placeholder="Search components...">
+      </div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="nav-group">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-item__link">
+              <span class="nav-item__text">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">CLIC Component</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">CLIC Component</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">CLIC Component</h1>
+        <p class="page-subtitle">Click-responsive interactive learning component for engaging content interactions.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The CLIC (Click-Interaction Learning Component) enables interactive content that responds to user clicks. It supports hotspots, clickable regions, and progressive content revelation to create engaging learning experiences.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class CLICComponent {
+        -hotspots: Array~Hotspot~
+        -content: ContentArea
+        -interactionMode: InteractionMode
+        -state: ComponentState
+        +initialize()
+        +registerHotspot(region)
+        +onHotspotClick(hotspotId)
+        +showContent(contentId)
+        +hideContent(contentId)
+        +trackInteraction()
+        +reset()
+    }
+    
+    class Hotspot {
+        -id: String
+        -coordinates: Coordinates
+        -shape: Shape
+        -linkedContent: Content
+        -isActive: Boolean
+        -isClicked: Boolean
+        +render()
+        +activate()
+        +deactivate()
+        +highlight()
+    }
+    
+    class Content {
+        -id: String
+        -text: String
+        -media: Media
+        -isVisible: Boolean
+        +show()
+        +hide()
+        +render()
+    }
+    
+    class InteractionMode {
+        <<enumeration>>
+        SINGLE_CLICK
+        MULTI_CLICK
+        ORDERED_SEQUENCE
+    }
+    
+    class Shape {
+        <<enumeration>>
+        CIRCLE
+        RECTANGLE
+        POLYGON
+    }
+    
+    CLICComponent "1" --> "*" Hotspot : manages
+    CLICComponent --> InteractionMode : uses
+    Hotspot --> Content : triggers
+    Hotspot --> Shape : has
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "CLIC Component System"
+        UC1(("Click Hotspot"))
+        UC2(("View Content"))
+        UC3(("Explore Regions"))
+        UC4(("Complete Sequence"))
+        UC5(("Create Hotspots"))
+        UC6(("Link Content"))
+        UC7(("Configure Mode"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Explores interactive content by clicking hotspots, views associated information or media, explores all regions for discovery-based learning.</li>
+                <li><strong>Author:</strong> Creates clickable hotspot regions on images or backgrounds, links content to each hotspot, and configures interaction modes (single, multiple, or ordered sequence).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> ConfigCLIC[Configure CLIC Component]
+    ConfigCLIC --> SetURL[Set Carnegie Learning URL]
+    SetURL --> ConfigDimensions[Set iframe Dimensions]
+    ConfigDimensions --> SetLabels[Set Question Labels]
+    SetLabels --> SaveCLIC[Save CLIC Configuration]
+    
+    SaveCLIC --> StudentLoad([Student Opens Widget])
+    StudentLoad --> InitIframe[Initialize External iframe]
+    InitIframe --> LoadExternal[Load Carnegie Learning Content]
+    LoadExternal --> RenderExternal[Render External Interface]
+    RenderExternal --> StudentInteract[Student Interacts with External System]
+    StudentInteract --> ExternalProcess[Carnegie Learning Processes Data]
+    ExternalProcess --> ExternalValidation[External System Validates]
+    ExternalValidation --> PassbackData{Data Available?}
+    PassbackData -->|Yes| ReceiveData[Receive External Results]
+    PassbackData -->|No| MonitorState[Monitor iframe Events]
+    ReceiveData --> UpdateLocal[Update Local State]
+    UpdateLocal --> DisplayStatus[Display Completion Status]
+    DisplayStatus --> SaveState[Save State to SCORM]
+    MonitorState --> StudentInteract
+    
+    SaveState --> DataFlow[Data Flow: External System → KITABOO]
+    DataFlow --> PostMessage[PostMessage Communication]
+    PostMessage --> ParseResponse[Parse External Response]
+    ParseResponse --> MapToSCORM[Map to SCORM Data Model]
+    MapToSCORM --> PersistState[Persist to LMS]
+    
+    PersistState --> Complete([Activity Complete])
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors configure the external Carnegie Learning URL, set iframe dimensions for proper display, and define question labels for the integration.</li>
+                <li><strong>Student Flow:</strong> Students interact directly with the embedded Carnegie Learning interface through an iframe, with all processing handled by the external system.</li>
+                <li><strong>Validation:</strong> External system performs all validation and scoring, with results passed back to KITABOO via PostMessage API communication protocol.</li>
+                <li><strong>Data Flow:</strong> Bidirectional communication between KITABOO and Carnegie Learning systems, mapping external results to SCORM data model for LMS persistence and tracking.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section__header">
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/CLIC/CLIC_COMPONENT_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

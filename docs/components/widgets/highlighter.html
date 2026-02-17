@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Highlighter | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Highlighter</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Highlighter Component</h1>
+        <p class="page-subtitle">Text highlighting tool for marking important content sections.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Highlighter component allows users to select and highlight specific text passages with different colors. It's useful for marking important information, identifying key concepts, or categorizing content by color-coding.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class HighlighterComponent {
+        -textContent: String
+        -highlights: Array~Highlight~
+        -availableColors: Array~Color~
+        -selectedColor: Color
+        -selectionMode: Boolean
+        +initialize()
+        +onTextSelect()
+        +applyHighlight(selection, color)
+        +removeHighlight(highlightId)
+        +changeColor(highlightId, newColor)
+        +clearAllHighlights()
+        +validateHighlights()
+    }
+    
+    class Highlight {
+        -id: String
+        -startOffset: Number
+        -endOffset: Number
+        -color: Color
+        -text: String
+        -isCorrect: Boolean
+        +render()
+        +updateColor()
+        +remove()
+    }
+    
+    class Color {
+        -name: String
+        -hexValue: String
+        -category: String
+    }
+    
+    class SelectionManager {
+        -currentSelection: Range
+        +captureSelection()
+        +validateSelection()
+        +getSelectionBounds()
+    }
+    
+    class ValidationEngine {
+        -expectedHighlights: Array
+        +compare(userHighlights)
+        +calculateScore()
+        +provideFeedback()
+    }
+    
+    HighlighterComponent "1" --> "*" Highlight : manages
+    HighlighterComponent --> SelectionManager : uses
+    HighlighterComponent --> ValidationEngine : validates with
+    Highlight --> Color : has
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Highlighter Component System"
+        UC1(("Select Text"))
+        UC2(("Apply Highlight"))
+        UC3(("Change Color"))
+        UC4(("Remove Highlight"))
+        UC5(("Create Activity"))
+        UC6(("Define Expected"))
+        UC7(("Configure Colors"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Reads the text passage, selects text to highlight, chooses a color from the palette, applies highlights to important sections, and can modify or remove highlights as needed.</li>
+                <li><strong>Author:</strong> Provides text content, defines which sections should be highlighted, assigns color categories or meanings, and configures validation rules if assessing correctness.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitHighlighter[Initialize Highlighter]
+    InitHighlighter --> AddParagraph[Add Paragraph Text]
+    AddParagraph --> MarkSentences[Mark Sentences to Highlight 1-10]
+    MarkSentences --> SetCorrect[Designate Correct Sentences]
+    SetCorrect --> ChooseColor[Select Highlight Color]
+    ChooseColor --> ConfigAttempts[Configure Max Attempts]
+    ConfigAttempts --> SetFeedback[Configure Feedback]
+    SetFeedback --> ChooseStyle[Select Visual Style]
+    ChooseStyle --> SaveHighlighter[Save Configuration]
+    
+    SaveHighlighter --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayText[Display Text Paragraph]
+    DisplayText --> EnableHighlight[Enable Click-to-Highlight]
+    EnableHighlight --> StudentClick{Student Clicks Sentence}
+    StudentClick --> CheckHighlighted{Already Highlighted?}
+    CheckHighlighted -->|Yes| RemoveHighlight[Remove Highlight]
+    CheckHighlighted -->|No| ApplyHighlight[Apply Highlight Color]
+    ApplyHighlight --> MarkSelected[Mark Sentence as Selected]
+    RemoveHighlight --> UnmarkSelected[Unmark Sentence]
+    MarkSelected --> UpdateCount[Update Selected Count]
+    UnmarkSelected --> UpdateCount
+    UpdateCount --> CheckAnySelected{Any Sentences Selected?}
+    CheckAnySelected -->|Yes| EnableSubmit[Enable Submit Button]
+    CheckAnySelected -->|No| DisableSubmit[Disable Submit Button]
+    EnableSubmit --> StudentClick
+    DisableSubmit --> StudentClick
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateSelections[Compare Selected vs Correct]
+    ValidateSelections --> LoopSentences[Loop Through Sentences]
+    LoopSentences --> CheckSentence{Sentence Correct?}
+    CheckSentence -->|Correctly Selected| MarkCorrect[Keep Highlight, Show Checkmark]
+    CheckSentence -->|Incorrectly Selected| MarkIncorrect[Change to Red, Show Cross]
+    CheckSentence -->|Should Be Selected| ShowMissed[Show as Missed]
+    MarkCorrect --> NextSentence{More Sentences?}
+    MarkIncorrect --> NextSentence
+    ShowMissed --> NextSentence
+    NextSentence -->|Yes| LoopSentences
+    NextSentence -->|No| CalculateScore[Calculate Score]
+    
+    CalculateScore --> ShowFeedback[Display Feedback Message]
+    ShowFeedback --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
+    CheckAttempts -->|All Correct| FinalSave
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Highlights]
+    ClearIncorrect --> KeepCorrect[Keep Correct Highlights]
+    KeepCorrect --> StudentClick
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAll[Highlight All Correct Sentences]
+    RevealAll --> FinalSave[Save Final State to SCORM]
+    
+    MarkSelected --> DataFlow[Data Flow: Selection → Model]
+    DataFlow --> UpdateSelectedArray[Update highlightedSentences Array]
+    UpdateSelectedArray --> SyncState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors add paragraph text, mark sentences to be interactive (1-10), designate correct sentences for highlighting, select highlight color, and configure max attempts with feedback messages.</li>
+                <li><strong>Student Flow:</strong> Students click sentences to toggle highlighting on/off, with submit button enabled only when at least one sentence is selected, allowing iterative selection refinement before submission.</li>
+                <li><strong>Validation:</strong> Selected sentences are validated against correct answers with visual feedback (green highlights/checkmarks for correct, red highlights/crosses for incorrect, indicators for missed sentences), with scoring calculated.</li>
+                <li><strong>Data Flow:</strong> Highlighted sentences array is maintained and synchronized with SCORM, with Try Again clearing only incorrect highlights while preserving correct ones, or Show Me highlighting all correct sentences automatically.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Highlighter/HIGHLIGHTER_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

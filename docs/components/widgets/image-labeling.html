@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Labeling | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Image Labeling</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Image Labeling Component</h1>
+        <p class="page-subtitle">Add and position labels on images for identification and learning.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The Image Labeling component allows users to identify and label specific areas of an image using interactive hotspots, drag-and-drop labels, and coordinate-based positioning.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Image Labeling System"
+        IL[Image Labeling Container]
+        Image[Image Layer]
+        Hotspots[Hotspot Manager]
+        Labels[Label Manager]
+        DragDrop[Drag & Drop System]
+        
+        IL --> Image
+        IL --> Hotspots
+        IL --> Labels
+        IL --> DragDrop
+        
+        Hotspots --> HS1[Hotspot 1]
+        Hotspots --> HS2[Hotspot 2]
+        Hotspots --> HS3[Hotspot 3]
+        
+        Labels --> L1[Label: Draggable]
+        Labels --> L2[Label: Position]
+        Labels --> L3[Label: Text]
+        
+        DragDrop --> Drag[Drag Handler]
+        DragDrop --> Drop[Drop Validation]
+        DragDrop --> Snap[Snap to Point]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the image hotspot and label positioning system:</p>
+            <div class="mermaid">
+classDiagram
+    class ImageLabeling {
+        +String componentId
+        +Image image
+        +HotspotManager hotspotManager
+        +LabelManager labelManager
+        +DragDropSystem dragDrop
+        +initialize()
+        +render()
+        +validate()
+        +getAnswers()
+    }
+    
+    class Image {
+        +String src
+        +Number width
+        +Number height
+        +String altText
+        +load()
+        +resize()
+        +getCoordinates()
+    }
+    
+    class HotspotManager {
+        +Array~Hotspot~ hotspots
+        +addHotspot()
+        +removeHotspot()
+        +getHotspot()
+        +highlightHotspot()
+    }
+    
+    class Hotspot {
+        +String id
+        +Coordinates position
+        +Number radius
+        +String labelId
+        +Boolean isLabeled
+        +Object style
+        +render()
+        +checkMatch()
+        +highlight()
+    }
+    
+    class LabelManager {
+        +Array~Label~ labels
+        +addLabel()
+        +removeLabel()
+        +updateLabel()
+        +validatePlacement()
+    }
+    
+    class Label {
+        +String id
+        +String text
+        +Coordinates position
+        +String targetHotspotId
+        +Boolean isDraggable
+        +Boolean isPlaced
+        +render()
+        +move()
+        +snap()
+    }
+    
+    class DragDropSystem {
+        +Label activeLabel
+        +startDrag()
+        +onDrag()
+        +endDrag()
+        +validateDrop()
+        +snapToHotspot()
+    }
+    
+    class Coordinates {
+        +Number x
+        +Number y
+        +distanceTo()
+        +update()
+    }
+    
+    class ValidationSystem {
+        +validateLabel()
+        +validateAllLabels()
+        +calculateScore()
+        +provideFeedback()
+    }
+    
+    ImageLabeling --> Image
+    ImageLabeling --> HotspotManager
+    ImageLabeling --> LabelManager
+    ImageLabeling --> DragDropSystem
+    ImageLabeling --> ValidationSystem
+    HotspotManager --> Hotspot
+    LabelManager --> Label
+    Hotspot --> Coordinates
+    Label --> Coordinates
+    DragDropSystem --> Label
+    Label --> Hotspot
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="usecase">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Use Case Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>User interactions with the Image Labeling component:</p>
+            <div class="mermaid">
+graph TB
+    Student([Student])
+    Teacher([Teacher/Author])
+    
+    subgraph "Image Labeling Use Cases"
+        UC1[View Image]
+        UC2[Drag Label]
+        UC3[Drop on Hotspot]
+        UC4[Reposition Label]
+        UC5[Remove Label]
+        UC6[Submit Answer]
+        UC7[Check Feedback]
+        UC8[Create Hotspots]
+        UC9[Add Labels]
+        UC10[Set Correct Answers]
+        UC11[Configure Snap]
+    end
+    
+    Student --> UC1
+    Student --> UC2
+    Student --> UC3
+    Student --> UC4
+    Student --> UC5
+    Student --> UC6
+    Student --> UC7
+    
+    Teacher --> UC8
+    Teacher --> UC9
+    Teacher --> UC10
+    Teacher --> UC11
+    
+    UC1 --> UC2
+    UC2 --> UC3
+    UC3 --> UC6
+    UC6 --> UC7
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitIL[Initialize Image Labeling]
+    InitIL --> UploadImage[Upload Base Image]
+    UploadImage --> AddLabels[Add Labels 2-20]
+    AddLabels --> ConfigLabel[Configure Each Label]
+    ConfigLabel --> ChooseLabelType{Choose Label Type}
+    ChooseLabelType -->|Number| SetNumber[Set Number Label]
+    ChooseLabelType -->|Text| SetText[Set Text Label]
+    SetNumber --> PositionLabel[Position Label on Image]
+    SetText --> PositionLabel
+    PositionLabel --> AddArrow{Add Arrow Connector?}
+    AddArrow -->|Yes| DrawArrow[Draw Arrow to Target]
+    AddArrow -->|No| NextLabel
+    DrawArrow --> ConfigArrow[Configure Arrow Style]
+    ConfigArrow --> NextLabel{More Labels?}
+    NextLabel -->|Yes| ConfigLabel
+    NextLabel -->|No| ChooseStyle[Select Visual Style]
+    ChooseStyle --> ConfigSettings[Configure Drag-Drop Settings]
+    ConfigSettings --> SaveIL[Save Configuration]
+    
+    SaveIL --> StudentLoad([Student Opens Widget])
+    StudentLoad --> CheckMode{Editor Mode}
+    CheckMode -->|View Only| DisplayImageView[Display Image with Labels]
+    CheckMode -->|Interactive| DisplayImageInteract[Display Image]
+    DisplayImageView --> ShowAllLabels[Show All Labels in Position]
+    ShowAllLabels --> ViewComplete([View Complete])
+    
+    DisplayImageInteract --> ShowImage[Show Base Image Only]
+    ShowImage --> ShowLabelBank[Show Label Bank Sidebar]
+    ShowLabelBank --> StudentDrag{Student Drags Label}
+    StudentDrag --> DropZone{Valid Drop Zone?}
+    DropZone -->|No| RejectDrop[Reject Drop]
+    DropZone -->|Yes| PlaceLabel[Place Label on Image]
+    PlaceLabel --> DrawConnection{Arrow Needed?}
+    DrawConnection -->|Yes| RenderArrow[Render Arrow Connector]
+    DrawConnection -->|No| MarkPlaced
+    RenderArrow --> MarkPlaced[Mark Label as Placed]
+    MarkPlaced --> RemoveFromBank[Remove from Label Bank]
+    RemoveFromBank --> CheckAllPlaced{All Labels Placed?}
+    CheckAllPlaced -->|No| StudentDrag
+    CheckAllPlaced -->|Yes| EnableSubmit[Enable Submit Button]
+    RejectDrop --> StudentDrag
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidatePositions[Validate Label Positions]
+    ValidatePositions --> LoopLabels[Loop Through Labels]
+    LoopLabels --> CheckPosition{Position Correct?}
+    CheckPosition -->|Yes| MarkCorrectLabel[Green Highlight, Checkmark]
+    CheckPosition -->|No| MarkIncorrectLabel[Red Highlight, Cross]
+    MarkCorrectLabel --> NextLabelCheck{More Labels?}
+    MarkIncorrectLabel --> NextLabelCheck
+    NextLabelCheck -->|Yes| LoopLabels
+    NextLabelCheck -->|No| CalculateScore[Calculate Score]
+    
+    CalculateScore --> ShowFeedback[Display Feedback]
+    ShowFeedback --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
+    CheckAttempts -->|All Correct| SaveFinal
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ReturnIncorrect[Return Incorrect Labels to Bank]
+    ReturnIncorrect --> StudentDrag
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> ShowCorrectPositions[Show All Correct Positions]
+    ShowCorrectPositions --> SaveFinal[Save Final State to SCORM]
+    
+    PlaceLabel --> DataFlow[Data Flow: Label Position → Model]
+    DataFlow --> UpdateLabelArray[Update labelPositions Array]
+    UpdateLabelArray --> SyncState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors upload base images, add labels (2-20) with number or text types, position labels on specific areas, optionally draw arrow connectors with configurable styles, and select visual styles for the interface.</li>
+                <li><strong>Student Flow:</strong> Students drag labels from a sidebar bank onto the image to correct positions, with arrow connectors rendering when configured, submitting when all labels are placed.</li>
+                <li><strong>Validation:</strong> Label positions are validated against correct target zones with visual feedback (green highlights/checkmarks for correct placements, red highlights/crosses for incorrect), calculating overall score.</li>
+                <li><strong>Data Flow:</strong> Label positions are tracked in an array and synchronized with SCORM, with Try Again returning only incorrect labels to the bank or Show Me displaying all correct positions automatically.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Image Labeling/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

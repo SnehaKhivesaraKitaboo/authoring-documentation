@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FIB with Image | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">FIB with Image</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">FIB with Image</h1>
+        <p class="page-subtitle">Image-based fill-in-the-blank questions with visual context.</p>
+         <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The FIB with Image component combines visual content with fill-in-the-blank exercises. Users complete sentences or labels related to an image, making it perfect for anatomy, geography, diagrams, and visual vocabulary activities.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class FIBImageComponent {
+        -image: Image
+        -blanks: Array~Blank~
+        -labels: Array~Label~
+        -userAnswers: Map
+        -correctAnswers: Map
+        +initialize()
+        +loadImage()
+        +positionBlanks()
+        +fillBlank(blankId, answer)
+        +validateAnswers()
+        +provideFeedback()
+        +reset()
+    }
+    
+    class Image {
+        -url: String
+        -width: Number
+        -height: Number
+        -altText: String
+        +load()
+        +render()
+    }
+    
+    class Blank {
+        -id: String
+        -position: Coordinates
+        -correctAnswer: String
+        -userAnswer: String
+        -linkedToImage: Boolean
+        +render()
+        +validate()
+    }
+    
+    class Label {
+        -id: String
+        -text: String
+        -position: Coordinates
+        +render()
+    }
+    
+    FIBImageComponent --> Image : displays
+    FIBImageComponent "1" --> "*" Blank : contains
+    FIBImageComponent "1" --> "*" Label : has
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "FIB with Image System"
+        UC1(("View Image"))
+        UC2(("Fill Blanks"))
+        UC3(("Submit Answers"))
+        UC4(("View Feedback"))
+        UC5(("Upload Image"))
+        UC6(("Position Blanks"))
+        UC7(("Set Answers"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Views an image with blank labels or captions, identifies the correct terms, fills in the blanks, and receives feedback with correct answers highlighted.</li>
+                <li><strong>Author:</strong> Uploads or selects images, positions blank fields on or around the image, defines correct answers for each blank.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitFIBImg[Initialize FIB with Image]
+    InitFIBImg --> UploadImage[Upload Base Image]
+    UploadImage --> AddCards[Add Answer Cards 2-20]
+    AddCards --> ConfigCard[Configure Each Card]
+    ConfigCard --> SetCardText[Set Card Text/Image]
+    SetCardText --> PositionCard[Position Card on Image]
+    PositionCard --> InsertBlank[Insert Blank in Card]
+    InsertBlank --> ChooseBlankType{Choose Blank Type}
+    ChooseBlankType -->|Dropdown| AddDropdownOptions[Add Dropdown Options]
+    ChooseBlankType -->|Text Input| SetCorrectText[Set Correct Text]
+    AddDropdownOptions --> MarkCorrect[Mark Correct Answer]
+    SetCorrectText --> MarkCorrect
+    MarkCorrect --> NextCard{More Cards?}
+    NextCard -->|Yes| ConfigCard
+    NextCard -->|No| ChooseStyle[Select Card Style 1-7]
+    ChooseStyle --> ConfigSettings[Configure Attempts, Feedback]
+    ConfigSettings --> SaveFIBImg[Save Configuration]
+    
+    SaveFIBImg --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayImage[Display Base Image]
+    DisplayImage --> RenderCards[Render Cards on Image]
+    RenderCards --> ShowBlanks[Display Blanks in Cards]
+    ShowBlanks --> StudentFill{Student Fills Blanks}
+    StudentFill -->|Dropdown| SelectOption[Select from Dropdown]
+    StudentFill -->|Text| TypeAnswer[Type Text Answer]
+    SelectOption --> FillBlank[Fill Blank]
+    TypeAnswer --> FillBlank
+    FillBlank --> CheckAllFilled{All Blanks Filled?}
+    CheckAllFilled -->|No| StudentFill
+    CheckAllFilled -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateAnswers[Validate All Blanks]
+    ValidateAnswers --> LoopCards[Loop Through Cards]
+    LoopCards --> CheckAnswer{Answer Correct?}
+    CheckAnswer -->|Yes| MarkGreen[Green Border, Checkmark]
+    CheckAnswer -->|No| MarkRed[Red Border, Cross]
+    MarkGreen --> NextCardValidate{More Cards?}
+    MarkRed --> NextCardValidate
+    NextCardValidate -->|Yes| LoopCards
+    NextCardValidate -->|No| CalculateScore[Calculate Score]
+    
+    CalculateScore --> ShowFeedback[Display Feedback]
+    ShowFeedback --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
+    CheckAttempts -->|All Correct| SaveFinal
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Answers]
+    ClearIncorrect --> StudentFill
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAll[Show All Correct Answers]
+    RevealAll --> SaveFinal[Save Final State to SCORM]
+    
+    FillBlank --> DataFlow[Data Flow: Answers → Model]
+    DataFlow --> UpdateCardAnswers[Update Card Answer Array]
+    UpdateCardAnswers --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors upload a base image, add positioned answer cards (2-20) with text or image content, insert blanks with dropdown or text input types, and select from 7 card styles.</li>
+                <li><strong>Student Flow:</strong> Students view cards overlaid on the base image, fill blanks by selecting dropdown options or typing text answers, with all card blanks required for submission.</li>
+                <li><strong>Validation:</strong> Card answers are validated individually with visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect) and aggregate scoring calculated.</li>
+                <li><strong>Data Flow:</strong> Card answer array is maintained and synchronized with SCORM, with Try Again clearing incorrect responses or Show Me revealing all correct answers on the image layout.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/FIB with Image/FIB_WITH_IMAGE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Match The Pairs | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Match The Pairs</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Match The Pairs Component</h1>
+        <p class="page-subtitle">Matching activity to connect related items from two columns.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Match The Pairs component presents two columns of items that users connect by drawing lines or clicking to create associations. It's ideal for vocabulary matching, concept pairing, and relationship identification activities.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class MatchPairsComponent {
+        -leftItems: Array~MatchItem~
+        -rightItems: Array~MatchItem~
+        -connections: Array~Connection~
+        -correctPairs: Map
+        -userPairs: Map
+        +initialize()
+        +shuffleItems()
+        +createConnection(leftId, rightId)
+        +removeConnection(connectionId)
+        +validatePairs()
+        +checkCorrectness()
+        +provideFeedback()
+        +reset()
+    }
+    
+    class MatchItem {
+        -id: String
+        -content: String
+        -column: Column
+        -isMatched: Boolean
+        -isCorrect: Boolean
+        +render()
+        +highlight()
+        +select()
+        +deselect()
+    }
+    
+    class Connection {
+        -id: String
+        -leftItemId: String
+        -rightItemId: String
+        -isCorrect: Boolean
+        +draw()
+        +remove()
+        +validate()
+    }
+    
+    class Column {
+        <<enumeration>>
+        LEFT
+        RIGHT
+    }
+    
+    class ConnectionManager {
+        -activeConnection: Connection
+        +startConnection(item)
+        +completeConnection(item)
+        +cancelConnection()
+    }
+    
+    MatchPairsComponent "1" --> "*" MatchItem : manages
+    MatchPairsComponent "1" --> "*" Connection : tracks
+    MatchPairsComponent --> ConnectionManager : uses
+    MatchItem --> Column : belongs to
+    Connection --> MatchItem : links
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">User interactions and workflows:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Match Pairs System"
+        UC1(("Select Item"))
+        UC2(("Create Connection"))
+        UC3(("Remove Connection"))
+        UC4(("Validate Pairs"))
+        UC5(("Create Activity"))
+        UC6(("Define Pairs"))
+        UC7(("Shuffle Items"))
+    end
+    
+    Learner[👤 Learner]:::actor
+    Author[👤 Author]:::actor
+    
+    Learner --> UC1
+    Learner --> UC2
+    Learner --> UC3
+    Learner --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">User Workflows:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Learner:</strong> Views two columns of items, clicks or drags to create connections between related items, modifies connections if needed, submits for validation, and receives feedback on correct/incorrect matches.</li>
+                <li><strong>Author:</strong> Creates pairs of related items, defines correct matches, controls whether items are shuffled, and configures visual layout and interaction style.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitMTP[Initialize Match The Pairs]
+    InitMTP --> AddPairs[Add Pairs 2-10]
+    AddPairs --> ConfigPair[Configure Each Pair]
+    ConfigPair --> SetColumnA[Set Column A Content]
+    SetColumnA --> ColumnAType{Column A Type}
+    ColumnAType -->|Text| AddTextA[Add Text Content]
+    ColumnAType -->|Image| AddImageA[Upload Image]
+    AddTextA --> SetColumnB
+    AddImageA --> SetColumnB[Set Column B Content]
+    SetColumnB --> ColumnBType{Column B Type}
+    ColumnBType -->|Text| AddTextB[Add Text Content]
+    ColumnBType -->|Image| AddImageB[Upload Image]
+    AddTextB --> LinkPair
+    AddImageB --> LinkPair[Link Column A to Column B]
+    LinkPair --> NextPair{More Pairs?}
+    NextPair -->|Yes| ConfigPair
+    NextPair -->|No| ChooseStyle[Select Visual Style 1-4]
+    ChooseStyle --> ConfigSettings[Configure Attempts, Feedback]
+    ConfigSettings --> ShuffleOption[Enable/Disable Shuffle Column B]
+    ShuffleOption --> SaveMTP[Save Configuration]
+    
+    SaveMTP --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderColumns[Render Column A and Column B]
+    RenderColumns --> CheckShuffle{Shuffle Enabled?}
+    CheckShuffle -->|Yes| ShuffleB[Shuffle Column B Items]
+    CheckShuffle -->|No| KeepOrder
+    ShuffleB --> DisplayPairs[Display Both Columns]
+    KeepOrder --> DisplayPairs
+    DisplayPairs --> ShowDots[Show Connection Dots]
+    ShowDots --> StudentAction{Student Action}
+    
+    StudentAction -->|Drag Dot| DragConnect[Drag from Column A to B]
+    StudentAction -->|Click A then B| ClickConnect[Click Column A Item]
+    ClickConnect --> HighlightA[Highlight Selected Item]
+    HighlightA --> ClickB[Click Column B Item]
+    ClickB --> DrawLine
+    DragConnect --> ValidateConnection{Valid Connection?}
+    ValidateConnection -->|Yes| DrawLine[Draw SVG Connection Line]
+    ValidateConnection -->|No| RejectConnection[Reject Connection]
+    DrawLine --> StoreConnection[Store Connection]
+    StoreConnection --> CheckAllConnected{All Pairs Connected?}
+    CheckAllConnected -->|No| StudentAction
+    CheckAllConnected -->|Yes| EnableSubmit[Enable Submit Button]
+    RejectConnection --> StudentAction
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateConnections[Validate All Connections]
+    ValidateConnections --> LoopPairs[Loop Through Pairs]
+    LoopPairs --> CheckPair{Connection Correct?}
+    CheckPair -->|Yes| MarkCorrectPair[Green Border, Checkmark]
+    CheckPair -->|No| MarkIncorrectPair[Red Border, Cross]
+    MarkCorrectPair --> ShowPairFeedback{Individual Feedback?}
+    MarkIncorrectPair --> ShowPairFeedback
+    ShowPairFeedback -->|Yes| DisplayPairFeedback[Show Pair-Specific Feedback]
+    ShowPairFeedback -->|No| NextPairCheck
+    DisplayPairFeedback --> NextPairCheck{More Pairs?}
+    NextPairCheck -->|Yes| LoopPairs
+    NextPairCheck -->|No| CalculateScore[Calculate Score]
+    
+    CalculateScore --> ShowGenericFeedback{Generic Feedback Enabled?}
+    ShowGenericFeedback -->|Yes| DisplayGeneric[Show Correct/Incorrect Message]
+    ShowGenericFeedback -->|No| DecrementAttempts
+    DisplayGeneric --> DecrementAttempts[Decrement Attempts]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
+    CheckAttempts -->|All Correct| SaveFinal
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Lines]
+    ClearIncorrect --> StudentAction
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> DrawCorrectLines[Draw All Correct Connection Lines]
+    DrawCorrectLines --> SaveFinal[Save Final State to SCORM]
+    
+    StoreConnection --> DataFlow[Data Flow: Connection → Model]
+    DataFlow --> UpdateConnectionArray[Update pairConnections Array]
+    UpdateConnectionArray --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors create pairs (2-10) with text or image content in Columns A and B, link correct associations, select from 4 visual styles, configure attempts and feedback, and enable optional Column B shuffling.</li>
+                <li><strong>Student Flow:</strong> Students connect matching items between columns by dragging dots or clicking sequential items, with SVG lines drawn to visualize connections, submitting when all pairs are connected.</li>
+                <li><strong>Validation:</strong> Connections are validated with visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect), supporting both individual pair feedback and generic overall feedback.</li>
+                <li><strong>Data Flow:</strong> Pair connections are stored in an array and synchronized with SCORM, with Try Again clearing only incorrect connection lines or Show Me drawing all correct connections automatically.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Match The Pairs/MATCH_THE_PAIRS_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

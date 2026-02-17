@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Search | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__header">
+      <a href="../../index.html" class="sidebar__logo">
+        <div class="sidebar__logo-icon">📚</div>
+        <span class="sidebar__logo-text">Docs Portal</span>
+      </a>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Word Search</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Word Search Component</h1>
+        <p class="page-subtitle">Interactive word search puzzle for vocabulary building.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The Word Search component provides an interactive puzzle game where users find hidden words in a letter grid across multiple directions with highlighting and validation.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Word Search System"
+        WS[Word Search Container]
+        Grid[Grid Manager]
+        Words[Word List]
+        Search[Search Handler]
+        Highlight[Highlight System]
+        
+        WS --> Grid
+        WS --> Words
+        WS --> Search
+        WS --> Highlight
+        
+        Grid --> G1[Grid Generation]
+        Grid --> G2[Cell Management]
+        Grid --> G3[Random Fill]
+        
+        Words --> W1[Target Words]
+        Words --> W2[Found Status]
+        Words --> W3[Directions]
+        
+        Search --> S1[Selection]
+        Search --> S2[Validation]
+        Search --> S3[Completion]
+        
+        Highlight --> H1[Color Coding]
+        Highlight --> H2[Direction Line]
+        Highlight --> H3[Animation]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the grid-based word search puzzle system:</p>
+            <div class="mermaid">
+classDiagram
+    class WordSearch {
+        +String componentId
+        +GridManager gridManager
+        +WordList wordList
+        +SearchHandler searchHandler
+        +HighlightSystem highlight
+        +initialize()
+        +generatePuzzle()
+        +render()
+        +isComplete()
+    }
+    
+    class GridManager {
+        +Number rows
+        +Number columns
+        +Array~Array~Cell~~ grid
+        +generateGrid()
+        +placeWords()
+        +fillRandomLetters()
+        +getCell()
+    }
+    
+    class Cell {
+        +Number row
+        +Number column
+        +String letter
+        +Boolean isPartOfWord
+        +Boolean isSelected
+        +Array~String~ wordIds
+        +render()
+        +select()
+        +deselect()
+    }
+    
+    class WordList {
+        +Array~Word~ words
+        +Number foundCount
+        +addWord()
+        +markFound()
+        +getWord()
+        +getRemainingWords()
+        +isComplete()
+    }
+    
+    class Word {
+        +String wordId
+        +String text
+        +Boolean isFound
+        +Coordinates startPosition
+        +Direction direction
+        +String highlightColor
+        +render()
+        +markAsFound()
+    }
+    
+    class SearchHandler {
+        +Array~Cell~ selection
+        +startSelection()
+        +addToSelection()
+        +endSelection()
+        +validateSelection()
+        +clearSelection()
+    }
+    
+    class Direction {
+        +String type
+        +Number dx
+        +Number dy
+        +getNextCell()
+    }
+    
+    class HighlightSystem {
+        +Array~Highlight~ highlights
+        +addHighlight()
+        +removeHighlight()
+        +animateHighlight()
+        +render()
+    }
+    
+    class Highlight {
+        +String wordId
+        +Array~Cell~ cells
+        +String color
+        +String pattern
+        +render()
+        +animate()
+    }
+    
+    class PuzzleGenerator {
+        +Array~String~ words
+        +Number gridSize
+        +generatePuzzle()
+        +placeWord()
+        +checkFit()
+        +fillEmpty()
+    }
+    
+    WordSearch --> GridManager
+    WordSearch --> WordList
+    WordSearch --> SearchHandler
+    WordSearch --> HighlightSystem
+    WordSearch --> PuzzleGenerator
+    GridManager --> Cell
+    WordList --> Word
+    Word --> Direction
+    Word --> Coordinates
+    SearchHandler --> Cell
+    HighlightSystem --> Highlight
+    Highlight --> Cell
+    PuzzleGenerator --> GridManager
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="usecase">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Use Case Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>User interactions with the Word Search component:</p>
+            <div class="mermaid">
+graph TB
+    Student([Student])
+    Teacher([Teacher/Author])
+    
+    subgraph "Word Search Use Cases"
+        UC1[View Grid]
+        UC2[View Word List]
+        UC3[Select Cells]
+        UC4[Find Word]
+        UC5[Highlight Word]
+        UC6[Clear Selection]
+        UC7[Check Progress]
+        UC8[Create Puzzle]
+        UC9[Add Words]
+        UC10[Set Grid Size]
+        UC11[Configure Directions]
+        UC12[Set Difficulty]
+    end
+    
+    Student --> UC1
+    Student --> UC2
+    Student --> UC3
+    Student --> UC4
+    Student --> UC5
+    Student --> UC6
+    Student --> UC7
+    
+    Teacher --> UC8
+    Teacher --> UC9
+    Teacher --> UC10
+    Teacher --> UC11
+    Teacher --> UC12
+    
+    UC1 --> UC3
+    UC3 --> UC4
+    UC4 --> UC5
+    UC5 --> UC7
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitWS[Initialize Word Search]
+    InitWS --> AddWords[Add Words to List]
+    AddWords --> ValidateWord[Validate Word Input]
+    ValidateWord --> CheckRules{Validation Rules}
+    CheckRules -->|Length| MaxChars[Max 13 Characters]
+    CheckRules -->|Content| AlphaOnly[Alphabetic Characters Only]
+    CheckRules -->|Count| MaxWords[Max 13 Words]
+    MaxChars --> AddToList[Add Word to List]
+    AlphaOnly --> AddToList
+    MaxWords --> AddToList
+    AddToList --> NextWord{More Words?}
+    NextWord -->|Yes| AddWords
+    NextWord -->|No| GenerateGrid[Generate Puzzle Grid]
+    GenerateGrid --> PlaceWords[Place Words in Grid]
+    PlaceWords --> SetOrientations[Use Horizontal/Vertical/Diagonal]
+    SetOrientations --> FillBlanks[Fill Empty Cells with Random Letters]
+    FillBlanks --> ShuffleOption{Shuffle Grid?}
+    ShuffleOption -->|Yes| RegenerateGrid[Regenerate Grid with Same Words]
+    ShuffleOption -->|No| ConfigWSSettings
+    RegenerateGrid --> ConfigWSSettings[Configure Settings]
+    ConfigWSSettings --> ShowWordList{Show Word List?}
+    ShowWordList --> SetWSAttempts[Set Max Attempts]
+    SetWSAttempts --> SaveWS[Save Configuration]
+    
+    SaveWS --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderPuzzleGrid[Render Puzzle Grid Buttons]
+    RenderPuzzleGrid --> CheckShowWords{Show Word List?}
+    CheckShowWords -->|Yes| DisplayWordList[Display Word List Sidebar]
+    CheckShowWords -->|No| HideWordList
+    DisplayWordList --> InitGameLogic[Initialize Word Search Game Logic]
+    HideWordList --> InitGameLogic
+    InitGameLogic --> AttachEvents[Attach Mouse/Touch Events]
+    AttachEvents --> WaitSelection{Student Action}
+    
+    WaitSelection -->|Mouse Down| StartTurn[Start Word Selection]
+    StartTurn --> SelectFirstLetter[Select First Letter]
+    SelectFirstLetter --> AddSelectedClass[Add 'selected' CSS Class]
+    AddSelectedClass --> WaitDrag{Mouse Move}
+    WaitDrag --> CheckAdjacent{Adjacent Letter?}
+    CheckAdjacent -->|Yes| SelectNextLetter[Select Next Letter]
+    CheckAdjacent -->|No| RejectSelection[Reject Selection]
+    SelectNextLetter --> CheckOrientation{Consistent Orientation?}
+    CheckOrientation -->|Yes| AddToWord[Append to Current Word]
+    CheckOrientation -->|No| RejectSelection
+    AddToWord --> WaitDrag
+    RejectSelection --> WaitDrag
+    
+    WaitDrag -->|Mouse Up| EndTurn[End Word Selection]
+    EndTurn --> ValidateWordSelection[Check if Word Matches List]
+    ValidateWordSelection --> WordMatch{Valid Word Found?}
+    WordMatch -->|Yes| MarkCorrectWord[Add 'partOfCorrect' Class]
+    WordMatch -->|No| MarkIncorrectWord[Add 'partOfIncorrect' Class Temporarily]
+    MarkCorrectWord --> CrossOutWord[Cross Out Word in List]
+    CrossOutWord --> AddToCorrectList[Add to correctAnswerList]
+    AddToCorrectList --> CheckAllFound{All Words Found?}
+    MarkIncorrectWord --> ClearSelection[Clear Selection on Next Turn]
+    ClearSelection --> WaitSelection
+    CheckAllFound -->|No| WaitSelection
+    CheckAllFound -->|Yes| EnableWSSubmit[Enable Submit Button]
+    
+    EnableWSSubmit --> WSSubmitClick([Student Clicks Submit])
+    WSSubmitClick --> ValidateAllWords[Compare Found Words vs Word List]
+    ValidateAllWords --> ApplyFinalFeedback[Apply correctData/incorrectData Classes]
+    ApplyFinalFeedback --> ShowWSFeedback[Display Feedback Message]
+    ShowWSFeedback --> DecrementWSAttempts[Decrement Attempts]
+    DecrementWSAttempts --> CheckWSAttempts{Attempts Remaining?}
+    CheckWSAttempts -->|Yes| CheckIfAllCorrect{All Words Correct?}
+    CheckWSAttempts -->|No| EnableWSShowMe
+    CheckIfAllCorrect -->|Yes| SaveWSFinal
+    CheckIfAllCorrect -->|No| EnableWSTryAgain[Enable Try Again]
+    
+    EnableWSTryAgain --> WSTryAgainClick([Click Try Again])
+    WSTryAgainClick --> RecreatePuzzle[Recreate Puzzle Same Grid]
+    RecreatePuzzle --> ClearProgress[Clear User Selections]
+    ClearProgress --> ReenableInteraction[Re-enable Grid Interaction]
+    ReenableInteraction --> WaitSelection
+    
+    EnableWSShowMe([Enable Show Me]) --> WSShowMeClick([Click Show Me])
+    WSShowMeClick --> SolveAll[Auto-Find All Words game.solve]
+    SolveAll --> MarkAllSolved[Add 'solved' Class to All Word Letters]
+    MarkAllSolved --> CrossOutAllWords[Cross Out All Words in List]
+    CrossOutAllWords --> DisableWSInteraction[Disable Grid Interaction]
+    DisableWSInteraction --> SaveWSFinal[Save Final State to SCORM]
+    
+    MarkCorrectWord --> DataFlowWS[Data Flow: Found Words → Model]
+    DataFlowWS --> UpdateCorrectList[Update correctAnswerList Array]
+    UpdateCorrectList --> TrackProgress[Track Completion Progress]
+    TrackProgress --> SyncWSState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flow Summary:</h4>
+              <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Editor Flow:</strong> Authors add words to list (max 13 words, max 13 characters each, alphabetic only), generate puzzle grid with words placed horizontally/vertically/diagonally with random letter fill, optionally shuffle grid for variation, configure settings to show/hide word list, and set max attempts.</li>
+                <li><strong>Student Flow:</strong> Students interact with puzzle grid using mouse/touch events (mouse down, move, up) to select letter sequences, with CSS classes for selection feedback, finding words that match the list with adjacent letter validation and consistent orientation checking.</li>
+                <li><strong>Validation:</strong> Selected word sequences are validated against the word list, with correct words marked ('partOfCorrect' class) and crossed out, incorrect selections temporarily marked ('partOfIncorrect' class) then cleared, submitting when all words are found with final correctData/incorrectData styling.</li>
+                <li><strong>Data Flow:</strong> Correct answer list array tracks found words with completion progress, synchronized with SCORM, with Try Again recreating the same puzzle grid and clearing progress, or Show Me auto-solving (game.solve) and marking all word letters with 'solved' class.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Word Search/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>
