@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extended Response (ITC) | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Extended Response (ITC)</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Extended Response (ITC)</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Extended Response Component</h1>
+        <p class="page-subtitle">Long-form text response component for essay-style answers.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Extended Response component provides a rich text editor for learners to compose lengthy, essay-style answers. It supports multimedia integration, formatting tools, word count tracking, and can be used for open-ended questions requiring detailed explanations.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class ExtendedResponseComponent {
+        -editor: RichTextEditor
+        -prompt: String
+        -response: String
+        -wordCount: Number
+        -constraints: Constraints
+        -rubric: Rubric
+        +initialize()
+        +renderEditor()
+        +onTextChange()
+        +submitResponse()
+        +autoSave()
+        +validateConstraints()
+        +reset()
+    }
+    
+    class RichTextEditor {
+        -content: String
+        -formatting: FormattingOptions
+        -mediaItems: Array~Media~
+        +insertText()
+        +formatText(style)
+        +insertMedia()
+        +getContent()
+        +setContent()
+    }
+    
+    class Constraints {
+        -minWordCount: Number
+        -maxWordCount: Number
+        -requiredElements: Array
+        -timeLimit: Number
+        +validate()
+    }
+    
+    class Rubric {
+        -criteria: Array~Criterion~
+        -scoringGuide: ScoringGuide
+        +evaluate(response)
+        +provideFeedback()
+    }
+    
+    class AutoSaveManager {
+        -interval: Number
+        -lastSaved: Timestamp
+        +save()
+        +restore()
+    }
+    
+    ExtendedResponseComponent --> RichTextEditor : uses
+    ExtendedResponseComponent --> Constraints : validates with
+    ExtendedResponseComponent --> Rubric : evaluates with
+    ExtendedResponseComponent --> AutoSaveManager : uses
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Extended Response Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant RTE as Rich Text Editor
+    participant SCORM as SCORM API
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Question Text
+    Author->>W: Select Label Type (Primary/Secondary)
+    Author->>W: Select Answer Type (Short/RTE)
+    Author->>W: Set Character Limit
+    Author->>W: Select Media Type
+    alt Image Media
+        Author->>W: Upload Image
+        W->>API: Upload Image
+        API-->>W: Return Image URL
+        Author->>W: Set Alt Text
+    else Video Media
+        Author->>W: Upload/Link Video
+        W->>API: Save Video Reference
+    else Audio Media
+        Author->>W: Upload Audio
+        W->>API: Save Audio
+    end
+    opt Enable Answer Validation
+        Author->>W: Enable allowResponse
+        Author->>W: Enter Correct Answers (pipe-separated)
+        Author->>W: Enable Exact Match (optional)
+        Author->>W: Configure Feedback Messages
+    end
+    opt Enable Custom Keyboard
+        Author->>W: Enable Custom Keyboard
+        Author->>W: Select Language (FRA/ESP/GER/MATH)
+    end
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Question
+    W->>UI: Display Media
+    alt Short Answer Type
+        W->>UI: Render Contenteditable Div
+        W->>UI: Set Character Limit
+        Student->>W: Type Answer
+        W->>UI: Show Character Count
+    else RTE Type
+        W->>RTE: Initialize Rich Text Editor
+        RTE->>UI: Display Formatting Toolbar
+        Student->>RTE: Enter Formatted Response
+        opt Math Equations
+            Student->>RTE: Insert Math Equation
+            RTE->>RTE: Launch MathLive Editor
+            Student->>RTE: Enter Equation
+            RTE->>UI: Render LaTeX
+        end
+    end
+    opt Custom Keyboard Enabled
+        W->>UI: Display Custom Keyboard
+        Student->>UI: Click Special Character
+        UI->>W: Insert Character
+    end
+    W->>SCORM: Save Draft Response
+    alt Validation Enabled
+        Student->>W: Submit Answer
+        W->>W: Normalize Answer
+        W->>W: Compare with Correct Answers
+        alt Exact Match Enabled
+            W->>W: Exact String Comparison
+        else Flexible Match
+            W->>W: Case-insensitive Comparison
+        end
+        alt Answer Correct
+            W->>UI: Display Success Feedback
+            W->>UI: Apply Green Styling
+        else Answer Incorrect
+            W->>UI: Display Error Feedback
+            W->>UI: Apply Red Styling
+        end
+    else No Validation
+        Student->>W: Submit Response
+        W->>UI: Confirm Submission
+    end
+    W->>SCORM: Save Final Response
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitER[Initialize Extended Response]
+    InitER --> AddMedia[Add Media - Image/Video/Audio]
+    AddMedia --> ConfigMedia[Configure Media Display]
+    ConfigMedia --> SetQuestion[Set Question Text]
+    SetQuestion --> ChooseInput{Choose Input Type}
+    ChooseInput -->|Short Answer| ConfigShort[Text Input - Single Line]
+    ChooseInput -->|RTE| ConfigRTE[Rich Text Editor]
+    ConfigShort --> SetCharLimit[Set Character Limit]
+    ConfigRTE --> SetCharLimit
+    SetCharLimit --> ConfigKeyboard{Custom Keyboard?}
+    ConfigKeyboard -->|Yes| SelectLanguage[Select Language Keyboard]
+    ConfigKeyboard -->|No| SaveER
+    SelectLanguage --> SaveER[Save Configuration]
+    
+    SaveER --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayMedia[Display Media Content]
+    DisplayMedia --> InitPlayer[Initialize Media Player]
+    InitPlayer --> DisplayQuestion[Display Question Text]
+    DisplayQuestion --> ShowInput[Show Input Field/RTE]
+    ShowInput --> ShowKeyboard{Custom Keyboard?}
+    ShowKeyboard -->|Yes| RenderKeyboard[Render Special Character Keyboard]
+    ShowKeyboard -->|No| EnableTyping
+    RenderKeyboard --> EnableTyping[Enable Text Entry]
+    
+    EnableTyping --> StudentTypes{Student Types Response}
+    StudentTypes --> CheckLength[Check Character Count]
+    CheckLength --> UpdateCounter[Update Character Counter]
+    UpdateCounter --> ValidateLength{Within Limit?}
+    ValidateLength -->|Yes| EnableSubmit[Enable Submit Button]
+    ValidateLength -->|No| TruncateText[Truncate Excess Characters]
+    TruncateText --> UpdateCounter
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> CaptureResponse[Capture Student Response]
+    CaptureResponse --> DisableInput[Disable Text Input]
+    DisableInput --> MarkSubmitted[Mark as Submitted]
+    MarkSubmitted --> SaveResponse[Save Response to SCORM]
+    SaveResponse --> ShowConfirmation[Show Submission Confirmation]
+    ShowConfirmation --> Complete([Activity Complete])
+    
+    StudentTypes --> DataFlow[Data Flow: Input → State]
+    DataFlow --> ValidateInput[Validate Text Content]
+    ValidateInput --> EncodeData[Encode Response Data]
+    EncodeData --> UpdateSuspendData[Update SCORM suspend_data]
+    UpdateSuspendData --> TrackLatency[Track Response Time]
+    TrackLatency --> PersistState[Persist to LMS]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors add media content (image, video, or audio), set question text, choose input type (short answer or RTE), configure character limits, and optionally select custom language keyboards.</li>
+                <li><strong>Student Flow:</strong> Students view media content, read questions, type responses in text fields or rich text editors, with character counters tracking input length and enabling submission when complete.</li>
+                <li><strong>Validation:</strong> No automated scoring; responses are captured and submitted for manual teacher grading, with validation limited to character count enforcement and content sanitization.</li>
+                <li><strong>Data Flow:</strong> Student responses are encoded and stored in SCORM suspend_data, with response time latency tracked for analytics and submission confirmation displayed upon completion.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Extended Response about Media (ITC)/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

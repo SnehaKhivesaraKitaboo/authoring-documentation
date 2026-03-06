@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flashcard | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Flashcard</span>
+        </div>
+      </nav>
+      <h1 class="header__title">Flashcard</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Flashcard Component</h1>
+        <p class="page-subtitle">Flip-card interface for memorization and quick review.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Flashcard component provides a digital flip-card interface for memorization and self-paced learning. Users can click or tap to flip between front and back of cards, making it ideal for vocabulary, definitions, and quick review sessions.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class FlashcardComponent {
+        -cards: Array~Card~
+        -currentIndex: Number
+        -studyMode: StudyMode
+        -progress: Progress
+        +initialize()
+        +nextCard()
+        +previousCard()
+        +flipCard()
+        +shuffle()
+        +markAsKnown(cardId)
+        +resetProgress()
+    }
+    
+    class Card {
+        -id: String
+        -frontContent: String
+        -backContent: String
+        -isFlipped: Boolean
+        -difficulty: Difficulty
+        -timesReviewed: Number
+        +flip()
+        +render()
+        +animate()
+    }
+    
+    class StudyMode {
+        <<enumeration>>
+        SEQUENTIAL
+        RANDOM
+        SPACED_REPETITION
+    }
+    
+    class Difficulty {
+        <<enumeration>>
+        EASY
+        MEDIUM
+        HARD
+    }
+    
+    class Progress {
+        -cardsReviewed: Number
+        -cardsRemaining: Number
+        -knownCards: Set
+        +update()
+        +calculate()
+    }
+    
+    FlashcardComponent "1" --> "*" Card : manages
+    FlashcardComponent --> StudyMode : uses
+    FlashcardComponent --> Progress : tracks
+    Card --> Difficulty : has
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Flashcard Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Flashcard (2-20 cards)
+    loop For Each Card
+        Author->>W: Configure Front Card
+        alt Text Mode
+            Author->>W: Enter Front Text (150 chars)
+        else Media Mode
+            Author->>W: Select Media Type
+            alt Image
+                Author->>W: Upload Image
+                W->>API: Upload Image
+                API-->>W: Return URL
+            else Video
+                Author->>W: Upload/Link Video
+                W->>API: Save Video
+            else Audio
+                Author->>W: Upload Audio
+                W->>API: Save Audio
+            end
+            Author->>W: Add Title/Caption
+        end
+        Author->>W: Configure Back Card
+        Author->>W: Set Content (Text/Media)
+    end
+    Author->>W: Select Style (Style-1/Style-2)
+    Author->>W: Set Card Color
+    Author->>W: Configure Auto-Play (optional)
+    Author->>W: Set Pause Duration
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
+    
+    Note over Student,UI: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render First Card (Front Face)
+    W->>UI: Initialize Slider
+    alt Style-2 Selected
+        W->>UI: Display Progress Bar
+    end
+    Student->>UI: Click Card to Flip
+    UI->>W: Handle Flip Event
+    W->>UI: Animate Card Flip
+    W->>UI: Show Back Face
+    alt Media on Back
+        W->>UI: Initialize Media Player
+    end
+    Student->>UI: Click Card Again
+    UI->>W: Handle Flip Event
+    W->>UI: Flip to Front Face
+    Student->>UI: Click Next Arrow
+    UI->>W: Navigate to Next Card
+    W->>UI: Transition to Next Card
+    alt Style-2 Active
+        W->>UI: Update Progress Bar
+    end
+    alt Auto-Play Enabled
+        W->>W: Start Auto-Play Timer
+        loop Auto Progression
+            W->>UI: Advance to Next Card
+            W->>UI: Update Progress
+        end
+    end
+    Student->>UI: Click Previous Arrow
+    UI->>W: Navigate to Previous Card
+    W->>UI: Show Previous Card
+    Student->>UI: Click Slide Indicator
+    UI->>W: Jump to Specific Card
+    W->>UI: Display Selected Card
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitFlashcard[Initialize Flashcard Editor]
+    InitFlashcard --> AddCards[Add Cards 2-20]
+    AddCards --> ConfigCard[Configure Each Card]
+    ConfigCard --> SetFront[Set Front Side Content]
+    SetFront --> AddFrontMedia{Add Front Media?}
+    AddFrontMedia -->|Yes| UploadFront[Upload Image/Video]
+    AddFrontMedia -->|No| SetBack
+    UploadFront --> SetBack[Set Back Side Content]
+    SetBack --> AddBackMedia{Add Back Media?}
+    AddBackMedia -->|Yes| UploadBack[Upload Image/Video]
+    AddBackMedia -->|No| NextCard
+    UploadBack --> NextCard{More Cards?}
+    NextCard -->|Yes| ConfigCard
+    NextCard -->|No| ChooseStyle[Select Visual Style 1-2]
+    ChooseStyle --> ConfigColors[Configure Card Colors]
+    ConfigColors --> SaveFlashcard[Save Configuration]
+    
+    SaveFlashcard --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayCard1[Display First Card - Front Side]
+    DisplayCard1 --> ShowNavigation[Show Navigation Controls]
+    ShowNavigation --> WaitAction{Student Action}
+    
+    WaitAction -->|Click Card| FlipCard[Flip to Back Side]
+    FlipCard --> ShowBack[Display Back Side Content]
+    ShowBack --> WaitBackAction{Student Action on Back}
+    WaitBackAction -->|Click Card| FlipToFront[Flip to Front Side]
+    FlipToFront --> WaitAction
+    
+    WaitAction -->|Click Next| NextCardNav[Move to Next Card]
+    WaitBackAction -->|Click Next| NextCardNav
+    NextCardNav --> CheckLastCard{Last Card?}
+    CheckLastCard -->|No| DisplayNextCard[Display Next Card Front]
+    CheckLastCard -->|Yes| WrapToFirst[Wrap to First Card]
+    DisplayNextCard --> ShowNavigation
+    WrapToFirst --> ShowNavigation
+    
+    WaitAction -->|Click Previous| PrevCardNav[Move to Previous Card]
+    WaitBackAction -->|Click Previous| PrevCardNav
+    PrevCardNav --> CheckFirstCard{First Card?}
+    CheckFirstCard -->|No| DisplayPrevCard[Display Previous Card Front]
+    CheckFirstCard -->|Yes| WrapToLast[Wrap to Last Card]
+    DisplayPrevCard --> ShowNavigation
+    WrapToLast --> ShowNavigation
+    
+    FlipCard --> TrackFlip[Track Card Flip]
+    TrackFlip --> DataFlow[Data Flow: Card State → Model]
+    DataFlow --> UpdateViewedCards[Update Viewed Cards Array]
+    UpdateViewedCards --> CheckAllViewed{All Cards Viewed?}
+    CheckAllViewed -->|Yes| MarkComplete[Mark Activity Complete]
+    CheckAllViewed -->|No| SaveProgress
+    MarkComplete --> SaveProgress[Save Progress to SCORM]
+    SaveProgress --> UpdateIndicator[Update Progress Indicator]
+    UpdateIndicator --> WaitBackAction
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors create flashcard sets (2-20 cards) with front and back content, optionally add images or videos to either side, select from 2 visual styles, and configure card colors for branding.</li>
+                <li><strong>Student Flow:</strong> Students navigate through cards using previous/next controls, click cards to flip between front and back sides, with automatic wrapping from last to first card for continuous study.</li>
+                <li><strong>Validation:</strong> Non-assessed learning tool focuses on content exploration, tracking which cards have been viewed and flipped to measure engagement and completion status.</li>
+                <li><strong>Data Flow:</strong> Card viewing and flip states are tracked in a viewed cards array, synchronized with SCORM for progress persistence, with progress indicators updated as students explore content.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Flashcard/FLASHCARD_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

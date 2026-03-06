@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Component Documentation Portal - Interactive authoring components">
+  <title>Documentation Portal | Component Library</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/markdown.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- Sidebar (populated by sidebar-loader.js) -->
+  <aside class="sidebar" id="sidebar"></aside>
+  
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">Component Library</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Dashboard</span>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Page Title -->
+      <h1 class="page-title">Welcome to the Authoring Components Portal</h1>
+      <p class="page-subtitle">
+        Comprehensive documentation for all authoring components. Browse by category or search for specific components.
+      </p>
+      
+      <!-- Statistics -->
+      <div class="stats-grid">
+        <div class="stats-card">
+          <div class="stats-card__value">24</div>
+          <div class="stats-card__label">Widget Components</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card__value">1</div>
+          <div class="stats-card__label">Layout Component</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card__value">2</div>
+          <div class="stats-card__label">Categories</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card__value">100%</div>
+          <div class="stats-card__label">Documented</div>
+        </div>
+      </div>
+      
+      <!-- Layout Components Section -->
+      <section class="category-section">
+        <button class="category-section__header" data-target="layout-components-grid" aria-expanded="true" aria-label="Toggle Layout Components section">
+          <h2 class="category-section__title">
+            Layout Components
+            <span class="category-section__count">(1)</span>
+          </h2>
+          <svg class="category-section__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="dashboard-grid" id="layout-components-grid">
+          <a href="components/layout/layout.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x2B1C;</div>
+            <h3 class="component-card__title">Layout Component</h3>
+            <p class="component-card__description">
+              Base layout structure for organizing content sections and managing page hierarchy.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Layout</span>
+                <span class="component-card__tag">Structure</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+      
+      <!-- Widget Components Section -->
+      <section class="category-section">
+        <button class="category-section__header" data-target="widget-components-grid" aria-expanded="true" aria-label="Toggle Widget Components section">
+          <h2 class="category-section__title">
+            Widget Components
+            <span class="category-section__count">(24)</span>
+          </h2>
+          <svg class="category-section__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="dashboard-grid" id="widget-components-grid">
+          <a href="components/widgets/annotation.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F4AC;</div>
+            <h3 class="component-card__title">Annotation</h3>
+            <p class="component-card__description">
+              Add interactive annotations and comments to content for enhanced learning experiences.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Widget</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/carousel.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F3A0;</div>
+            <h3 class="component-card__title">Carousel</h3>
+            <p class="component-card__description">
+              Display multiple items in a sliding carousel interface with navigation controls.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Media</span>
+                <span class="component-card__tag">Navigation</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/categorize.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F4CA;</div>
+            <h3 class="component-card__title">Categorize</h3>
+            <p class="component-card__description">
+              Drag-and-drop interface for categorizing items into different groups.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Assessment</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/clic.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F3AF;</div>
+            <h3 class="component-card__title">CLIC Component</h3>
+            <p class="component-card__description">
+              Click-responsive interactive learning component for engaging content interactions.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Widget</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/click-to-reveal.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F441;&#xFE0F;</div>
+            <h3 class="component-card__title">Click to Reveal</h3>
+            <p class="component-card__description">
+              Hide and reveal content sections with interactive click actions.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Disclosure</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/correction.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x270F;&#xFE0F;</div>
+            <h3 class="component-card__title">Correction</h3>
+            <p class="component-card__description">
+              Mark and correct errors in text with inline editing capabilities.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Editing</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/extended-response.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F4DD;</div>
+            <h3 class="component-card__title">Extended Response (ITC)</h3>
+            <p class="component-card__description">
+              Long-form text response component for essay-style answers.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Text Input</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/fib.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x2B1C;</div>
+            <h3 class="component-card__title">Fill in the Blank (FIB)</h3>
+            <p class="component-card__description">
+              Text-based fill-in-the-blank questions with validation.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Text Input</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/fib-with-image.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F5BC;&#xFE0F;</div>
+            <h3 class="component-card__title">FIB with Image</h3>
+            <p class="component-card__description">
+              Image-based fill-in-the-blank questions with visual context.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Media</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/flashcard.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F0CF;</div>
+            <h3 class="component-card__title">Flashcard</h3>
+            <p class="component-card__description">
+              Flip-card interface for memorization and quick review.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Study Tool</span>
+                <span class="component-card__tag">Interactive</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/graphic-organizer.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F5C2;&#xFE0F;</div>
+            <h3 class="component-card__title">Graphic Organizer (Image GO)</h3>
+            <p class="component-card__description">
+              Visual organization tool for structuring information and concepts.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Visual</span>
+                <span class="component-card__tag">Organization</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/group-activity.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F465;</div>
+            <h3 class="component-card__title">Group Activity (Multipart)</h3>
+            <p class="component-card__description">
+              Multi-step collaborative activity component for group learning.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Collaborative</span>
+                <span class="component-card__tag">Multi-step</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/highlighter.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F58D;&#xFE0F;</div>
+            <h3 class="component-card__title">Highlighter</h3>
+            <p class="component-card__description">
+              Text highlighting tool for marking important content sections.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Annotation</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/image-labeling.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F3F7;&#xFE0F;</div>
+            <h3 class="component-card__title">Image Labeling</h3>
+            <p class="component-card__description">
+              Add and position labels on images for identification and learning.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Media</span>
+                <span class="component-card__tag">Interactive</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/match-the-pairs.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F517;</div>
+            <h3 class="component-card__title">Match The Pairs</h3>
+            <p class="component-card__description">
+              Matching activity to connect related items from two columns.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Interactive</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/mtp-multiple.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F522;</div>
+            <h3 class="component-card__title">MTP Multiple</h3>
+            <p class="component-card__description">
+              Multiple matching pairs with advanced grouping capabilities.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Advanced</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/mcq.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x2705;</div>
+            <h3 class="component-card__title">Multiple Choice Question (MCQ)</h3>
+            <p class="component-card__description">
+              Standard multiple-choice question format with single or multiple answers.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Standard</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/question-answer.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x2753;</div>
+            <h3 class="component-card__title">Question Answer</h3>
+            <p class="component-card__description">
+              Short and long answer question component with text input.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Text Input</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/sidebar.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F4D1;</div>
+            <h3 class="component-card__title">Sidebar</h3>
+            <p class="component-card__description">
+              Collapsible sidebar for supplementary content and resources.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Layout</span>
+                <span class="component-card__tag">Navigation</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/sorting.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F524;</div>
+            <h3 class="component-card__title">Sorting</h3>
+            <p class="component-card__description">
+              Drag-and-drop sorting component for ordering items sequentially.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Interactive</span>
+                <span class="component-card__tag">Assessment</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/table-go.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F4CA;</div>
+            <h3 class="component-card__title">Table GO</h3>
+            <p class="component-card__description">
+              Table-based graphic organizer for structured data visualization.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Visual</span>
+                <span class="component-card__tag">Data</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/true-false.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x2713;&#x2717;</div>
+            <h3 class="component-card__title">True and False</h3>
+            <p class="component-card__description">
+              Binary true/false question format for quick assessments.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Assessment</span>
+                <span class="component-card__tag">Simple</span>
+              </div>
+            </div>
+          </a>
+          
+          <a href="components/widgets/word-search.html" class="component-card">
+            <div class="component-card__icon" aria-hidden="true">&#x1F50D;</div>
+            <h3 class="component-card__title">Word Search</h3>
+            <p class="component-card__description">
+              Interactive word search puzzle for vocabulary building.
+            </p>
+            <div class="component-card__footer">
+              <div class="component-card__tags">
+                <span class="component-card__tag">Game</span>
+                <span class="component-card__tag">Vocabulary</span>
+              </div>
+            </div>
+          </a>
+          
+          <!-- Search empty state -->
+          <div id="search-empty-state" class="search-empty-state">
+            No components match your search. Try a different keyword.
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/sidebar-loader.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/markdown-renderer.js"></script>
+</body>
+</html>

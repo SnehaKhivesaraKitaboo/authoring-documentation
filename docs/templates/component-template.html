@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{COMPONENT_NAME} - Component Documentation">
+  <title>{COMPONENT_NAME} | Documentation Portal</title>
+  
+  <!--
+    ================================================
+    TEMPLATE PLACEHOLDERS — Replace before use:
+    
+    {COMPONENT_NAME}    — Display name (e.g. "Multiple Choice Question (MCQ)")
+    {COMPONENT_SHORT}   — Short name for breadcrumb (e.g. "MCQ")
+    {CATEGORY}          — "Widgets" or "Layout"
+    {CATEGORY_HASH}     — URL hash fragment (e.g. "#widgets" or "#layout")
+    {COMPONENT_DESC}    — One-line description
+    {COMPONENT_TYPE}    — e.g. "Assessment Widget", "Interactive Widget", "Layout"
+    {MD_FILE_PATH}      — Relative path to .md file from this HTML (e.g.
+                           "../../../Components/Widgets/MCQ/MCQ_DOCS.md")
+    ================================================
+  -->
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid for Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  
+  <!-- Sidebar (populated by sidebar-loader.js) -->
+  <aside class="sidebar" id="sidebar"></aside>
+  
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">{COMPONENT_NAME}</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html{CATEGORY_HASH}" class="breadcrumb__link">{CATEGORY}</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">{COMPONENT_SHORT}</span>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Component Overview -->
+      <section class="section">
+        <h1 class="page-title">{COMPONENT_NAME}</h1>
+        <p class="page-subtitle">{COMPONENT_DESC}</p>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Diagram
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+          <a href="#technical" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            Technical Details
+          </a>
+        </div>
+      </section>
+      
+      <!-- Overview Section -->
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>{OVERVIEW_TEXT}</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- UML Diagram Section -->
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Class structure and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class ComponentName {
+        -property1: Type
+        -property2: Type
+        +method1()
+        +method2()
+    }
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Feature Specification Section (Markdown) -->
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Technical Details Section -->
+      <section class="section" id="technical">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <h2 class="section__title">Technical Details</h2>
+        </div>
+        
+        <div class="tech-details">
+          <div class="tech-details__grid">
+            <div class="tech-details__item">
+              <div class="tech-details__label">Component Type</div>
+              <div class="tech-details__value">{COMPONENT_TYPE}</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Category</div>
+              <div class="tech-details__value">{CATEGORY}</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Status</div>
+              <div class="tech-details__value">Active</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Documentation</div>
+              <div class="tech-details__value">Complete</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const markdownFilePath = '{MD_FILE_PATH}';
+      
+      renderMarkdown(markdownFilePath, 'feature-specification')
+        .catch(() => {
+          document.getElementById('feature-specification').innerHTML = `
+            <div class="alert alert-warning">
+              <strong>Documentation not loaded.</strong><br>
+              Expected file: <code>${markdownFilePath}</code><br>
+              <p class="mt-md">Verify the file exists and the path is correct relative to this HTML page.</p>
+            </div>
+          `;
+        });
+    });
+  </script>
+</body>
+</html>

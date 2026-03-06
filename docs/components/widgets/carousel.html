@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Carousel</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Carousel</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Carousel Component</h1>
+        <p class="page-subtitle">Display multiple items in a sliding carousel interface with navigation controls.</p>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Carousel component enables navigation through multiple content items with smooth transitions and interactive controls. It supports images, videos, and text content with customizable layouts and auto-play functionality.</p>
+            <p class="mt-md"><strong>Key Capabilities:</strong></p>
+            <ul>
+              <li>Multi-slide presentations (2-12 slides)</li>
+              <li>Image, video, and text content support</li>
+              <li>Vertical and horizontal layout options</li>
+              <li>Auto-play with configurable duration</li>
+              <li>Navigation controls and indicators</li>
+              <li>Responsive design for all screen sizes</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the architecture of the Carousel component:</p>
+            <div class="mermaid">
+classDiagram
+    class CarouselComponent {
+        -slides: Array~Slide~
+        -currentIndex: Number
+        -autoPlay: Boolean
+        -autoPlayDuration: Number
+        -layoutType: LayoutType
+        -styleVariant: StyleVariant
+        -isPlaying: Boolean
+        +initialize()
+        +addSlide(slide)
+        +removeSlide(index)
+        +nextSlide()
+        +previousSlide()
+        +goToSlide(index)
+        +startAutoPlay()
+        +stopAutoPlay()
+        +renderSlides()
+        +updateIndicators()
+    }
+    
+    class Slide {
+        -id: String
+        -title: String
+        -description: String
+        -mediaType: MediaType
+        -mediaUrl: String
+        -caption: String
+        -order: Number
+        +render()
+        +validate()
+        +toJSON()
+    }
+    
+    class MediaType {
+        <<enumeration>>
+        IMAGE
+        VIDEO
+        YOUTUBE
+        TEXT_ONLY
+    }
+    
+    class LayoutType {
+        <<enumeration>>
+        VERTICAL
+        HORIZONTAL
+    }
+    
+    class NavigationController {
+        -carousel: CarouselComponent
+        +handleNext()
+        +handlePrevious()
+        +handleIndicatorClick(index)
+        +handleKeyboard(event)
+    }
+    
+    class SliderLibrary {
+        <<external>>
+        +init(config)
+        +goToSlide(index)
+        +reloadSlider()
+    }
+    
+    CarouselComponent "1" --> "*" Slide : contains
+    CarouselComponent --> MediaType : uses
+    CarouselComponent --> LayoutType : uses
+    CarouselComponent --> NavigationController : controlled by
+    CarouselComponent ..> SliderLibrary : uses
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Carousel Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant V as Video Player
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Introduction/Instruction Text
+    Author->>W: Add Slide (2-12 slides)
+    loop For Each Slide
+        Author->>W: Select Media Type (Image/Video/Text)
+        alt Image Selected
+            Author->>W: Upload Image
+            W->>API: Upload Image File
+            API-->>W: Return Image URL
+        else Video Selected
+            Author->>W: Upload Video or YouTube URL
+            W->>API: Save Video Reference
+        else Text Only
+            Author->>W: Enter Text Content
+        end
+        Author->>W: Add Slide Title
+        Author->>W: Add Caption Text
+        Author->>W: Add Description Text
+    end
+    Author->>W: Configure Settings
+    Author->>W: Select Style (1, 2, or 3)
+    Author->>W: Set Layout (Vertical/Horizontal)
+    Author->>W: Enable Auto-Play (optional)
+    Author->>W: Set Pause Duration
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
+    
+    Note over Student,V: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render First Slide
+    W->>UI: Initialize bxSlider
+    alt Auto-Play Enabled
+        W->>W: Start Auto-Play Timer
+        loop Auto Progression
+            W->>UI: Transition to Next Slide
+        end
+    end
+    Student->>UI: Click Navigation Arrow
+    UI->>W: Navigate to Slide
+    W->>UI: Render Slide Content
+    alt Slide Contains Video
+        W->>V: Initialize Video Player
+        V->>UI: Display Video Controls
+        Student->>V: Play Video
+    end
+    Student->>UI: Click Slide Indicator
+    UI->>W: Jump to Slide
+    W->>UI: Update Active Slide
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitCarousel[Initialize Carousel Editor]
+    InitCarousel --> ConfigSlides{Configure Number of Slides}
+    ConfigSlides --> AddSlides[Add Slides 2-12]
+    AddSlides --> EditSlide[Select Slide to Edit]
+    EditSlide --> SetContent[Add Title, Text, Media]
+    SetContent --> ChooseStyle{Select Carousel Style}
+    ChooseStyle -->|Style 1| ApplyStyle1[Dots Navigation]
+    ChooseStyle -->|Style 2| ApplyStyle2[Thumbnail Navigation]
+    ChooseStyle -->|Style 3| ApplyStyle3[Progress Bar]
+    ApplyStyle1 --> ConfigAutoplay[Configure Autoplay Settings]
+    ApplyStyle2 --> ConfigAutoplay
+    ApplyStyle3 --> ConfigAutoplay
+    ConfigAutoplay --> SaveCarousel[Save Carousel Configuration]
+    
+    SaveCarousel --> ReaderLoad([Student Opens Carousel])
+    ReaderLoad --> DisplaySlide1[Display First Slide]
+    DisplaySlide1 --> InitNavigation[Initialize Navigation Controls]
+    InitNavigation --> CheckAutoplay{Autoplay Enabled?}
+    CheckAutoplay -->|Yes| StartTimer[Start Auto-advance Timer]
+    CheckAutoplay -->|No| WaitInteraction[Wait for User Interaction]
+    
+    StartTimer --> AutoNext[Auto-advance After Delay]
+    AutoNext --> NextSlide[Display Next Slide]
+    WaitInteraction --> UserAction{User Action}
+    UserAction -->|Click Next| NextSlide
+    UserAction -->|Click Previous| PrevSlide[Display Previous Slide]
+    UserAction -->|Click Dot/Thumb| JumpSlide[Jump to Selected Slide]
+    
+    NextSlide --> UpdateIndicator[Update Navigation Indicator]
+    PrevSlide --> UpdateIndicator
+    JumpSlide --> UpdateIndicator
+    UpdateIndicator --> CheckLastSlide{Last Slide?}
+    CheckLastSlide -->|No| WaitNext[Wait for Next Action]
+    CheckLastSlide -->|Yes| CheckLoop{Loop Enabled?}
+    CheckLoop -->|Yes| DisplaySlide1
+    CheckLoop -->|No| CarouselEnd([Carousel Complete])
+    
+    WaitNext --> UserAction
+    
+    UpdateIndicator --> DataFlow[Data Flow: Slide Index → State]
+    DataFlow --> TrackProgress[Track Viewed Slides]
+    TrackProgress --> SaveProgress[Save Progress to SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors configure slides (2-12) with titles, text, and media, select navigation style (dots, thumbnails, or progress bar), and set autoplay options with timing controls.</li>
+                <li><strong>Student Flow:</strong> Students view slides sequentially or jump to specific slides via navigation controls, with optional automatic advancement and looping functionality.</li>
+                <li><strong>Validation:</strong> Content is displayed without assessment validation, focusing on presentation and navigation tracking for completion status.</li>
+                <li><strong>Data Flow:</strong> Tracks slide viewing progress and navigation patterns, persisting viewed slide indices and completion status to SCORM for analytics.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Carousel/CAROUSEL_COMPONENT_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

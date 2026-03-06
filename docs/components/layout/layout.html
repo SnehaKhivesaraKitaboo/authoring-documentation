@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Layout Component - Component Documentation">
+  <title>Layout Component | Documentation Portal</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  
+  <!-- Sidebar (populated by sidebar-loader.js) -->
+  <aside class="sidebar" id="sidebar"></aside>
+  
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">Layout Component</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#layout" class="breadcrumb__link">Layout</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Layout Component</span>
+        </div>
+      </nav>
+    </header>
+    
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Component Overview -->
+      <section class="section">
+        <h1 class="page-title">Layout Component</h1>
+        <p class="page-subtitle">Base layout structure for organizing content sections and managing page hierarchy.</p>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Use Cases
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+          <a href="#technical" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+            Technical Details
+          </a>
+        </div>
+      </section>
+      
+      <!-- Overview Section -->
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Layout Component provides the foundational structure for organizing and presenting content in a hierarchical, responsive manner. It manages the arrangement of sections, subsections, and content blocks across different page layouts.</p>
+            <p class="mt-md"><strong>Key Capabilities:</strong></p>
+            <ul>
+              <li>6 predefined layout templates (Layout1-Layout6)</li>
+              <li>Drag-and-drop widget placement</li>
+              <li>Responsive design across devices</li>
+              <li>Dynamic content organization</li>
+              <li>Configurable sections and zones</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the architecture of the Layout Component:</p>
+            <div class="mermaid">
+classDiagram
+    class LayoutComponent {
+        -templateType: LayoutTemplate
+        -sections: Array~Section~
+        -widgets: Array~Widget~
+        -configuration: LayoutConfig
+        -dragState: DragState
+        +initialize()
+        +loadTemplate(type)
+        +addSection(section)
+        +removeSection(id)
+        +dropWidget(widget, sectionId)
+        +reorderSections()
+        +saveLayout()
+        +exportJSON()
+    }
+    
+    class LayoutTemplate {
+        <<enumeration>>
+        LAYOUT1
+        LAYOUT2
+        LAYOUT3
+        LAYOUT4
+        LAYOUT5
+        LAYOUT6
+    }
+    
+    class Section {
+        -id: String
+        -name: String
+        -widgets: Array~Widget~
+        -order: Number
+        -styling: CSSProperties
+        +render()
+        +acceptWidget(widget)
+        +removeWidget(id)
+        +reorderWidgets()
+    }
+    
+    class Widget {
+        -id: String
+        -type: String
+        -config: Object
+        -position: Position
+        +render()
+        +validate()
+        +serialize()
+    }
+    
+    class DragDropController {
+        -source: Widget
+        -target: Section
+        -placeholder: Element
+        +onDragStart(widget)
+        +onDragOver(section)
+        +onDrop()
+        +cancelDrag()
+    }
+    
+    class LayoutService {
+        +getAvailableLayouts()
+        +loadLayoutConfig(type)
+        +saveLayoutState()
+        +validateLayout()
+    }
+    
+    LayoutComponent --> LayoutTemplate : uses
+    LayoutComponent "1" --> "*" Section : contains
+    LayoutComponent --> DragDropController : uses
+    LayoutComponent --> LayoutService : uses
+    Section "1" --> "*" Widget : contains
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Use Case Diagram -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Use Case Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows user interactions with the Layout Component:</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Layout Management System"
+        UC1((\"Select<br/>Template\"))
+        UC2((\"Drag<br/>Widget\"))
+        UC3((\"Drop<br/>Widget\"))
+        UC4((\"Add<br/>Section\"))
+        UC5((\"Remove<br/>Section\"))
+        UC6((\"Reorder<br/>Content\"))
+        UC7((\"Configure<br/>Layout\"))
+        UC8((\"Save<br/>Layout\"))
+        UC9((\"Preview<br/>Layout\"))
+    end
+    
+    Author[👤 Content Author]:::actor
+    Designer[👤 Designer]:::actor
+    
+    Author --> UC1
+    Author --> UC2
+    Author --> UC3
+    Author --> UC4
+    Author --> UC5
+    Author --> UC6
+    Author --> UC8
+    Author --> UC9
+    
+    Designer --> UC1
+    Designer --> UC7
+    
+    UC1 --> UC4
+    UC2 --> UC3
+    UC3 -.-> UC6
+    UC4 -.-> UC7
+    
+    classDef actor fill:#e1f5ff,stroke:#2563eb,stroke-width:2px
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">User Workflows:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Content Author:</strong> Select layout template → Add sections → Drag widgets from panel → Drop into sections → Reorder content → Configure settings → Preview → Save layout</li>
+                <li><strong>Designer:</strong> Choose layout template → Configure visual styling → Set responsive breakpoints → Define section dimensions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Feature Specification Section (Markdown) -->
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <!-- Markdown content will be rendered here -->
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Technical Details Section -->
+      <section class="section" id="technical">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <h2 class="section__title">Technical Details</h2>
+        </div>
+        
+        <div class="tech-details">
+          <div class="tech-details__grid">
+            <div class="tech-details__item">
+              <div class="tech-details__label">Component Type</div>
+              <div class="tech-details__value">Layout</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Category</div>
+              <div class="tech-details__value">Layout</div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Status</div>
+              <div class="tech-details__value">
+                <span class="badge badge--success">Active</span>
+              </div>
+            </div>
+            <div class="tech-details__item">
+              <div class="tech-details__label">Documentation</div>
+              <div class="tech-details__value">
+                <span class="badge badge--success">Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  
+  <script>
+    // Initialize navigation and markdown rendering
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render markdown documentation
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Layout/LAYOUT_COMPONENT_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

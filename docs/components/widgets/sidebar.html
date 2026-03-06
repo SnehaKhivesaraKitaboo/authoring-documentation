@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sidebar | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Sidebar Component</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Sidebar</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Sidebar Component</h1>
+        <p class="page-subtitle">Collapsible sidebar for supplementary content and resources.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The Sidebar component provides an expandable/collapsible panel for displaying supplementary content, resources, and navigation without disrupting the main content area.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Sidebar System"
+        SB[Sidebar Container]
+        Toggle[Toggle Control]
+        Panels[Panel Manager]
+        Navigation[Navigation System]
+        Content[Content Manager]
+        
+        SB --> Toggle
+        SB --> Panels
+        SB --> Navigation
+        SB --> Content
+        
+        Toggle --> Expand[Expand]
+        Toggle --> Collapse[Collapse]
+        Toggle --> Auto[Auto-hide]
+        
+        Panels --> P1[Panel: Resources]
+        Panels --> P2[Panel: Notes]
+        Panels --> P3[Panel: Help]
+        
+        Content --> Rich[Rich Media]
+        Content --> Links[Links]
+        Content --> Text[Text Content]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the expandable sidebar panel system:</p>
+            <div class="mermaid">
+classDiagram
+    class Sidebar {
+        +String componentId
+        +String position
+        +Boolean isExpanded
+        +PanelManager panelManager
+        +ToggleControl toggle
+        +NavigationSystem navigation
+        +initialize()
+        +expand()
+        +collapse()
+        +render()
+    }
+    
+    class ToggleControl {
+        +Boolean state
+        +String icon
+        +String position
+        +toggle()
+        +expand()
+        +collapse()
+        +updateIcon()
+    }
+    
+    class PanelManager {
+        +Array~Panel~ panels
+        +Panel activePanel
+        +addPanel()
+        +removePanel()
+        +switchPanel()
+        +getPanel()
+    }
+    
+    class Panel {
+        +String panelId
+        +String title
+        +String icon
+        +ContentManager content
+        +Boolean isActive
+        +Number sequence
+        +render()
+        +show()
+        +hide()
+    }
+    
+    class ContentManager {
+        +Array~ContentBlock~ blocks
+        +addContent()
+        +removeContent()
+        +updateContent()
+        +render()
+    }
+    
+    class ContentBlock {
+        +String blockId
+        +String type
+        +Object data
+        +Object style
+        +render()
+    }
+    
+    class NavigationSystem {
+        +Array~NavItem~ items
+        +addNavItem()
+        +removeNavItem()
+        +navigate()
+        +getActive()
+    }
+    
+    class NavItem {
+        +String id
+        +String label
+        +String target
+        +String icon
+        +Boolean isActive
+        +render()
+    }
+    
+    class AnimationController {
+        +Number duration
+        +String easing
+        +animateExpand()
+        +animateCollapse()
+        +animateSwitch()
+    }
+    
+    class ResponsiveHandler {
+        +Number breakpoint
+        +String mode
+        +checkViewport()
+        +adjustLayout()
+        +autoCollapse()
+    }
+    
+    Sidebar --> ToggleControl
+    Sidebar --> PanelManager
+    Sidebar --> NavigationSystem
+    Sidebar --> AnimationController
+    Sidebar --> ResponsiveHandler
+    PanelManager --> Panel
+    Panel --> ContentManager
+    ContentManager --> ContentBlock
+    NavigationSystem --> NavItem
+    ToggleControl --> AnimationController
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Sidebar Widget
+    participant UI as UI Layer
+    participant Student
+    
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Header Text
+    Author->>W: Enter Body Content Text
+    opt Inline Images
+        Author->>W: Insert Image in Content
+        W->>UI: Embed Image
+    end
+    Author->>W: Set Default State (Expanded/Collapsed)
+    Author->>W: Select Outline Mode
+    Author->>W: Set Background Color
+    Author->>W: Set Accent Color
+    W->>UI: Save Configuration
+    
+    Note over Student,UI: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    alt Default Collapsed
+        W->>UI: Render Header Only
+        W->>UI: Display Right Arrow Icon
+        W->>UI: Hide Content (height: 0)
+        Student->>UI: Click Header/Icon
+        UI->>W: Handle Click Event
+        W->>UI: Toggle Checkbox State
+        W->>UI: Animate Expand (CSS transition)
+        W->>UI: Change Icon to Down Arrow
+        W->>UI: Display Content (height: auto)
+    else Default Expanded
+        W->>UI: Render Header
+        W->>UI: Display Down Arrow Icon
+        W->>UI: Display Content (visible)
+        Student->>UI: Click Header/Icon
+        UI->>W: Handle Click Event
+        W->>UI: Toggle Checkbox State
+        W->>UI: Animate Collapse (CSS transition)
+        W->>UI: Change Icon to Right Arrow
+        W->>UI: Hide Content (height: 0)
+    end
+    opt Math Equations in Content
+        W->>UI: Render LaTeX Equations
+    end
+    Student->>W: Read Content
+    Student->>UI: Click Header Again
+    UI->>W: Toggle State
+    W->>UI: Animate Transition
+    Note right of Student: Pure CSS-based toggle<br>No SCORM state saving<br>Informational only
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitSidebar[Initialize Sidebar]
+    InitSidebar --> SetHeader[Set Sidebar Header Text]
+    SetHeader --> SetContent[Set Body Content Text]
+    SetContent --> AddMedia{Add Inline Images?}
+    AddMedia -->|Yes| UploadInline[Upload Inline Images]
+    AddMedia -->|No| ChooseBgColor
+    UploadInline --> ChooseBgColor[Choose Background Color]
+    ChooseBgColor --> OutlineOption{Enable Outline?}
+    OutlineOption -->|Yes| SetOutlineColor[Set Outline/Border Color]
+    OutlineOption -->|No| SetDefaultState
+    SetOutlineColor --> SetDefaultState{Default State}
+    SetDefaultState -->|Expanded| MarkExpanded[Set expandView = true]
+    SetDefaultState -->|Collapsed| MarkCollapsed[Set expandView = false]
+    MarkExpanded --> SaveSidebar[Save Configuration]
+    MarkCollapsed --> SaveSidebar
+    
+    SaveSidebar --> StudentLoad([Student Opens Widget])
+    StudentLoad --> CheckDefault{Default State}
+    CheckDefault -->|Expanded| RenderExpanded[Render Sidebar Expanded]
+    CheckDefault -->|Collapsed| RenderCollapsed[Render Sidebar Collapsed]
+    
+    RenderExpanded --> ShowHeader1[Display Header with Down Arrow]
+    ShowHeader1 --> ShowContent[Display Body Content Visible]
+    ShowContent --> WaitActionExpanded{Student Action}
+    WaitActionExpanded -->|Click Header| CollapseAnim[CSS Transition to Collapse]
+    CollapseAnim --> HideContent[Hide Body Content height: 0]
+    HideContent --> ChangeIconDown[Change Icon to Right Arrow]
+    ChangeIconDown --> WaitActionCollapsed
+    
+    RenderCollapsed --> ShowHeader2[Display Header with Right Arrow]
+    ShowHeader2 --> HideContentInit[Body Content Hidden]
+    HideContentInit --> WaitActionCollapsed{Student Action}
+    WaitActionCollapsed -->|Click Header| ExpandAnim[CSS Transition to Expand]
+    ExpandAnim --> RevealContent[Show Body Content height: auto]
+    RevealContent --> ChangeIconUp[Change Icon to Down Arrow]
+    ChangeIconUp --> WaitActionExpanded
+    
+    CollapseAnim --> TrackState[Track Expand/Collapse State]
+    ExpandAnim --> TrackState
+    TrackState --> DataFlow[Data Flow: State → Model]
+    DataFlow --> UpdateCheckbox[Update Toggle Checkbox State]
+    UpdateCheckbox --> SaveState[Save State to SCORM]
+    SaveState --> TrackInteraction[Track User Interaction Count]
+    TrackInteraction --> WaitActionCollapsed
+    TrackInteraction --> WaitActionExpanded
+    
+    WaitActionExpanded -->|Navigate Away| Complete([Non-Assessment Complete])
+    WaitActionCollapsed -->|Navigate Away| Complete
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors set header and body content text, optionally add inline images, choose background colors, enable outline with custom border colors, and set default state (expanded or collapsed with expandView flag).</li>
+                <li><strong>Student Flow:</strong> Students view sidebar in default state, click header to toggle between expanded (down arrow, visible content) and collapsed (right arrow, hidden content) states with CSS transitions.</li>
+                <li><strong>Validation:</strong> Non-assessment content display widget with no validation; tracks user interactions (expand/collapse actions) and state persistence for engagement analytics without scoring.</li>
+                <li><strong>Data Flow:</strong> Toggle checkbox state is updated on expand/collapse, synchronized with SCORM for state persistence, tracking interaction count as users navigate between expanded and collapsed views throughout the session.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Sidebar/SIDEBAR_ASIDEBAR_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

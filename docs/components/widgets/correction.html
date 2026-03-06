@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correction | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Correction</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Correction</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Correction Component</h1>
+        <p class="page-subtitle">Mark and correct errors in text with inline editing capabilities.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Correction component allows learners to identify and correct errors in text passages. It supports grammar, spelling, punctuation corrections, and can provide inline editing or selection-based correction modes.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class CorrectionComponent {
+        -text: String
+        -errors: Array~Error~
+        -userCorrections: Map
+        -correctionMode: CorrectionMode
+        +initialize()
+        +highlightError(errorId)
+        +submitCorrection(errorId, correction)
+        +validateCorrection(errorId)
+        +showFeedback()
+        +checkAllCorrections()
+        +reset()
+    }
+    
+    class Error {
+        -id: String
+        -position: Position
+        -incorrectText: String
+        -correctText: String
+        -errorType: ErrorType
+        -explanation: String
+        -isCorrected: Boolean
+        +highlight()
+        +acceptCorrection(text)
+        +validate()
+    }
+    
+    class ErrorType {
+        <<enumeration>>
+        SPELLING
+        GRAMMAR
+        PUNCTUATION
+        WORD_CHOICE
+    }
+    
+    class CorrectionMode {
+        <<enumeration>>
+        INLINE_EDIT
+        SELECT_FROM_OPTIONS
+        FREE_TEXT
+    }
+    
+    class ValidationEngine {
+        +compareCorrection()
+        +checkAlternatives()
+        +provideFeedback()
+    }
+    
+    CorrectionComponent "1" --> "*" Error : contains
+    CorrectionComponent --> CorrectionMode : uses
+    CorrectionComponent --> ValidationEngine : validates with
+    Error --> ErrorType : has
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Correction Widget
+    participant UI as UI Layer
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Text Passage
+    Author->>W: Select Incorrect Word/Phrase
+    W->>UI: Show Strikethrough Toolbar
+    Author->>UI: Click Strikethrough
+    UI->>W: Mark as Incorrect
+    W->>UI: Apply Strikethrough Style
+    Author->>W: Enter Correct Answer
+    W->>W: Store Correction Mapping
+    loop For Multiple Errors
+        Author->>W: Select Incorrect Text
+        Author->>W: Add Correction
+    end
+    Author->>W: Set Max Attempts
+    Author->>W: Configure Buttons (Show Me, Reset)
+    W->>UI: Save Configuration
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Text Passage
+    W->>UI: Enable Text Selection
+    Student->>UI: Select Word/Phrase
+    UI->>W: Handle Selection
+    W->>UI: Show Strikethrough Popup
+    Student->>UI: Click Strikethrough
+    UI->>W: Apply Strikethrough
+    W->>UI: Show Input Box
+    Student->>W: Enter Correction
+    W->>UI: Display Correction Input
+    W->>SCORM: Save Current State
+    loop Correct Multiple Errors
+        Student->>W: Strikethrough and Correct
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate All Corrections
+    loop For Each Correction
+        V->>V: Compare Input with Correct Answer
+        V->>V: Normalize Text (trim, lowercase)
+    end
+    V-->>W: Return Validation Results
+    alt All Correct
+        W->>UI: Display Success Message
+        W->>UI: Apply Green Highlights
+        W->>UI: Disable Inputs
+    else Some/All Incorrect
+        W->>UI: Display Error Message
+        W->>UI: Apply Red to Incorrect
+        W->>UI: Apply Green to Correct
+        alt Attempts Remaining
+            W->>UI: Enable Try Again
+            Student->>W: Try Again
+            W->>UI: Clear Incorrect Answers
+            W->>UI: Keep Correct Answers
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Display All Correct Answers
+        W->>UI: Fill Input Fields
+        W->>UI: Disable Further Input
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitCorrection[Initialize Correction Widget]
+    InitCorrection --> AddSentences[Add Sentences 1-5]
+    AddSentences --> SelectWord[Select Word to Correct]
+    SelectWord --> MarkWrong[Mark as Wrong Word]
+    MarkWrong --> AddCorrect[Add Correct Word Option]
+    AddCorrect --> ConfigAttempts[Configure Max Attempts 1-5]
+    ConfigAttempts --> SetFeedback[Configure Feedback Messages]
+    SetFeedback --> ChooseStyle[Select Visual Style]
+    ChooseStyle --> SaveCorrection[Save Configuration]
+    
+    SaveCorrection --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderSentences[Display Sentences with Errors]
+    RenderSentences --> StudentClick{Student Clicks Wrong Word}
+    StudentClick --> ShowCorrections[Display Correction Options]
+    ShowCorrections --> StudentSelect[Student Selects Correction]
+    StudentSelect --> ApplyCorrection[Apply Strikethrough, Show Correction]
+    ApplyCorrection --> MarkAnswered[Mark Sentence as Answered]
+    MarkAnswered --> CheckAllAnswered{All Sentences Corrected?}
+    CheckAllAnswered -->|No| StudentClick
+    CheckAllAnswered -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateAll[Compare All Corrections vs Correct]
+    ValidateAll --> LoopSentences[Loop Through Each Sentence]
+    LoopSentences --> CheckCorrect{Correction Correct?}
+    CheckCorrect -->|Yes| MarkGreen[Show Green Border, Checkmark]
+    CheckCorrect -->|No| MarkRed[Show Red Border, Cross]
+    MarkGreen --> NextSentence{More Sentences?}
+    MarkRed --> NextSentence
+    NextSentence -->|Yes| LoopSentences
+    NextSentence -->|No| CalculateScore[Calculate Total Score]
+    
+    CalculateScore --> ShowFeedback[Display Feedback Message]
+    ShowFeedback --> DecrementAttempts[Decrement Attempt Counter]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
+    CheckAttempts -->|All Correct| DisableAll[Disable All Buttons]
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ResetIncorrect[Reset Incorrect Corrections]
+    ResetIncorrect --> StudentClick
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAll[Show All Correct Answers]
+    RevealAll --> DisableInteraction[Disable All Interactions]
+    
+    DisableAll --> SaveState[Save Final State to SCORM]
+    DisableInteraction --> SaveState
+    
+    ApplyCorrection --> DataFlow[Data Flow: Selection → State]
+    DataFlow --> UpdateModel[Update corrections Object]
+    UpdateModel --> SyncState[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors create sentences (1-5) with errors, mark incorrect words, provide correct word options, and configure attempts (1-5) with custom feedback messages.</li>
+                <li><strong>Student Flow:</strong> Students identify and click wrong words to display correction options, select the correct replacement, and see strikethrough formatting applied to errors with corrections shown.</li>
+                <li><strong>Validation:</strong> Upon submission, all corrections are validated with visual feedback (green borders and checkmarks for correct, red borders and crosses for incorrect) and scoring calculated.</li>
+                <li><strong>Data Flow:</strong> Corrections are stored in a state object, synchronized with SCORM, with Try Again resetting only incorrect answers or Show Me revealing all correct solutions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Correction/CORRECTION_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

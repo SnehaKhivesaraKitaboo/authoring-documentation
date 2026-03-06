@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorize | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Categorize</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Categorize</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Categorize Component</h1>
+        <p class="page-subtitle">Drag-and-drop interface for categorizing items into different groups.</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The Categorize component allows users to organize items into categories through an intuitive drag-and-drop interface.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="uml">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Component architecture and relationships:</p>
+            <div class="mermaid">
+classDiagram
+    class CategorizeComponent {
+        -categories: Array~Category~
+        -items: Array~Item~
+        -dragState: DragState
+        -userPlacements: Map
+        -correctPlacements: Map
+        +initialize()
+        +onDragStart(itemId)
+        +onDragOver(categoryId)
+        +onDrop(itemId, categoryId)
+        +validatePlacements()
+        +checkCorrectness()
+        +provideFeedback()
+        +reset()
+    }
+    
+    class Category {
+        -id: String
+        -name: String
+        -items: Array~Item~
+        -maxItems: Number
+        -color: String
+        +addItem(item)
+        +removeItem(itemId)
+        +render()
+        +highlight()
+    }
+    
+    class Item {
+        -id: String
+        -content: String
+        -correctCategory: String
+        -currentCategory: String
+        -isDragging: Boolean
+        +render()
+        +moveTo(category)
+    }
+    
+    class DragState {
+        -draggedItem: Item
+        -sourceCategory: Category
+        -targetCategory: Category
+        +reset()
+    }
+    
+    class ValidationEngine {
+        +validatePlacement()
+        +calculateScore()
+        +highlightCorrect()
+        +highlightIncorrect()
+    }
+    
+    CategorizeComponent "1" --> "*" Category : manages
+    CategorizeComponent "1" --> "*" Item : contains
+    CategorizeComponent --> DragState : tracks
+    CategorizeComponent --> ValidationEngine : validates with
+    Category "1" --> "*" Item : holds
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Categorize Widget
+    participant UI as UI Layer
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Add Categories (2-6)
+    loop For Each Category
+        Author->>W: Enter Category Title
+        Author->>W: Add Items to Category
+        alt Text Items
+            Author->>W: Enter Item Text
+        else Image Items
+            Author->>W: Upload Item Image
+        end
+    end
+    Author->>W: Configure Settings
+    Author->>W: Select Style (1-6)
+    Author->>W: Set Max Attempts
+    Author->>W: Configure Feedback
+    Author->>W: Enable/Disable Show Me
+    W->>UI: Save Configuration
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Categories
+    W->>UI: Randomize Item Options
+    W->>UI: Initialize jQuery Draggable
+    Student->>UI: Drag Item
+    UI->>W: Track Drag Position
+    Student->>UI: Drop Item on Category
+    UI->>W: Handle Drop Event
+    W->>UI: Move Item to Category
+    W->>SCORM: Save Current State
+    loop Categorize All Items
+        Student->>UI: Drag and Drop Items
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit Answer
+    W->>V: Validate Categories
+    V->>V: Compare with Correct Answers
+    loop For Each Item
+        V->>V: Check Category Match
+    end
+    V-->>W: Return Validation Results
+    alt All Correct
+        W->>UI: Display Success Feedback
+        W->>UI: Apply Green Highlights
+    else Some/All Incorrect
+        W->>UI: Display Incorrect Feedback
+        W->>UI: Apply Red Highlights
+        alt Attempts Remaining
+            W->>UI: Enable Try Again
+            Student->>W: Try Again
+            W->>UI: Clear Incorrect Items
+        end
+    end
+    opt Show Me Clicked
+        Student->>W: Show Me
+        W->>UI: Display Correct Answers
+        W->>UI: Auto-place Items
+    end
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> LoadCategorize[Load Categorize Template]
+    LoadCategorize --> SetCategories[Configure 2-4 Categories]
+    SetCategories --> NameCategories[Set Category Names/Colors]
+    NameCategories --> AddItems[Add Items 0-10 per Category]
+    AddItems --> ItemType{Item Type}
+    ItemType -->|Text| AddText[Add Text Content]
+    ItemType -->|Image| AddImage[Upload Image with Alt Text]
+    AddText --> AssignCorrect[Assign to Correct Category]
+    AddImage --> AssignCorrect
+    AssignCorrect --> ChooseStyle[Select Visual Style 1-6]
+    ChooseStyle --> ConfigSettings[Configure Attempts, Feedback]
+    ConfigSettings --> SaveCategorize[Save Configuration]
+    
+    SaveCategorize --> StudentLoad([Student Opens Widget])
+    StudentLoad --> RenderCategories[Display Empty Categories]
+    RenderCategories --> RenderItems[Display Shuffled Items]
+    RenderItems --> StudentDrag{Student Drags Item}
+    StudentDrag --> ValidateDrop{Valid Drop Zone?}
+    ValidateDrop -->|No| RejectDrop[Reject Drop, Keep in Place]
+    ValidateDrop -->|Yes| AcceptDrop[Move Item to Category]
+    AcceptDrop --> RemoveItem[Remove from Item Pool]
+    RemoveItem --> CheckAllPlaced{All Items Placed?}
+    CheckAllPlaced -->|No| StudentDrag
+    CheckAllPlaced -->|Yes| EnableSubmit[Enable Submit Button]
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> ValidateAnswers[Compare Items vs Correct Categories]
+    ValidateAnswers --> CheckCorrectness{All Correct?}
+    CheckCorrectness -->|Yes| ShowSuccess[Show Green Borders, Checkmarks]
+    CheckCorrectness -->|No| ShowErrors[Show Red Borders on Incorrect]
+    ShowSuccess --> ShowFeedback[Display Feedback Message]
+    ShowErrors --> ShowFeedback
+    ShowFeedback --> DecrementAttempts[Decrement Attempt Counter]
+    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
+    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
+    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
+    
+    EnableTryAgain --> TryAgainClick([Click Try Again])
+    TryAgainClick --> ClearIncorrect[Clear Incorrect Items]
+    ClearIncorrect --> ReturnItems[Return to Item Pool]
+    ReturnItems --> StudentDrag
+    
+    EnableShowMe --> ShowMeClick([Click Show Me])
+    ShowMeClick --> RevealAnswers[Show All Correct Placements]
+    RevealAnswers --> DisableInteraction[Disable All Interactions]
+    DisableInteraction --> SaveFinalState[Save Final State to SCORM]
+    
+    ShowSuccess --> SaveFinalState
+    
+    AcceptDrop --> DataFlow[Data Flow: DOM → Model]
+    DataFlow --> UpdateState[Update categoryMappings Object]
+    UpdateState --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors create 2-4 categories with custom names and colors, add text or image items (0-10 per category), assign correct categories, and select from 6 visual styles.</li>
+                <li><strong>Student Flow:</strong> Students drag items from a shuffled pool into appropriate category containers, with visual feedback for drop validation and completion tracking.</li>
+                <li><strong>Validation:</strong> Upon submission, items are validated against correct categories with visual indicators (green checkmarks for correct, red borders for incorrect) and attempt-based feedback.</li>
+                <li><strong>Data Flow:</strong> Category mappings are stored in the DOM model, synchronized with SCORM for persistence, with Try Again clearing incorrect items or Show Me revealing all correct placements.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h2 class="section__title">Feature Specification</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Categorize/CATEGORIZE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

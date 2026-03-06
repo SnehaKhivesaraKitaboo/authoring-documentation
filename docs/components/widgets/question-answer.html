@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question Answer | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Question Answer</h1>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Question Answer</span>
+        </div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Question Answer Component</h1>
+        <p class="page-subtitle">Short and long answer question component with text input.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The Question Answer component provides text input fields for short-answer and long-answer responses with validation, character limits, and rubric-based scoring.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Question Answer System"
+        QA[Question Answer Container]
+        Question[Question Display]
+        Input[Input Manager]
+        Validation[Validation System]
+        Scoring[Scoring Engine]
+        
+        QA --> Question
+        QA --> Input
+        QA --> Validation
+        QA --> Scoring
+        
+        Input --> Short[Short Answer Field]
+        Input --> Long[Long Answer Field]
+        Input --> Rich[Rich Text Editor]
+        
+        Validation --> Length[Length Check]
+        Validation --> Keywords[Keyword Match]
+        Validation --> Format[Format Check]
+        
+        Scoring --> Auto[Auto-scoring]
+        Scoring --> Manual[Manual Review]
+        Scoring --> Rubric[Rubric-based]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the text input and validation system:</p>
+            <div class="mermaid">
+classDiagram
+    class QuestionAnswer {
+        +String componentId
+        +Question question
+        +InputManager inputManager
+        +ValidationSystem validation
+        +ScoringEngine scoring
+        +initialize()
+        +render()
+        +submit()
+        +getAnswer()
+    }
+    
+    class Question {
+        +String questionId
+        +String text
+        +String type
+        +Object media
+        +Array~String~ rubric
+        +render()
+    }
+    
+    class InputManager {
+        +AnswerField answerField
+        +createField()
+        +getValue()
+        +setValue()
+        +clear()
+        +focus()
+    }
+    
+    class AnswerField {
+        +String fieldType
+        +String value
+        +Number minLength
+        +Number maxLength
+        +Boolean isRequired
+        +Object formatting
+        +render()
+        +update()
+        +validate()
+    }
+    
+    class ValidationSystem {
+        +Array~ValidationRule~ rules
+        +validateLength()
+        +validateKeywords()
+        +validateFormat()
+        +validateRequired()
+        +getErrors()
+    }
+    
+    class ValidationRule {
+        +String ruleType
+        +Object parameters
+        +String errorMessage
+        +validate()
+    }
+    
+    class ScoringEngine {
+        +String scoringMethod
+        +Rubric rubric
+        +autoScore()
+        +manualScore()
+        +calculateScore()
+        +provideFeedback()
+    }
+    
+    class Rubric {
+        +Array~Criterion~ criteria
+        +Number maxScore
+        +addCriterion()
+        +evaluateAnswer()
+        +getScore()
+    }
+    
+    class Criterion {
+        +String name
+        +Number points
+        +Array~String~ keywords
+        +String description
+        +evaluate()
+    }
+    
+    class CharacterCounter {
+        +Number currentCount
+        +Number minCount
+        +Number maxCount
+        +update()
+        +isValid()
+        +render()
+    }
+    
+    QuestionAnswer --> Question
+    QuestionAnswer --> InputManager
+    QuestionAnswer --> ValidationSystem
+    QuestionAnswer --> ScoringEngine
+    InputManager --> AnswerField
+    InputManager --> CharacterCounter
+    ValidationSystem --> ValidationRule
+    ScoringEngine --> Rubric
+    Rubric --> Criterion
+    AnswerField --> ValidationSystem
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Question Answer Widget
+    participant UI as UI Layer
+    participant RTE as Rich Text Editor
+    participant Student
+    participant V as Validation Engine
+    participant SCORM as SCORM API
+    
+    Note over Author,UI: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Enter Question Text
+    Author->>W: Select Answer Type
+    alt Short Answer
+        Author->>W: Set Character Limit (default 150)
+        W->>UI: Configure Single-line Input
+    else Long Answer
+        Author->>W: Set Character Limit (default 5000)
+        W->>UI: Configure Textarea
+    else RTE (Rich Text)
+        Author->>W: Select Editor Type (Basic/Jodit)
+        Author->>W: Set Character Limit (default 5000)
+        alt Basic RTE
+            W->>UI: Configure Cazary Editor
+        else Jodit RTE
+            W->>UI: Configure Jodit Editor
+            Author->>W: Select Subject (ELA/Math/Science)
+        end
+        opt Math Support
+            Author->>W: Enable MathLive
+        end
+    end
+    opt Answer Validation
+        Author->>W: Enable allowResponse
+        Author->>W: Enter Correct Answers
+        Author->>W: Enable Exact Match (optional)
+        Author->>W: Configure Feedback
+    end
+    opt Custom Keyboard
+        Author->>W: Enable Custom Keyboard
+        Author->>W: Select Language (FRA/ESP/GER/MATH)
+    end
+    W->>UI: Save Configuration
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Question
+    alt Short Answer
+        W->>UI: Display Single-line Input
+        Student->>UI: Type Answer
+        W->>UI: Show Character Count
+        alt Character Limit Reached
+            W->>UI: Prevent Further Input
+        end
+    else Long Answer
+        W->>UI: Display Textarea
+        Student->>UI: Type Multi-line Answer
+        W->>UI: Show Character Count
+    else RTE
+        alt Basic RTE
+            W->>RTE: Initialize Cazary
+            RTE->>UI: Display Basic Toolbar
+        else Jodit RTE
+            W->>RTE: Initialize Jodit
+            RTE->>UI: Display Full Toolbar
+        end
+        Student->>RTE: Format Text
+        Student->>UI: Apply Styling
+        opt Math Equations
+            Student->>RTE: Click Math Button
+            RTE->>RTE: Open MathLive Editor
+            Student->>RTE: Enter Equation
+            RTE->>UI: Render LaTeX
+        end
+    end
+    opt Custom Keyboard Active
+        W->>UI: Display Keyboard Panel
+        Student->>UI: Click Special Character
+        UI->>W: Insert Character
+    end
+    W->>SCORM: Save Draft Response
+    SCORM->>SCORM: Store latency data
+    alt Validation Enabled
+        Student->>W: Submit Answer
+        W->>V: Validate Response
+        V->>V: Normalize Answer
+        V->>V: Split by Pipe Separator
+        loop For Each Valid Answer
+            alt Exact Match Mode
+                V->>V: Exact String Compare
+            else Flexible Match
+                V->>V: Case-insensitive Compare
+                V->>V: Trim Whitespace
+            end
+        end
+        V-->>W: Return Validation Result
+        alt Correct
+            W->>UI: Display Success Feedback
+            W->>UI: Apply Green Border
+            W->>UI: Disable Input
+        else Incorrect
+            W->>UI: Display Error Feedback
+            W->>UI: Apply Red Border
+        end
+    else No Validation
+        Student->>W: Submit Response
+        W->>UI: Confirm Submission
+        W->>UI: Disable Input
+    end
+    W->>SCORM: Save Final Response
+    W->>SCORM: Set Completion Status
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitQA[Initialize Question Answer]
+    InitQA --> SetQuestion[Set Question Text]
+    SetQuestion --> ChooseAnswerType{Choose Answer Type}
+    ChooseAnswerType -->|Short Answer| ConfigShort[Configure Short Answer]
+    ChooseAnswerType -->|Long Answer| ConfigLong[Configure Long Answer]
+    ChooseAnswerType -->|RTE| ConfigRTE[Configure Rich Text Editor]
+    
+    ConfigShort --> SetCharLimit1[Set Char Limit Default 150]
+    ConfigLong --> SetCharLimit2[Set Char Limit Default 5000]
+    ConfigRTE --> ChooseKeyboard{Choose Keyboard Type}
+    ChooseKeyboard -->|Basic| SetBasicRTE[Basic RTE - Cazary Editor]
+    ChooseKeyboard -->|Jodit| SetJoditRTE[Jodit Advanced Editor]
+    
+    SetCharLimit1 --> CustomKeyboard{Enable Custom Keyboard?}
+    SetCharLimit2 --> CustomKeyboard
+    SetBasicRTE --> CustomKeyboard
+    SetJoditRTE --> CustomKeyboard
+    CustomKeyboard -->|Yes| SelectLanguage[Select Language Keyboard FRA/ESP/GER]
+    CustomKeyboard -->|No| ConfigLabels
+    SelectLanguage --> ConfigLabels[Configure Labels]
+    ConfigLabels --> SaveQA[Save Configuration]
+    
+    SaveQA --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayQuestion[Display Question Text]
+    DisplayQuestion --> InitEditor{Answer Type}
+    InitEditor -->|Short Answer| ShowTextInput[Show Single-Line Text Input]
+    InitEditor -->|Long Answer| ShowTextarea[Show Multi-Line Textarea]
+    InitEditor -->|RTE| InitRTEEditor[Initialize RTE Editor]
+    
+    ShowTextInput --> ShowKeyboard{Custom Keyboard?}
+    ShowTextarea --> ShowKeyboard
+    InitRTEEditor --> ShowKeyboard
+    ShowKeyboard -->|Yes| RenderKeyboard[Render Special Character Keyboard]
+    ShowKeyboard -->|No| EnableTyping
+    RenderKeyboard --> EnableTyping[Enable Text Entry]
+    
+    EnableTyping --> StudentTypes{Student Types Response}
+    StudentTypes --> CountCharacters[Count Characters]
+    CountCharacters --> UpdateCounter[Update Character Counter Display]
+    UpdateCounter --> CheckLimit{Within Character Limit?}
+    CheckLimit -->|Yes| CheckEmpty{Text Empty?}
+    CheckLimit -->|No| TruncateText[Truncate to Max Length]
+    TruncateText --> UpdateCounter
+    CheckEmpty -->|No| EnableSubmit[Enable Submit Button]
+    CheckEmpty -->|Yes| DisableSubmit[Disable Submit Button]
+    EnableSubmit --> StudentTypes
+    DisableSubmit --> StudentTypes
+    
+    EnableSubmit --> SubmitClick([Student Clicks Submit])
+    SubmitClick --> CaptureResponse[Capture Student Response Text]
+    CaptureResponse --> EncodeResponse[Encode Response Base64]
+    EncodeResponse --> DisableEditor[Disable Text Input/Editor]
+    DisableEditor --> MarkSubmitted[Mark Form as Submitted]
+    MarkSubmitted --> SaveToSCORM[Save Response to SCORM suspend_data]
+    SaveToSCORM --> TrackLatency[Track Response Time Latency]
+    TrackLatency --> ShowConfirmation[Show Submission Confirmation]
+    ShowConfirmation --> Complete([Activity Complete - Manual Grading Required])
+    
+    StudentTypes --> DataFlow[Data Flow: Text Input → State]
+    DataFlow --> ValidateHTML[Sanitize HTML if RTE]
+    ValidateHTML --> StoreInMemory[Store in fieldData.answerText]
+    StoreInMemory --> SetDirtyFlag[Set Dirty Bit for Unsaved Changes]
+    SetDirtyFlag --> PrepareForSCORM[Prepare SCORM Payload]
+    PrepareForSCORM --> APISetValue[Call apiHandle.SetValue]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors set question text, choose answer type (short, long, or RTE), configure character limits (default 150 for short, 5000 for long), select keyboard type (basic Cazary or advanced Jodit for RTE), and optionally enable custom language keyboards (French, Spanish, German).</li>
+                <li><strong>Student Flow:</strong> Students type responses in text fields, textareas, or rich text editors with character counting, special character keyboards when configured, and submit button enabled only when text is present.</li>
+                <li><strong>Validation:</strong> No automated scoring; responses are captured and submitted for manual teacher grading, with HTML sanitization for RTE content and character limit enforcement via truncation.</li>
+                <li><strong>Data Flow:</strong> Student text responses are stored in fieldData.answerText, encoded as Base64, saved to SCORM suspend_data with response time latency tracking, and marked with dirty flags for unsaved changes until API submission confirms persistence.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Question Answer  (short Long Ans Component )/SHORT_LONG_ANSWER_COMPONENT_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>

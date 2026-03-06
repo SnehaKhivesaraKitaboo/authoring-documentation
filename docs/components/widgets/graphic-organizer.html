@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Graphic Organizer (Image GO) | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Graphic Organizer (Image GO)</span>
+        </div>
+      </nav>
+      <h1 class="header__title">Graphic Organizer (Image GO)</h1>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Graphic Organizer</h1>
+        <p class="page-subtitle">Visual organization tool for structuring information and concepts.</p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#uml" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#usecase" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#features" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Features
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Component Overview</h2>
+          </div>
+          <div class="card__content">
+            <p>The Graphic Organizer component enables visual organization of information through an image-based interface with nodes, connections, and categories. It helps users structure concepts and relationships in a visual format.</p>
+            <div class="mermaid">
+graph TB
+    subgraph "Graphic Organizer System"
+        GO[Graphic Organizer Container]
+        Canvas[Canvas Layer]
+        Nodes[Node Manager]
+        Connections[Connection Manager]
+        Categories[Category System]
+        
+        GO --> Canvas
+        Canvas --> Nodes
+        Canvas --> Connections
+        GO --> Categories
+        
+        Nodes --> Node1[Node: Text/Image]
+        Nodes --> Node2[Node: Position]
+        Nodes --> Node3[Node: Category]
+        
+        Connections --> Conn1[Line]
+        Connections --> Conn2[Arrow]
+        Connections --> Conn3[Label]
+        
+        Categories --> Cat1[Color Coding]
+        Categories --> Cat2[Icons]
+        Categories --> Cat3[Grouping]
+    end
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">UML Class Diagram</h2>
+          </div>
+          <div class="card__content">
+            <p>Architecture showing the node-based organization system with connections and categories:</p>
+            <div class="mermaid">
+classDiagram
+    class GraphicOrganizer {
+        +String componentId
+        +Canvas canvas
+        +NodeManager nodeManager
+        +ConnectionManager connectionManager
+        +CategorySystem categories
+        +initialize()
+        +render()
+        +exportData()
+        +importData()
+    }
+    
+    class Canvas {
+        +Number width
+        +Number height
+        +String backgroundColor
+        +Array~Node~ nodes
+        +Array~Connection~ connections
+        +render()
+        +clear()
+        +resize()
+        +getCoordinates()
+    }
+    
+    class NodeManager {
+        +Array~Node~ nodes
+        +addNode()
+        +removeNode()
+        +updateNode()
+        +moveNode()
+        +selectNode()
+        +getNode()
+    }
+    
+    class Node {
+        +String id
+        +String type
+        +String content
+        +Position position
+        +String categoryId
+        +Object style
+        +render()
+        +update()
+        +move()
+        +delete()
+    }
+    
+    class ConnectionManager {
+        +Array~Connection~ connections
+        +addConnection()
+        +removeConnection()
+        +updateConnection()
+        +validateConnection()
+    }
+    
+    class Connection {
+        +String id
+        +String sourceNodeId
+        +String targetNodeId
+        +String type
+        +String label
+        +Object style
+        +render()
+        +update()
+        +delete()
+    }
+    
+    class CategorySystem {
+        +Array~Category~ categories
+        +addCategory()
+        +removeCategory()
+        +assignNodeToCategory()
+        +getCategoryNodes()
+    }
+    
+    class Category {
+        +String id
+        +String name
+        +String color
+        +String icon
+        +Array~String~ nodeIds
+    }
+    
+    class Position {
+        +Number x
+        +Number y
+        +Number z
+        +update()
+    }
+    
+    GraphicOrganizer --> Canvas
+    GraphicOrganizer --> NodeManager
+    GraphicOrganizer --> ConnectionManager
+    GraphicOrganizer --> CategorySystem
+    Canvas --> Node
+    Canvas --> Connection
+    NodeManager --> Node
+    ConnectionManager --> Connection
+    CategorySystem --> Category
+    Node --> Position
+    Connection --> Node
+    Category --> Node
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram Section -->
+      <section class="section" id="usecase">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
+            <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant W as Graphic Organizer Widget
+    participant UI as UI Layer
+    participant API as Backend API
+    participant Student
+    participant SCORM as SCORM API
+    
+    Note over Author,API: Authoring Phase
+    Author->>W: Open Editor
+    W->>UI: Render Settings Panel
+    Author->>W: Upload Base Image
+    W->>API: Upload Image
+    API-->>W: Return Image URL
+    Author->>W: Set Alt Text
+    Author->>W: Click Add Hotspot
+    W->>UI: Create Draggable Hotspot
+    W->>UI: Enable Resize Handles
+    Author->>UI: Drag Hotspot to Position
+    Author->>UI: Resize Hotspot
+    Author->>W: Click Hotspot to Configure
+    W->>UI: Show Hotspot Settings
+    Author->>W: Enter Header Label
+    Author->>W: Enter Answer Text
+    Author->>W: Set Character Limit
+    Author->>W: Set Background Color
+    Author->>W: Set Outline Color
+    Author->>W: Set Lock for Student (optional)
+    opt Advanced Formatting
+        Author->>W: Enable Jodit Editor
+    end
+    loop For Multiple Hotspots
+        Author->>W: Add Hotspot
+        Author->>W: Configure Hotspot
+    end
+    Author->>W: Select Label Type
+    W->>API: Save Configuration
+    API-->>W: Configuration Saved
+    
+    Note over Student,SCORM: Student Interaction Phase
+    Student->>W: Load Widget in Reader
+    W->>UI: Render Base Image
+    W->>UI: Render Hotspot Overlays
+    Student->>UI: Click Hotspot
+    UI->>W: Handle Hotspot Click
+    W->>UI: Open Input Modal
+    W->>UI: Show Header Label
+    alt Advanced Formatting Enabled
+        W->>UI: Initialize Jodit Editor
+        Student->>UI: Enter Formatted Text
+        opt Math Equations
+            Student->>UI: Insert Math Equation
+            UI->>W: Launch MathLive Editor
+        end
+    else Basic Input
+        W->>UI: Show Textarea
+        Student->>UI: Enter Text
+        W->>UI: Show Character Count
+    end
+    alt Hotspot Locked
+        W->>UI: Display Read-Only Content
+    else Hotspot Editable
+        Student->>W: Enter Answer
+        W->>SCORM: Save Hotspot Data
+    end
+    Student->>UI: Close Modal
+    UI->>W: Save Input
+    W->>UI: Update Hotspot State
+    loop For Each Hotspot
+        Student->>UI: Click and Fill Hotspot
+        W->>SCORM: Update State
+    end
+    Student->>W: Submit (if enabled)
+    W->>SCORM: Save Final State
+    SCORM-->>W: State Persisted
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Interaction Flow:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
+                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
+                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
+                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow Diagram Section -->
+      <section class="section" id="flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
+            <div class="mermaid">
+flowchart TD
+    Start([Author Opens Editor]) --> InitGO[Initialize Graphic Organizer]
+    InitGO --> UploadBase[Upload Base Image]
+    UploadBase --> AddHotspots[Add Hotspots 1-20]
+    AddHotspots --> ConfigHotspot[Configure Hotspot]
+    ConfigHotspot --> PositionHS[Position Hotspot on Image]
+    PositionHS --> ResizeHS[Resize Hotspot Area]
+    ResizeHS --> SetContent[Set Hotspot Content]
+    SetContent --> UseJodit[Use Jodit Editor for Rich Text]
+    UseJodit --> AddHSMedia{Add Media?}
+    AddHSMedia -->|Yes| UploadHSMedia[Upload Image/Video]
+    AddHSMedia -->|No| NextHotspot
+    UploadHSMedia --> NextHotspot{More Hotspots?}
+    NextHotspot -->|Yes| ConfigHotspot
+    NextHotspot -->|No| ConfigStyle[Configure Visual Style]
+    ConfigStyle --> SaveGO[Save Configuration]
+    
+    SaveGO --> StudentLoad([Student Opens Widget])
+    StudentLoad --> DisplayImage[Display Base Image with Hotspots]
+    DisplayImage --> ShowIndicators[Show Hotspot Indicators]
+    ShowIndicators --> WaitClick{Student Clicks Hotspot}
+    WaitClick --> ShowPopup[Display Content Popup]
+    ShowPopup --> RenderContent[Render Rich Text Content]
+    RenderContent --> InitMedia{Media Present?}
+    InitMedia -->|Yes| PlayMedia[Initialize Media Player]
+    InitMedia -->|No| TrackView
+    PlayMedia --> TrackView[Track Hotspot Viewed]
+    TrackView --> WaitPopupAction{Student Action}
+    
+    WaitPopupAction -->|Close Popup| ClosePopup[Close Content Popup]
+    ClosePopup --> MarkViewed[Mark Hotspot as Viewed]
+    MarkViewed --> UpdateIndicator[Update Hotspot Indicator]
+    UpdateIndicator --> CheckAllViewed{All Hotspots Viewed?}
+    CheckAllViewed -->|No| WaitClick
+    CheckAllViewed -->|Yes| MarkComplete[Mark Activity Complete]
+    
+    WaitPopupAction -->|Click Another HS| ClosePopup
+    
+    MarkComplete --> SaveState[Save State to SCORM]
+    SaveState --> CompleteActivity([Activity Complete])
+    
+    TrackView --> DataFlow[Data Flow: Hotspot ID → State]
+    DataFlow --> UpdateViewedArray[Update Viewed Hotspots Array]
+    UpdateViewedArray --> CalculateProgress[Calculate Completion %]
+    CalculateProgress --> SyncSCORM[Sync with SCORM]
+            </div>
+            <div class="mt-lg">
+              <h4 class="flow-summary__title">Flow Summary:</h4>
+              <ul class="flow-summary__list">
+                <li><strong>Editor Flow:</strong> Authors upload a base image, add positioned hotspots (1-20) with resizable areas, create rich text content using Jodit editor, and optionally embed images or videos within hotspots.</li>
+                <li><strong>Student Flow:</strong> Students explore the base image by clicking hotspot indicators to display content popups with rich text and media, navigating between hotspots to discover all information.</li>
+                <li><strong>Validation:</strong> Non-assessed exploration widget tracks hotspot viewing completion, calculating percentage of hotspots accessed and marking activity complete when all have been viewed.</li>
+                <li><strong>Data Flow:</strong> Viewed hotspot IDs are stored in an array and synchronized with SCORM, with completion percentage calculated dynamically for progress tracking and LMS reporting.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+      </section>
+      <section class="section">
+        <div class="card">
+          <div class="card__content">
+            <div id="feature-specification" class="loading">
+              <div class="spinner"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const renderer = new MarkdownRenderer();
+      renderer.renderFile('../../../Components/Widgets/Graphic Organizer  (Image GO)/GRAPHIC_ORGANIZER_DOCUMENTATION.md', 'feature-specification');
+    });
+  </script>
+</body>
+</html>
