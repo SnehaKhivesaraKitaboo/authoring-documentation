@@ -85,21 +85,13 @@ class Navigation {
   }
 
   /**
-   * Setup group dropdown toggles
+   * Setup group dropdown toggles.
+   * NOTE: sidebar-loader.js handles dropdowns directly after injection.
+   * This method is a no-op to avoid double-binding on already-wired toggles.
    */
   setupGroupDropdowns() {
-    const groupToggles = document.querySelectorAll('.nav-group__toggle');
-    
-    groupToggles.forEach(toggle => {
-      // Initialize with expanded state
-      toggle.setAttribute('aria-expanded', 'true');
-      
-      // Add click event listener
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.toggleGroupDropdown(toggle);
-      });
-    });
+    // Dropdowns are wired by sidebar-loader.js immediately after injection.
+    // No additional binding needed here.
   }
 
   /**
@@ -109,14 +101,8 @@ class Navigation {
   toggleGroupDropdown(toggle) {
     const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
     const targetId = toggle.dataset.target;
-    const targetList = document.getElementById(targetId);
     
-    if (!targetList) return;
-    
-    // Toggle aria-expanded attribute
-    toggle.setAttribute('aria-expanded', !isExpanded);
-    
-    // Save state to localStorage
+    toggle.setAttribute('aria-expanded', String(!isExpanded));
     this.saveGroupDropdownState(targetId, !isExpanded);
   }
 
@@ -136,19 +122,11 @@ class Navigation {
   }
 
   /**
-   * Restore group dropdown states from localStorage
+   * Restore group dropdown states from localStorage.
+   * NOTE: sidebar-loader.js handles this immediately after injection.
    */
   restoreGroupDropdownStates() {
-    const groupToggles = document.querySelectorAll('.nav-group__toggle');
-    
-    groupToggles.forEach(toggle => {
-      const targetId = toggle.dataset.target;
-      const savedState = this.getGroupDropdownState(targetId);
-      
-      if (savedState !== null) {
-        toggle.setAttribute('aria-expanded', savedState);
-      }
-    });
+    // Handled by sidebar-loader.js — no-op here.
   }
 
   /**
