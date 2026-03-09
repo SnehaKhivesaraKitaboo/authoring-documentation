@@ -38,6 +38,9 @@
           <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
           <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
           <a href="#sources" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>Video Sources</a>
+          <a href="#uml-class" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>UML Class</a>
+          <a href="#sequence" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Sequence</a>
+          <a href="#component-flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
         </div>
       </section>
 
@@ -197,6 +200,136 @@ Language selector  → List of available VTT caption tracks</code></pre>
             <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <h2 class="section-title">UML Class Diagram</h2>
+        <p>Structural relationships between the Video element, its multi-source data model, and the player libraries.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+classDiagram
+    class VideoElement {
+        +string identifier
+        +string videoSrc
+        +string videoType
+        +string headerText
+        +string captionText
+        +boolean hasOutline
+        +boolean showTranscript
+        +boolean showCC
+        +VideoSettings settings
+    }
+    class VideoSettings {
+        +string sourceType
+        +string mp4Url
+        +string youtubeUrl
+        +string kalturaUrl
+        +string transcriptText
+        +array captionTracks
+        +boolean outlineStyle
+        +string outlineBgColor
+    }
+    class VideoDirective {
+        +link(scope, element, attrs)
+        +initVideoJS()
+        +switchSource(type)
+        +handleUpload()
+        +loadTranscript()
+        +loadCC()
+        +loadSettingsPanel()
+    }
+    class VideoJS {
+        +initialize(element, options)
+        +src(url)
+        +addTextTrack(kind, lang, src)
+        +dispose()
+    }
+    class IFrameEmbed {
+        +buildYoutubeUrl(id)
+        +buildKalturaUrl(id)
+        +sanitize(url)
+    }
+    VideoElement "1" --> "1" VideoSettings : contains
+    VideoDirective --> VideoElement : binds scope
+    VideoDirective --> VideoJS : MP4 playback
+    VideoDirective --> IFrameEmbed : YouTube/Kaltura embed
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <h2 class="section-title">Sequence Diagram</h2>
+        <p>Author interaction flow for selecting a video source and enabling closed captions.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant Canvas
+    participant NgController
+    participant VideoDirective
+    participant SettingsPanel
+    participant ShellService
+    participant VideoJS
+    participant SavedJson
+
+    Author->>Canvas: Drag Video tile
+    Canvas->>NgController: onDrop(dataType: video)
+    NgController->>NgController: $compile(video-template.html, scope)
+    NgController->>Canvas: inject element
+    Canvas->>VideoDirective: link(scope, element)
+    VideoDirective->>SavedJson: store fieldData
+
+    Author->>Canvas: Click Video element
+    VideoDirective->>SettingsPanel: load settings panel
+    SettingsPanel-->>Author: show source type options
+
+    Author->>SettingsPanel: Select MP4 → Upload file
+    SettingsPanel->>ShellService: POST mp4 file
+    ShellService-->>SettingsPanel: return mp4Url
+    SettingsPanel->>VideoDirective: update fieldData.videoSrc
+    VideoDirective->>VideoJS: initialize(element, {src: mp4Url})
+    VideoJS-->>Canvas: render video player
+
+    Author->>SettingsPanel: Upload CC (.vtt) file
+    SettingsPanel->>ShellService: POST vtt file
+    ShellService-->>SettingsPanel: return vttUrl
+    SettingsPanel->>VideoDirective: add to fieldData.settings.captionTracks
+    VideoDirective->>VideoJS: addTextTrack('captions', lang, vttUrl)
+    VideoDirective->>SavedJson: persist fieldData
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <h2 class="section-title">Component Flow</h2>
+        <p>End-to-end flow for the Video element covering source selection, player init, and transcript/CC setup.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    A([Author drops Video tile]) --> B[NgController reads config.js]
+    B --> C[$compile video-template.html + scope]
+    C --> D[Inject into Canvas]
+    D --> E[VideoDirective.link fires]
+    E --> F{Author selects source type?}
+    F -- MP4 Upload --> G[ShellService.upload → mp4Url]
+    G --> H[VideoJS.initialize with mp4Url]
+    F -- YouTube URL --> I[Build YouTube iframe URL]
+    I --> J[Render iframe with trusted URL]
+    F -- Kaltura URL --> K[Build Kaltura iframe URL]
+    K --> J
+    H & J --> L{Additional options?}
+    L -- Enable Transcript --> M[Load transcriptText from fieldData]
+    M --> N[Show collapsible transcript panel]
+    L -- Upload CC tracks --> O[ShellService upload .vtt → add TextTrack]
+    O --> P[VideoJS renders CC button]
+    L -- Add header/caption --> Q[Toggle showHeader / showCaption fields]
+    N & P & Q --> R[Persist to savedJson]
+    R --> S([Video element saved])
+          </div>
+        </div>
       </section>
     </div>
   </main>

@@ -42,6 +42,9 @@
           <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
           <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
           <a href="#variants" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>Style Variants</a>
+          <a href="#uml-class" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>UML Class</a>
+          <a href="#sequence" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Sequence</a>
+          <a href="#component-flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
         </div>
       </section>
 
@@ -231,6 +234,130 @@ graph TD
             <tr><td><code>styles/header-component-template.css</code></td><td>Component-specific styles</td></tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <h2 class="section-title">UML Class Diagram</h2>
+        <p>Structural relationships between the Header element's directive, data model, and heading-level resolution logic.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+classDiagram
+    class HeaderElement {
+        +string identifier
+        +string headerDataText
+        +boolean ignoreApplyAll
+        +HeaderSettings settings
+    }
+    class HeaderSettings {
+        +string headerClassData
+        +string styleClass
+        +string componentColor
+        +string iconClass
+        +array iconClassGroup
+        +array style_tab
+        +boolean headerStyleSettings
+    }
+    class HeaderComponentDirective {
+        +link(scope, element, attrs)
+        +applyAllCheck()
+        +loadSettingsPanel()
+        +resolveHeadingLevel()
+    }
+    class HeadingRenderer {
+        +renderH2(text)
+        +renderH3(text)
+        +renderH4(text)
+        +renderH5(text)
+        +renderH6(text)
+        +renderSubtitle(text)
+    }
+    class NgController {
+        +compile(html, scope)
+        +injectElement(canvas)
+        +manageApplyAll()
+    }
+    HeaderElement "1" --> "1" HeaderSettings : contains
+    HeaderComponentDirective --> HeaderElement : binds scope
+    HeaderComponentDirective --> HeadingRenderer : delegates rendering
+    HeaderComponentDirective --> NgController : uses
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <h2 class="section-title">Sequence Diagram</h2>
+        <p>Author interaction flow for dropping a Header element and changing heading level via the settings panel.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant Canvas
+    participant NgController
+    participant HeaderDirective
+    participant SettingsPanel
+    participant SavedJson
+
+    Author->>Canvas: Drag Header tile from panel
+    Canvas->>NgController: onDrop(dataType: header)
+    NgController->>NgController: fetch default/headerComponent.json
+    NgController->>NgController: $compile(header.html, scope)
+    NgController->>Canvas: inject compiled element
+    Canvas->>HeaderDirective: link(scope, element)
+    HeaderDirective->>HeaderDirective: applyAllCheck()
+    HeaderDirective->>SavedJson: store fieldData at [pageNo][uniqueId]
+
+    Author->>Canvas: Click Header element
+    Canvas->>HeaderDirective: onClick
+    HeaderDirective->>SettingsPanel: load header-settings-panel.html
+    SettingsPanel-->>Author: display heading level + style options
+
+    Author->>SettingsPanel: Change heading level (e.g. H2 → H4)
+    SettingsPanel->>HeaderDirective: update fieldData.settings.headerClassData = 'h4-style'
+    HeaderDirective->>Canvas: ng-if re-evaluates → renders &lt;h4&gt;
+    HeaderDirective->>SavedJson: persist updated fieldData
+
+    Author->>SettingsPanel: Pick accent color
+    SettingsPanel->>HeaderDirective: update fieldData.settings.componentColor
+    HeaderDirective->>Canvas: CSS binding updates border/icon color
+    HeaderDirective->>SavedJson: persist
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <h2 class="section-title">Component Flow</h2>
+        <p>End-to-end rendering and heading-level resolution flow for the Header element.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    A([Author drops Header tile]) --> B[NgController reads config.js]
+    B --> C[Fetch default/headerComponent.json]
+    C --> D[$compile header.html + scope]
+    D --> E[Inject into Canvas]
+    E --> F[HeaderDirective.link fires]
+    F --> G{ApplyAll active?}
+    G -- Yes --> H[Merge style settings from ApplyAll JSON]
+    G -- No --> I[Use default fieldData]
+    H --> J[Render element]
+    I --> J
+    J --> K[ng-if resolves headerClassData]
+    K --> L{headerClassData value?}
+    L -- h2-style --> M[Render &lt;h2&gt;]
+    L -- h3-style --> N[Render &lt;h3&gt;]
+    L -- h4/h5/h6-style --> O[Render &lt;h4/h5/h6&gt;]
+    L -- sub-2-style --> P[Render &lt;p&gt; subtitle]
+    M & N & O & P --> Q{styleClass?}
+    Q -- card-style-4 --> R[Show decorative icon span]
+    Q -- other --> S[Hide icon span]
+    R & S --> T[Author edits text via contenteditable]
+    T --> U[fieldData.headerDataText updated]
+    U --> V[Persist to savedJson]
+    V --> W([TOC updated])
+          </div>
+        </div>
       </section>
     </div>
   </main>

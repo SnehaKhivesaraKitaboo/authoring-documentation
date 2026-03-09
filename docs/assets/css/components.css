@@ -402,17 +402,19 @@
 
 /* ==================== Quick Links ==================== */
 .quick-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--spacing-md);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
   margin: var(--spacing-lg) 0;
+  align-items: center;
 }
 
 .quick-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -420,6 +422,7 @@
   color: var(--text-primary);
   font-size: var(--font-size-sm);
   font-weight: 500;
+  white-space: nowrap;
   transition: all var(--transition-fast);
 }
 
@@ -428,12 +431,14 @@
   background: var(--bg-secondary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
+  color: var(--primary-color);
 }
 
 .quick-link__icon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   color: var(--primary-color);
+  flex-shrink: 0;
 }
 
 /* ==================== Empty State ==================== */

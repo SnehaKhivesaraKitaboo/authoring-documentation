@@ -38,6 +38,9 @@
           <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
           <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
           <a href="#operations" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>Table Operations</a>
+          <a href="#uml-class" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>UML Class</a>
+          <a href="#sequence" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Sequence</a>
+          <a href="#component-flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
         </div>
       </section>
 
@@ -218,6 +221,147 @@ isNoOfRowColChangedFlag = true → triggers table rebuild</code></pre>
         </table>
         <div class="alert alert--warning">
           <strong>Global Scope Usage:</strong> The row/column operation buttons use inline <code>onclick</code> attributes calling <code>globalScope.*</code> methods. This is a legacy pattern — <code>globalScope</code> is a reference to the AngularJS scope made globally accessible for direct DOM event handlers.
+        </div>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <h2 class="section-title">UML Class Diagram</h2>
+        <p>Structural relationships between the Table element, its cell data model, and the resize/edit subsystems.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+classDiagram
+    class TableElement {
+        +string identifier
+        +string headerText
+        +string captionText
+        +boolean hasOutline
+        +string bgColor
+        +TableSettings settings
+        +TableData tableData
+    }
+    class TableSettings {
+        +string themeClass
+        +boolean showHeader
+        +boolean showCaption
+        +boolean isLabelTypeParagraph
+        +string labelType
+        +boolean outlineStyle
+        +string outlineBgColor
+    }
+    class TableData {
+        +number rows
+        +number cols
+        +array cells
+        +Cell getCell(row, col)
+    }
+    class Cell {
+        +string content
+        +number colspan
+        +number rowspan
+        +boolean isMerged
+        +boolean isHeader
+        +number widthPercent
+    }
+    class TableDirective {
+        +link(scope, element, attrs)
+        +initResizable()
+        +insertRow(position)
+        +deleteRow()
+        +insertCol(position)
+        +deleteCol()
+        +mergeCells()
+        +unmergeCells()
+        +applyTheme(themeClass)
+        +loadSettingsPanel()
+    }
+    class ResizableJS {
+        +init(table)
+        +onDragHandle(col)
+        +updateWidths()
+    }
+    TableElement "1" --> "1" TableSettings : contains
+    TableElement "1" --> "1" TableData : contains
+    TableData "1" --> "many" Cell : contains
+    TableDirective --> TableElement : binds scope
+    TableDirective --> ResizableJS : column resizing
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <h2 class="section-title">Sequence Diagram</h2>
+        <p>Author interaction flow for creating a table, inserting rows, and merging cells.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant Canvas
+    participant NgController
+    participant TableDirective
+    participant ResizableJS
+    participant SettingsPanel
+    participant SavedJson
+
+    Author->>Canvas: Drag Table tile
+    Canvas->>NgController: onDrop(dataType: tablesNew)
+    NgController->>NgController: show row/col creation dialog
+    Author->>NgController: enter 3 rows × 4 columns → confirm
+    NgController->>NgController: $compile(tables.html, scope) with 3×4 data
+    NgController->>Canvas: inject compiled table
+    Canvas->>TableDirective: link(scope, element)
+    TableDirective->>ResizableJS: init(table element)
+    TableDirective->>SavedJson: store fieldData
+
+    Author->>Canvas: Right-click row → Insert Row Below
+    Canvas->>TableDirective: insertRow('below')
+    TableDirective->>TableData: add row cells at position
+    TableDirective->>Canvas: re-render table body
+    TableDirective->>SavedJson: persist updated tableData
+
+    Author->>Canvas: Select cells → Merge All
+    Canvas->>TableDirective: mergeCells(selectedCells)
+    TableDirective->>TableData: set colspan/rowspan, mark merged
+    TableDirective->>Canvas: re-render merged cell
+    TableDirective->>SavedJson: persist
+
+    Author->>Canvas: Drag column resize handle
+    ResizableJS->>TableDirective: onDragHandle(colIndex)
+    TableDirective->>TableData: update cell widthPercent values
+    TableDirective->>SavedJson: persist
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <h2 class="section-title">Component Flow</h2>
+        <p>End-to-end flow for the Table element from creation through cell editing and theme selection.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    A([Author drops Table tile]) --> B[Row/Col creation dialog appears]
+    B --> C[Author enters rows and columns → confirm]
+    C --> D[NgController builds tableData grid]
+    D --> E[$compile tables.html with scope]
+    E --> F[Inject into Canvas]
+    F --> G[TableDirective.link fires]
+    G --> H[ResizableJS.init → add drag handles]
+    H --> I[Persist initial fieldData to savedJson]
+    I --> J{Author action?}
+    J -- Edit cell --> K[contenteditable in &lt;td&gt; → update cell.content]
+    J -- Insert row --> L[insertRow above/below → rebuild tableData]
+    J -- Delete row --> M[deleteRow → rebuild tableData]
+    J -- Insert col --> N[insertCol left/right → rebuild tableData]
+    J -- Delete col --> O[deleteCol → rebuild tableData]
+    J -- Merge cells --> P[set colspan/rowspan → mark isMerged]
+    J -- Unmerge --> Q[reset colspan/rowspan]
+    J -- Resize column --> R[ResizableJS drag → update widthPercent]
+    J -- Change theme --> S[applyTheme → swap CSS class]
+    K & L & M & N & O & P & Q & R & S --> T[Persist to savedJson]
+    T --> U([Table saved])
+          </div>
         </div>
       </section>
     </div>

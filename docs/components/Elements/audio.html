@@ -37,6 +37,9 @@
           <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
           <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
           <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#uml-class" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>UML Class</a>
+          <a href="#sequence" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Sequence</a>
+          <a href="#component-flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
         </div>
       </section>
 
@@ -175,6 +178,125 @@ graph TD
             <tr><td><code>editor/sd.js</code></td><td>JSON serialization for save/load</td></tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <h2 class="section-title">UML Class Diagram</h2>
+        <p>Structural relationships between the Audio element directive, its data model, and the native HTML5 player.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+classDiagram
+    class AudioElement {
+        +string identifier
+        +string audioSrc
+        +string captionText
+        +boolean hasOutline
+        +string bgColor
+        +string alignment
+        +AudioSettings settings
+    }
+    class AudioSettings {
+        +string skinName
+        +boolean backgroundMode
+        +boolean outlineStyle
+        +string outlineBgColor
+        +string alignment
+        +boolean showCaption
+    }
+    class AudioDirective {
+        +link(scope, element, attrs)
+        +handleUpload()
+        +getSkinName()
+        +setBackgroundMode()
+        +toggleOutline()
+        +loadSettingsPanel()
+    }
+    class HTML5AudioPlayer {
+        +src(url)
+        +controls
+        +autoplay
+        +loop
+    }
+    class ShellService {
+        +httpServiceCall(method, url, data)
+        +uploadAudio(file)
+    }
+    AudioElement "1" --> "1" AudioSettings : contains
+    AudioDirective --> AudioElement : binds scope
+    AudioDirective --> HTML5AudioPlayer : renders native player
+    AudioDirective --> ShellService : uploads audio file
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <h2 class="section-title">Sequence Diagram</h2>
+        <p>Author interaction flow for uploading an audio file and selecting a skin.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant Canvas
+    participant NgController
+    participant AudioDirective
+    participant SettingsPanel
+    participant ShellService
+    participant SavedJson
+
+    Author->>Canvas: Drag Audio tile
+    Canvas->>NgController: onDrop(dataType: audio)
+    NgController->>NgController: $compile(audio.html, scope)
+    NgController->>Canvas: inject element
+    Canvas->>AudioDirective: link(scope, element)
+    AudioDirective->>SavedJson: store fieldData
+
+    Author->>Canvas: Click Audio element
+    AudioDirective->>SettingsPanel: load audio settings panel
+    SettingsPanel-->>Author: show upload + skin options
+
+    Author->>SettingsPanel: Upload audio file
+    SettingsPanel->>ShellService: POST audio file
+    ShellService-->>SettingsPanel: return audioSrc URL
+    SettingsPanel->>AudioDirective: update fieldData.audioSrc
+    AudioDirective->>Canvas: set &lt;audio src="audioSrc"&gt;
+
+    Author->>SettingsPanel: Select skin
+    SettingsPanel->>AudioDirective: getSkinName() → apply skinClass
+    AudioDirective->>Canvas: update CSS class on player
+
+    Author->>SettingsPanel: Enable background mode
+    SettingsPanel->>AudioDirective: setBackgroundMode(true)
+    AudioDirective->>Canvas: hide visible player, set autoplay
+    AudioDirective->>SavedJson: persist fieldData
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <h2 class="section-title">Component Flow</h2>
+        <p>End-to-end flow for the Audio element from drop through file upload and skin configuration.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    A([Author drops Audio tile]) --> B[NgController reads config.js]
+    B --> C[$compile audio.html + scope]
+    C --> D[Inject into Canvas]
+    D --> E[AudioDirective.link fires]
+    E --> F[Render placeholder player]
+    F --> G{Author action?}
+    G -- Upload audio --> H[ShellService.upload → audioSrc]
+    H --> I[Set &lt;audio src&gt; → native player renders]
+    G -- Select skin --> J[getSkinName() → apply CSS class]
+    G -- Enable background mode --> K[Set autoplay + hide controls]
+    G -- Toggle outline --> L[Apply outline CSS + bgColor]
+    G -- Add caption --> M[Show figcaption field]
+    I & J & K & L & M --> N[Persist to savedJson]
+    N --> O([Audio element saved])
+          </div>
+        </div>
       </section>
     </div>
   </main>

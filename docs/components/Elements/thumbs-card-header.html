@@ -37,6 +37,9 @@
           <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
           <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
           <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#uml-class" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>UML Class</a>
+          <a href="#sequence" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>Sequence</a>
+          <a href="#component-flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
         </div>
       </section>
 
@@ -186,6 +189,122 @@ settings.thumbsCardActiveIcons = 0; // Index of active icon</code></pre>
             <tr><td>Icon image assets</td><td>SVG/PNG icon files for the picker</td></tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <h2 class="section-title">UML Class Diagram</h2>
+        <p>Structural relationships between the Thumbs Card Header directive, its icon model, and color settings.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+classDiagram
+    class ThumbsCardHeaderElement {
+        +string identifier
+        +string headingText
+        +ThumbsCardSettings settings
+    }
+    class ThumbsCardSettings {
+        +string iconClass
+        +string iconSrc
+        +string headerBgColor
+        +string strokeColor
+        +number iconSize
+        +array iconLibrary
+    }
+    class ThumbsCardHeaderDirective {
+        +link(scope, element, attrs)
+        +loadIconPicker()
+        +setIcon(iconSrc)
+        +setHeaderBgColor(color)
+        +setStrokeColor(color)
+        +loadSettingsPanel()
+    }
+    class IconPicker {
+        +icons array
+        +selectedIcon
+        +onSelect(iconSrc)
+    }
+    class NgController {
+        +compile(html, scope)
+        +injectElement(canvas)
+    }
+    ThumbsCardHeaderElement "1" --> "1" ThumbsCardSettings : contains
+    ThumbsCardHeaderDirective --> ThumbsCardHeaderElement : binds scope
+    ThumbsCardHeaderDirective --> IconPicker : delegates icon selection
+    ThumbsCardHeaderDirective --> NgController : uses
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <h2 class="section-title">Sequence Diagram</h2>
+        <p>Author flow for placing a Thumbs Card Header, selecting an icon, and customizing colors.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    participant Author
+    participant Canvas
+    participant NgController
+    participant ThumbsDirective
+    participant IconPicker
+    participant SettingsPanel
+    participant SavedJson
+
+    Author->>Canvas: Drag Thumbs Card Header tile
+    Canvas->>NgController: onDrop(dataType: thumbs-card-header)
+    NgController->>NgController: $compile(thumbs-card-header.html, scope)
+    NgController->>Canvas: inject element
+    Canvas->>ThumbsDirective: link(scope, element)
+    ThumbsDirective->>Canvas: render default icon + editable heading
+    ThumbsDirective->>SavedJson: store fieldData
+
+    Author->>Canvas: Click element → open settings
+    ThumbsDirective->>SettingsPanel: load settings panel
+    SettingsPanel-->>Author: show icon picker + color options
+
+    Author->>SettingsPanel: Open icon picker
+    SettingsPanel->>IconPicker: loadIconLibrary()
+    IconPicker-->>Author: display icon grid (48×48px icons)
+    Author->>IconPicker: select icon
+    IconPicker->>ThumbsDirective: setIcon(iconSrc)
+    ThumbsDirective->>Canvas: update icon src
+    ThumbsDirective->>SavedJson: update settings.iconSrc
+
+    Author->>SettingsPanel: Choose header background color
+    SettingsPanel->>ThumbsDirective: setHeaderBgColor('#3498db')
+    ThumbsDirective->>Canvas: apply background-color CSS
+    ThumbsDirective->>SavedJson: persist fieldData
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <h2 class="section-title">Component Flow</h2>
+        <p>End-to-end flow for the Thumbs Card Header element from drop through icon selection and color customization.</p>
+        <div class="diagram-container">
+          <div class="mermaid">
+flowchart TD
+    A([Author drops Thumbs Card Header tile]) --> B[NgController reads config.js]
+    B --> C[$compile thumbs-card-header.html + scope]
+    C --> D[Inject into Canvas]
+    D --> E[ThumbsCardHeaderDirective.link fires]
+    E --> F[Render default icon + empty heading text]
+    F --> G{Author action?}
+    G -- Edit heading --> H[contenteditable → update headingText]
+    G -- Open settings --> I[Load settings panel]
+    I --> J{Settings action?}
+    J -- Pick icon --> K[Icon picker grid → select 48×48 icon]
+    K --> L[Update settings.iconSrc → render new icon]
+    J -- Set bg color --> M[Color picker → headerBgColor]
+    M --> N[Apply background-color to header]
+    J -- Set stroke color --> O[Color picker → strokeColor]
+    O --> P[Apply border-color CSS]
+    H & L & N & P --> Q[Persist to savedJson]
+    Q --> R([Thumbs Card Header saved])
+          </div>
+        </div>
       </section>
     </div>
   </main>
