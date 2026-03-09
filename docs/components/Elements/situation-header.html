@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Situation Header Element - Context-setting prompt component for KITABOO Authoring">
+  <title>Situation Header Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Situation Header Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Situation Header</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Situation Header Element</h1>
+        <p class="page-subtitle">
+          A visually distinct context-setting prompt box with a decorative arrow icon and a rich-text editable area, designed to present scenario introductions and situational prompts at the start of a learning section.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>situationbox</code></td></tr>
+                <tr><td>Directive</td><td><code>situationbox</code></td></tr>
+                <tr><td>Directive File</td><td><code>scripts/situation-box-directive.js</code></td></tr>
+                <tr><td>Preview File</td><td><code>scripts/situation-box-preview1.js</code></td></tr>
+                <tr><td>Template File</td><td><code>situation-box/situation-box.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Situation_Header</code></td></tr>
+                <tr><td>Panel Label</td><td>Situation Header</td></tr>
+                <tr><td>Background</td><td>Fixed <code>#f3ecfe</code> (purple tint)</td></tr>
+                <tr><td>Border Radius</td><td>Fixed <code>16px</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Decorative arrow icon (non-interactive)</li>
+              <li class="feature-list__item feature-list__item--available">Rich-text editable body area</li>
+              <li class="feature-list__item feature-list__item--available">Floating text toolbar for formatting</li>
+              <li class="feature-list__item feature-list__item--available">Math equation support</li>
+              <li class="feature-list__item feature-list__item--available">Alt text for accessibility</li>
+              <li class="feature-list__item feature-list__item--available">Preview mode rendering</li>
+              <li class="feature-list__item feature-list__item--available">Fixed purple-tinted visual design</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Situation Header is a specialized element used to introduce a learning scenario, real-world context, or situational problem before related questions or activities. Its distinctive rounded purple box with an arrow icon visually signals "here is the situation" to students.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: situationbox] --> B[ngcontroller.js]
+    B --> C[situation-box.html]
+    C --> D[situationbox Directive<br/>situation-box-directive.js]
+    D --> E[Arrow Icon Image<br/>images/arrow.svg<br/>draggable: false]
+    D --> F[Rich Text Editor Area<br/>fieldData.textArea<br/>contenteditable]
+    D --> G[Floating Text Toolbar<br/>floatingTextPanel.js]
+    D --> H[Settings Panel<br/>situation-box-settings.html]
+    D --> I[situation-box-preview1.js<br/>Preview / Reader rendering]
+    C --> J[Purple Box Container<br/>bg: #f3ecfe, border-radius: 16px]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── situation-box/
+        ├── situation-box.html              ← AngularJS template
+        ├── situation-box-settings.html     ← Settings panel
+        ├── scripts/
+        │   ├── situation-box-directive.js  ← situationbox directive
+        │   └── situation-box-preview1.js   ← Preview mode handler
+        ├── styles/
+        │   └── situation-box.css           ← Component CSS
+        └── default/
+            └── situation-box.json          ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"situationbox"</code>)</td></tr>
+            <tr><td>textArea</td><td>string (HTML)</td><td>Main body content (rich HTML, contenteditable)</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>altText</td><td>string</td><td>Alt text for the arrow icon image (accessibility)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert--info">
+          <strong>Simple Data Model:</strong> The Situation Header has one of the simplest data models — all editable content is in <code>fieldData.textArea</code> as rich HTML. The visual design (background color, border radius, arrow icon) is entirely CSS/HTML defined and not customizable by the author.
+        </div>
+      </section>
+
+      <section class="section" id="visual">
+        <h2 class="section-title">Visual Design</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">situation-box.html — Fixed styling</span></div>
+          <pre class="code-block__content"><code>&lt;div class="situation-box-container"
+  style="background-color: #f3ecfe; border-radius: 16px;"&gt;
+  &lt;div class="situation-box-title-container"
+    style="display: flex; padding: 16px 16px 0px 16px"&gt;
+    &lt;!-- Arrow icon (non-draggable, pointer-events: none) --&gt;
+    &lt;img src="images/arrow.svg" alt="..." draggable="false"/&gt;
+    &lt;!-- Rich text area --&gt;
+    &lt;div contenteditable="true"
+      ng-model="fieldData.textArea"
+      style="font-family: Roboto; font-size: 16px; line-height: 24px;
+             min-height: 72px;"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div class="alert alert--warning">
+          <strong>Non-Customizable Design:</strong> The background color (<code>#f3ecfe</code>), border radius (<code>16px</code>), padding, arrow icon, font family, font size, and line height are all hard-coded in the template HTML using inline styles. Authors cannot change the visual theme of this element.
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>situation-box-directive.js</code></td><td>Core directive</td></tr>
+            <tr><td><code>situation-box-preview1.js</code></td><td>Preview/reader mode rendering logic</td></tr>
+            <tr><td><code>editor/floatingTextPanel.js</code></td><td>Floating rich-text toolbar</td></tr>
+            <tr><td><code>images/arrow.svg</code></td><td>Decorative arrow icon</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile and inject</td></tr>
+            <tr><td><code>situation-box.css</code></td><td>Component-specific styles</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

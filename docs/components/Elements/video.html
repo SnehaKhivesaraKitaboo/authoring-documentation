@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Video Element - Media video component for KITABOO Authoring">
+  <title>Video Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Video Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Video</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Video Element</h1>
+        <p class="page-subtitle">
+          A video media component supporting MP4 upload, YouTube/Kaltura embeds, transcript display, closed captions (CC), and optional header/caption text.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#sources" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>Video Sources</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>video</code></td></tr>
+                <tr><td>Directive</td><td><code>videoTemplate</code></td></tr>
+                <tr><td>Directive File</td><td><code>editor/video-directive.js</code></td></tr>
+                <tr><td>Template File</td><td><code>templates/video-template.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Video</code></td></tr>
+                <tr><td>Panel Label</td><td>Video</td></tr>
+                <tr><td>Player</td><td>Video.js (<code>video-js</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">MP4 video upload (direct file upload)</li>
+              <li class="feature-list__item feature-list__item--available">YouTube embed via iframe</li>
+              <li class="feature-list__item feature-list__item--available">Kaltura embed via iframe</li>
+              <li class="feature-list__item feature-list__item--available">Transcript panel toggle</li>
+              <li class="feature-list__item feature-list__item--available">Closed Captions (CC) toggle</li>
+              <li class="feature-list__item feature-list__item--available">Multiple language caption tracks</li>
+              <li class="feature-list__item feature-list__item--available">Optional header text</li>
+              <li class="feature-list__item feature-list__item--available">Optional figcaption</li>
+              <li class="feature-list__item feature-list__item--available">Outline / border style</li>
+              <li class="feature-list__item feature-list__item--available">In-player settings overlay (transcript &amp; CC)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Architecture Note:</strong> Like the Image element, the Video directive lives in <code>editor/video-directive.js</code> so it can be reused across standalone use and within layout columns.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: video] --> B[ngcontroller.js]
+    B --> C[templates/video-template.html]
+    C --> D{Video Source Type}
+    D -->|MP4 Upload| E[&lt;video&gt; Video.js Player<br/>vjs-default-skin]
+    D -->|YouTube / Kaltura| F[&lt;iframe&gt; Embed<br/>embed-responsive-16by9]
+    C --> G[videoTemplate Directive<br/>editor/video-directive.js]
+    G --> H[Settings Panel<br/>video-settings-panel.html]
+    G --> I[In-Player Overlay<br/>Transcript + CC toggles]
+    G --> J[Language Track Selector<br/>caption tracks list]
+    C --> K[Header Text<br/>ng-if: isHeaderVisible]
+    C --> L[Figcaption<br/>ng-show: optionalcaption]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+├── editor/
+│   └── video-directive.js           ← videoTemplate directive (shared)
+│
+└── templates/
+    ├── video-template.html           ← AngularJS template (editor view)
+    └── video/
+        ├── video-settings-panel.html ← Settings panel HTML
+        └── video.json                ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"video"</code>)</td></tr>
+            <tr><td>videoUploaded</td><td>boolean</td><td>Whether a video has been uploaded/linked</td></tr>
+            <tr><td>youtube</td><td>boolean</td><td>Video is a YouTube embed</td></tr>
+            <tr><td>kaltura</td><td>boolean</td><td>Video is a Kaltura embed</td></tr>
+            <tr><td>altText</td><td>string</td><td>Accessibility alt text</td></tr>
+            <tr><td>ratio</td><td>string</td><td>Video aspect ratio (e.g., <code>"16:9"</code>)</td></tr>
+            <tr><td>ogXDim</td><td>string</td><td>Original horizontal dimension</td></tr>
+            <tr><td>caption</td><td>string</td><td>Figcaption text (optional)</td></tr>
+            <tr><td>header</td><td>string</td><td>Header text above video (style1 only)</td></tr>
+            <tr><td>media</td><td>object</td><td>Video media source</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object (Key Fields)</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>showTranscript</td><td>boolean</td><td>Enable/disable transcript panel</td></tr>
+            <tr><td>showClosedCaptions</td><td>boolean</td><td>Enable/disable closed captions</td></tr>
+            <tr><td>optionalcaption</td><td>boolean</td><td>Show/hide figcaption</td></tr>
+            <tr><td>isHeaderVisible</td><td>boolean</td><td>Show/hide header text (style1 only)</td></tr>
+            <tr><td>outline</td><td>string</td><td>Border style: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Background color for outlined box</td></tr>
+            <tr><td>styleSelected</td><td>string</td><td>Visual style: <code>"style1"</code>, <code>"style2"</code></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="sources">
+        <h2 class="section-title">Video Sources</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">MP4 Upload</h3>
+            <p>Direct MP4 file upload — renders as a <strong>Video.js</strong> player with controls. Supports:</p>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Playback controls (play/pause/volume/fullscreen)</li>
+              <li class="feature-list__item feature-list__item--available">Closed caption track injection (VTT files)</li>
+              <li class="feature-list__item feature-list__item--available">Transcript panel below video</li>
+              <li class="feature-list__item feature-list__item--available">Multi-language caption support</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">External Embeds</h3>
+            <p>YouTube and Kaltura videos render as responsive iframes:</p>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">16:9 responsive container (<code>embed-responsive-16by9</code>)</li>
+              <li class="feature-list__item feature-list__item--available">URL sanitized via <code>| trusted</code> filter</li>
+              <li class="feature-list__item feature-list__item--available">CC handled natively by platform</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">In-Player Settings Overlay</h3>
+        <p>An overlay panel inside the video element allows authors to toggle Transcript and CC directly on the canvas:</p>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">In-player overlay controls</span></div>
+          <pre class="code-block__content"><code>Transcript toggle  → fieldData.settings.showTranscript (boolean)
+CC toggle          → fieldData.settings.showClosedCaptions (boolean)
+Language selector  → List of available VTT caption tracks</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>editor/video-directive.js</code></td><td>Core videoTemplate directive</td></tr>
+            <tr><td><code>Video.js</code></td><td>HTML5 video player library</td></tr>
+            <tr><td><code>editprimarymedia</code> directive</td><td>Upload/link video interaction</td></tr>
+            <tr><td><code>ShellService</code></td><td>HTTP API for video upload</td></tr>
+            <tr><td><code>| trusted</code> filter</td><td>URL sanitization for iframe sources</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

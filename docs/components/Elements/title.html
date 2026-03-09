@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Title Element - Chapter heading component for KITABOO Authoring">
+  <title>Title Element | Documentation Portal</title>
+  
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Title Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#elements" class="breadcrumb__link">Elements</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Title</span>
+        </div>
+      </nav>
+    </header>
+    
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Title Element</h1>
+        <p class="page-subtitle">
+          A full-page chapter heading component that supports background images, color overlays, author name, chapter number labels, and multiple visual style variants.
+        </p>
+        
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Overview
+          </a>
+          <a href="#architecture" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            Architecture
+          </a>
+          <a href="#datamodel" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>
+            Data Model
+          </a>
+          <a href="#variants" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+            Style Variants
+          </a>
+          <a href="#filestructure" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+            File Structure
+          </a>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td class="props-table__name">dataType</td><td class="props-table__desc"><code>chapter-headingNew-h1</code></td></tr>
+                <tr><td class="props-table__name">Directive</td><td class="props-table__desc"><code>chapterHeadingNewTemplate</code></td></tr>
+                <tr><td class="props-table__name">Element</td><td class="props-table__desc"><code>&lt;header&gt;</code></td></tr>
+                <tr><td class="props-table__name">Icon Class</td><td class="props-table__desc"><code>icon-Hero-header</code></td></tr>
+                <tr><td class="props-table__name">Panel Label</td><td class="props-table__desc">Title</td></tr>
+                <tr><td class="props-table__name">Apply All</td><td class="props-table__desc">Supported</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Multiple visual style variants (card-style-1..4, full-bleed-1/2)</li>
+              <li class="feature-list__item feature-list__item--available">Background image with crop/mask support</li>
+              <li class="feature-list__item feature-list__item--available">Background solid color or gradient</li>
+              <li class="feature-list__item feature-list__item--available">Color overlay with opacity control</li>
+              <li class="feature-list__item feature-list__item--available">Editable Chapter Name &amp; Number labels</li>
+              <li class="feature-list__item feature-list__item--available">Editable Author Name field</li>
+              <li class="feature-list__item feature-list__item--available">Divider line with custom color</li>
+              <li class="feature-list__item feature-list__item--available">Apply All / Ignore Apply All toggle</li>
+              <li class="feature-list__item feature-list__item--available">Undo support for title and author text</li>
+              <li class="feature-list__item feature-list__item--available">TOC integration</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Title element is the primary chapter-level heading component. It occupies the full width of the page canvas and supports rich visual customization including background images (with built-in Cropper.js), color themes, and multiple layout styles. It is the first element authors typically place when creating a new chapter page.
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: chapter-headingNew-h1] --> B[ngcontroller.js<br/>Drag-drop + compile]
+    B --> C[chapter-heading.html<br/>AngularJS Template]
+    C --> D[chapterHeadingNewTemplate Directive<br/>titleNew-directive.js]
+    D --> E[fieldData Scope<br/>Bound to savedJson]
+    E --> F[Settings Panel<br/>chapter-heading-settings-panel.html]
+    F --> G[ShellService API<br/>Image Upload / Crop]
+    D --> H[UndoRedo Stack<br/>headerTitleText + authorName]
+    D --> I[ApplyAll System<br/>Propagate style across pages]
+    D --> J[TOC Update<br/>updateActivePageToc]
+    E --> K[Persistence Layer<br/>sd.js → savedJson]
+          </div>
+        </div>
+
+        <h3 class="subsection-title">How It Works</h3>
+        <p>When an author drags the <strong>Title</strong> tile from the Elements panel:</p>
+        <ol class="steps-list">
+          <li class="steps-list__item">The <code>ngcontroller.js</code> reads the widget definition from <code>config.js</code>, fetches <code>default/header.json</code> as the initial <code>fieldData</code>, and loads <code>chapter-heading.html</code>.</li>
+          <li class="steps-list__item">The HTML is <code>$compile</code>d against a new child scope carrying the JSON as <code>fieldData</code>, and injected into the page canvas.</li>
+          <li class="steps-list__item">The <code>chapterHeadingNewTemplate</code> directive's <code>link</code> function fires: undo stacks are initialized, click handlers are bound, the first-load Apply All check runs, and the Cropper.js image widget is initialized if needed.</li>
+          <li class="steps-list__item">The author clicks the element to select it — the right-side settings panel loads <code>chapter-heading-settings-panel.html</code>, wired to <code>con.currSettings</code>.</li>
+          <li class="steps-list__item">Every change to <code>fieldData</code> is auto-persisted via <code>savedJson</code> and can be saved via the Save button.</li>
+        </ol>
+      </section>
+
+      <!-- File Structure -->
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__title">Directory Layout</span>
+          </div>
+          <pre class="code-block__content">KITABOO_Authoring/
+├── config/
+│   └── config.js                          ← Widget registry entry (dataType: chapter-headingNew-h1)
+│
+└── templates/
+    └── titleNew/
+        ├── chapter-heading.html           ← AngularJS template (editor view)
+        ├── chapter-heading-settings-panel.html  ← Settings panel HTML
+        ├── scripts/
+        │   └── titleNew-directive.js      ← chapterHeadingNewTemplate directive
+        ├── styles/
+        │   └── titleNew-template.css      ← Component-specific CSS
+        └── default/
+            └── header.json               ← Default fieldData JSON</pre>
+        </div>
+
+        <h3 class="subsection-title">config.js Registry Entry</h3>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__title">config/config.js</span>
+          </div>
+          <pre class="code-block__content"><code>{
+  name: "Title",
+  iconClass: "icon-Hero-header",
+  dataType: "chapter-headingNew-h1",
+  url: "templates/titleNew/chapter-heading.html",
+  json: "templates/titleNew/default/header.json",
+  settingsURL: "templates/titleNew/chapter-heading-settings-panel.html",
+  isDroppable: true,
+  preview: { imgURL: "templates/preview/Title-popup.png" }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Data Model -->
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <p>The entire state of a Title instance is stored as a JSON object (<code>fieldData</code>) in <code>savedJson[pageNo][uniqueId]</code>.</p>
+        
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead>
+            <tr>
+              <th class="props-table__name">Field</th>
+              <th class="props-table__type">Type</th>
+              <th class="props-table__default">Default</th>
+              <th class="props-table__desc">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td><code>"chapter-headingNew-h1"</code></td><td>Component type identifier</td></tr>
+            <tr><td>headerTitleText</td><td>string</td><td><code>""</code></td><td>Main H1 title text (contenteditable)</td></tr>
+            <tr><td>chapterheadingTitleText</td><td>string</td><td><code>"Chapter"</code></td><td>Chapter label text (max 7 chars)</td></tr>
+            <tr><td>headerChapterNo</td><td>string</td><td><code>"01"</code></td><td>Chapter number (max 3 chars)</td></tr>
+            <tr><td>authorName</td><td>string</td><td><code>""</code></td><td>Author name field (optional)</td></tr>
+            <tr><td>styleClass</td><td>string</td><td><code>"card-style-4"</code></td><td>Active visual style variant</td></tr>
+            <tr><td>ignoreApplyAll</td><td>boolean</td><td><code>false</code></td><td>Exclude from Apply All propagation</td></tr>
+            <tr><td>bgColor</td><td>string</td><td><code>"#ffffff"</code></td><td>Legacy background color</td></tr>
+            <tr><td>settings</td><td>object</td><td>See below</td><td>All style &amp; display settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object (Key Fields)</h3>
+        <table class="props-table">
+          <thead>
+            <tr>
+              <th class="props-table__name">Field</th>
+              <th class="props-table__type">Type</th>
+              <th class="props-table__default">Default</th>
+              <th class="props-table__desc">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>imgOrColorBoolean</td><td>string</td><td><code>"bg-color"</code></td><td>Background mode: <code>"bg-image"</code> or <code>"bg-color"</code></td></tr>
+            <tr><td>imageUrl</td><td>string</td><td><code>"images/image.jpg"</code></td><td>Uploaded background image URL</td></tr>
+            <tr><td>bgColor</td><td>string</td><td><code>"#efe7db"</code></td><td>Background panel color</td></tr>
+            <tr><td>bgColortitle</td><td>string</td><td><code>"#7eb1eb"</code></td><td>Overlay/title panel background color</td></tr>
+            <tr><td>bgColorpanel</td><td>string</td><td><code>"#e4164a"</code></td><td>Chapter label panel color</td></tr>
+            <tr><td>opacityColortitle</td><td>string</td><td><code>"0"</code></td><td>Overlay opacity (0–1)</td></tr>
+            <tr><td>elementColor</td><td>string</td><td><code>"#000000"</code></td><td>Title text color</td></tr>
+            <tr><td>chapterAlign</td><td>string</td><td><code>"left"</code></td><td>Chapter panel alignment: <code>"left"</code> or <code>"right"</code></td></tr>
+            <tr><td>chapternamedisplay</td><td>boolean</td><td><code>true</code></td><td>Show/hide chapter name label</td></tr>
+            <tr><td>chapternumberdisplay</td><td>boolean</td><td><code>true</code></td><td>Show/hide chapter number</td></tr>
+            <tr><td>allowAuthorName</td><td>boolean</td><td><code>true</code></td><td>Show/hide author name field</td></tr>
+            <tr><td>allowDivider</td><td>boolean</td><td><code>true</code></td><td>Show/hide divider line</td></tr>
+            <tr><td>dividerColor</td><td>string</td><td><code>"#000000"</code></td><td>Divider line color</td></tr>
+            <tr><td>labeltext</td><td>boolean</td><td><code>true</code></td><td>Show/hide chapter label section</td></tr>
+            <tr><td>style_tab</td><td>array</td><td>—</td><td>Style picker groups with thumbnail images</td></tr>
+            <tr><td>colorvalues</td><td>array</td><td>10 colors</td><td>Predefined color palette for theme switching</td></tr>
+            <tr><td>altText</td><td>string</td><td><code>""</code></td><td>Alt text for background image (accessibility)</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Style Variants -->
+      <section class="section" id="variants">
+        <h2 class="section-title">Style Variants</h2>
+        <p>The Title element supports 6 visual styles grouped into two categories:</p>
+        
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Title with Background (card-style)</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td><code>card-style-1</code></td><td>Side panel with chapter label + full background image</td></tr>
+                <tr><td><code>card-style-2</code></td><td>Full bleed background image, compact layout</td></tr>
+                <tr><td><code>card-style-3</code></td><td>Split layout with color panel and image</td></tr>
+                <tr><td><code>card-style-4</code></td><td>Default — bold title with bottom divider (default)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Plain Text Title (full-bleed)</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td><code>full-bleed-1</code></td><td>Minimal text-only, no background</td></tr>
+                <tr><td><code>full-bleed-2</code></td><td>Full-width colored panel with overlay</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Style Switching Flow</h3>
+        <div class="diagram-container">
+          <div class="mermaid">
+sequenceDiagram
+    Author->>SettingsPanel: Click style thumbnail
+    SettingsPanel->>Directive: ApplystyleTitleNew(styleNo, colorNum)
+    Directive->>fieldData: Update styleClass, urlNo, colornum
+    Directive->>DOM: Add/remove CSS classes
+    Directive->>savedJson: Persist updated fieldData
+          </div>
+        </div>
+      </section>
+
+      <!-- Directive Behavior -->
+      <section class="section" id="directive">
+        <h2 class="section-title">Directive Behavior</h2>
+        
+        <h3 class="subsection-title">Initialization (link function)</h3>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">titleNew-directive.js — Key Behaviors</span></div>
+          <pre class="code-block__content"><code>// 1. Undo stack setup
+scope.undoHeaderTitleTextStack = [];
+scope.undoTitleAuthorNameStack = [];
+
+// 2. First-load ApplyAll check
+if (element.parents('.template-main-body').eq(0).hasClass('first-time-load')) {
+  if (scope.$parent.ApplyToAllStyleSettingJson['chapter-headingNew-h1'].styleSettingFlag) {
+    // Apply stored style settings, preserve text content
+    var scopeCopy = angular.copy(scope.$parent.ApplyToAllStyleSettingJson[...].styleSettingJson);
+    scope.fieldData = scopeCopy;
+  }
+}
+
+// 3. Font size normalization
+setTimeout(() => {
+  element.find('.headerTitle').css('font-size', fontValue + 'rem');
+}, 10);
+
+// 4. Click → load settings panel
+$(element).parents('.sd-item').bind('click', function(e) {
+  con.currSettings = con.savedJson[pageNo][uniqueId].settings;
+  con.settingsUrl = templateScope.settingsPath;
+  con.displaySettingPanel();
+});</code></pre>
+        </div>
+
+        <h3 class="subsection-title">Image Upload &amp; Crop</h3>
+        <p>The Title element integrates <strong>Cropper.js</strong> for background image manipulation:</p>
+        <ul class="feature-list">
+          <li class="feature-list__item feature-list__item--available">Author clicks "Upload" in settings → file input triggers</li>
+          <li class="feature-list__item feature-list__item--available">Image is uploaded to server via <code>ShellService.httpServiceCall(POST)</code></li>
+          <li class="feature-list__item feature-list__item--available">Cropper initialized with <code>aspectRatio: 2/1</code>, drag mode</li>
+          <li class="feature-list__item feature-list__item--available">On "Crop" click: canvas exported as JPEG → re-uploaded → URL stored in <code>fieldData.settings.imageUrl</code></li>
+          <li class="feature-list__item feature-list__item--available">Original image preserved in <code>data-og-img</code> attribute</li>
+        </ul>
+
+        <h3 class="subsection-title">Special Constraints</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Constraint</th></tr></thead>
+          <tbody>
+            <tr><td>Chapter Name</td><td>Max 7 characters (enforced via keydown)</td></tr>
+            <tr><td>Chapter Number</td><td>Max 3 characters (enforced via keydown)</td></tr>
+            <tr><td>Enter key</td><td>Blocked in chapter name field</td></tr>
+            <tr><td>Paste</td><td>Custom handler strips HTML formatting</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Settings Panel -->
+      <section class="section" id="settings">
+        <h2 class="section-title">Settings Panel Options</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Style Tab</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Visual style picker (6 thumbnail options)</li>
+              <li class="feature-list__item feature-list__item--available">Color palette switcher (10 predefined colors)</li>
+              <li class="feature-list__item feature-list__item--available">Label style picker (4 options)</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Background Tab</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Toggle: image vs. solid color</li>
+              <li class="feature-list__item feature-list__item--available">Image upload / replace / crop</li>
+              <li class="feature-list__item feature-list__item--available">Image library selector</li>
+              <li class="feature-list__item feature-list__item--available">Color picker for background color</li>
+              <li class="feature-list__item feature-list__item--available">Overlay color + opacity slider</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Text &amp; Layout Tab</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Chapter alignment (left/right)</li>
+              <li class="feature-list__item feature-list__item--available">Show/hide chapter name &amp; number</li>
+              <li class="feature-list__item feature-list__item--available">Show/hide author name</li>
+              <li class="feature-list__item feature-list__item--available">Show/hide divider line + color picker</li>
+              <li class="feature-list__item feature-list__item--available">Title text color</li>
+              <li class="feature-list__item feature-list__item--available">Apply All / Ignore toggle</li>
+              <li class="feature-list__item feature-list__item--available">Alt text for background image</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Integration -->
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compiles and injects the template; manages ApplyAll, undo/redo, TOC</td></tr>
+            <tr><td><code>editor/ngdragdrop.js</code></td><td>Handles drag-drop from the Elements panel into the canvas</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>JSON serialization / deserialization for save &amp; load</td></tr>
+            <tr><td><code>editor/UndoRedo.js</code></td><td>Global undo/redo system (component adds to stack)</td></tr>
+            <tr><td><code>ShellService</code></td><td>HTTP wrapper for image upload API calls</td></tr>
+            <tr><td><code>Cropper.js</code></td><td>Third-party image crop library</td></tr>
+            <tr><td><code>css/authoring/authoring-style.css</code></td><td>Global element styles</td></tr>
+            <tr><td><code>templates/titleNew/styles/titleNew-template.css</code></td><td>Component-specific styles</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Known Behaviors -->
+      <section class="section" id="notes">
+        <h2 class="section-title">Known Behaviors &amp; Notes</h2>
+        <div class="alert alert--warning">
+          <strong>Apply All Behavior:</strong> When Apply All is active and a new Title element is dropped, it inherits all style settings from the stored Apply All JSON, but the text content fields (<code>headerTitleText</code>, <code>authorName</code>, <code>headerChapterNo</code>, <code>chapterheadingTitleText</code>) are always reset to defaults to avoid copying content.
+        </div>
+        <div class="alert alert--info">
+          <strong>TOC Integration:</strong> The Title element's <code>headerTitleText</code> is registered in the Table of Contents. The directive calls <code>con.updateActivePageToc()</code> on click and highlights the matching TOC item.
+        </div>
+        <div class="alert alert--info">
+          <strong>Duplicate Component:</strong> When a Title is duplicated (<code>data-duplicatecomp="true"</code>), the text content is preserved from the original even when Apply All is active.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

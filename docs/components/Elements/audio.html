@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Audio Element - Media audio component for KITABOO Authoring">
+  <title>Audio Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Audio Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Audio</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Audio Element</h1>
+        <p class="page-subtitle">
+          An HTML5 audio player component supporting audio file upload, optional caption, outline styles, background playback mode, and custom skin selection.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>audio</code></td></tr>
+                <tr><td>Directive</td><td><code>audioTemplate</code></td></tr>
+                <tr><td>Directive File</td><td><code>editor/audio-directive.js</code></td></tr>
+                <tr><td>Template File</td><td><code>templates/audio.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Audio</code></td></tr>
+                <tr><td>Panel Label</td><td>Audio</td></tr>
+                <tr><td>Player</td><td>Native HTML5 <code>&lt;audio&gt;</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Audio file upload (MP3, WAV, OGG, etc.)</li>
+              <li class="feature-list__item feature-list__item--available">Native HTML5 browser audio player</li>
+              <li class="feature-list__item feature-list__item--available">Custom skin selection via <code>getSkinName()</code></li>
+              <li class="feature-list__item feature-list__item--available">Background (ambient) playback mode</li>
+              <li class="feature-list__item feature-list__item--available">Optional figcaption text</li>
+              <li class="feature-list__item feature-list__item--available">Outline / border style toggle</li>
+              <li class="feature-list__item feature-list__item--available">Background color for outline box</li>
+              <li class="feature-list__item feature-list__item--available">Audio alignment</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Architecture Note:</strong> Like Image and Video, the Audio directive lives in <code>editor/audio-directive.js</code> for reuse across multiple contexts.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: audio] --> B[ngcontroller.js]
+    B --> C[templates/audio.html]
+    C --> D[audioTemplate Directive<br/>editor/audio-directive.js]
+    D --> E[HTML5 &lt;audio&gt; Element<br/>native controls]
+    D --> F[getSkinName function<br/>Custom audio skin]
+    D --> G[editprimarymedia directive<br/>Upload audio file]
+    G --> H[ShellService API<br/>File upload]
+    D --> I[Settings Panel<br/>audio-setting-panel.html]
+    C --> J[figcaption<br/>ng-if: optionalcaption]
+    C --> K[figure.audioBorder<br/>outline styles]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+├── editor/
+│   └── audio-directive.js          ← audioTemplate directive (shared)
+│
+└── templates/
+    ├── audio.html                   ← AngularJS template (editor view)
+    └── audio/
+        ├── audio-setting-panel.html ← Settings panel HTML
+        └── audio.json               ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"audio"</code>)</td></tr>
+            <tr><td>caption</td><td>string</td><td>Caption text below audio player</td></tr>
+            <tr><td>media</td><td>object</td><td>Audio media source info (<code>src</code>, <code>align</code>)</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object (Key Fields)</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>optionalcaption</td><td>boolean</td><td>Show/hide figcaption</td></tr>
+            <tr><td>playinBackground</td><td>boolean</td><td>Enable background/ambient playback mode</td></tr>
+            <tr><td>outline</td><td>string</td><td>Border style class: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Background color for outlined box</td></tr>
+            <tr><td>skinName</td><td>string</td><td>Custom audio player skin identifier</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="settings">
+        <h2 class="section-title">Settings Panel Options</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Audio Options</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Upload audio file / Replace</li>
+              <li class="feature-list__item feature-list__item--available">Audio alignment</li>
+              <li class="feature-list__item feature-list__item--available">Skin selection</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Display Options</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Show/hide caption</li>
+              <li class="feature-list__item feature-list__item--available">Outline style toggle</li>
+              <li class="feature-list__item feature-list__item--available">Outline background color</li>
+              <li class="feature-list__item feature-list__item--available">Background playback mode toggle</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--warning">
+          <strong>Background Playback:</strong> When <code>playinBackground</code> is enabled (<code>playInBackground</code> attribute on the element), the audio plays as ambient background music in the reader, without showing visible player controls. This is useful for chapter atmosphere audio.
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>editor/audio-directive.js</code></td><td>Core audioTemplate directive</td></tr>
+            <tr><td><code>editprimarymedia</code> directive</td><td>Upload/link audio interaction</td></tr>
+            <tr><td><code>ShellService</code></td><td>HTTP API for audio file upload</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>JSON serialization for save/load</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Table Element - Editable data table component for KITABOO Authoring">
+  <title>Table Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Table Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Table</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Table Element</h1>
+        <p class="page-subtitle">
+          A fully editable HTML table component with resizable columns, row/column insert/delete, cell merging, theme styles, header text, caption, and label type support.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#operations" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>Table Operations</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>tablesNew</code></td></tr>
+                <tr><td>Directive</td><td><code>tableNewInit</code></td></tr>
+                <tr><td>Directive File</td><td><code>scripts/tablesTemplate-directive.js</code></td></tr>
+                <tr><td>Resize Script</td><td><code>scripts/resizable.js</code></td></tr>
+                <tr><td>Template File</td><td><code>tableNew/tables.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Table</code></td></tr>
+                <tr><td>Panel Label</td><td>Table</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Dynamic row/column creation dialog</li>
+              <li class="feature-list__item feature-list__item--available">Insert row above/below, insert column left/right</li>
+              <li class="feature-list__item feature-list__item--available">Delete rows and columns</li>
+              <li class="feature-list__item feature-list__item--available">Cell merge (Merge All) and Unmerge</li>
+              <li class="feature-list__item feature-list__item--available">Resizable columns (drag handle)</li>
+              <li class="feature-list__item feature-list__item--available">Multiple visual themes</li>
+              <li class="feature-list__item feature-list__item--available">Optional header text above table</li>
+              <li class="feature-list__item feature-list__item--available">Optional figcaption below table</li>
+              <li class="feature-list__item feature-list__item--available">Label type (Primary/Secondary question label)</li>
+              <li class="feature-list__item feature-list__item--available">Outline / background color styling</li>
+              <li class="feature-list__item feature-list__item--available">Math equation support in cells</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: tablesNew] --> B[ngcontroller.js]
+    B --> C[tables.html]
+    C --> D[tableNewInit Directive<br/>tablesTemplate-directive.js]
+    D --> E[resizable.js<br/>Column resize handles]
+    D --> F[globalScope.appendRow<br/>Insert row above/below]
+    D --> G[globalScope.appendColumn<br/>Insert column left/right]
+    D --> H[globalScope.deleteRows<br/>Delete row]
+    D --> I[globalScope.deleteColumns<br/>Delete column]
+    D --> J[mergeAll / unmergeAll<br/>Cell merging]
+    D --> K[Context Menu .vmenu<br/>Row/Col operations]
+    D --> L[Settings Panel<br/>tables-settings-panel.html]
+    C --> M[Header Text<br/>ng-if: isHeaderVisible]
+    C --> N[Figcaption<br/>ng-if: optionalcaption]
+    C --> O[Label Type<br/>ng-if: isLabelTypeTable]
+    C --> P[Row/Col Dialog<br/>rows-columns-dialog]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── tableNew/
+        ├── tables.html                   ← AngularJS template
+        ├── tables-settings-panel.html    ← Settings panel
+        ├── scripts/
+        │   ├── tablesTemplate-directive.js ← tableNewInit directive
+        │   └── resizable.js              ← Column resize library
+        ├── styles/
+        │   └── tablesNew-template.css    ← Component CSS
+        └── default/
+            └── tablesTemplate.json       ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"tablesNew"</code>)</td></tr>
+            <tr><td>theme</td><td>string</td><td>Active visual theme class</td></tr>
+            <tr><td>noOfRows</td><td>number</td><td>Number of rows (from creation dialog)</td></tr>
+            <tr><td>noOfCol</td><td>number</td><td>Number of columns (from creation dialog)</td></tr>
+            <tr><td>header</td><td>string</td><td>Header text above the table (HTML)</td></tr>
+            <tr><td>caption</td><td>string</td><td>Caption text below table (displayed to reader)</td></tr>
+            <tr><td>question</td><td>string</td><td>Primary label question text</td></tr>
+            <tr><td>secondaryQuestion</td><td>string</td><td>Secondary label question text</td></tr>
+            <tr><td>tableData</td><td>array</td><td>Serialized table cell content (rows × columns)</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display settings</td></tr>
+            <tr><td>media</td><td>object</td><td>Caption width and margin settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>isHeaderVisible</td><td>boolean</td><td>Show/hide header text above table</td></tr>
+            <tr><td>optionalcaption</td><td>boolean</td><td>Show/hide figcaption below table</td></tr>
+            <tr><td>isLabelTypeTable</td><td>boolean</td><td>Show/hide question label overlay</td></tr>
+            <tr><td>labelType</td><td>string</td><td>Label type: <code>"primary"</code> or <code>"secondary"</code></td></tr>
+            <tr><td>outline</td><td>string</td><td>Border style: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Outline background color</td></tr>
+            <tr><td>mediaToUpload</td><td>string</td><td>Media type indicator class</td></tr>
+            <tr><td>figCaption2</td><td>string</td><td>Additional caption style class</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="operations">
+        <h2 class="section-title">Table Operations</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Row Operations</h3>
+            <p>Right-click context menu (<code>.vmenu</code>) on any row:</p>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available"><strong>Insert Above</strong> — <code>globalScope.appendRow(rowIndex - 1, 'up')</code></li>
+              <li class="feature-list__item feature-list__item--available"><strong>Insert Below</strong> — <code>globalScope.appendRow(rowIndex, 'down')</code></li>
+              <li class="feature-list__item feature-list__item--available"><strong>Delete</strong> — <code>globalScope.deleteRows(rowIndex)</code></li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Column Operations</h3>
+            <p>Right-click context menu on any column:</p>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available"><strong>Insert Left</strong> — <code>globalScope.appendColumn(colIndex - 1, 'left')</code></li>
+              <li class="feature-list__item feature-list__item--available"><strong>Insert Right</strong> — <code>globalScope.appendColumn(colIndex - 1, 'right')</code></li>
+              <li class="feature-list__item feature-list__item--available"><strong>Delete</strong> — <code>globalScope.deleteColumns(colIndex - 1)</code></li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Cell Merge</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available"><strong>Merge All</strong> — Merges selected cells into one (<code>mergeAll()</code>)</li>
+              <li class="feature-list__item feature-list__item--available"><strong>Unmerge</strong> — Splits merged cell back (<code>unmergeAll()</code>)</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Column Resize</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Drag column border to resize</li>
+              <li class="feature-list__item feature-list__item--available">Powered by <code>resizable.js</code></li>
+              <li class="feature-list__item feature-list__item--available">Column widths persisted in <code>tableData</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Table Creation Dialog</h3>
+        <p>When a new Table element is first dropped, a dialog appears to define the initial dimensions:</p>
+        <div class="code-block">
+          <pre class="code-block__content"><code>Rows: ng-model="fieldData.noOfRows" (1–20, step: 1)
+Cols: ng-model="fieldData.noOfCol"  (1–20, step: 1)
+isNoOfRowColChangedFlag = true → triggers table rebuild</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>tablesTemplate-directive.js</code></td><td>Core directive with all table logic</td></tr>
+            <tr><td><code>resizable.js</code></td><td>Column drag-resize functionality</td></tr>
+            <tr><td><code>globalScope</code></td><td>Shared scope for row/column operations (called from inline <code>onclick</code>)</td></tr>
+            <tr><td><code>editor/floatingTextPanel.js</code></td><td>Rich text editing for cell content</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+            <tr><td><code>tablesNew-template.css</code></td><td>Table themes and styles</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert--warning">
+          <strong>Global Scope Usage:</strong> The row/column operation buttons use inline <code>onclick</code> attributes calling <code>globalScope.*</code> methods. This is a legacy pattern — <code>globalScope</code> is a reference to the AngularJS scope made globally accessible for direct DOM event handlers.
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

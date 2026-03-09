@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lesson Opener Components Element - Lesson introduction prompt component for KITABOO Authoring">
+  <title>Lesson Opener Components | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Lesson Opener Components</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Lesson Opener</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Lesson Opener Components</h1>
+        <p class="page-subtitle">
+          A multi-style lesson introduction component with 4 predefined prompt types — Learning Prompt, Make a Connection, My Learning Goals, and Key Terms — each with a unique icon, label, color scheme, and editable body text.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#types" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>Component Types</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>lessonOpenerComponent</code></td></tr>
+                <tr><td>Directive</td><td><code>lessonOpenerTemplate</code></td></tr>
+                <tr><td>Directive File</td><td><code>scripts/lessonOpener-directive.js</code></td></tr>
+                <tr><td>Template File</td><td><code>lessonOpener/lessonOpener.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Lesson_Opener</code></td></tr>
+                <tr><td>Panel Label</td><td>Lesson Opener Components</td></tr>
+                <tr><td>Styles Available</td><td>4 (style1, style2, style3, style4)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">4 predefined lesson prompt types</li>
+              <li class="feature-list__item feature-list__item--available">Each type has a unique icon and label</li>
+              <li class="feature-list__item feature-list__item--available">Editable body text (rich HTML)</li>
+              <li class="feature-list__item feature-list__item--available">Custom background color per style</li>
+              <li class="feature-list__item feature-list__item--available">Custom border/stroke color per style</li>
+              <li class="feature-list__item feature-list__item--available">Outline style support</li>
+              <li class="feature-list__item feature-list__item--available">Flexible placement (left, right, full-width)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Lesson Opener element provides structured, pedagogically-labeled prompts at the beginning of lessons. Each style represents a specific type of learning activity: activating prior knowledge, making connections, goal setting, or vocabulary introduction. The fixed labels and icons ensure consistent visual language across all content.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: lessonOpenerComponent] --> B[ngcontroller.js]
+    B --> C[lessonOpener.html]
+    C --> D{layoutColorActive}
+    D -->|style1| E[Learning Prompt<br/>lessonOpener-Icon_1.svg<br/>Green theme #00B673]
+    D -->|style2| F[Make a Connection<br/>lessonOpener-Icon_2.svg<br/>Orange theme #EC9511]
+    D -->|style3| G[My Learning Goals<br/>starIcon.svg<br/>Purple theme #2E1984]
+    D -->|style4| H[Key Terms<br/>keyTerm.svg<br/>Purple theme #2E1984]
+    C --> I[lessonOpenerTemplate Directive<br/>lessonOpener-directive.js]
+    I --> J[Settings Panel<br/>lessonOpener-setting-panel.html]
+    I --> K[fieldData.paragraph<br/>Editable body text]
+    I --> L[sidebarBgColor / sidebarStrokeColor<br/>per-style theming]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── lessonOpener/
+        ├── lessonOpener.html                ← AngularJS template
+        ├── lessonOpener-setting-panel.html  ← Settings panel
+        ├── scripts/
+        │   └── lessonOpener-directive.js    ← lessonOpenerTemplate directive
+        ├── styles/
+        │   └── lessonOpener-template.css    ← Component CSS
+        └── default/
+            └── lessonOpener.json            ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"lessonOpenerComponent"</code>)</td></tr>
+            <tr><td>paragraph</td><td>string (HTML)</td><td>Body text (rich HTML, contenteditable, shared across all styles)</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display and style settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>layoutColorActive</td><td>string</td><td>Active style type: <code>"style1"</code>, <code>"style2"</code>, <code>"style3"</code>, <code>"style4"</code></td></tr>
+            <tr><td>placement</td><td>string</td><td>Layout placement: <code>"left"</code>, <code>"right"</code>, <code>"full"</code></td></tr>
+            <tr><td>sidebarBgColor</td><td>string</td><td>Body background color</td></tr>
+            <tr><td>sidebarStrokeColor</td><td>string</td><td>Border/stroke color</td></tr>
+            <tr><td>headerBgColor</td><td>string</td><td>Overlay section background (when <code>allowAutoColor</code> is on)</td></tr>
+            <tr><td>allowAutoColor</td><td>boolean</td><td>Use auto-color scheme</td></tr>
+            <tr><td>outline</td><td>string</td><td>Outer border style: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Outer outline background color</td></tr>
+            <tr><td>imagedisplay</td><td>boolean</td><td>Show/hide any image element</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="types">
+        <h2 class="section-title">Component Types</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">style1 — Learning Prompt</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>Icon</td><td><code>images/lessonOpener-Icon_1.svg</code></td></tr>
+                <tr><td>Label</td><td>"Learning Prompt"</td></tr>
+                <tr><td>Default Stroke</td><td><code>#00B673</code> (green)</td></tr>
+                <tr><td>Purpose</td><td>Activate prior knowledge and set the learning stage</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style2 — Make a Connection</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>Icon</td><td><code>images/lessonOpener-Icon_2.svg</code></td></tr>
+                <tr><td>Label</td><td>"Make a Connection"</td></tr>
+                <tr><td>Default Stroke</td><td><code>#EC9511</code> (orange)</td></tr>
+                <tr><td>Purpose</td><td>Prompt students to relate new content to existing knowledge</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style3 — My Learning Goals</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>Icon</td><td><code>images/starIcon.svg</code></td></tr>
+                <tr><td>Label</td><td>"My Learning Goals"</td></tr>
+                <tr><td>Default Stroke</td><td><code>#2E1984</code> (purple)</td></tr>
+                <tr><td>Purpose</td><td>State lesson objectives and success criteria</td></tr>
+                <tr><td>Layout</td><td>Icon + Label stacked above body text</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style4 — Key Terms</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>Icon</td><td><code>images/keyTerm.svg</code></td></tr>
+                <tr><td>Label</td><td>"Key Terms"</td></tr>
+                <tr><td>Default Stroke</td><td><code>#2E1984</code> (purple)</td></tr>
+                <tr><td>Purpose</td><td>Introduce vocabulary and key terminology for the lesson</td></tr>
+                <tr><td>Layout</td><td>Icon + Label stacked above body text (with list padding)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="alert alert--info">
+          <strong>Fixed Labels:</strong> The text labels ("Learning Prompt", "Make a Connection", etc.) are hard-coded in the HTML template — they are not editable by the author. Only the body text (<code>fieldData.paragraph</code>) is editable. This ensures pedagogical consistency across all books.
+        </div>
+      </section>
+
+      <section class="section" id="settings">
+        <h2 class="section-title">Settings Panel Options</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Style Selection</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Select from 4 lesson opener types (style1–style4)</li>
+              <li class="feature-list__item feature-list__item--available">Each type shown with preview thumbnail</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Color Settings</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Custom background color picker</li>
+              <li class="feature-list__item feature-list__item--available">Custom stroke/border color picker</li>
+              <li class="feature-list__item feature-list__item--available">Auto-color mode toggle</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Layout</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Placement: Left, Right, Full-width</li>
+              <li class="feature-list__item feature-list__item--available">Outline toggle</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>lessonOpener-directive.js</code></td><td>Core lessonOpenerTemplate directive</td></tr>
+            <tr><td><code>editor/floatingTextPanel.js</code></td><td>Rich-text toolbar for body text editing</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>JSON serialization for save/load</td></tr>
+            <tr><td><code>lessonOpener-template.css</code></td><td>Component-specific styles</td></tr>
+            <tr><td>Icon SVG assets</td><td><code>lessonOpener-Icon_1.svg</code>, <code>lessonOpener-Icon_2.svg</code>, <code>starIcon.svg</code>, <code>keyTerm.svg</code></td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Header Element - Section heading component for KITABOO Authoring">
+  <title>Header Element | Documentation Portal</title>
+  
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Header Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Header</span></div>
+      </nav>
+    </header>
+    
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Header Element</h1>
+        <p class="page-subtitle">
+          A flexible section-heading component supporting H2–H6 semantic levels and subtitle text, with 4 visual styles and optional decorative icons.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#variants" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>Style Variants</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td class="props-table__name">dataType</td><td class="props-table__desc"><code>header</code></td></tr>
+                <tr><td class="props-table__name">Directive</td><td class="props-table__desc"><code>headerComponent</code></td></tr>
+                <tr><td class="props-table__name">Element</td><td class="props-table__desc"><code>&lt;header&gt;</code></td></tr>
+                <tr><td class="props-table__name">Directive File</td><td class="props-table__desc"><code>scripts/header-component.js</code></td></tr>
+                <tr><td class="props-table__name">Icon Class</td><td class="props-table__desc"><code>icon-Header</code></td></tr>
+                <tr><td class="props-table__name">Panel Label</td><td class="props-table__desc">Header</td></tr>
+                <tr><td class="props-table__name">Apply All</td><td class="props-table__desc">Supported</td></tr>
+                <tr><td class="props-table__name">TOC Included</td><td class="props-table__desc">Yes (<code>tocTextContent</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Semantic heading levels: H2, H3, H4, H5, H6, and Subtitle</li>
+              <li class="feature-list__item feature-list__item--available">4 visual style cards (card-style-1 to card-style-4)</li>
+              <li class="feature-list__item feature-list__item--available">7 optional decorative icon shapes</li>
+              <li class="feature-list__item feature-list__item--available">Custom border/accent color via <code>componentColor</code></li>
+              <li class="feature-list__item feature-list__item--available">Inline contenteditable text</li>
+              <li class="feature-list__item feature-list__item--available">Apply All / Ignore Apply All toggle</li>
+              <li class="feature-list__item feature-list__item--available">TOC integration</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Header element provides semantic section headings (H2–H6) inside page content. It is distinct from the Title element (which is the full chapter heading) — Headers are used for in-page section breaks, sub-topics, and content organization within a page.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: header] --> B[ngcontroller.js<br/>Drag-drop + compile]
+    B --> C[header.html<br/>AngularJS Template]
+    C --> D{headerClassData?}
+    D -->|h2-style| E[&lt;h2&gt; element]
+    D -->|h3-style| F[&lt;h3&gt; element]
+    D -->|h4-style| G[&lt;h4&gt; element]
+    D -->|h5-style| H[&lt;h5&gt; element]
+    D -->|h6-style| I[&lt;h6&gt; element]
+    D -->|sub-2-style| J[&lt;p&gt; Subtitle]
+    C --> K[headerComponent Directive<br/>header-component.js]
+    K --> L[Settings Panel<br/>header-settings-panel.html]
+    K --> M[ApplyAll System]
+    K --> N[savedJson Persistence]
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Template Switching Pattern</h3>
+        <p>The Header element uses <code>ng-if</code> to render the correct semantic HTML element based on <code>fieldData.settings.headerClassData</code>. All heading variants share the same <code>ng-model</code> binding (<code>fieldData.headerDataText</code>), so switching heading level preserves the text.</p>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">header.html — Semantic element switching</span></div>
+          <pre class="code-block__content"><code>&lt;h2 ng-if="fieldData.settings.headerClassData == 'h2-style'"
+    ng-model="fieldData.headerDataText" contenteditable="true"
+    class="header-data tocTextContent" ...&gt;
+&lt;/h2&gt;
+&lt;h3 ng-if="fieldData.settings.headerClassData == 'h3-style'"
+    ng-model="fieldData.headerDataText" contenteditable="true" ...&gt;
+&lt;/h3&gt;
+&lt;!-- ...h4, h5, h6, p (subtitle) --&gt;</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── header-component/
+        ├── header.html                      ← AngularJS template (editor view)
+        ├── header-settings-panel.html       ← Settings panel HTML
+        ├── scripts/
+        │   └── header-component.js          ← headerComponent directive
+        ├── styles/
+        │   └── header-component-template.css
+        └── default/
+            └── headerComponent.json         ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td><code>"header-component"</code></td><td>Component type identifier</td></tr>
+            <tr><td>headerDataText</td><td>string</td><td><code>""</code></td><td>The editable heading text content</td></tr>
+            <tr><td>ignoreApplyAll</td><td>boolean</td><td><code>false</code></td><td>Exclude from Apply All</td></tr>
+            <tr><td>settings</td><td>object</td><td>See below</td><td>Style and display settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>headerClassData</td><td>string</td><td><code>"h2-style"</code></td><td>Semantic level: <code>h2-style</code>, <code>h3-style</code>, <code>h4-style</code>, <code>h5-style</code>, <code>h6-style</code>, <code>sub-2-style</code></td></tr>
+            <tr><td>styleClass</td><td>string</td><td><code>"card-style-3"</code></td><td>Visual style variant (card-style-1..4)</td></tr>
+            <tr><td>componentColor</td><td>string</td><td><code>"#000000"</code></td><td>Accent/border color for heading</td></tr>
+            <tr><td>iconClass</td><td>string</td><td><code>"icon-Title-Style_Shape-1"</code></td><td>Active decorative icon shape</td></tr>
+            <tr><td>iconClassGroup</td><td>array</td><td>7 shapes</td><td>Available icon shape options with active state</td></tr>
+            <tr><td>style_tab</td><td>array</td><td>4 styles</td><td>Style picker thumbnails</td></tr>
+            <tr><td>headerStyleSettings</td><td>boolean</td><td><code>true</code></td><td>Controls settings panel display state</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="variants">
+        <h2 class="section-title">Style Variants</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Visual Styles</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td><code>card-style-1</code></td><td>Border-bottom accent line</td></tr>
+                <tr><td><code>card-style-2</code></td><td>Left border accent bar</td></tr>
+                <tr><td><code>card-style-3</code></td><td>Default — clean text (no decoration)</td></tr>
+                <tr><td><code>card-style-4</code></td><td>Icon + text layout (icon shown only in this style)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Heading Levels</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td><code>h2-style</code></td><td>Renders as <code>&lt;h2&gt;</code></td></tr>
+                <tr><td><code>h3-style</code></td><td>Renders as <code>&lt;h3&gt;</code></td></tr>
+                <tr><td><code>h4-style</code></td><td>Renders as <code>&lt;h4&gt;</code></td></tr>
+                <tr><td><code>h5-style</code></td><td>Renders as <code>&lt;h5&gt;</code></td></tr>
+                <tr><td><code>h6-style</code></td><td>Renders as <code>&lt;h6&gt;</code></td></tr>
+                <tr><td><code>sub-2-style</code></td><td>Renders as <code>&lt;p&gt;</code> (subtitle)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="alert alert--info">
+          <strong>Icon Note:</strong> The decorative icon (<code>span.header-icon-image</code>) is only displayed when <code>styleClass == 'card-style-4'</code>. The icon shape is controlled by <code>iconClass</code> and the color by <code>componentColor</code>.
+        </div>
+      </section>
+
+      <section class="section" id="settings">
+        <h2 class="section-title">Settings Panel Options</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Style Settings</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">4 visual style thumbnails</li>
+              <li class="feature-list__item feature-list__item--available">7 decorative icon shape options</li>
+              <li class="feature-list__item feature-list__item--available">Accent color picker (<code>componentColor</code>)</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Text Settings</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Heading level selector (H2–H6, Subtitle)</li>
+              <li class="feature-list__item feature-list__item--available">Apply All / Ignore toggle</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compiles and injects the template</td></tr>
+            <tr><td><code>editor/ngdragdrop.js</code></td><td>Drag-drop from Elements panel</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>JSON serialization for save &amp; load</td></tr>
+            <tr><td><code>editor/contenteditable-ng-model-directive.js</code></td><td>Shared contenteditable ng-model binding</td></tr>
+            <tr><td><code>css/authoring/authoring-style.css</code></td><td>Global element styles</td></tr>
+            <tr><td><code>styles/header-component-template.css</code></td><td>Component-specific styles</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

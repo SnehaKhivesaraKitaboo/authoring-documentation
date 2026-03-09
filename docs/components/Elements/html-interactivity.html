@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HTML Interactivity Element - ZIP-based interactive content component for KITABOO Authoring">
+  <title>HTML Interactivity Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">HTML Interactivity Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">HTML Interactivity</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">HTML Interactivity Element</h1>
+        <p class="page-subtitle">
+          A ZIP package-based interactive content element that embeds custom HTML/JavaScript interactivities — such as simulations and animations — directly within a page. Supports inline playback, cover image upload, instruction text, header, and caption.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#playback" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>Playback Modes</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>html-interactivity</code></td></tr>
+                <tr><td>Directive</td><td><code>htmlInteractiveDirective</code></td></tr>
+                <tr><td>Directive File</td><td><code>scripts/html-interactive-directive.js</code></td></tr>
+                <tr><td>Template File</td><td><code>htmlInteractivity/html-interactivity.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-HTML_Interactivity_1</code></td></tr>
+                <tr><td>Panel Label</td><td>HTML Interactivity</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">ZIP file upload (containing index.html + assets)</li>
+              <li class="feature-list__item feature-list__item--available">Inline iframe playback on canvas</li>
+              <li class="feature-list__item feature-list__item--available">Modal/popup playback mode</li>
+              <li class="feature-list__item feature-list__item--available">Cover image upload (displayed before play)</li>
+              <li class="feature-list__item feature-list__item--available">Custom width and height settings</li>
+              <li class="feature-list__item feature-list__item--available">Optional instruction text</li>
+              <li class="feature-list__item feature-list__item--available">Optional header text</li>
+              <li class="feature-list__item feature-list__item--available">Optional caption text</li>
+              <li class="feature-list__item feature-list__item--available">Outline / background color styling</li>
+              <li class="feature-list__item feature-list__item--available">Accessibility alt text</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The HTML Interactivity element allows authors to embed any custom HTML5-based interactive content (simulations, drag-and-drop activities, animations, games) packaged as a ZIP file. The ZIP must contain an <code>index.html</code> entry point. The element either embeds it inline via <code>&lt;object&gt;</code> or renders a cover image with a launch button.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: html-interactivity] --> B[ngcontroller.js]
+    B --> C[html-interactivity.html]
+    C --> D[HTML Interactive Directive<br/>html-interactive-directive.js]
+    D --> E{Playback Mode}
+    E -->|Inline| F[&lt;object&gt; tag<br/>data: indexLink<br/>Embedded on canvas]
+    E -->|Modal| G[Modal overlay<br/>inline-play-container]
+    D --> H[Cover Image<br/>html-interactive-image]
+    D --> I[Settings Panel<br/>html-interactive-settings-panel.html]
+    D --> J[ZIP Upload → Extract<br/>fieldData.indexLink]
+    C --> K[Instruction Text<br/>ng-if: isInstructionText]
+    C --> L[Header Text<br/>ng-if: isHeaderText]
+    C --> M[Caption Text<br/>ng-if: isCaptionText]
+    D --> N[Validation Modal<br/>Valid ZIP check]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── htmlInteractivity/
+        ├── html-interactivity.html              ← AngularJS template
+        ├── html-interactive-settings-panel.html ← Settings panel
+        ├── scripts/
+        │   └── html-interactive-directive.js    ← Directive
+        ├── styles/
+        │   └── html-interactive-template.css    ← Component CSS
+        └── default/
+            └── html-interactivity.json          ← Default fieldData</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"html-interactivity"</code>)</td></tr>
+            <tr><td>indexLink</td><td>string</td><td>URL to the extracted ZIP's <code>index.html</code></td></tr>
+            <tr><td>align</td><td>string</td><td>Component alignment</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display and playback settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>playInline</td><td>boolean</td><td>Enable inline <code>&lt;object&gt;</code> playback on canvas</td></tr>
+            <tr><td>imageuploaded</td><td>boolean</td><td>Whether a cover image has been uploaded</td></tr>
+            <tr><td>imageUrl</td><td>string</td><td>Cover image URL</td></tr>
+            <tr><td>imageWidth</td><td>string</td><td>Cover image display width</td></tr>
+            <tr><td>imageHeight</td><td>string</td><td>Cover image display height</td></tr>
+            <tr><td>htmlWidth</td><td>string</td><td>Component container width</td></tr>
+            <tr><td>htmlHeight</td><td>string</td><td>Component container height</td></tr>
+            <tr><td>isInstructionText</td><td>boolean</td><td>Show/hide instruction text section</td></tr>
+            <tr><td>instructionText</td><td>string</td><td>Instruction text content (HTML)</td></tr>
+            <tr><td>isHeaderText</td><td>boolean</td><td>Show/hide header text section</td></tr>
+            <tr><td>headerText</td><td>string</td><td>Header text content (HTML)</td></tr>
+            <tr><td>isCaptionText</td><td>boolean</td><td>Show/hide caption text section</td></tr>
+            <tr><td>caption</td><td>string</td><td>Caption text content</td></tr>
+            <tr><td>outline</td><td>string</td><td>Border style: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Outline background color</td></tr>
+            <tr><td>altText</td><td>string</td><td>Accessibility alt text</td></tr>
+            <tr><td>fileuploaded</td><td>boolean</td><td>Whether a ZIP file has been uploaded</td></tr>
+            <tr><td>uploadImage</td><td>boolean</td><td>Controls cover image visibility</td></tr>
+            <tr><td>showMarkupIcon</td><td>boolean</td><td>Show/hide the upload icon markup</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="playback">
+        <h2 class="section-title">Playback Modes</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Inline Mode</h3>
+            <p>The interactivity is embedded directly on the page canvas using an <code>&lt;object&gt;</code> tag:</p>
+            <div class="code-block">
+              <pre class="code-block__content"><code>&lt;object data="{{fieldData.indexLink}}"
+  style="width:100%;height:100%;"&gt;
+&lt;/object&gt;</code></pre>
+            </div>
+            <p>Authors can interact with the content directly on the authoring canvas.</p>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Cover Image Mode</h3>
+            <p>A static cover image is shown on the canvas. In the reader, clicking the image launches the interactivity in a modal or full-screen view. The cover image is uploaded separately from the ZIP.</p>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">ZIP Upload Validation</h3>
+        <p>When a ZIP file is uploaded, the system validates it contains a valid <code>index.html</code> entry point. If validation fails, a modal error dialog is shown:</p>
+        <div class="code-block">
+          <pre class="code-block__content"><code>Modal ID: #html-interactivity-valid
+Error Message: "Please try a valid zip file."</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>html-interactive-directive.js</code></td><td>Core directive for the element</td></tr>
+            <tr><td><code>ShellService</code></td><td>HTTP API for ZIP upload and extraction</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+            <tr><td><code>html-interactive-template.css</code></td><td>Component-specific styles</td></tr>
+            <tr><td>Bootstrap Modal</td><td>Validation error dialog</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

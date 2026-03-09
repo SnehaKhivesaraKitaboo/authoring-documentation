@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Text (Paragraph) Element - Rich text content component for KITABOO Authoring">
+  <title>Text Element | Documentation Portal</title>
+  
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Text Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Text</span></div>
+      </nav>
+    </header>
+    
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Text (Paragraph) Element</h1>
+        <p class="page-subtitle">
+          The primary rich-text content component supporting body paragraphs, blockquotes, pull-quotes, and label types, with inline image support and a floating text editor toolbar.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#variants" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>Style Variants</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td class="props-table__name">dataType</td><td class="props-table__desc"><code>paragraph</code></td></tr>
+                <tr><td class="props-table__name">Directive</td><td class="props-table__desc"><code>paragraphTemplate</code></td></tr>
+                <tr><td class="props-table__name">Directive File</td><td class="props-table__desc"><code>scripts/paragraph-directive.js</code></td></tr>
+                <tr><td class="props-table__name">Preview File</td><td class="props-table__desc"><code>scripts/paragraph-preview1.js</code></td></tr>
+                <tr><td class="props-table__name">Icon Class</td><td class="props-table__desc"><code>icon-Text_Paragraph</code></td></tr>
+                <tr><td class="props-table__name">Panel Label</td><td class="props-table__desc">Text</td></tr>
+                <tr><td class="props-table__name">Apply All</td><td class="props-table__desc">Supported</td></tr>
+                <tr><td class="props-table__name">Inline Images</td><td class="props-table__desc">Supported (<code>inlineImage</code> class)</td></tr>
+                <tr><td class="props-table__name">Math</td><td class="props-table__desc">Supported (<code>math-read-only-field</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Full rich-text editing via floating text toolbar</li>
+              <li class="feature-list__item feature-list__item--available">Paragraph, blockquote, pull-quote variants</li>
+              <li class="feature-list__item feature-list__item--available">Inline image insertion &amp; split-paragraph layout</li>
+              <li class="feature-list__item feature-list__item--available">Paragraph number display toggle</li>
+              <li class="feature-list__item feature-list__item--available">Label type (Primary/Secondary question label)</li>
+              <li class="feature-list__item feature-list__item--available">Author name field for blockquote attribution</li>
+              <li class="feature-list__item feature-list__item--available">Apply All / Ignore Apply All</li>
+              <li class="feature-list__item feature-list__item--available">Math equation support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Text element is the most commonly used element — it provides the main body content area for page text. It supports rich formatting (bold, italic, lists, tables, links, images) via the floating text editor toolbar, and multiple layout styles including blockquotes with author attribution.
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: paragraph] --> B[ngcontroller.js]
+    B --> C[paragraph.html<br/>AngularJS Template]
+    C --> D[paragraphTemplate Directive<br/>paragraph-directive.js]
+    D --> E[Floating Text Toolbar<br/>floatingTextPanel.js]
+    D --> F[Inline Image Handler<br/>editprimarymedia]
+    D --> G[Math Equation Support<br/>math-read-only-field]
+    D --> H[Label Type Overlay<br/>ng-if: isLabelTypeParagraph]
+    D --> I[Paragraph Number<br/>paragrahNumberShow]
+    C --> J[fieldData.header<br/>Main content area - HTML]
+    C --> K[fieldData.authorName<br/>Blockquote attribution]
+    D --> L[paragraph-preview1.js<br/>Preview/Reader mode rendering]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── paragraph/
+        ├── paragraph.html              ← AngularJS template (editor view)
+        ├── paragraph_settings.html     ← Settings panel HTML
+        ├── scripts/
+        │   ├── paragraph-directive.js  ← paragraphTemplate directive
+        │   └── paragraph-preview1.js   ← Preview/reader mode handler
+        └── default/
+            └── paragraph.json          ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td><code>"paragraph"</code></td><td>Component type identifier</td></tr>
+            <tr><td>header</td><td>string (HTML)</td><td><code>""</code></td><td>Main body content (rich HTML, contenteditable)</td></tr>
+            <tr><td>authorName</td><td>string</td><td><code>""</code></td><td>Attribution text for blockquote style</td></tr>
+            <tr><td>question</td><td>string</td><td><code>""</code></td><td>Primary label question text</td></tr>
+            <tr><td>secondaryQuestion</td><td>string</td><td><code>""</code></td><td>Secondary label question text</td></tr>
+            <tr><td>ignoreApplyAll</td><td>boolean</td><td><code>false</code></td><td>Exclude from Apply All</td></tr>
+            <tr><td>settings</td><td>object</td><td>See below</td><td>Display and layout settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>classparagraphg1</td><td>string</td><td><code>""</code></td><td>Base paragraph style class</td></tr>
+            <tr><td>classparagraphg2</td><td>string</td><td><code>""</code></td><td>Variant class: <code>"blockquote"</code>, <code>"pull-quote"</code></td></tr>
+            <tr><td>classparagraphg3</td><td>string</td><td><code>""</code></td><td>Additional modifier class</td></tr>
+            <tr><td>paragrahNumberShow</td><td>boolean</td><td><code>false</code></td><td>Show paragraph number badge</td></tr>
+            <tr><td>paragrahNumber</td><td>string</td><td><code>""</code></td><td>Paragraph number text content</td></tr>
+            <tr><td>isLabelTypeParagraph</td><td>boolean</td><td><code>false</code></td><td>Show question label overlay</td></tr>
+            <tr><td>labelType</td><td>string</td><td><code>"primary"</code></td><td>Label type: <code>"primary"</code> or <code>"secondary"</code></td></tr>
+            <tr><td>allowAuthorName</td><td>boolean</td><td><code>false</code></td><td>Show author attribution (blockquote only)</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="variants">
+        <h2 class="section-title">Style Variants</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Text Paragraph Styles</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>Standard</td><td>Default body text paragraph</td></tr>
+                <tr><td><code>blockquote</code></td><td>Styled blockquote with optional author attribution</td></tr>
+                <tr><td><code>pull-quote</code></td><td>Large highlighted pull-quote for emphasis</td></tr>
+                <tr><td>Inline Image</td><td>Text wraps around an embedded inline image (<code>splitParagraph</code>)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Label Types</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>None</td><td>Standard paragraph (no label)</td></tr>
+                <tr><td>Primary</td><td>Question label with number badge (e.g., "Q1.")</td></tr>
+                <tr><td>Secondary</td><td>Sub-question or alternative label style</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Floating Text Toolbar</h3>
+        <p>The Text element activates the shared floating text editor toolbar (<code>floatingTextPanel.js</code>) when the author selects text inside the content area. The toolbar provides:</p>
+        <div class="info-grid">
+          <div class="info-card">
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Bold, Italic, Underline, Strikethrough</li>
+              <li class="feature-list__item feature-list__item--available">Font family and size selectors</li>
+              <li class="feature-list__item feature-list__item--available">Text color and background color pickers</li>
+              <li class="feature-list__item feature-list__item--available">Text alignment (left, center, right, justify)</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">Ordered and unordered lists</li>
+              <li class="feature-list__item feature-list__item--available">Hyperlink insertion</li>
+              <li class="feature-list__item feature-list__item--available">Superscript / Subscript</li>
+              <li class="feature-list__item feature-list__item--available">Math equation insertion</li>
+              <li class="feature-list__item feature-list__item--available">Inline image upload</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>editor/floatingTextPanel.js</code></td><td>Shared floating rich-text toolbar</td></tr>
+            <tr><td><code>editor/contenteditable-ng-model-directive.js</code></td><td>ng-model binding for contenteditable</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, ApplyAll management</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>Serializes rich HTML content for save/load</td></tr>
+            <tr><td><code>paragraph-preview1.js</code></td><td>Preview mode rendering (MathJax, inline images)</td></tr>
+            <tr><td><code>css/authoring/floatingTextPanel.css</code></td><td>Floating toolbar styles</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert--warning">
+          <strong>Content Storage:</strong> The <code>fieldData.header</code> field stores raw HTML (produced by contenteditable). This includes inline styles, formatting tags, and embedded image references. The save/load system must handle HTML entity encoding carefully.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

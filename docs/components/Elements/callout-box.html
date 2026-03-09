@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Callout Box Element - Sidebar/callout content component for KITABOO Authoring">
+  <title>Callout Box Element | Documentation Portal</title>
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Callout Box Element</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#elements" class="breadcrumb__link">Elements</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Callout Box</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Callout Box Element</h1>
+        <p class="page-subtitle">
+          A highlighted content callout component (internally named <strong>Sidebar Component</strong>) that presents supplementary information with a header, body text, optional image, and multiple visual styles including auto-color and icon variants.
+        </p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#architecture" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>Architecture</a>
+          <a href="#datamodel" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582 4 8 4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#variants" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>Style Variants</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">Component Identity</h3>
+            <table class="props-table">
+              <tbody>
+                <tr><td>dataType</td><td><code>sidebarComponent</code></td></tr>
+                <tr><td>Directive</td><td><code>sidebarTemplate</code></td></tr>
+                <tr><td>Directive File</td><td><code>scripts/sidebar-directive.js</code></td></tr>
+                <tr><td>Template File</td><td><code>sidebar/sidebar.html</code></td></tr>
+                <tr><td>Icon Class</td><td><code>icon-Callout_box</code></td></tr>
+                <tr><td>Panel Label</td><td>Callout Box</td></tr>
+                <tr><td>Internal Name</td><td>Sidebar Component</td></tr>
+                <tr><td>Placement</td><td>Left, Right, Full-width</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">Key Capabilities</h3>
+            <ul class="feature-list">
+              <li class="feature-list__item feature-list__item--available">4 visual style variants (style1–style4)</li>
+              <li class="feature-list__item feature-list__item--available">Editable header / title text</li>
+              <li class="feature-list__item feature-list__item--available">Editable body text paragraph</li>
+              <li class="feature-list__item feature-list__item--available">Optional embedded image with caption</li>
+              <li class="feature-list__item feature-list__item--available">Auto-color mode for background</li>
+              <li class="feature-list__item feature-list__item--available">Custom header background color</li>
+              <li class="feature-list__item feature-list__item--available">Custom body background color</li>
+              <li class="feature-list__item feature-list__item--available">Outline / stroke color</li>
+              <li class="feature-list__item feature-list__item--available">Style3 icon (pill/note icon)</li>
+              <li class="feature-list__item feature-list__item--available">Style4 icon picker (multiple icon options)</li>
+              <li class="feature-list__item feature-list__item--available">Left/Right/Full placement</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert alert--info">
+          <strong>Purpose:</strong> The Callout Box highlights supplementary content, tips, notes, warnings, or sidebar information alongside main page content. It is flexible enough to act as a simple text callout (style1/style2) or an icon-annotated note block (style3/style4).
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2 class="section-title">Component Architecture</h2>
+        <div class="diagram-container">
+          <div class="mermaid">
+graph TD
+    A[config.js Registry<br/>dataType: sidebarComponent] --> B[ngcontroller.js]
+    B --> C[sidebar.html]
+    C --> D{layoutColorActive}
+    D -->|style1 or style2| E[Standard layout<br/>Header + Body + Image]
+    D -->|style3| F[Icon layout<br/>Pill icon + Body text]
+    D -->|style4| G[Icon picker layout<br/>Custom icon + Label + Body]
+    C --> H[sidebarTemplate Directive<br/>sidebar-directive.js]
+    H --> I[Settings Panel<br/>sidebar-settings-pannel.html]
+    H --> J[introclick handler<br/>Text focus management]
+    E --> K[Header: fieldData.introductionText]
+    E --> L[Body: fieldData.paragraph]
+    E --> M[Image: fieldData.media.src<br/>+ figcaption]
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="filestructure">
+        <h2 class="section-title">File Structure</h2>
+        <div class="code-block">
+          <div class="code-block__header"><span class="code-block__title">Directory Layout</span></div>
+          <pre class="code-block__content">KITABOO_Authoring/
+└── templates/
+    └── sidebar/
+        ├── sidebar.html                  ← AngularJS template
+        ├── sidebar-settings-pannel.html  ← Settings panel
+        ├── scripts/
+        │   └── sidebar-directive.js      ← sidebarTemplate directive
+        ├── styles/
+        │   └── sidebar-template.css      ← Component CSS
+        └── default/
+            └── sidebar.json              ← Default fieldData JSON</pre>
+        </div>
+      </section>
+
+      <section class="section" id="datamodel">
+        <h2 class="section-title">Data Model</h2>
+        <h3 class="subsection-title">Root-Level Fields</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>identifier</td><td>string</td><td>Component type identifier (<code>"sidebarComponent"</code>)</td></tr>
+            <tr><td>introductionText</td><td>string</td><td>Header/title text (contenteditable, styles 1 &amp; 2)</td></tr>
+            <tr><td>paragraph</td><td>string</td><td>Body text (HTML, contenteditable, all styles)</td></tr>
+            <tr><td>caption</td><td>string</td><td>Image caption text</td></tr>
+            <tr><td>media</td><td>object</td><td>Image media source (<code>src</code>, <code>align</code>, <code>outline</code>)</td></tr>
+            <tr><td>settings</td><td>object</td><td>Display and style settings</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="subsection-title">settings Object</h3>
+        <table class="props-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>layoutColorActive</td><td>string</td><td>Active style: <code>"style1"</code>, <code>"style2"</code>, <code>"style3"</code>, <code>"style4"</code></td></tr>
+            <tr><td>placement</td><td>string</td><td>Component placement: <code>"left"</code>, <code>"right"</code>, <code>"full"</code></td></tr>
+            <tr><td>isHeaderVisible</td><td>boolean</td><td>Show/hide header (styles 1 &amp; 2)</td></tr>
+            <tr><td>imagedisplay</td><td>boolean</td><td>Show/hide embedded image</td></tr>
+            <tr><td>captiondisplay</td><td>boolean</td><td>Show/hide image caption</td></tr>
+            <tr><td>headerBgColor</td><td>string</td><td>Header background color</td></tr>
+            <tr><td>sidebarBgColor</td><td>string</td><td>Body section background color</td></tr>
+            <tr><td>sidebarStrokeColor</td><td>string</td><td>Border/stroke color</td></tr>
+            <tr><td>allowAutoColor</td><td>boolean</td><td>Use auto-color scheme (overrides manual colors)</td></tr>
+            <tr><td>outline</td><td>string</td><td>Outer border style: <code>"outlineBg"</code> or <code>""</code></td></tr>
+            <tr><td>outlineBgColor</td><td>string</td><td>Outer outline background color</td></tr>
+            <tr><td>altText</td><td>string</td><td>Accessibility alt text for image</td></tr>
+            <tr><td>style4Icons</td><td>array</td><td>Available icons for style4 variant</td></tr>
+            <tr><td>style4ActiveIcon</td><td>number</td><td>Index of active icon in style4Icons array</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="variants">
+        <h2 class="section-title">Style Variants</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card__title">style1 — Header + Body + Image</h3>
+            <p>Standard callout with colored header bar, body text area, and optional image. Header background color is configurable. Border applied as <code>1px solid headerBgColor</code>.</p>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style2 — Body + Image Only</h3>
+            <p>Callout without a separate header section — just body text and optional image. No top-bar color.</p>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style3 — Pill Icon Callout</h3>
+            <p>Compact callout with a fixed circular pill/note icon (<code>Sidebar-Style-3-icon.png</code>) on the left and body text on the right. No header. Uses <code>sidebarBgColor</code> and <code>sidebarStrokeColor</code> for theming.</p>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card__title">style4 — Icon Picker Callout</h3>
+            <p>Callout with a selectable icon (from <code>style4Icons</code> array), a label text derived from the icon definition, and body text. The icon and label are predefined; the author selects from available options.</p>
+          </div>
+        </div>
+
+        <div class="alert alert--info">
+          <strong>Auto Color Mode:</strong> When <code>allowAutoColor</code> is enabled, the component uses a predefined green-tinted color scheme (<code>rgb(244, 248, 233)</code>) for the background, overriding manual color settings.
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <h2 class="section-title">Integration &amp; Dependencies</h2>
+        <table class="props-table">
+          <thead><tr><th>Dependency</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>sidebar-directive.js</code></td><td>Core sidebarTemplate directive</td></tr>
+            <tr><td><code>editprimarymedia</code> directive</td><td>Image upload interaction</td></tr>
+            <tr><td><code>floating-text</code> directive</td><td>Floating text toolbar for caption</td></tr>
+            <tr><td><code>editor/ngcontroller.js</code></td><td>Compile, inject, settings management</td></tr>
+            <tr><td><code>editor/sd.js</code></td><td>JSON serialization for save/load</td></tr>
+            <tr><td><code>sidebar-template.css</code></td><td>Component styles</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>
