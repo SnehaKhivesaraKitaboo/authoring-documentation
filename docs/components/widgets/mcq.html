@@ -1,659 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Multiple Choice Question (MCQ) Component - Standard assessment component">
-  <title>Multiple Choice Question (MCQ) | Documentation Portal</title>
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ“š</text></svg>">
-  
-  <!-- Fonts -->
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Multiple Choice Question (MCQ) Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Mermaid for Diagrams -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Multiple Choice Question (MCQ) Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">MCQ</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Multiple Choice Question (MCQ) Component</h1><p class="page-subtitle">Assessment widget supporting single and multiple-select questions with media support. Features 60 unique visual styles (6 layouts x 10 color presets), Base64-encoded feedback, and comprehensive SCORM tracking.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The MCQ Component is the primary assessment widget supporting single-select (radio) and multiple-select (checkbox) question formats. It features 60 visual appearances from 6 layout styles multiplied by 10 color presets, plus full custom color override. Individual feedback for each answer option is stored Base64-encoded. Media support includes image, local video, YouTube, Kaltura, and audio.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Single-select (radio) and multiple-select (checkbox) modes</li><li>60 visual styles: 6 layouts x 10 color presets</li><li>Custom color pickers override preset colors</li><li>Individual answer feedback Base64-encoded (btoa/atob)</li><li>Media: image, local MP4, YouTube, Kaltura, Audio.js</li><li>Sample answer layer via isLayerEnable</li><li>Shuffle answer options (Fisher-Yates)</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">mcq-template-data</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">multiple-choice-template</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">msOrSsBoolean: single-select/multiple-select</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files (~3000 lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainMCQ()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Base64 btoa/atob, Audio.js</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class MCQController {
+        +settings: MCQSettings
+        +listData: MCQData[]
+        +addOptionClick()
+        +removeOptionClick()
+        +optionClick()
+        +mcqApplyStyle()
+        +setMediaToUpload()
+        +SubmitAnswerMCQ()
+        +showAnswerMCQ()
+        +resetAnswerMCQ()
+        +tryagainMCQ()
+        +stateMainatainMCQ()
+    }
+    class MCQSettings {
+        +msOrSsBoolean: String
+        +maxTries: Number
+        +feedbackCheckbox: Boolean
+        +shuftleChoiceCheckbox: Boolean
+        +mediaCheckbox: Boolean
+        +isLayerEnable: Boolean
+        +style: StyleConfig
+    }
+    class StyleConfig {
+        +selected_style: String
+        +selected_label: Number
+        +custom_colors: Object
+    }
+    class MCSSData {
+        +choiceList: Choice[]
+        +isSingleSelect: Boolean
+        +media: MediaConfig
+    }
+    class Choice {
+        +identifier: String
+        +choiceText: String
+        +feedbackinline: String
+        +checked: Boolean
+    }
+    MCQController --> MCQSettings
+    MCQController --> MCSSData
+    MCSSData --> Choice
+    MCQSettings --> StyleConfig</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as MCQController
+    participant S as Student
 
-</head>
-<body>
-  
-  <aside class="sidebar" id="sidebar"></aside>
-  
-  <div class="sidebar-overlay"></div>
-  
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Header -->
-    <header class="header">
-      <h1 class="header__title">Multiple Choice Question (MCQ)</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">MCQ</span>
-        </div>
-      </nav>
-    </header>
-    
-    <!-- Content -->
-    <div class="content-wrapper">
-      <!-- Component Overview -->
-      <section class="section">
-        <h1 class="page-title">Multiple Choice Question (MCQ)</h1>
-        <p class="page-subtitle">
-          Standard multiple-choice question component supporting single and multiple correct answers with immediate feedback and validation.
-        </p>
-        
-        <!-- Quick Links -->
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-          <a href="#technical" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            Technical Details
-          </a>
-        </div>
-      </section>
-      
-      <!-- Overview Section -->
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>
-              The Multiple Choice Question (MCQ) component is a versatile assessment tool that presents learners with a question 
-              and multiple answer options. It supports both single-select (radio buttons) and multi-select (checkboxes) formats, 
-              making it suitable for various assessment scenarios.
-            </p>
-            <p class="mt-md">
-              <strong>Use Cases:</strong>
-            </p>
-            <ul>
-              <li>Knowledge checks and quizzes</li>
-              <li>Formative assessments</li>
-              <li>Practice exercises</li>
-              <li>Self-paced learning validation</li>
-              <li>Prerequisite testing</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      
-      <!-- UML Class Diagram Section -->
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the class structure and relationships of the MCQ Component:</p>
-            <div class="mermaid">
-classDiagram
-    class MCQComponent {
-        -questionText: String
-        -instructionText: String
-        -options: Array~MCQOption~
-        -correctAnswers: Array~String~
-        -userAnswers: Array~String~
-        -mode: SelectionMode
-        -styles: StyleSettings
-        -attempts: Number
-        -maxAttempts: Number
-        -score: Number
-        +initialize()
-        +renderQuestion()
-        +renderOptions()
-        +selectOption(optionId)
-        +deselectOption(optionId)
-        +validateAnswer()
-        +calculateScore()
-        +showFeedback(type)
-        +reset()
-        +shuffleOptions()
-        +exportResults()
+    A->>C: Select single or multiple select
+    A->>C: addOptionClick() 2-5 options
+    A->>C: Click option to mark as correct
+    A->>C: Set individual feedback per option btoa encoded
+    A->>C: Select style thumbnail 6 options
+    A->>C: Select color preset 1-10
+    A->>C: Upload media optional
+    A->>C: Save component
+    S->>C: View shuffled options
+    S->>C: Click option radio or checkbox
+    S->>C: Submit
+    C->>C: SubmitAnswerMCQ validate selected vs correct
+    C->>C: Show feedback atob decoded
+    C->>C: stateMainatainMCQ SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates MCQ]) --> B[Select Single or Multiple select]
+    B --> C[Add 2-5 answer options]
+    C --> D[Click correct option to mark]
+    D --> E[Set per-option feedback optional]
+    E --> F[Feedback Base64 encoded btoa]
+    F --> G[Select layout style 1-6]
+    G --> H[Select color preset 1-10]
+    H --> I[60 total style combinations]
+    I --> J[Override with custom colors optional]
+    J --> K[Add media optional]
+    K --> L([Student Views MCQ])
+    L --> M[Options shuffled if enabled]
+    M --> N[Student selects option]
+    N --> O[Submit]
+    O --> P[SubmitAnswerMCQ validates]
+    P --> Q[Feedback decoded atob and shown]
+    Q --> R[stateMainatainMCQ SCORM]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">mcq-template-data</div></div><div class="info-card"><div class="info-card__label">Visual Styles</div><div class="info-card__value">60 (6 layouts x 10 colors)</div></div><div class="info-card"><div class="info-card__label">Option Range</div><div class="info-card__value">2-5 options</div></div><div class="info-card"><div class="info-card__label">Feedback Encoding</div><div class="info-card__value">Base64 btoa/atob</div></div><div class="info-card"><div class="info-card__label">Single Select</div><div class="info-card__value">Radio button input</div></div><div class="info-card"><div class="info-card__label">Multi Select</div><div class="info-card__value">Checkbox input</div></div><div class="info-card"><div class="info-card__label">Media</div><div class="info-card__value">Image/MP4/YouTube/Kaltura/Audio.js</div></div><div class="info-card"><div class="info-card__label">Sample Answer</div><div class="info-card__value">isLayerEnable overlay</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "msOrSsBoolean": "single-select",
+    "maxTries": 3,
+    "feedbackCheckbox": true,
+    "genericFeedbackCheckbox": false,
+    "shuftleChoiceCheckbox": true,
+    "mediaCheckbox": false,
+    "isLayerEnable": false,
+    "style": {
+      "selected_style": "card-style1",
+      "selected_label": 1,
+      "custom_colors": {}
     }
-    
-    class MCQOption {
-        -id: String
-        -text: String
-        -mediaUrl: String
-        -mediaType: MediaType
-        -isCorrect: Boolean
-        -feedback: String
-        +render()
-        +select()
-        +deselect()
-        +highlight()
+  },
+  "listData": [
+    {
+      "mcssData": {
+        "isSingleSelect": true,
+        "choiceList": [
+          {"choice": {"identifier": "A", "choiceText": "Option A", "feedbackinline": "V3JvbmcgYW5zd2Vy", "checked": false}},
+          {"choice": {"identifier": "B", "choiceText": "Option B (correct)", "feedbackinline": "Q29ycmVjdCE=", "checked": true}}
+        ],
+        "media": {"src": "", "imageVisible": false}
+      }
     }
-    
-    class SelectionMode {
-        <<enumeration>>
-        SINGLE_SELECT
-        MULTIPLE_SELECT
-    }
-    
-    class MediaType {
-        <<enumeration>>
-        IMAGE
-        VIDEO
-        AUDIO
-        NONE
-    }
-    
-    class FeedbackManager {
-        -genericCorrect: String
-        -genericIncorrect: String
-        -optionFeedbacks: Map
-        +showGenericFeedback(correct)
-        +showOptionFeedback(optionId)
-        +clearFeedback()
-    }
-    
-    class StyleSettings {
-        -labelType: LabelType
-        -styleVariant: StyleVariant
-        -colorScheme: String
-        +applyStyles()
-        +updateTheme(theme)
-    }
-    
-    MCQComponent "1" --> "*" MCQOption : contains
-    MCQComponent --> SelectionMode : uses
-    MCQComponent --> FeedbackManager : uses
-    MCQComponent --> StyleSettings : has
-    MCQOption --> MediaType : has
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as MCQ Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Select Question Type (Single/Multiple)
-    Author->>W: Enter Question Text
-    Author->>W: Add Options (2-10)
-    loop For Each Option
-        Author->>W: Enter Option Text
-        alt With Media
-            Author->>W: Upload Media
-            W->>API: Upload Image/Video/Audio
-            API-->>W: Return Media URL
-        end
-        opt Individual Feedback
-            Author->>W: Enable Feedback
-            Author->>W: Enter Custom Feedback
-        end
-    end
-    Author->>W: Mark Correct Option(s)
-    Author->>W: Select Style (Card 1-3 / Full Bleed 1-3)
-    Author->>W: Select Label Type (Default/A-Z/i-x/1-10)
-    Author->>W: Set Appearance Colors
-    Author->>W: Set Max Attempts
-    Author->>W: Enable Shuffle (optional)
-    Author->>W: Configure Generic Feedback
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Question
-    alt Shuffle Enabled
-        W->>W: Randomize Option Order
-    end
-    W->>UI: Render Options
-    loop For Each Option
-        W->>UI: Render Option Text/Media
-        W->>UI: Render Selection Control
-        alt Single Select
-            W->>UI: Display Radio Button
-        else Multiple Select
-            W->>UI: Display Checkbox
-        end
-    end
-    alt Single Select
-        Student->>UI: Click Option
-        UI->>W: Deselect Previous
-        UI->>W: Select New Option
-        W->>UI: Update Visual State
-    else Multiple Select
-        Student->>UI: Click Option
-        UI->>W: Toggle Selection
-        W->>UI: Update Checkbox State
-    end
-    W->>UI: Enable Submit Button
-    W->>SCORM: Save Current Selection
-    Student->>W: Submit Answer
-    W->>V: Validate Selection
-    alt Single Select
-        V->>V: Compare Selected with Correct
-    else Multiple Select
-        V->>V: Check All Correct Selected
-        V->>V: Check No Incorrect Selected
-    end
-    V-->>W: Return Validation Result
-    alt Individual Feedback Enabled
-        loop For Each Selected Option
-            W->>UI: Display Option Feedback
-        end
-    else Generic Feedback
-        alt Correct
-            W->>UI: Display Generic Success
-        else Incorrect
-            W->>UI: Display Generic Error
-        end
-    end
-    W->>UI: Color-code Options
-    alt Correct
-        W->>UI: Apply Green Highlight
-        W->>UI: Show Checkmark
-    else Incorrect
-        W->>UI: Apply Red Highlight
-        W->>UI: Show X Mark
-    end
-    alt Attempts Remaining
-        W->>UI: Enable Try Again
-        Student->>W: Try Again
-        W->>UI: Clear Selection
-        W->>UI: Reset Visual State
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Highlight Correct Answer(s)
-        W->>UI: Disable Selection
-    end
-    W->>SCORM: Save Final State
-    W->>SCORM: Save Score
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitMCQ[Initialize MCQ Editor]
-    InitMCQ --> SetQuestion[Set Question Text]
-    SetQuestion --> AddMedia{Add Media?}
-    AddMedia -->|Yes| UploadMedia[Upload Image/Video/Audio]
-    AddMedia -->|No| AddOptions
-    UploadMedia --> AddOptions[Add Options 2-6]
-    AddOptions --> ConfigOption[Configure Each Option]
-    ConfigOption --> SetOptionText[Set Option Text/Image]
-    SetOptionText --> NextOption{More Options?}
-    NextOption -->|Yes| ConfigOption
-    NextOption -->|No| SelectType{Single or Multiple Select?}
-    SelectType -->|Single| MarkOneCorrect[Mark 1 Correct Answer]
-    SelectType -->|Multiple| MarkMultiCorrect[Mark Multiple Correct]
-    MarkOneCorrect --> ChooseStyle
-    MarkMultiCorrect --> ChooseStyle[Select Visual Style 1-6]
-    ChooseStyle --> SelectLabel[Select Label Type A-B/1-2/None]
-    SelectLabel --> ConfigFeedback[Configure Feedback Options]
-    ConfigFeedback --> SetAttempts[Set Max Attempts]
-    SetAttempts --> SaveMCQ[Save Configuration]
-    
-    SaveMCQ --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayQuestion[Display Question Text]
-    DisplayQuestion --> ShowMedia{Media Present?}
-    ShowMedia -->|Yes| RenderMedia[Render Image/Video/Audio]
-    ShowMedia -->|No| ShowOptions
-    RenderMedia --> ShowOptions[Display Answer Options]
-    ShowOptions --> CheckSelectType{Selection Type}
-    CheckSelectType -->|Single| ShowRadio[Show Radio Buttons]
-    CheckSelectType -->|Multiple| ShowCheckbox[Show Checkboxes]
-    ShowRadio --> StudentSelect{Student Selects Option}
-    ShowCheckbox --> StudentSelect
-    StudentSelect --> MarkChoice[Mark Selection]
-    MarkChoice --> CheckRequired{Required Selections Made?}
-    CheckRequired -->|No| StudentSelect
-    CheckRequired -->|Yes| EnableSubmit[Enable Submit Button]
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateAnswers[Compare Selected vs Correct]
-    ValidateAnswers --> CheckSingle{Single or Multiple?}
-    CheckSingle -->|Single| ValidateSingle[Check Single Selection]
-    CheckSingle -->|Multiple| ValidateMultiple[Check All Selections]
-    ValidateSingle --> AllCorrect{All Correct?}
-    ValidateMultiple --> AllCorrect
-    AllCorrect -->|Yes| ShowCorrectFeedback[Show Correct Visual Feedback]
-    AllCorrect -->|No| ShowIncorrectFeedback[Show Incorrect Visual Feedback]
-    ShowCorrectFeedback --> ApplyGreen[Green Borders, Checkmarks]
-    ShowIncorrectFeedback --> ApplyRed[Red for Wrong, Green for Correct]
-    ApplyGreen --> ShowMessage
-    ApplyRed --> ShowMessage[Display Feedback Message]
-    ShowMessage --> ShowIndividualFB{Individual Feedback Enabled?}
-    ShowIndividualFB -->|Yes| DisplayOptionFeedback[Show Per-Option Feedback]
-    ShowIndividualFB -->|No| DecrementAttempts
-    DisplayOptionFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
-    CheckAttempts -->|All Correct| FinalSave
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearSelections[Clear All Selections]
-    ClearSelections --> ResetVisuals[Reset Visual Feedback]
-    ResetVisuals --> StudentSelect
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> HighlightCorrect[Highlight All Correct Answers]
-    HighlightCorrect --> DisableInteraction[Disable All Interactions]
-    DisableInteraction --> FinalSave[Save Final State to SCORM]
-    
-    MarkChoice --> DataFlow[Data Flow: Selection â†’ Model]
-    DataFlow --> UpdateChoicesArray[Update selectedChoices Array]
-    UpdateChoicesArray --> SyncState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors set question text with optional media (image, video, audio), add options (2-6) with text or images, mark correct answer(s) for single or multiple selection types, select from 6 visual styles and label types (A-B, 1-2, none), and configure per-option and generic feedback.</li>
-                <li><strong>Student Flow:</strong> Students view questions with media, select answers using radio buttons (single) or checkboxes (multiple), with submit enabled when required selections are made.</li>
-                <li><strong>Validation:</strong> Answers are validated with comprehensive visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect), supporting both individual option feedback and overall feedback messages.</li>
-                <li><strong>Data Flow:</strong> Selected choices are tracked in an array and synchronized with SCORM, with Try Again clearing all selections and resetting visuals, or Show Me highlighting all correct answers and disabling interaction.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Feature Specification Section (Markdown) -->
-      <section class="section" id="features">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          <h2 class="section__title">Feature Specification</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <!-- Markdown content will be rendered here -->
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Technical Details Section -->
-      <section class="section" id="technical">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-          </svg>
-          <h2 class="section__title">Technical Details</h2>
-        </div>
-        
-        <div class="tech-details">
-          <div class="tech-details__grid">
-            <div class="tech-details__item">
-              <div class="tech-details__label">Component Type</div>
-              <div class="tech-details__value">Assessment Widget</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Category</div>
-              <div class="tech-details__value">Question/Answer</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Status</div>
-              <div class="tech-details__value">Active</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Accessibility</div>
-              <div class="tech-details__value">WCAG 2.1 AA Compliant</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Features List -->
-      <section class="section">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Key Features</h2>
-        </div>
-        
-        <div class="feature-list">
-          <ul class="feature-list__items">
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Single & Multiple Answer Support</div>
-                <div class="feature-list__description">Configure for single correct answer (radio) or multiple correct answers (checkbox)</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Rich Media Support</div>
-                <div class="feature-list__description">Include images, audio, and video in both questions and answer options</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Immediate Feedback</div>
-                <div class="feature-list__description">Provide instant correctness feedback with customizable messages and explanations</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Randomization Options</div>
-                <div class="feature-list__description">Randomize answer order to prevent pattern memorization</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Retry Functionality</div>
-                <div class="feature-list__description">Allow learners to retry questions with configurable attempt limits</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-      
-      <!-- Dependencies Section -->
-      <section class="section" id="dependencies">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-          </svg>
-          <h2 class="section__title">Dependencies</h2>
-        </div>
-        
-        <div class="dependencies">
-          <div class="dependencies__list">
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Base Component</span>
-            </div>
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Validation Module</span>
-            </div>
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Feedback System</span>
-            </div>
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Media Player</span>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Code Reference Section -->
-      <section class="section" id="code">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          <h2 class="section__title">Code Reference</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p><strong>Implementation Location:</strong></p>
-            <pre><code>Components/Widgets/Multiple Choice Question (MCQ)/</code></pre>
-            
-            <p class="mt-md"><strong>Key Files:</strong></p>
-            <ul>
-              <li><code>MCQ_COMPONENT_TECHNICAL_DOCUMENTATION.md</code> - Technical specification</li>
-              <li><code>Prompt messages (MCQ).md</code> - User-facing messages and prompts</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  
-  <script>
-    // Load and render feature specification from markdown file
-    document.addEventListener('DOMContentLoaded', () => {
-      // Path to the actual markdown documentation file
-      const markdownFilePath = '../../../Components/Widgets/Multiple Choice Question (MCQ)/MCQ_COMPONENT_TECHNICAL_DOCUMENTATION.md';
-      
-      // Render the markdown file
-      renderMarkdown(markdownFilePath, 'feature-specification')
-        .catch(error => {
-          console.error('Error loading documentation:', error);
-          document.getElementById('feature-specification').innerHTML = `
-            <div class="alert alert-info">
-              <strong>Documentation File:</strong><br>
-              This section will automatically load content from:<br>
-              <code>${markdownFilePath}</code>
-              <p class="mt-md">
-                The component will render your existing Markdown documentation files without modification.
-                Simply ensure the file path is correct and the file is accessible.
-              </p>
-            </div>
-          `;
-        });
-    });
-  </script>
-</body>
-</html>
+  ]
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>mcq/
++-- templates/
+¦   +-- mcq/
+¦       +-- multiple-choice-template-auth.html   # Main template
+¦       +-- multiple-choice-template-settings.html # Settings panel
+¦       +-- mcq-media-template.html             # Media sub-template
++-- scripts/
+¦   +-- multiple-choice-template-directive.js   # Core (2103 lines)
+¦   +-- multiple-choice-template-preview1.js    # Preview (895 lines)
++-- styles/
+¦   +-- multiple-choice-template.css           # Component styles
+¦   +-- multiple-choice-data-template.css      # Data display styles
++-- default/
+    +-- multiple-choice-template.json          # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Single/Multiple Select</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">msOrSsBoolean: single-select (radio) or multiple-select (checkbox)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Layout Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">6 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">card-style1-3 or mcq_full_bleed_style1-3</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Preset</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">10 Color Buttons</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">selected_label 1-10 for color theme</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Individual Feedback</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Per-option feedback text (feedbackCheckbox) stored Base64</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Shuffle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Fisher-Yates shuffle answer options on load</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Media</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio + Upload</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Image, video (system/YouTube), or audio media attachment</td></tr><tr><td style="padding:9px 12px;">Sample Answer</td><td style="padding:9px 12px;">Toggle</td><td style="padding:9px 12px;">isLayerEnable shows sample answer overlay layer</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>60 visual styles:</strong> The combination of 6 layout styles (card-style1-3 and mcq_full_bleed_style1-3) and 10 color presets (selected_label 1-10) creates 60 unique appearances. Custom colors can further override any preset.</li><li><strong>Base64-encoded feedback:</strong> Individual option feedback is stored as btoa-encoded strings in feedbackinline. Decoded via atob() on display. This prevents casual inspection but provides minimal security.</li><li><strong>isSingleSelect controls input type:</strong> When isSingleSelect=true, radio inputs are rendered; when false, checkbox inputs are rendered. The msOrSsBoolean setting maps to this property.</li><li><strong>Audio.js media player:</strong> Audio files use the Audio.js library for consistent cross-browser playback with custom controls. The player initializes with a 300ms $timeout after the component renders.</li><li><strong>isLayerEnable sample answer:</strong> When enabled, a separate overlay layer shows the correct answer as a visual model before students attempt the question.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/MCQ/MCQ_COMPONENT_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

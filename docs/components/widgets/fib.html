@@ -1,406 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Fill in the Blank (FIB) | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="description" content="Fill in the Blank FIB Component - Sentence completion with dropdown, text, or drag-and-drop blanks."><title>Fill in the Blank (FIB) Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Fill in the Blank (FIB) Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">FIB</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Fill in the Blank (FIB) Component</h1><p class="page-subtitle">Sentence-completion widget where students fill in blanks via dropdown, text input, or drag-and-drop. Supports 1-20 sentences with per-blank answer validation, optional media, and 7 visual styles.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML Class</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Component Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Fill in the Blank Component presents sentences with embedded blank spaces that students complete by selecting from a dropdown, typing text, or dragging and dropping answer chips. Blanks are embedded in sentence HTML using a special syntax. Supports up to 20 sentences and 20 blanks total, with 7 visual styles and optional sentence-level media.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>3 interaction types: Dropdown, Text input, Drag and Drop</li><li>1-20 sentences, up to 20 blanks total</li><li>7 visual style variants (fibcard-style1 through style7)</li><li>Per-blank correct answers stored Base64-encoded</li><li>Optional paragraph and per-sentence media (image)</li><li>Distractor answer options for dropdown/drag modes</li><li>Fisher-Yates shuffle for dropdown/drag choices</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">fibTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">fill-in-the-blank</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">isWithOption: with-option/without-option/drag-and-drop</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">6 files (~4272 lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainFIB()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI resizable</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class FIBController {
+        +settings: FIBSettings
+        +TemplateData: FIBData
+        +insertBlank()
+        +addSentenceClick()
+        +removeSentenceClick()
+        +blankClick()
+        +correctOptionClick()
+        +fibradioChange()
+        +SubmitAnswerFIB()
+        +showAnswerFIB()
+        +tryagainFIB()
+        +stateMainatainFIB()
+    }
+    class FIBSettings {
+        +isWithOption: String
+        +maxTries: Number
+        +selected_style: String
+        +Case_SensitiveCheckbox: Boolean
+        +shuftleChoiceCheckbox: Boolean
+        +fibWithImage: Boolean
+        +distractor: String[]
+    }
+    class FIBSentence {
+        +id: String
+        +statement: String
+        +responseList: BlankResponse[]
+        +showMedia: Boolean
+        +imageUrl: String
+    }
+    class BlankResponse {
+        +responseId: String
+        +mainIndex: Number
+        +choiceList: Choice[]
+        +correctChoice: String[]
+        +correctIndex: Number
+    }
+    FIBController --> FIBSettings
+    FIBController --> FIBSentence
+    FIBSentence --> BlankResponse</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as FIBController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Fill in the Blank (FIB)</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Fill in the Blank (FIB)</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Fill in the Blank (FIB)</h1>
-        <p class="page-subtitle">Text-based fill-in-the-blank questions with validation.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The Fill in the Blank (FIB) component provides an interactive learning experience where users complete sentences by filling in missing words or phrases. It supports multiple interaction modes including text input, dropdown selection, and drag-and-drop.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class FIBComponent {
-        -sentences: Array~Sentence~
-        -blanks: Array~Blank~
-        -interactionMode: InteractionMode
-        -userAnswers: Map
-        -correctAnswers: Map
-        +initialize()
-        +addSentence(text)
-        +insertBlank(position)
-        +validateAnswer(blankId)
-        +checkAllAnswers()
-        +provideFeedback()
-        +reset()
-    }
-    
-    class Blank {
-        -id: String
-        -correctAnswer: String
-        -alternatives: Array~String~
-        -userAnswer: String
-        -position: Number
-        -caseSensitive: Boolean
-        +render()
-        +validate()
-        +showFeedback()
-        +acceptInput()
-    }
-    
-    class InteractionMode {
-        <<enumeration>>
-        DROPDOWN
-        TEXT_INPUT
-        DRAG_DROP
-    }
-    
-    class ValidationEngine {
-        +validateExact()
-        +validatePartial()
-        +checkAlternatives()
-        +provideFeedback()
-    }
-    
-    FIBComponent "1" --> "*" Blank : contains
-    FIBComponent --> InteractionMode : uses
-    FIBComponent --> ValidationEngine : validates with
-    Blank --> ValidationEngine : uses
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as FIB Widget
-    participant UI as UI Layer
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Select FIB Type (Text/Dropdown/Drag-Drop)
-    Author->>W: Enter Sentence
-    Author->>W: Position Cursor
-    Author->>W: Click Insert Blank
-    alt Dropdown Type
-        W->>UI: Insert Dropdown Element
-        Author->>W: Add Options (2-6)
-        Author->>W: Set Correct Option
-        loop Add Distractors
-            Author->>W: Enter Distractor Text
-        end
-    else Text Input Type
-        W->>UI: Insert Input Field
-        Author->>W: Enter Correct Answer(s)
-        Author->>W: Add Alternatives (pipe-separated)
-        Author->>W: Set Case Sensitivity
-    else Drag-Drop Type
-        W->>UI: Insert Drop Zone
-        Author->>W: Enter Correct Answer
-        Author->>W: Add Distractors
-        W->>UI: Create Draggable Options
-    end
-    loop For Multiple Blanks
-        Author->>W: Insert Additional Blanks
-        Author->>W: Configure Each Blank
-    end
-    Author->>W: Set Max Attempts
-    Author->>W: Configure Feedback
-    W->>UI: Save Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Sentences with Blanks
-    alt Dropdown Type
-        W->>UI: Render Dropdown Lists
-        W->>UI: Randomize Options
-        Student->>UI: Select Option from Dropdown
-        UI->>W: Record Selection
-    else Text Input Type
-        W->>UI: Render Input Fields
-        Student->>UI: Type Answer
-        UI->>W: Store Input
-    else Drag-Drop Type
-        W->>UI: Render Drop Zones
-        W->>UI: Render Draggable Options
-        W->>UI: Randomize Options
-        W->>UI: Initialize jQuery Draggable
-        Student->>UI: Drag Option
-        Student->>UI: Drop on Blank
-        UI->>W: Handle Drop
-        W->>UI: Place Option in Blank
-    end
-    W->>SCORM: Save Current State
-    loop Fill All Blanks
-        Student->>W: Provide Answers
-        W->>SCORM: Update State
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate All Blanks
-    loop For Each Blank
-        alt Dropdown
-            V->>V: Compare Selected Index
-        else Text Input
-            V->>V: Normalize Answer
-            V->>V: Compare with Alternatives
-            alt Case Sensitive
-                V->>V: Exact Match
-            else Case Insensitive
-                V->>V: Lowercase Comparison
-            end
-        else Drag-Drop
-            V->>V: Compare Dropped Item ID
-        end
-    end
-    V-->>W: Return Validation Results
-    alt All Correct
-        W->>UI: Display Success Message
-        W->>UI: Apply Green Checkmarks
-    else Some/All Incorrect
-        W->>UI: Display Error Message
-        W->>UI: Apply Red X to Incorrect
-        W->>UI: Apply Green Checkmarks to Correct
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-            Student->>W: Try Again
-            W->>UI: Clear Incorrect Answers
-        end
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Display Correct Answers
-        W->>UI: Fill All Blanks
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitFIB[Initialize FIB Editor]
-    InitFIB --> AddSentences[Add Sentences 1-10]
-    AddSentences --> InsertBlank[Insert Blank in Sentence]
-    InsertBlank --> ChooseType{Choose Blank Type}
-    ChooseType -->|Dropdown| ConfigDropdown[Add Dropdown Options]
-    ChooseType -->|Text Input| ConfigText[Set Correct Answer Text]
-    ChooseType -->|Drag-Drop| ConfigDrag[Add Draggable Items]
-    
-    ConfigDropdown --> AddOptions[Add Options 2-6]
-    AddOptions --> SetCorrectDD[Mark Correct Option]
-    SetCorrectDD --> NextBlank
-    
-    ConfigText --> SetCorrectText[Set Correct Answer]
-    SetCorrectText --> ConfigCase{Case Sensitive?}
-    ConfigCase --> NextBlank
-    
-    ConfigDrag --> AddDragItems[Add Draggable Items]
-    AddDragItems --> SetCorrectDrag[Set Correct Item]
-    SetCorrectDrag --> NextBlank{More Blanks?}
-    
-    NextBlank -->|Yes| InsertBlank
-    NextBlank -->|No| ConfigSettings[Configure Attempts, Feedback]
-    ConfigSettings --> ChooseStyle[Select Visual Style]
-    ChooseStyle --> SaveFIB[Save Configuration]
-    
-    SaveFIB --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderSentences[Display Sentences with Blanks]
-    RenderSentences --> CheckMode{Blank Type}
-    CheckMode -->|Dropdown| ShowDropdowns[Display Dropdown Menus]
-    CheckMode -->|Text| ShowTextInputs[Display Text Input Boxes]
-    CheckMode -->|Drag-Drop| ShowDragItems[Display Draggable Items]
-    
-    ShowDropdowns --> StudentSelectDD{Student Selects from Dropdown}
-    ShowTextInputs --> StudentTypeText{Student Types Answer}
-    ShowDragItems --> StudentDragItem{Student Drags Item to Blank}
-    
-    StudentSelectDD --> FillBlank[Fill Blank with Selection]
-    StudentTypeText --> FillBlank
-    StudentDragItem --> ValidateDrop{Valid Drop Zone?}
-    ValidateDrop -->|Yes| FillBlank
-    ValidateDrop -->|No| RejectDrop[Reject Drop]
-    RejectDrop --> StudentDragItem
-    
-    FillBlank --> MarkFilled[Mark Blank as Filled]
-    MarkFilled --> CheckAllFilled{All Blanks Filled?}
-    CheckAllFilled -->|No| CheckMode
-    CheckAllFilled -->|Yes| EnableSubmit[Enable Submit Button]
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateBlanks[Validate Each Blank]
-    ValidateBlanks --> LoopBlanks[Loop Through Blanks]
-    LoopBlanks --> CompareAnswer{Answer Correct?}
-    CompareAnswer -->|Yes| MarkCorrectBlank[Show Green Border, Checkmark]
-    CompareAnswer -->|No| MarkIncorrectBlank[Show Red Border, Cross]
-    MarkCorrectBlank --> NextBlankCheck{More Blanks?}
-    MarkIncorrectBlank --> NextBlankCheck
-    NextBlankCheck -->|Yes| LoopBlanks
-    NextBlankCheck -->|No| CalculateScore[Calculate Score]
-    
-    CalculateScore --> ShowFeedback[Display Feedback]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
-    CheckAttempts -->|All Correct| FinalSave
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearIncorrect[Clear Incorrect Blanks]
-    ClearIncorrect --> CheckMode
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> RevealAnswers[Show All Correct Answers]
-    RevealAnswers --> FinalSave[Save Final State to SCORM]
-    
-    FillBlank --> DataFlow[Data Flow: Answer â†’ Model]
-    DataFlow --> UpdateAnswers[Update blankAnswers Array]
-    UpdateAnswers --> SyncState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors create sentences (1-10) with blanks, choose input types (dropdown, text input, or drag-drop), configure options (2-6 for dropdowns), set correct answers with optional case sensitivity, and apply visual styles.</li>
-                <li><strong>Student Flow:</strong> Students fill blanks by selecting from dropdowns, typing text answers, or dragging items into drop zones, with validation preventing invalid interactions and enabling submission when complete.</li>
-                <li><strong>Validation:</strong> Each blank is validated against correct answers with visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect), calculated scoring, and attempt-based progression.</li>
-                <li><strong>Data Flow:</strong> Blank answers are stored in an array and synchronized with SCORM, with Try Again clearing only incorrect blanks or Show Me revealing all correct solutions.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Fill in the Blank (FIB)/FIB_Component_Technical_Documentation.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: addSentenceClick() up to 20
+    A->>C: Type sentence then insertBlank()
+    C->>C: Embed blank marker in HTML
+    A->>C: Click blank to set correct answers
+    C->>C: correctOptionClick() stores Base64 answer
+    A->>C: Select interaction type radio
+    C->>C: fibradioChange() rebuilds ALL blanks
+    A->>C: Select style 1-7
+    S->>C: View shuffled choices
+    S->>C: Select/type/drag answer into blank
+    S->>C: Submit
+    C->>C: SubmitAnswerFIB() validates per blank
+    C->>C: stateMainatainFIB() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates FIB]) --> B[Add 1-20 sentences]
+    B --> C[Type sentence text]
+    C --> D[Click insertBlank at cursor position]
+    D --> E[Click blank to set correct answer]
+    E --> F[Choose interaction type]
+    F --> G{Type?}
+    G -->|Dropdown| H[Choices shown in select element]
+    G -->|Text| I[Student types in input field]
+    G -->|Drag and Drop| J[Chips dragged into blank zone]
+    H --> K[Select style 1-7]
+    I --> K
+    J --> K
+    K --> L[fibWithImage locks to style7]
+    L --> M([Student Views Component])
+    M --> N[Fisher-Yates shuffle choices]
+    N --> O[Student fills blanks]
+    O --> P[Submit]
+    P --> Q[Per-blank Base64 answer comparison]
+    Q --> R[Correct locked, incorrect cleared on TryAgain]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">fibTemplate</div></div><div class="info-card"><div class="info-card__label">Styles</div><div class="info-card__value">7 (fibcard-style1 to style7)</div></div><div class="info-card"><div class="info-card__label">Max Sentences</div><div class="info-card__value">20</div></div><div class="info-card"><div class="info-card__label">Max Blanks</div><div class="info-card__value">20 total</div></div><div class="info-card"><div class="info-card__label">Answer Storage</div><div class="info-card__value">Base64-encoded data-correct-answer</div></div><div class="info-card"><div class="info-card__label">Dropdown Match</div><div class="info-card__value">Index-based</div></div><div class="info-card"><div class="info-card__label">Text Match</div><div class="info-card__value">Base64-encoded comparison</div></div><div class="info-card"><div class="info-card__label">Critical Bug</div><div class="info-card__value">Empty MathLive fields break package</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "identifier": "fill-in-the-blank",
+  "question": "Complete the sentences.",
+  "settings": {
+    "fibWithImage": false,
+    "labelType": "primary",
+    "maxTries": 3,
+    "isWithOption": "with-option",
+    "shuftleChoiceCheckbox": true,
+    "Case_SensitiveCheckbox": false,
+    "selected_style": "fibcard-style1",
+    "allowRestart": true,
+    "showmecheckbox": true,
+    "distractor": []
+  },
+  "TemplateData": {
+    "paragraphData": {
+      "paragraph": "",
+      "showMedia": false
+    },
+    "fibInfo": [
+      {
+        "id": "f1",
+        "statement": "The [blank] is blue.",
+        "responseList": [
+          {
+            "responseId": "r1",
+            "mainIndex": 0,
+            "correctChoice": ["sky"],
+            "choiceList": [
+              {"choice": {"identifier": "c1", "choiceText": "sky"}},
+              {"choice": {"identifier": "c2", "choiceText": "grass"}}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>fib/
++-- templates/
+¦   +-- fib/
+¦       +-- fib.html                  # Main component template
+¦       +-- fib-settings-panel.html   # Settings panel (933 lines)
++-- scripts/
+¦   +-- fib-template-directive.js     # Core directive (1926 lines)
+¦   +-- fib-template-preview1.js      # Preview renderer (2346 lines)
++-- styles/
+¦   +-- fib-template.css             # Component styles
++-- default/
+    +-- fib.json                     # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Option Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown, Text input, or Drag and Drop (isWithOption) — triggers full blank rebuild</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">7 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">fibcard-style1 through style7 (style7 forced when fibWithImage=true)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Shuffle Choices</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Fisher-Yates shuffle answer choices on load</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Case Sensitive</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable case-sensitive text comparison (text mode only)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Distractor</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text list</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Additional wrong answers mixed into dropdown/drag choices</td></tr><tr><td style="padding:9px 12px;">Media (per sentence)</td><td style="padding:9px 12px;">Image upload</td><td style="padding:9px 12px;">Per-sentence image with left/right placement</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>fibradioChange rebuilds ALL blanks:</strong> Switching between Dropdown/Text/Drag modes calls fibradioChange() which destroys and regenerates all blank DOM elements — losing any unsaved student input.</li><li><strong>Base64-encoded answers:</strong> Correct answers are stored as data-correct-answer attributes Base64-encoded (btoa) to prevent students from reading answers via browser devtools.</li><li><strong>Critical bug - empty MathLive:</strong> If MathLive equation fields are present but empty, the package generation process throws a fatal error. Authors must either fill or remove all math fields before publishing.</li><li><strong>FIB with Image locks style7:</strong> When fibWithImage=true, the selected_style is forced to fibcard-style7 and cannot be changed. Style selector is hidden in settings panel.</li><li><strong>Dropdown flips on viewport:</strong> Dropdown menus detect viewport position and flip above or below the blank depending on available space.</li><li><strong>Try Again partial credit:</strong> On non-final attempts, correct blanks lock in place; incorrect blanks clear allowing re-entry. Locked correct blanks cannot be changed.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/FIB/FIB_Component_Technical_Documentation.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

@@ -1,360 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>FIB with Image | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>FIB with Image Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">FIB with Image Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">FIB with Image</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">FIB with Image Component</h1><p class="page-subtitle">Image-enhanced Fill in the Blank variant with a paragraph section and per-sentence images. Style locked to fibcard-style7. Shares the FIB codebase with extended media configuration.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>FIB with Image is a variant of the Fill in the Blank component that adds a paragraph section and per-sentence image support. It shares the same directive (fibTemplate) and codebase as standard FIB but is identified by fibWithImage:true in settings. The visual style is permanently locked to fibcard-style7 which accommodates the image layout.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>All standard FIB capabilities (dropdown/text/drag-and-drop)</li><li>Optional paragraph section with top/bottom media placement</li><li>Per-sentence image with left/right placement</li><li>Style locked to fibcard-style7 (image-compatible layout)</li><li>fibMediaLoc global variable tracks active image upload context</li><li>Detected via tocSelected=FIB with Image or fibStyle=fibcard-style7</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">fibTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">fill-in-the-blank</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">fibWithImage: true, selected_style: fibcard-style7</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">Same as FIB (6 files)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainFIB()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI resizable</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class FIBWithImageController {
+        +settings: FIBSettings
+        +TemplateData: FIBData
+        +fibWithImage: Boolean
+        +fibMediaLoc: String
+        +insertBlank()
+        +addSentenceClick()
+        +SubmitAnswerFIB()
+        +stateMainatainFIB()
+    }
+    class FIBSettings {
+        +fibWithImage: Boolean
+        +selected_style: String
+        +isWithOption: String
+        +maxTries: Number
+    }
+    class ParagraphData {
+        +paragraph: String
+        +showMedia: Boolean
+        +mediaType: String
+        +imageUrl: String
+        +mediaPosition: String
+    }
+    class FIBSentence {
+        +id: String
+        +statement: String
+        +showMedia: Boolean
+        +imageUrl: String
+        +mediaPosition: String
+        +responseList: Object[]
+    }
+    FIBWithImageController --> FIBSettings
+    FIBWithImageController --> ParagraphData
+    FIBWithImageController --> FIBSentence</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as FIBWithImageController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">FIB with Image</span>
-        </div>
-      </nav>
-      <h1 class="header__title">FIB with Image</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">FIB with Image</h1>
-        <p class="page-subtitle">Image-based fill-in-the-blank questions with visual context.</p>
-         <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The FIB with Image component combines visual content with fill-in-the-blank exercises. Users complete sentences or labels related to an image, making it perfect for anatomy, geography, diagrams, and visual vocabulary activities.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class FIBImageComponent {
-        -image: Image
-        -blanks: Array~Blank~
-        -labels: Array~Label~
-        -userAnswers: Map
-        -correctAnswers: Map
-        +initialize()
-        +loadImage()
-        +positionBlanks()
-        +fillBlank(blankId, answer)
-        +validateAnswers()
-        +provideFeedback()
-        +reset()
-    }
-    
-    class Image {
-        -url: String
-        -width: Number
-        -height: Number
-        -altText: String
-        +load()
-        +render()
-    }
-    
-    class Blank {
-        -id: String
-        -position: Coordinates
-        -correctAnswer: String
-        -userAnswer: String
-        -linkedToImage: Boolean
-        +render()
-        +validate()
-    }
-    
-    class Label {
-        -id: String
-        -text: String
-        -position: Coordinates
-        +render()
-    }
-    
-    FIBImageComponent --> Image : displays
-    FIBImageComponent "1" --> "*" Blank : contains
-    FIBImageComponent "1" --> "*" Label : has
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as FIB with Image Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    W->>UI: Force Style 7 (Image Compatible)
-    Author->>W: Enable FIB with Image
-    Author->>W: Upload Paragraph Image
-    W->>API: Upload Image
-    API-->>W: Return Image URL
-    Author->>W: Set Image Position (Top/Bottom)
-    Author->>W: Add Caption
-    Author->>W: Select FIB Type (Text/Dropdown/Drag-Drop)
-    Author->>W: Enter Sentence
-    opt Per-Sentence Image
-        Author->>W: Upload Sentence Image
-        W->>API: Upload Image
-        API-->>W: Return Image URL
-        Author->>W: Set Image Position (Left/Right)
-    end
-    Author->>W: Position Cursor
-    Author->>W: Click Insert Blank
-    alt Dropdown Type
-        W->>UI: Insert Dropdown
-        Author->>W: Add Options
-        Author->>W: Set Correct Option
-    else Text Input Type
-        W->>UI: Insert Input Field
-        Author->>W: Enter Correct Answers
-    else Drag-Drop Type
-        W->>UI: Insert Drop Zone
-        Author->>W: Enter Correct Answer
-        Author->>W: Add Distractors
-    end
-    loop For Multiple Sentences
-        Author->>W: Add Sentence with Image
-        Author->>W: Insert Blanks
-    end
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Paragraph Image
-    W->>UI: Render Image Caption
-    loop For Each Sentence
-        W->>UI: Render Sentence Image (if present)
-        W->>UI: Render Sentence with Blanks
-    end
-    alt Dropdown Type
-        Student->>UI: Select from Dropdown
-    else Text Input Type
-        Student->>UI: Type Answer
-    else Drag-Drop Type
-        Student->>UI: Drag and Drop Option
-    end
-    W->>SCORM: Save State
-    Student->>W: Submit Answer
-    W->>V: Validate Answers
-    V-->>W: Return Results
-    alt All Correct
-        W->>UI: Display Success
-        W->>UI: Green Highlights
-    else Some Incorrect
-        W->>UI: Display Errors
-        W->>UI: Red/Green Highlights
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-        end
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitFIBImg[Initialize FIB with Image]
-    InitFIBImg --> UploadImage[Upload Base Image]
-    UploadImage --> AddCards[Add Answer Cards 2-20]
-    AddCards --> ConfigCard[Configure Each Card]
-    ConfigCard --> SetCardText[Set Card Text/Image]
-    SetCardText --> PositionCard[Position Card on Image]
-    PositionCard --> InsertBlank[Insert Blank in Card]
-    InsertBlank --> ChooseBlankType{Choose Blank Type}
-    ChooseBlankType -->|Dropdown| AddDropdownOptions[Add Dropdown Options]
-    ChooseBlankType -->|Text Input| SetCorrectText[Set Correct Text]
-    AddDropdownOptions --> MarkCorrect[Mark Correct Answer]
-    SetCorrectText --> MarkCorrect
-    MarkCorrect --> NextCard{More Cards?}
-    NextCard -->|Yes| ConfigCard
-    NextCard -->|No| ChooseStyle[Select Card Style 1-7]
-    ChooseStyle --> ConfigSettings[Configure Attempts, Feedback]
-    ConfigSettings --> SaveFIBImg[Save Configuration]
-    
-    SaveFIBImg --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayImage[Display Base Image]
-    DisplayImage --> RenderCards[Render Cards on Image]
-    RenderCards --> ShowBlanks[Display Blanks in Cards]
-    ShowBlanks --> StudentFill{Student Fills Blanks}
-    StudentFill -->|Dropdown| SelectOption[Select from Dropdown]
-    StudentFill -->|Text| TypeAnswer[Type Text Answer]
-    SelectOption --> FillBlank[Fill Blank]
-    TypeAnswer --> FillBlank
-    FillBlank --> CheckAllFilled{All Blanks Filled?}
-    CheckAllFilled -->|No| StudentFill
-    CheckAllFilled -->|Yes| EnableSubmit[Enable Submit Button]
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateAnswers[Validate All Blanks]
-    ValidateAnswers --> LoopCards[Loop Through Cards]
-    LoopCards --> CheckAnswer{Answer Correct?}
-    CheckAnswer -->|Yes| MarkGreen[Green Border, Checkmark]
-    CheckAnswer -->|No| MarkRed[Red Border, Cross]
-    MarkGreen --> NextCardValidate{More Cards?}
-    MarkRed --> NextCardValidate
-    NextCardValidate -->|Yes| LoopCards
-    NextCardValidate -->|No| CalculateScore[Calculate Score]
-    
-    CalculateScore --> ShowFeedback[Display Feedback]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
-    CheckAttempts -->|All Correct| SaveFinal
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearIncorrect[Clear Incorrect Answers]
-    ClearIncorrect --> StudentFill
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> RevealAll[Show All Correct Answers]
-    RevealAll --> SaveFinal[Save Final State to SCORM]
-    
-    FillBlank --> DataFlow[Data Flow: Answers â†’ Model]
-    DataFlow --> UpdateCardAnswers[Update Card Answer Array]
-    UpdateCardAnswers --> SyncSCORM[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors upload a base image, add positioned answer cards (2-20) with text or image content, insert blanks with dropdown or text input types, and select from 7 card styles.</li>
-                <li><strong>Student Flow:</strong> Students view cards overlaid on the base image, fill blanks by selecting dropdown options or typing text answers, with all card blanks required for submission.</li>
-                <li><strong>Validation:</strong> Card answers are validated individually with visual feedback (green borders/checkmarks for correct, red borders/crosses for incorrect) and aggregate scoring calculated.</li>
-                <li><strong>Data Flow:</strong> Card answer array is maintained and synchronized with SCORM, with Try Again clearing incorrect responses or Show Me revealing all correct answers on the image layout.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/FIB with Image/FIB_WITH_IMAGE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Enable fibWithImage mode
+    C->>C: Lock selected_style to fibcard-style7
+    A->>C: Upload paragraph media top or bottom
+    C->>C: Set fibMediaLoc='Paragraph'
+    A->>C: Add sentences with blanks
+    A->>C: Upload per-sentence image left or right
+    C->>C: Set fibMediaLoc='Sentence'
+    A->>C: Save component
+    S->>C: View component with paragraph image
+    S->>C: Read sentences with inline images
+    S->>C: Fill blanks
+    S->>C: Submit
+    C->>C: stateMainatainFIB() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates FIB with Image]) --> B[fibWithImage=true auto-set]
+    B --> C[Style locked to fibcard-style7]
+    C --> D{Add paragraph image?}
+    D -->|Yes| E[Upload image to paragraph section]
+    E --> F[Set position top or bottom]
+    D -->|No| G[Add sentences with blanks]
+    F --> G
+    G --> H{Add sentence image?}
+    H -->|Yes| I[Upload image per sentence]
+    I --> J[Set position left or right, max 1 per sentence]
+    H -->|No| K[Configure blanks and answers]
+    J --> K
+    K --> L[Save component]
+    L --> M([Student Views Component])
+    M --> N[Paragraph shown with optional image]
+    N --> O[Sentences shown with optional images]
+    O --> P[Fill blanks and submit]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">fibTemplate (shared)</div></div><div class="info-card"><div class="info-card__label">Identifier Flag</div><div class="info-card__value">fibWithImage: true</div></div><div class="info-card"><div class="info-card__label">Locked Style</div><div class="info-card__value">fibcard-style7</div></div><div class="info-card"><div class="info-card__label">Paragraph Media</div><div class="info-card__value">top or bottom position</div></div><div class="info-card"><div class="info-card__label">Sentence Media</div><div class="info-card__value">left or right, max 1 per sentence</div></div><div class="info-card"><div class="info-card__label">fibMediaLoc</div><div class="info-card__value">Global: Paragraph or Sentence</div></div><div class="info-card"><div class="info-card__label">Detection</div><div class="info-card__value">tocSelected or fibStyle check</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainFIB() (same as FIB)</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "identifier": "fill-in-the-blank",
+  "settings": {
+    "fibWithImage": true,
+    "selected_style": "fibcard-style7",
+    "isWithOption": "with-option",
+    "maxTries": 3
+  },
+  "TemplateData": {
+    "paragraphData": {
+      "paragraph": "Read the paragraph below.",
+      "showMedia": true,
+      "mediaType": "image",
+      "imageUrl": "images/paragraph-image.jpg",
+      "mediaPosition": "top",
+      "altText": "Diagram illustrating the concept"
+    },
+    "fibInfo": [
+      {
+        "id": "f1",
+        "statement": "The [blank] is 42.",
+        "showMedia": true,
+        "mediaType": "image",
+        "imageUrl": "images/sentence-image.jpg",
+        "mediaPosition": "left",
+        "altText": "Supporting image",
+        "responseList": [{"responseId":"r1","correctChoice":["answer"]}]
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>fib/ (shared with FIB)
++-- templates/
+¦   +-- fib/
+¦       +-- fib.html                  # Shared template (detects fibWithImage)
+¦       +-- fib-settings-panel.html   # Settings panel (933 lines)
++-- scripts/
+¦   +-- fib-template-directive.js     # Shared directive (1926 lines)
+¦   +-- fib-template-preview1.js      # Shared preview (2346 lines)
++-- styles/
+¦   +-- fib-template.css             # Shared styles
++-- default/
+    +-- fib.json                     # Default (fibWithImage: true variant)</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Paragraph Media</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Image Upload</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Optional image above or below paragraph text (mediaPosition: top/bottom)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Sentence Media</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Image Upload per sentence</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Per-sentence image, left or right placement (mediaPosition: left/right)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Option Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown, Text, or Drag and Drop (same as FIB)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Locked</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">fibcard-style7 locked — style selector hidden in settings panel</td></tr><tr><td style="padding:9px 12px;">All FIB Settings</td><td style="padding:9px 12px;">Various</td><td style="padding:9px 12px;">All standard FIB settings (attempts, shuffle, case-sensitive, etc.) apply</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Style locked to style7:</strong> fibWithImage=true forces selected_style to fibcard-style7. The style thumbnail selector is hidden in the settings panel to prevent changes.</li><li><strong>fibMediaLoc global variable:</strong> A global variable tracks whether the current image upload context is the "Paragraph" section or a "Sentence" section, routing uploads to the correct target.</li><li><strong>Per-sentence limit:</strong> Each sentence supports a maximum of 1 image. Attempting to add a second image replaces the existing one rather than adding another.</li><li><strong>Shared codebase detection:</strong> The directive detects FIB with Image mode via con.tocSelected=="FIB with Image" or con.fibStyle=="fibcard-style7" at initialization.</li><li><strong>Paragraph section optional:</strong> The paragraph section (including its image) can be disabled — only the sentence-level content is required.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/FIB with Image/FIB_WITH_IMAGE_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

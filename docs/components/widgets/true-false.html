@@ -1,400 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>True and False | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>True and False Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">True and False Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">True and False</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">True and False Component</h1><p class="page-subtitle">Binary-choice assessment widget sharing the MCQ codebase. Features the same 60 visual styles (6 layouts x 10 colors) and media support, limited to 2 answer choices with single-select validation.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The True and False Component is a specialized binary-choice assessment that shares most of its codebase with the MCQ component. It presents exactly 2 answer choices (True/False or custom labels) in single-select mode. Both choices share the same 60 visual style combinations as MCQ. The data-type attribute distinguishes True/False from MCQ at runtime. A known bug allows addOptionClick() to add up to 5 options despite the intended limit of 2.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Exactly 2 answer choices (True and False, or custom text)</li><li>Always single-select (radio button) mode</li><li>60 visual styles: 6 layouts x 10 color presets</li><li>Individual feedback per option (Base64-encoded)</li><li>Media support: image, video (local/YouTube), audio</li><li>Known bug: addOptionClick allows up to 5 choices</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">trueFalseData</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">true-false-template</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">correctOptionIndex: 0 or 1, choiceList: exactly 2</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">8 files (~2000 lines directive)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainTrueFalse()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Base64 btoa/atob, Audio.js</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class TrueFalseController {
+        +settings: TFSettings
+        +listData: TFData[]
+        +correctOptionIndex: Number
+        +SubmitAnswerTrueFalse()
+        +showAnswerTrueFalse()
+        +resetAnswerTrueFalse()
+        +tryagainTrueFalse()
+        +addOptionClick()
+        +removeOptionClick()
+        +stateMainatainTrueFalse()
+    }
+    class TFSettings {
+        +maxTries: Number
+        +feedbackCheckbox: Boolean
+        +genericFeedbackCheckbox: Boolean
+        +mediaCheckbox: Boolean
+        +style: StyleConfig
+    }
+    class StyleConfig {
+        +selected_style: String
+        +selected_label: Number
+        +custom_colors: Object
+    }
+    class MCSSData {
+        +choiceList: Choice[]
+        +isSingleSelect: Boolean
+        +media: MediaConfig
+    }
+    class Choice {
+        +identifier: String
+        +choiceText: String
+        +feedbackinline: String
+        +checked: Boolean
+    }
+    TrueFalseController --> TFSettings
+    TrueFalseController --> MCSSData
+    MCSSData --> Choice
+    TFSettings --> StyleConfig</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as TFController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <h1 class="header__title">True and False</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">True and False</span>
-        </div>
-      </nav>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">True and False Component</h1>
-        <p class="page-subtitle">Binary true/false question format for quick assessments.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The True and False component provides a simple binary choice assessment format where learners evaluate statements and select whether they are true or false. It's perfect for quick knowledge checks, fact verification, and binary decision-making exercises.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class TrueFalseComponent {
-        -questions: Array~TFQuestion~
-        -currentIndex: Number
-        -userAnswers: Map
-        -showFeedback: Boolean
-        +initialize()
-        +renderQuestion(index)
-        +selectAnswer(questionId, answer)
-        +validateAnswer(questionId)
-        +checkAllAnswers()
-        +calculateScore()
-        +provideFeedback()
-        +reset()
+    A->>C: View default 2 choices True and False
+    A->>C: Customize choice text optional
+    A->>C: Click correct choice to mark
+    C->>C: Set correctOptionIndex 0 or 1
+    A->>C: Set individual feedback btoa encoded
+    A->>C: Select style 6 options x 10 colors
+    A->>C: Upload media optional
+    A->>C: Save component
+    S->>C: View True False options
+    S->>C: Select one option
+    S->>C: Submit
+    C->>C: SubmitAnswerTrueFalse validates
+    C->>C: Show feedback atob decoded
+    C->>C: stateMainatainTrueFalse SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates True and False]) --> B[2 default choices: True and False]
+    B --> C[Click correct option to mark]
+    C --> D[Set correctOptionIndex 0 or 1]
+    D --> E[Set feedback per option optional]
+    E --> F[Feedback Base64 encoded btoa]
+    F --> G[Select layout style 1-6]
+    G --> H[Select color preset 1-10 = 60 combinations]
+    H --> I[Add media optional]
+    I --> J([Student Views Component])
+    J --> K[Student selects True or False]
+    K --> L[Submit]
+    L --> M[SubmitAnswerTrueFalse validates]
+    M --> N{Correct?}
+    N -->|Yes| O[Correct feedback shown]
+    N -->|No| P[Incorrect feedback shown]
+    O --> Q[stateMainatainTrueFalse SCORM]
+    P --> Q</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">trueFalseData</div></div><div class="info-card"><div class="info-card__label">Choice Count</div><div class="info-card__value">Exactly 2 (bug allows up to 5)</div></div><div class="info-card"><div class="info-card__label">Always Single-Select</div><div class="info-card__value">isSingleSelect: always true</div></div><div class="info-card"><div class="info-card__label">Visual Styles</div><div class="info-card__value">60 (6 layouts x 10 colors)</div></div><div class="info-card"><div class="info-card__label">Codebase</div><div class="info-card__value">Shared with MCQ (mcssData naming)</div></div><div class="info-card"><div class="info-card__label">Runtime ID</div><div class="info-card__value">data-type attribute distinguishes TF/MCQ</div></div><div class="info-card"><div class="info-card__label">Audio Init</div><div class="info-card__value">300ms $timeout</div></div><div class="info-card"><div class="info-card__label">Known Bug</div><div class="info-card__value">addOptionClick allows 5 (should be 2)</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "maxTries": 3,
+    "feedbackCheckbox": true,
+    "genericFeedbackCheckbox": false,
+    "mediaCheckbox": false,
+    "style": {
+      "selected_style": "card-style1",
+      "selected_label": 1,
+      "custom_colors": {}
     }
-    
-    class TFQuestion {
-        -id: String
-        -statement: String
-        -correctAnswer: Boolean
-        -userAnswer: Boolean
-        -explanation: String
-        -isAnswered: Boolean
-        +render()
-        +validate()
-        +showExplanation()
+  },
+  "correctOptionIndex": 0,
+  "listData": [
+    {
+      "mcssData": {
+        "isSingleSelect": true,
+        "choiceList": [
+          {"choice": {"identifier": "T", "choiceText": "True", "feedbackinline": "Q29ycmVjdCE=", "checked": true}},
+          {"choice": {"identifier": "F", "choiceText": "False", "feedbackinline": "SW5jb3JyZWN0", "checked": false}}
+        ],
+        "media": {"src": "", "imageVisible": false}
+      }
     }
-    
-    class Answer {
-        <<enumeration>>
-        TRUE
-        FALSE
-    }
-    
-    class FeedbackManager {
-        -immediateMode: Boolean
-        +showCorrect()
-        +showIncorrect()
-        +displayExplanation()
-    }
-    
-    TrueFalseComponent "1" --> "*" TFQuestion : contains
-    TFQuestion --> Answer : has
-    TrueFalseComponent --> FeedbackManager : uses
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as True/False Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Enter Question Text
-    Author->>W: Configure Option 1 (True)
-    Author->>W: Configure Option 2 (False)
-    opt Customize Labels
-        Author->>W: Change True Label
-        Author->>W: Change False Label
-    end
-    opt Add Media to Question
-        Author->>W: Select Media Type
-        alt Image
-            Author->>W: Upload Image
-            W->>API: Upload Image
-            API-->>W: Return URL
-        else Video
-            Author->>W: Upload/Link Video
-            W->>API: Save Video
-        else Audio
-            Author->>W: Upload Audio
-            W->>API: Save Audio
-        end
-    end
-    Author->>W: Set Correct Answer
-    opt Individual Feedback
-        Author->>W: Enable Feedback
-        Author->>W: Enter Correct Feedback
-        Author->>W: Enter Incorrect Feedback
-    end
-    Author->>W: Select Style (Card 1-3 / Full Bleed 1-3)
-    Author->>W: Set Max Attempts
-    Author->>W: Configure Generic Feedback
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Question
-    alt Media Present
-        W->>UI: Display Image/Video/Audio
-        alt Video
-            W->>UI: Initialize Video Player
-        else Audio
-            W->>UI: Initialize Audio Player
-        end
-    end
-    W->>UI: Render True Option
-    W->>UI: Render False Option
-    W->>UI: Display Radio Buttons
-    Student->>UI: Click True
-    UI->>W: Select True Option
-    W->>UI: Deselect False
-    W->>UI: Highlight True
-    W->>UI: Enable Submit Button
-    W->>SCORM: Save Selection
-    opt Change Answer
-        Student->>UI: Click False
-        UI->>W: Select False Option
-        W->>UI: Deselect True
-        W->>UI: Highlight False
-        W->>SCORM: Update Selection
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate Selection
-    V->>V: Compare with Correct Answer
-    V-->>W: Return Result
-    alt Individual Feedback Enabled
-        alt Correct
-            W->>UI: Display Correct Feedback
-            W->>UI: Apply Green Highlight
-            W->>UI: Show Checkmark
-        else Incorrect
-            W->>UI: Display Incorrect Feedback
-            W->>UI: Apply Red Highlight
-            W->>UI: Show X Mark
-        end
-    else Generic Feedback
-        alt Correct
-            W->>UI: Display Generic Success
-            W->>UI: Green Styling
-        else Incorrect
-            W->>UI: Display Generic Error
-            W->>UI: Red Styling
-        end
-    end
-    alt Attempts Remaining
-        W->>UI: Enable Try Again
-        Student->>W: Try Again
-        W->>UI: Clear Selection
-        W->>UI: Reset Visual State
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Select Correct Answer
-        W->>UI: Display Explanation
-        W->>UI: Disable Selection
-    end
-    W->>SCORM: Save Final State
-    W->>SCORM: Save Score
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitTF[Initialize True/False Component]
-    InitTF --> SetQuestion[Set Question Text]
-    SetQuestion --> AddMedia{Add Media?}
-    AddMedia -->|Yes| UploadTFMedia[Upload Image/Video/Audio]
-    AddMedia -->|No| ConfigOptions
-    UploadTFMedia --> ConfigOptions[Configure 2 Options True/False]
-    ConfigOptions --> EditOption1[Edit Option 1 Text Default True]
-    EditOption1 --> EditOption2[Edit Option 2 Text Default False]
-    EditOption2 --> MarkCorrect[Mark Correct Answer Radio]
-    MarkCorrect --> AddFeedback{Add Individual Feedback?}
-    AddFeedback -->|Yes| SetFeedback1[Set Feedback for Option 1]
-    AddFeedback -->|No| ChooseTFStyle
-    SetFeedback1 --> SetFeedback2[Set Feedback for Option 2]
-    SetFeedback2 --> ChooseTFStyle[Choose Visual Style]
-    ChooseTFStyle --> StyleType{Style Type}
-    StyleType -->|Card| SelectCardStyle[Select Card Style 1-3]
-    StyleType -->|Full-Bleed| SelectBleedStyle[Select Full-Bleed Style 1-3]
-    SelectCardStyle --> ChooseColor
-    SelectBleedStyle --> ChooseColor[Choose Color Scheme 1-10]
-    ChooseColor --> SelectLabel[Select Label Type A-B/1-2/None]
-    SelectLabel --> ConfigTFSettings[Configure Attempts, Generic Feedback]
-    ConfigTFSettings --> SaveTF[Save Configuration]
-    
-    SaveTF --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayTFQuestion[Display Question Text]
-    DisplayTFQuestion --> ShowTFMedia{Media Present?}
-    ShowTFMedia -->|Yes| RenderTFMedia[Render Media Player]
-    ShowTFMedia -->|No| ShowTFOptions
-    RenderTFMedia --> ShowTFOptions[Display True/False Options]
-    ShowTFOptions --> WaitSelection{Student Selects Option}
-    WaitSelection -->|Click Option 1| SelectTrue[Select True Option]
-    WaitSelection -->|Click Option 2| SelectFalse[Select False Option]
-    SelectTrue --> MarkSelection[Mark Radio Button Selected]
-    SelectFalse --> MarkSelection
-    MarkSelection --> ApplyStyle[Apply Selected CSS Style]
-    ApplyStyle --> EnableTFSubmit[Enable Submit Button]
-    
-    EnableTFSubmit --> TFSubmitClick([Student Clicks Submit])
-    TFSubmitClick --> ValidateTF[Compare Selected vs Correct]
-    ValidateTF --> CheckTFCorrect{Selection Correct?}
-    CheckTFCorrect -->|Yes| MarkTFCorrect[Green Border, Checkmark Icon]
-    CheckTFCorrect -->|No| MarkTFIncorrect[Red Border, Cross Icon]
-    MarkTFCorrect --> ShowIndividualFBTF{Individual Feedback?}
-    MarkTFIncorrect --> ShowIndividualFBTF
-    ShowIndividualFBTF -->|Yes| DisplayOptionFB[Display Option-Specific Feedback]
-    ShowIndividualFBTF -->|No| ShowGenericFBTF
-    DisplayOptionFB --> ShowGenericFBTF{Generic Feedback Enabled?}
-    ShowGenericFBTF -->|Yes| DisplayGenericTF[Show Correct/Incorrect Message]
-    ShowGenericFBTF -->|No| DecrementTFAttempts
-    DisplayGenericTF --> DecrementTFAttempts[Decrement Attempts]
-    DecrementTFAttempts --> CheckTFAttempts{Attempts Remaining?}
-    CheckTFAttempts -->|Yes| EnableTFTryAgain[Enable Try Again]
-    CheckTFAttempts -->|No| EnableTFShowMe[Enable Show Me]
-    CheckTFAttempts -->|Correct| SaveTFFinal
-    
-    EnableTFTryAgain --> TFTryAgainClick([Click Try Again])
-    TFTryAgainClick --> ClearTFSelection[Clear Selection]
-    ClearTFSelection --> ResetTFVisuals[Reset Visual Feedback]
-    ResetTFVisuals --> WaitSelection
-    
-    EnableTFShowMe --> TFShowMeClick([Click Show Me])
-    TFShowMeClick --> HighlightTFCorrect[Highlight Correct Answer]
-    HighlightTFCorrect --> DisableTFInteraction[Disable Option Selection]
-    DisableTFInteraction --> SaveTFFinal[Save Final State to SCORM]
-    
-    MarkSelection --> DataFlowTF[Data Flow: Selection â†’ Model]
-    DataFlowTF --> UpdateSelectedIndex[Update selectedOptionIndex]
-    UpdateSelectedIndex --> CompareWithCorrect[Compare with correctOptionIndex]
-    CompareWithCorrect --> SyncTFState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors set question text with optional media (image, video, audio), configure two options (default True/False but editable), mark the correct answer, add individual feedback per option, select visual style (card styles 1-3 or full-bleed styles 1-3), choose from 10 color schemes, select label type (A-B, 1-2, none), and configure attempts with generic feedback.</li>
-                <li><strong>Student Flow:</strong> Students view questions with optional media, select one of two radio button options (True/False), with CSS styling applied to selection and submit button enabled upon choice.</li>
-                <li><strong>Validation:</strong> Binary validation compares selected vs correct option with visual feedback (green border/checkmark icon for correct, red border/cross icon for incorrect), supporting both individual option-specific feedback and generic overall feedback messages.</li>
-                <li><strong>Data Flow:</strong> Selected option index is tracked and compared with correct option index, synchronized with SCORM, with Try Again clearing selection and resetting visuals, or Show Me highlighting the correct answer and disabling interaction.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/True and False/TRUE_FALSE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+  ]
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>true-false/
++-- templates/
+¦   +-- truefalse/
+¦       +-- truefalse-template-auth.html   # Main template
+¦       +-- truefalse-template-settings.html # Settings panel
+¦       +-- truefalse-media-template.html  # Media sub-template
++-- scripts/
+¦   +-- truefalse-template-directive.js    # Core (~2000 lines)
+¦   +-- truefalse-template-preview1.js     # Preview (~750 lines)
++-- styles/
+¦   +-- truefalse-template.css            # Component styles
+¦   +-- truefalse-data-template.css       # Data display styles
++-- default/
+    +-- truefalse.json                    # Default (561 lines)</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Choice Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input x2</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Custom text for each choice (default: True/False)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Correct Choice</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Click to mark</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Click a choice to mark as correct (correctOptionIndex 0 or 1)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Layout Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">6 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">card-style1-3 or mcq_full_bleed_style1-3 (same as MCQ)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Preset</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">10 Color Buttons</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">selected_label 1-10 for color theme (same as MCQ)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Individual Feedback</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Per-choice feedback text (feedbackCheckbox) stored Base64</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Media</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio + Upload</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Image, video, or audio media attachment (same as MCQ)</td></tr><tr><td style="padding:9px 12px;">Max Attempts</td><td style="padding:9px 12px;">Dropdown 1-5</td><td style="padding:9px 12px;">Number of submission attempts (maxTries)</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Shared MCQ codebase:</strong> The True/False directive reuses most MCQ functions and data structures. Variable names use mcq/mcssData naming. The data-type attribute distinguishes the two at runtime.</li><li><strong>addOptionClick bug:</strong> The addOptionClick() function allows adding up to 5 choice options instead of enforcing the intended 2-choice limit. Authors should not add more than 2 choices.</li><li><strong>Always single-select:</strong> Unlike MCQ which supports multiple-select, True/False always has isSingleSelect=true and renders radio button inputs.</li><li><strong>Base64 feedback:</strong> Per-option feedback is stored as btoa-encoded strings (feedbackinline) and decoded via atob() for display — same mechanism as MCQ.</li><li><strong>Audio 300ms timeout:</strong> When audio media is attached, the Audio.js player initialization uses a 300ms $timeout to ensure the DOM has rendered before the player attaches.</li><li><strong>60 visual styles:</strong> Identical to MCQ — 6 layout styles x 10 color presets = 60 combinations. Custom color pickers can override any preset.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/True and False/TRUE_FALSE_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

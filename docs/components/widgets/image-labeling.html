@@ -1,474 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Image Labeling | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Image Labeling</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Image Labeling</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Image Labeling Component</h1>
-        <p class="page-subtitle">Add and position labels on images for identification and learning.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The Image Labeling component allows users to identify and label specific areas of an image using interactive hotspots, drag-and-drop labels, and coordinate-based positioning.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "Image Labeling System"
-        IL[Image Labeling Container]
-        Image[Image Layer]
-        Hotspots[Hotspot Manager]
-        Labels[Label Manager]
-        DragDrop[Drag & Drop System]
-        
-        IL --> Image
-        IL --> Hotspots
-        IL --> Labels
-        IL --> DragDrop
-        
-        Hotspots --> HS1[Hotspot 1]
-        Hotspots --> HS2[Hotspot 2]
-        Hotspots --> HS3[Hotspot 3]
-        
-        Labels --> L1[Label: Draggable]
-        Labels --> L2[Label: Position]
-        Labels --> L3[Label: Text]
-        
-        DragDrop --> Drag[Drag Handler]
-        DragDrop --> Drop[Drop Validation]
-        DragDrop --> Snap[Snap to Point]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the image hotspot and label positioning system:</p>
-            <div class="mermaid">
-classDiagram
-    class ImageLabeling {
-        +String componentId
-        +Image image
-        +HotspotManager hotspotManager
-        +LabelManager labelManager
-        +DragDropSystem dragDrop
-        +initialize()
-        +render()
-        +validate()
-        +getAnswers()
-    }
-    
-    class Image {
-        +String src
-        +Number width
-        +Number height
-        +String altText
-        +load()
-        +resize()
-        +getCoordinates()
-    }
-    
-    class HotspotManager {
-        +Array~Hotspot~ hotspots
-        +addHotspot()
-        +removeHotspot()
-        +getHotspot()
-        +highlightHotspot()
-    }
-    
-    class Hotspot {
-        +String id
-        +Coordinates position
-        +Number radius
-        +String labelId
-        +Boolean isLabeled
-        +Object style
-        +render()
-        +checkMatch()
-        +highlight()
-    }
-    
-    class LabelManager {
-        +Array~Label~ labels
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Image Labeling Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Image Labeling Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Image Labeling</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Image Labeling Component</h1><p class="page-subtitle">Drag-and-drop labeling activity where students match numbered or text labels to hotspot positions on an image using configurable arrows and connectors. Supports partial credit and up to 20 labels.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Image Labeling Component displays a background image with numbered or text hotspot targets. Students drag label chips from a bank to match the correct hotspot. Connector arrows are drawn using calculated angles (Math.atan2) between the label position and its connector anchor point. Supports up to 20 labels with partial credit on Try Again.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Number mode (1,2,3...) or Text mode (custom labels)</li><li>Up to 20 labels with percentage-based positions</li><li>3 arrow types: Arrow, Circle Arrow, Line Arrow</li><li>2 hotspot shapes: Circle or Square</li><li>Partial credit: correct labels lock on Try Again</li><li>Arrow angle calculated via Math.atan2(dy, dx)</li><li>Mobile popup warning shown (activity remains functional)</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">labellingTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">Image Labeling</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">isNumber: with-Number/with-Text</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files (~2962 lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainImageLabel()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI, Math.atan2</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class ImageLabelingController {
+        +settings: ILSettings
         +addLabel()
-        +removeLabel()
-        +updateLabel()
-        +validatePlacement()
+        +deleteDiv()
+        +labellingColorpicker()
+        +Applystyle()
+        +SubmitAnswerIL()
+        +showAnswerIL()
+        +tryagainIL()
+        +resetAnswerIL()
+        +droppingLabels()
+        +stateMainatainImageLabel()
     }
-    
-    class Label {
-        +String id
-        +String text
-        +Coordinates position
-        +String targetHotspotId
-        +Boolean isDraggable
-        +Boolean isPlaced
-        +render()
-        +move()
-        +snap()
+    class ILSettings {
+        +isNumber: String
+        +maxTries: Number
+        +allowRestart: Boolean
+        +showmecheckbox: Boolean
+        +media: ILMedia
+        +genericFeedbackCheckbox: Boolean
     }
-    
-    class DragDropSystem {
-        +Label activeLabel
-        +startDrag()
-        +onDrag()
-        +endDrag()
-        +validateDrop()
-        +snapToHotspot()
+    class ILMedia {
+        +src: String
+        +shape: String
+        +arrowshape: String
+        +isArrowVisible: Boolean
+        +labelInfo: LabelConfig[]
     }
-    
-    class Coordinates {
-        +Number x
-        +Number y
-        +distanceTo()
-        +update()
+    class LabelConfig {
+        +identifier: String
+        +labelText: String
+        +labelLeft: String
+        +labelTop: String
+        +width: Number
+        +height: Number
+        +box1left: String
+        +box1top: String
+        +line1left: String
+        +line1width: String
+        +line1angle: String
     }
-    
-    class ValidationSystem {
-        +validateLabel()
-        +validateAllLabels()
-        +calculateScore()
-        +provideFeedback()
-    }
-    
-    ImageLabeling --> Image
-    ImageLabeling --> HotspotManager
-    ImageLabeling --> LabelManager
-    ImageLabeling --> DragDropSystem
-    ImageLabeling --> ValidationSystem
-    HotspotManager --> Hotspot
-    LabelManager --> Label
-    Hotspot --> Coordinates
-    Label --> Coordinates
-    DragDropSystem --> Label
-    Label --> Hotspot
-            </div>
-          </div>
-        </div>
-      </section>
+    ImageLabelingController --> ILSettings
+    ILSettings --> ILMedia
+    ILMedia --> LabelConfig</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as ILController
+    participant S as Student
 
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Image Labeling Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Upload Base Image
-    W->>API: Upload Image
-    API-->>W: Return Image URL
-    Author->>W: Select Label Type (Number/Text)
-    alt Number Type
-        Author->>W: Select Shape (Circle/Square)
-        Author->>W: Select Arrow Type
-        Author->>W: Add Label
-        W->>UI: Create Numbered Label
-        Author->>UI: Drag Label to Position
-        Author->>W: Enter Label Text
-        Author->>W: Draw Arrow to Target
-        W->>UI: Render Arrow Line
-        opt Multiple Arrows
-            Author->>W: Add Second Arrow Point
-            Author->>W: Add Third Arrow Point
-        end
-    else Text Type
-        Author->>W: Add Label
-        W->>UI: Create Text Box
-        Author->>W: Enter Label Text
-        Author->>UI: Drag Label to Position
-        Author->>UI: Resize Text Box
-        opt With Arrow
-            Author->>W: Enable Arrow
-            Author->>W: Draw Arrow to Target
-        end
-    end
-    Author->>W: Set Colors (Label/Text/Arrow)
-    loop For Multiple Labels
-        Author->>W: Add and Position Label
-    end
-    Author->>W: Set Max Attempts
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Base Image
-    alt Number Type
-        W->>UI: Render Drop Zones on Image
-        W->>UI: Render Numbered Labels (randomized)
-        W->>UI: Create Draggables
-        W->>UI: Initialize jQuery UI Draggable
-        Student->>UI: Drag Number Label
-        Student->>UI: Drop on Target Zone
-        UI->>W: Handle Drop Event
-        W->>UI: Place Label in Zone
-        W->>UI: Remove from Available List
-    else Text Type
-        W->>UI: Render Empty Drop Zones
-        W->>UI: Render Text Labels (randomized)
-        Student->>UI: Drag Text Label
-        Student->>UI: Drop on Target
-        UI->>W: Handle Drop
-        W->>UI: Place Label
-    end
-    W->>SCORM: Save Current State
-    loop Label All Targets
-        Student->>UI: Drag and Drop Labels
-        W->>SCORM: Update State
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate Label Positions
-    loop For Each Label
-        V->>V: Check Drop Zone Match
-        V->>V: Verify Label Placement
-    end
-    V-->>W: Return Validation Results
-    alt All Correct
-        W->>UI: Display Success Message
-        W->>UI: Apply Green Highlights
-        W->>UI: Disable Dragging
-    else Some/All Incorrect
-        W->>UI: Display Error Message
-        W->>UI: Apply Red to Incorrect
-        W->>UI: Apply Green to Correct
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-            Student->>W: Try Again
-            W->>UI: Clear Incorrect Labels
-            W->>UI: Return to Available List
-        end
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Auto-place All Labels Correctly
-        W->>UI: Disable Dragging
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitIL[Initialize Image Labeling]
-    InitIL --> UploadImage[Upload Base Image]
-    UploadImage --> AddLabels[Add Labels 2-20]
-    AddLabels --> ConfigLabel[Configure Each Label]
-    ConfigLabel --> ChooseLabelType{Choose Label Type}
-    ChooseLabelType -->|Number| SetNumber[Set Number Label]
-    ChooseLabelType -->|Text| SetText[Set Text Label]
-    SetNumber --> PositionLabel[Position Label on Image]
-    SetText --> PositionLabel
-    PositionLabel --> AddArrow{Add Arrow Connector?}
-    AddArrow -->|Yes| DrawArrow[Draw Arrow to Target]
-    AddArrow -->|No| NextLabel
-    DrawArrow --> ConfigArrow[Configure Arrow Style]
-    ConfigArrow --> NextLabel{More Labels?}
-    NextLabel -->|Yes| ConfigLabel
-    NextLabel -->|No| ChooseStyle[Select Visual Style]
-    ChooseStyle --> ConfigSettings[Configure Drag-Drop Settings]
-    ConfigSettings --> SaveIL[Save Configuration]
-    
-    SaveIL --> StudentLoad([Student Opens Widget])
-    StudentLoad --> CheckMode{Editor Mode}
-    CheckMode -->|View Only| DisplayImageView[Display Image with Labels]
-    CheckMode -->|Interactive| DisplayImageInteract[Display Image]
-    DisplayImageView --> ShowAllLabels[Show All Labels in Position]
-    ShowAllLabels --> ViewComplete([View Complete])
-    
-    DisplayImageInteract --> ShowImage[Show Base Image Only]
-    ShowImage --> ShowLabelBank[Show Label Bank Sidebar]
-    ShowLabelBank --> StudentDrag{Student Drags Label}
-    StudentDrag --> DropZone{Valid Drop Zone?}
-    DropZone -->|No| RejectDrop[Reject Drop]
-    DropZone -->|Yes| PlaceLabel[Place Label on Image]
-    PlaceLabel --> DrawConnection{Arrow Needed?}
-    DrawConnection -->|Yes| RenderArrow[Render Arrow Connector]
-    DrawConnection -->|No| MarkPlaced
-    RenderArrow --> MarkPlaced[Mark Label as Placed]
-    MarkPlaced --> RemoveFromBank[Remove from Label Bank]
-    RemoveFromBank --> CheckAllPlaced{All Labels Placed?}
-    CheckAllPlaced -->|No| StudentDrag
-    CheckAllPlaced -->|Yes| EnableSubmit[Enable Submit Button]
-    RejectDrop --> StudentDrag
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidatePositions[Validate Label Positions]
-    ValidatePositions --> LoopLabels[Loop Through Labels]
-    LoopLabels --> CheckPosition{Position Correct?}
-    CheckPosition -->|Yes| MarkCorrectLabel[Green Highlight, Checkmark]
-    CheckPosition -->|No| MarkIncorrectLabel[Red Highlight, Cross]
-    MarkCorrectLabel --> NextLabelCheck{More Labels?}
-    MarkIncorrectLabel --> NextLabelCheck
-    NextLabelCheck -->|Yes| LoopLabels
-    NextLabelCheck -->|No| CalculateScore[Calculate Score]
-    
-    CalculateScore --> ShowFeedback[Display Feedback]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
-    CheckAttempts -->|All Correct| SaveFinal
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ReturnIncorrect[Return Incorrect Labels to Bank]
-    ReturnIncorrect --> StudentDrag
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> ShowCorrectPositions[Show All Correct Positions]
-    ShowCorrectPositions --> SaveFinal[Save Final State to SCORM]
-    
-    PlaceLabel --> DataFlow[Data Flow: Label Position â†’ Model]
-    DataFlow --> UpdateLabelArray[Update labelPositions Array]
-    UpdateLabelArray --> SyncState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors upload base images, add labels (2-20) with number or text types, position labels on specific areas, optionally draw arrow connectors with configurable styles, and select visual styles for the interface.</li>
-                <li><strong>Student Flow:</strong> Students drag labels from a sidebar bank onto the image to correct positions, with arrow connectors rendering when configured, submitting when all labels are placed.</li>
-                <li><strong>Validation:</strong> Label positions are validated against correct target zones with visual feedback (green highlights/checkmarks for correct placements, red highlights/crosses for incorrect), calculating overall score.</li>
-                <li><strong>Data Flow:</strong> Label positions are tracked in an array and synchronized with SCORM, with Try Again returning only incorrect labels to the bank or Show Me displaying all correct positions automatically.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Image Labeling/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Upload background image
+    A->>C: addLabel() up to 20
+    A->>C: Drag labels to positions on image
+    C->>C: Store labelLeft/labelTop as percentages
+    A->>C: Select arrow type and hotspot shape
+    C->>C: Calculate arrow angle via Math.atan2
+    A->>C: Save component
+    S->>C: View component with numbered/text labels
+    S->>C: Drag label chip to hotspot
+    C->>C: droppingLabels() validates drop target
+    S->>C: Submit
+    C->>C: SubmitAnswerIL() checks identifier match
+    C->>C: stateMainatainImageLabel() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Image Labeling]) --> B[Upload background image]
+    B --> C[addLabel up to 20]
+    C --> D[Select Number or Text mode]
+    D --> E[Drag labels to positions on image]
+    E --> F[Positions stored as percentages]
+    F --> G[Select arrow type Arrow/Circle/Line]
+    G --> H[Select hotspot shape Circle/Square]
+    H --> I[Calculate connectors via Math.atan2]
+    I --> J([Student Views Component])
+    J --> K{Mobile device?}
+    K -->|Yes| L[Show popup warning]
+    K -->|No| M[Drag labels from bank]
+    L --> M
+    M --> N[Drop label on hotspot]
+    N --> O[Submit]
+    O --> P[Validate identifier match]
+    P --> Q{Correct?}
+    Q -->|Yes| R[Lock correct label partial credit]
+    Q -->|No| S[Return to bank on TryAgain]
+    R --> T[SCORM state saved]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">labellingTemplate</div></div><div class="info-card"><div class="info-card__label">Max Labels</div><div class="info-card__value">20</div></div><div class="info-card"><div class="info-card__label">Modes</div><div class="info-card__value">with-Number / with-Text</div></div><div class="info-card"><div class="info-card__label">Arrow Types</div><div class="info-card__value">arrow / circleArrow / lineArrow</div></div><div class="info-card"><div class="info-card__label">Shapes</div><div class="info-card__value">circle / square</div></div><div class="info-card"><div class="info-card__label">Arrow Calc</div><div class="info-card__value">Math.atan2(dy,dx)*(180/pi)</div></div><div class="info-card"><div class="info-card__label">Partial Credit</div><div class="info-card__value">Correct lock on TryAgain</div></div><div class="info-card"><div class="info-card__label">Coordinates</div><div class="info-card__value">Percentage-based (responsive)</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "isNumber": "with-Number",
+    "maxTries": 3,
+    "allowRestart": true,
+    "showmecheckbox": true,
+    "genericFeedbackCheckbox": false,
+    "style": { "selected_style": "Label-style1" },
+    "media": {
+      "src": "images/diagram.jpg",
+      "shape": "circle",
+      "arrowshape": "arrow",
+      "isArrowVisible": true,
+      "textDiv": "",
+      "labelInfo": [
+        {
+          "identifier": "L1",
+          "labelText": "Label 1",
+          "labelLeft": "30%",
+          "labelTop": "25%",
+          "width": 80,
+          "height": 30,
+          "singleConnector": true,
+          "box1left": "35%",
+          "box1top": "30%",
+          "box2left": "45%",
+          "box2top": "40%",
+          "line1left": "35%",
+          "line1top": "30%",
+          "line1width": "80px",
+          "line1angle": "45deg"
+        }
+      ]
+    }
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>image-labeling/
++-- templates/
+¦   +-- image-labelling/
+¦       +-- image-labelling-number.html          # Main template
+¦       +-- image-labelling-number-setting.html  # Settings panel
+¦       +-- media-template-labelling.html        # Media sub-template
++-- scripts/
+¦   +-- image-labelling-number.js                # Core (2962 lines)
+¦   +-- image-labelling-preview1.js              # Preview (880 lines)
++-- styles/
+¦   +-- image-labelling-template.css            # Component styles
++-- default/
+    +-- image-labelling-number.json             # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Label Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number mode (1,2,3) or Text mode (custom label text)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts with partial credit on TryAgain</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show Arrow</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show/hide connector arrows (isArrowVisible)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Arrow Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Arrow, Circle Arrow, or Line Arrow (arrowshape)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Hotspot Shape</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Circle or Square hotspot markers on image (shape)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Label Width/Height</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number inputs</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text label chip dimensions in pixels (text mode only)</td></tr><tr><td style="padding:9px 12px;">Generic Feedback</td><td style="padding:9px 12px;">Checkbox + text</td><td style="padding:9px 12px;">Single correct/incorrect message for all labels</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Arrow calculation:</strong> Connector arrow length is the hypotenuse between box1 and box2 (distance formula); angle is Math.atan2(dy, dx)*(180/Math.PI) converted to CSS rotation degrees.</li><li><strong>Percentage-based coordinates:</strong> All label positions (labelLeft, labelTop, box1left, etc.) are stored as percentage strings for responsive scaling with the image container.</li><li><strong>Partial credit on TryAgain:</strong> Correctly placed labels are locked and cannot be moved; incorrect labels return to the label bank for re-attempt.</li><li><strong>Mobile popup warning:</strong> A popup warning message appears on mobile devices indicating the activity may be difficult to use on small screens, but the activity remains interactive.</li><li><strong>Number vs Text UI difference:</strong> Number mode renders circular numbered chips; Text mode renders rectangular chips with custom labelText and configurable width/height.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Image Labeling/TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

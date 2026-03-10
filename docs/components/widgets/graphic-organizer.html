@@ -1,425 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Graphic Organizer (Image GO) | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Graphic Organizer (Image GO) Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Graphic Organizer (Image GO) Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Graphic Organizer</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Graphic Organizer (Image GO) Component</h1><p class="page-subtitle">Image-based hotspot activity where authors place interactive input zones over a background image. Students click hotspots to open modal editors and enter text or rich-text responses.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Graphic Organizer Component lets authors place input hotspots over a background image at percentage-based coordinates. Students click hotspots to open a draggable modal editor where they enter text (plain or rich-text with Jodit). Authors can configure individual hotspot properties including size, color, lock state, and character limits. This is a non-scored component — answers are saved but not auto-graded.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Unlimited hotspots placeable over a background image</li><li>Percentage-based coordinates for responsive layout</li><li>Per-hotspot: size, background color (3 presets), outline color (3 presets), char limit</li><li>Lock for Student pre-fills and makes read-only</li><li>Advanced formatting via Jodit (ELA/Math toolbars)</li><li>Math via MathLive with Temml/LaTeX fallback</li><li>applyAll applies colors to all hotspots simultaneously</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">graphicOrganizerTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">graphicOrganizerImageHotSpot</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">inputBox[]: hotspot positions as %</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainImageLabel()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI draggable+resizable, Jodit</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class GraphicOrganizerController {
+        +settings: GOSettings
+        +addHotSpot()
+        +showSetting(event, index)
+        +deleteTextarea(index, event)
+        +clickuplode()
+        +handleMaxLengthInput(event, index)
+        +changeBgColor(color, index)
+        +changeOutlineColor(color, index)
+        +applyAll(value, index)
+        +submitAnswerGO()
+        +stateMainatainImageLabel()
+    }
+    class GOSettings {
+        +labelType: String
+        +src: String
+        +altText: String
+        +inputBox: HotspotConfig[]
+        +activeInput: Number
+        +advancedFormatting: Boolean
+        +formattingValue: String
+    }
+    class HotspotConfig {
+        +id: String
+        +inputLabel: String
+        +inputAnswer: String
+        +charLimitCheck: Boolean
+        +charLimit: Number
+        +height: String
+        +width: String
+        +bgColor: String
+        +outlineColor: String
+        +xcords: String
+        +ycords: String
+        +lockForStudent: Boolean
+    }
+    GraphicOrganizerController --> GOSettings
+    GOSettings --> HotspotConfig</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as GOController
+    participant JQ as jQuery UI
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Graphic Organizer (Image GO)</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Graphic Organizer (Image GO)</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Graphic Organizer</h1>
-        <p class="page-subtitle">Visual organization tool for structuring information and concepts.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The Graphic Organizer component enables visual organization of information through an image-based interface with nodes, connections, and categories. It helps users structure concepts and relationships in a visual format.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "Graphic Organizer System"
-        GO[Graphic Organizer Container]
-        Canvas[Canvas Layer]
-        Nodes[Node Manager]
-        Connections[Connection Manager]
-        Categories[Category System]
-        
-        GO --> Canvas
-        Canvas --> Nodes
-        Canvas --> Connections
-        GO --> Categories
-        
-        Nodes --> Node1[Node: Text/Image]
-        Nodes --> Node2[Node: Position]
-        Nodes --> Node3[Node: Category]
-        
-        Connections --> Conn1[Line]
-        Connections --> Conn2[Arrow]
-        Connections --> Conn3[Label]
-        
-        Categories --> Cat1[Color Coding]
-        Categories --> Cat2[Icons]
-        Categories --> Cat3[Grouping]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the node-based organization system with connections and categories:</p>
-            <div class="mermaid">
-classDiagram
-    class GraphicOrganizer {
-        +String componentId
-        +Canvas canvas
-        +NodeManager nodeManager
-        +ConnectionManager connectionManager
-        +CategorySystem categories
-        +initialize()
-        +render()
-        +exportData()
-        +importData()
-    }
-    
-    class Canvas {
-        +Number width
-        +Number height
-        +String backgroundColor
-        +Array~Node~ nodes
-        +Array~Connection~ connections
-        +render()
-        +clear()
-        +resize()
-        +getCoordinates()
-    }
-    
-    class NodeManager {
-        +Array~Node~ nodes
-        +addNode()
-        +removeNode()
-        +updateNode()
-        +moveNode()
-        +selectNode()
-        +getNode()
-    }
-    
-    class Node {
-        +String id
-        +String type
-        +String content
-        +Position position
-        +String categoryId
-        +Object style
-        +render()
-        +update()
-        +move()
-        +delete()
-    }
-    
-    class ConnectionManager {
-        +Array~Connection~ connections
-        +addConnection()
-        +removeConnection()
-        +updateConnection()
-        +validateConnection()
-    }
-    
-    class Connection {
-        +String id
-        +String sourceNodeId
-        +String targetNodeId
-        +String type
-        +String label
-        +Object style
-        +render()
-        +update()
-        +delete()
-    }
-    
-    class CategorySystem {
-        +Array~Category~ categories
-        +addCategory()
-        +removeCategory()
-        +assignNodeToCategory()
-        +getCategoryNodes()
-    }
-    
-    class Category {
-        +String id
-        +String name
-        +String color
-        +String icon
-        +Array~String~ nodeIds
-    }
-    
-    class Position {
-        +Number x
-        +Number y
-        +Number z
-        +update()
-    }
-    
-    GraphicOrganizer --> Canvas
-    GraphicOrganizer --> NodeManager
-    GraphicOrganizer --> ConnectionManager
-    GraphicOrganizer --> CategorySystem
-    Canvas --> Node
-    Canvas --> Connection
-    NodeManager --> Node
-    ConnectionManager --> Connection
-    CategorySystem --> Category
-    Node --> Position
-    Connection --> Node
-    Category --> Node
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Graphic Organizer Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Upload Base Image
-    W->>API: Upload Image
-    API-->>W: Return Image URL
-    Author->>W: Set Alt Text
-    Author->>W: Click Add Hotspot
-    W->>UI: Create Draggable Hotspot
-    W->>UI: Enable Resize Handles
-    Author->>UI: Drag Hotspot to Position
-    Author->>UI: Resize Hotspot
-    Author->>W: Click Hotspot to Configure
-    W->>UI: Show Hotspot Settings
-    Author->>W: Enter Header Label
-    Author->>W: Enter Answer Text
-    Author->>W: Set Character Limit
-    Author->>W: Set Background Color
-    Author->>W: Set Outline Color
-    Author->>W: Set Lock for Student (optional)
-    opt Advanced Formatting
-        Author->>W: Enable Jodit Editor
-    end
-    loop For Multiple Hotspots
-        Author->>W: Add Hotspot
-        Author->>W: Configure Hotspot
-    end
-    Author->>W: Select Label Type
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Base Image
-    W->>UI: Render Hotspot Overlays
-    Student->>UI: Click Hotspot
-    UI->>W: Handle Hotspot Click
-    W->>UI: Open Input Modal
-    W->>UI: Show Header Label
-    alt Advanced Formatting Enabled
-        W->>UI: Initialize Jodit Editor
-        Student->>UI: Enter Formatted Text
-        opt Math Equations
-            Student->>UI: Insert Math Equation
-            UI->>W: Launch MathLive Editor
-        end
-    else Basic Input
-        W->>UI: Show Textarea
-        Student->>UI: Enter Text
-        W->>UI: Show Character Count
-    end
-    alt Hotspot Locked
-        W->>UI: Display Read-Only Content
-    else Hotspot Editable
-        Student->>W: Enter Answer
-        W->>SCORM: Save Hotspot Data
-    end
-    Student->>UI: Close Modal
-    UI->>W: Save Input
-    W->>UI: Update Hotspot State
-    loop For Each Hotspot
-        Student->>UI: Click and Fill Hotspot
-        W->>SCORM: Update State
-    end
-    Student->>W: Submit (if enabled)
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitGO[Initialize Graphic Organizer]
-    InitGO --> UploadBase[Upload Base Image]
-    UploadBase --> AddHotspots[Add Hotspots 1-20]
-    AddHotspots --> ConfigHotspot[Configure Hotspot]
-    ConfigHotspot --> PositionHS[Position Hotspot on Image]
-    PositionHS --> ResizeHS[Resize Hotspot Area]
-    ResizeHS --> SetContent[Set Hotspot Content]
-    SetContent --> UseJodit[Use Jodit Editor for Rich Text]
-    UseJodit --> AddHSMedia{Add Media?}
-    AddHSMedia -->|Yes| UploadHSMedia[Upload Image/Video]
-    AddHSMedia -->|No| NextHotspot
-    UploadHSMedia --> NextHotspot{More Hotspots?}
-    NextHotspot -->|Yes| ConfigHotspot
-    NextHotspot -->|No| ConfigStyle[Configure Visual Style]
-    ConfigStyle --> SaveGO[Save Configuration]
-    
-    SaveGO --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayImage[Display Base Image with Hotspots]
-    DisplayImage --> ShowIndicators[Show Hotspot Indicators]
-    ShowIndicators --> WaitClick{Student Clicks Hotspot}
-    WaitClick --> ShowPopup[Display Content Popup]
-    ShowPopup --> RenderContent[Render Rich Text Content]
-    RenderContent --> InitMedia{Media Present?}
-    InitMedia -->|Yes| PlayMedia[Initialize Media Player]
-    InitMedia -->|No| TrackView
-    PlayMedia --> TrackView[Track Hotspot Viewed]
-    TrackView --> WaitPopupAction{Student Action}
-    
-    WaitPopupAction -->|Close Popup| ClosePopup[Close Content Popup]
-    ClosePopup --> MarkViewed[Mark Hotspot as Viewed]
-    MarkViewed --> UpdateIndicator[Update Hotspot Indicator]
-    UpdateIndicator --> CheckAllViewed{All Hotspots Viewed?}
-    CheckAllViewed -->|No| WaitClick
-    CheckAllViewed -->|Yes| MarkComplete[Mark Activity Complete]
-    
-    WaitPopupAction -->|Click Another HS| ClosePopup
-    
-    MarkComplete --> SaveState[Save State to SCORM]
-    SaveState --> CompleteActivity([Activity Complete])
-    
-    TrackView --> DataFlow[Data Flow: Hotspot ID â†’ State]
-    DataFlow --> UpdateViewedArray[Update Viewed Hotspots Array]
-    UpdateViewedArray --> CalculateProgress[Calculate Completion %]
-    CalculateProgress --> SyncSCORM[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors upload a base image, add positioned hotspots (1-20) with resizable areas, create rich text content using Jodit editor, and optionally embed images or videos within hotspots.</li>
-                <li><strong>Student Flow:</strong> Students explore the base image by clicking hotspot indicators to display content popups with rich text and media, navigating between hotspots to discover all information.</li>
-                <li><strong>Validation:</strong> Non-assessed exploration widget tracks hotspot viewing completion, calculating percentage of hotspots accessed and marking activity complete when all have been viewed.</li>
-                <li><strong>Data Flow:</strong> Viewed hotspot IDs are stored in an array and synchronized with SCORM, with completion percentage calculated dynamically for progress tracking and LMS reporting.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Graphic Organizer  (Image GO)/GRAPHIC_ORGANIZER_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Upload background image
+    A->>C: addHotSpot() click
+    C->>C: Push new HotspotConfig with default position
+    C->>JQ: Make hotspot draggable and resizable
+    A->>JQ: Drag hotspot to position
+    JQ->>C: Update xcords/ycords as percentages
+    A->>C: showSetting(event, index) open panel
+    A->>C: Set bgColor, charLimit, lockForStudent
+    A->>C: applyAll(value, index) to spread colors
+    A->>C: Save component
+    S->>C: Click hotspot
+    C->>C: Open draggable Bootstrap modal
+    S->>C: Type response in modal editor
+    C->>C: stateMainatainImageLabel() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Graphic Organizer]) --> B[Upload background image]
+    B --> C[addHotSpot creates new zone]
+    C --> D[Drag hotspot to position on image]
+    D --> E[Position stored as percentage coordinates]
+    E --> F[Open hotspot settings panel]
+    F --> G[Configure size, colors, char limit]
+    G --> H{Lock for Student?}
+    H -->|Yes| I[Pre-fill inputAnswer, set read-only]
+    H -->|No| J[Student can type freely]
+    I --> K[Enable Advanced Formatting?]
+    J --> K
+    K -->|Yes| L[Jodit WYSIWYG opens in modal]
+    K -->|No| M[Plain text input in modal]
+    L --> N[Save component]
+    M --> N
+    N --> O([Student Views Component])
+    O --> P[Click hotspot]
+    P --> Q[Draggable modal opens]
+    Q --> R[Student enters response]
+    R --> S[stateMainatainImageLabel SCORM]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">graphicOrganizerTemplate</div></div><div class="info-card"><div class="info-card__label">Coordinates</div><div class="info-card__value">Percentage-based (responsive)</div></div><div class="info-card"><div class="info-card__label">BG Colors</div><div class="info-card__value">3 presets: white/yellow/cyan</div></div><div class="info-card"><div class="info-card__label">Outline Colors</div><div class="info-card__value">3 presets: black/navy/green</div></div><div class="info-card"><div class="info-card__label">Char Limit Default</div><div class="info-card__value">100 characters</div></div><div class="info-card"><div class="info-card__label">RTE Engine</div><div class="info-card__value">Jodit (ELA/Math toolbars)</div></div><div class="info-card"><div class="info-card__label">Math</div><div class="info-card__value">MathLive + Temml + LaTeX fallback</div></div><div class="info-card"><div class="info-card__label">Delete Key Bug</div><div class="info-card__value">Delete on container deletes hotspot</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "identifier": "graphicOrganizerImageHotSpot",
+  "question": "Label the parts of the diagram.",
+  "settings": {
+    "labelType": "primary",
+    "keyData": "image",
+    "src": "images/diagram.jpg",
+    "altText": "Diagram of the water cycle",
+    "activeInput": 0,
+    "advancedFormatting": false,
+    "formattingValue": "ELA",
+    "inputBox": [
+      {
+        "id": "hs1",
+        "inputLabel": "Label 1",
+        "inputAnswer": "",
+        "charLimitCheck": true,
+        "charLimit": 100,
+        "height": "10%",
+        "width": "15%",
+        "bgColor": "#FFFFFF",
+        "outlineColor": "#000000",
+        "xcords": "25%",
+        "ycords": "40%",
+        "lockForStudent": false,
+        "altText": "Hotspot 1"
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>graphic-organizer/
++-- templates/
+¦   +-- graphic-organizer/
+¦       +-- graphic-organizer.html               # Main template
+¦       +-- graphic-organizer-image-setting.html # Settings panel
++-- scripts/
+¦   +-- graphic-organizer.js                    # Core directive logic
+¦   +-- graphic-organizer-preview1.js            # Preview renderer
++-- styles/
+¦   +-- graphic-organizer-template.css          # Component styles
+¦   +-- graphice-organizer-image-setting.css    # Settings panel styles
++-- default/
+    +-- graphic-organizer.json                  # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Image Upload</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">File Upload</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Background image for the graphic organizer (src)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Label Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Primary or secondary question label style</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Header Label</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input per hotspot</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Label shown in the hotspot modal header (inputLabel)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Char Limit</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle + Number</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable character limit per hotspot (default 100)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Lock for Student</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox per hotspot</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Pre-fills inputAnswer and makes the hotspot read-only</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Background Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">3 Preset Buttons</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">White, Yellow, or Cyan background for hotspot (bgColor)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Outline Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">3 Preset Buttons</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Black, Navy, or Green border for hotspot (outlineColor)</td></tr><tr><td style="padding:9px 12px;">Apply for All</td><td style="padding:9px 12px;">Button</td><td style="padding:9px 12px;">applyAll() spreads current colors to all hotspots simultaneously</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Percentage coordinates:</strong> Hotspot positions (xcords/ycords) are stored as percentage strings (e.g., "25%") enabling responsive repositioning when the component container resizes.</li><li><strong>Delete key conflict:</strong> Pressing the Delete key while a hotspot container is focused will delete the hotspot instead of characters in a text field — a known editing conflict.</li><li><strong>Jodit ELA vs Math toolbars:</strong> When advancedFormatting=true, the Jodit toolbar configuration changes based on formattingValue: ELA shows text formatting tools; Math shows equation tools with MathLive integration.</li><li><strong>applyAll colors all hotspots:</strong> The Apply for All button calls applyAll(value, index) which copies bgColor and outlineColor from the current hotspot to all other hotspots simultaneously.</li><li><strong>No auto-grading:</strong> The component saves student answers via SCORM but does not compare them to inputAnswer for scoring — it is a content capture tool only.</li><li><strong>Draggable modal:</strong> The student input modal is a draggable Bootstrap modal positioned over the image, allowing students to see the context while typing their answer.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Graphic Organizer/GRAPHIC_ORGANIZER_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

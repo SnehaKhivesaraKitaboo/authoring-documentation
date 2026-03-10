@@ -1,504 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MTP Multiple | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MTP Multiple Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">MTP Multiple Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">MTP Multiple</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">MTP Multiple Component</h1><p class="page-subtitle">Enhanced Match The Pairs widget supporting one-to-many connections where each Column A item can match up to 3 Column B options. Uses SVG lines and supports configurable per-pair matching type.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>MTP Multiple extends the standard Match The Pairs widget to allow each Column A item to connect to 1, 2, or 3 Column B items (configurable per-pair). The key structural difference is that pair2 is an array (not a single object), and subIdentifier distinguishes multiple Column B matches for the same Column A source. displaceFromBottom() aligns Column A items vertically when they have multiple matches.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Per-pair toggle: single or multiple match mode</li><li>Each Column A can connect to up to 3 Column B items</li><li>subIdentifier tracks individual matches within a multiple pair</li><li>displaceFromBottom() aligns Column A with multiple targets</li><li>Correct: green 5px left border (#EBF6E7); Incorrect: red 5px left border (#FBE3E3)</li><li>Max 20 total elements</li><li>4 visual style variants (same as MTP)</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">mtpMultipleTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">mtp-multiple</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">pair2: Array (not single object)</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">8 files (~100KB total)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainMTPMultiple()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI, SVG, displaceFromBottom()</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class MTPMultipleController {
+        +settings: MTPSettings
+        +SubmitAnswerMtpMultiple()
+        +showAnswerMtpMultiple()
+        +tryagainMtpMultiple()
+        +resetAnswerMtpMultiple()
+        +svgDrawLineMultiple()
+        +mtpJoinThePairMultiple()
+        +displaceFromBottom()
+        +stateMainatainMTPMultiple()
+    }
+    class MTPSettings {
+        +maxTries: Number
+        +shuftleChoiceCheckbox: Boolean
+        +activeStyle: String
+        +imageConfiguration: Object
+    }
+    class PairedItem {
+        +pairInfo: PairInfoMultiple
+    }
+    class PairInfoMultiple {
+        +pair1: PairSide
+        +pair2: PairSide2Array
+        +pairChoice: String
+    }
+    class PairSide2Array {
+        +identifier: String
+        +subIdentifier: String
+        +infoData: String
+        +isImageEnable: Boolean
+    }
+    MTPMultipleController --> MTPSettings
+    MTPMultipleController --> PairedItem
+    PairedItem --> PairInfoMultiple
+    PairInfoMultiple --> PairSide2Array</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as MTPMultipleController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <h1 class="header__title">MTP Multiple</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">MTP Multiple</span>
-        </div>
-      </nav>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">MTP Multiple Component</h1>
-        <p class="page-subtitle">Multiple matching pairs with advanced grouping capabilities.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The MTP Multiple component extends the basic matching pairs concept with support for multiple matching sets, groups, and parallel matching activities in a single interface.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "MTP Multiple System"
-        MTP[MTP Multiple Container]
-        Groups[Group Manager]
-        Sets[Matching Sets]
-        Pairs[Pair Manager]
-        Validation[Multi-Validation]
-        
-        MTP --> Groups
-        MTP --> Sets
-        MTP --> Validation
-        
-        Groups --> G1[Group 1: Science]
-        Groups --> G2[Group 2: Math]
-        Groups --> G3[Group 3: History]
-        
-        Sets --> Set1[Set 1: Terms]
-        Sets --> Set2[Set 2: Images]
-        Sets --> Set3[Set 3: Mixed]
-        
-        Sets --> Pairs
-        
-        Pairs --> P1[Pair 1]
-        Pairs --> P2[Pair 2]
-        Pairs --> P3[Pair 3]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the multiple matching sets and grouping system:</p>
-            <div class="mermaid">
-classDiagram
-    class MTPMultiple {
-        +String componentId
-        +GroupManager groupManager
-        +Array~MatchingSet~ matchingSets
-        +ValidationSystem validation
-        +initialize()
-        +render()
-        +validateAll()
-        +getResults()
+    A->>C: Add pairs with pair1 items
+    A->>C: Set pairChoice single or multiple per pair
+    A->>C: Add pair2 items as array
+    C->>C: Assign subIdentifier to each pair2 item
+    A->>C: Configure style, attempts, shuffle
+    A->>C: Save component
+    S->>C: View Column A and Column B items
+    S->>C: Connect Column A to multiple Column B targets
+    C->>C: mtpJoinThePairMultiple records connections
+    C->>C: svgDrawLineMultiple draws SVG lines
+    C->>C: displaceFromBottom aligns Column A vertically
+    S->>C: Submit
+    C->>C: SubmitAnswerMtpMultiple validates all
+    C->>C: stateMainatainMTPMultiple SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates MTP Multiple]) --> B[Add Column A items pair1]
+    B --> C{Per-pair: single or multiple?}
+    C -->|Single| D[Add 1 Column B item pair2 as single-item array]
+    C -->|Multiple| E[Add 2-3 Column B items pair2 as array]
+    D --> F[subIdentifier assigned automatically]
+    E --> F
+    F --> G[Select style 1-4]
+    G --> H([Student Views Component])
+    H --> I[Connect pair1 to one or more pair2 items]
+    I --> J[displaceFromBottom aligns pair1 vertically]
+    J --> K[SVG lines drawn for each connection]
+    K --> L[Submit]
+    L --> M{All connections correct?}
+    M -->|Yes| N[Green border #EBF6E7]
+    M -->|No| O[Red border #FBE3E3]
+    N --> P[SCORM state saved]
+    O --> P</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">mtpMultipleTemplate</div></div><div class="info-card"><div class="info-card__label">Key Difference</div><div class="info-card__value">pair2 is Array not single object</div></div><div class="info-card"><div class="info-card__label">Max Matches</div><div class="info-card__value">Up to 3 per Column A item</div></div><div class="info-card"><div class="info-card__label">Correct Style</div><div class="info-card__value">Green 5px left border #EBF6E7</div></div><div class="info-card"><div class="info-card__label">Incorrect Style</div><div class="info-card__value">Red 5px left border #FBE3E3</div></div><div class="info-card"><div class="info-card__label">Alignment Fn</div><div class="info-card__value">displaceFromBottom()</div></div><div class="info-card"><div class="info-card__label">Max Elements</div><div class="info-card__value">20 total</div></div><div class="info-card"><div class="info-card__label">Style Variants</div><div class="info-card__value">mtpStyle1-4 (same as MTP)</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "maxTries": 3,
+    "shuftleChoiceCheckbox": false,
+    "activeStyle": "mtpStyle1",
+    "imageConfiguration": {"imageDisplayMode": "fit"}
+  },
+  "listData": [
+    {
+      "hpvpData": {
+        "pairedList": [
+          {
+            "pairInfo": {
+              "pairChoice": "multiple",
+              "pair1": {
+                "identifier": "A1",
+                "infoData": "Mammals",
+                "isImageEnable": false
+              },
+              "pair2": [
+                {
+                  "identifier": "B1",
+                  "subIdentifier": "B1-1",
+                  "infoData": "Dog",
+                  "isImageEnable": false
+                },
+                {
+                  "identifier": "B2",
+                  "subIdentifier": "B2-1",
+                  "infoData": "Cat",
+                  "isImageEnable": false
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
-    
-    class GroupManager {
-        +Array~Group~ groups
-        +addGroup()
-        +removeGroup()
-        +getGroup()
-        +reorderGroups()
-    }
-    
-    class Group {
-        +String groupId
-        +String title
-        +String description
-        +Array~String~ setIds
-        +Number sequence
-        +render()
-        +validate()
-    }
-    
-    class MatchingSet {
-        +String setId
-        +String groupId
-        +Array~Item~ leftItems
-        +Array~Item~ rightItems
-        +Array~Match~ matches
-        +Boolean allowMultiple
-        +shuffle()
-        +render()
-        +validate()
-    }
-    
-    class Item {
-        +String itemId
-        +String content
-        +String type
-        +String side
-        +String matchedWith
-        +Boolean isMatched
-        +render()
-    }
-    
-    class Match {
-        +String leftItemId
-        +String rightItemId
-        +Boolean isCorrect
-        +validate()
-        +remove()
-    }
-    
-    class ValidationSystem {
-        +validateSet()
-        +validateGroup()
-        +validateAll()
-        +calculateGroupScore()
-        +calculateTotalScore()
-        +provideFeedback()
-    }
-    
-    class DragDropHandler {
-        +Item draggedItem
-        +startDrag()
-        +onDrag()
-        +drop()
-        +cancelDrag()
-    }
-    
-    class ScoreManager {
-        +Object scores
-        +calculateSetScore()
-        +calculateGroupScore()
-        +getTotalScore()
-        +getProgress()
-    }
-    
-    MTPMultiple --> GroupManager
-    MTPMultiple --> MatchingSet
-    MTPMultiple --> ValidationSystem
-    MTPMultiple --> ScoreManager
-    GroupManager --> Group
-    Group --> MatchingSet
-    MatchingSet --> Item
-    MatchingSet --> Match
-    MatchingSet --> DragDropHandler
-    Match --> Item
-    ValidationSystem --> MatchingSet
-    ScoreManager --> Group
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as MTP Multiple Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Add Pair (2-10 pairs)
-    loop For Each Pair
-        Author->>W: Set Pair Choice (Single/Multiple)
-        Author->>W: Configure Column A
-        alt Text Mode
-            Author->>W: Enter Text
-        else Image Mode
-            Author->>W: Upload Image
-            W->>API: Upload Image
-            API-->>W: Return URL
-        end
-        Author->>W: Configure Column B Items
-        alt Single Choice (1-to-1)
-            Author->>W: Add 1 Match
-        else Multiple Choice (1-to-n)
-            Author->>W: Add Multiple Matches (up to 3)
-        end
-        loop For Each Column B Match
-            Author->>W: Enter Text/Upload Image
-        end
-        opt Individual Feedback
-            Author->>W: Enter Feedback Text
-        end
-    end
-    Author->>W: Select Style (mtpStyle1-4)
-    Author->>W: Set Max Attempts
-    Author->>W: Enable Shuffle Column B
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Column A
-    W->>UI: Render Column B
-    alt Shuffle Enabled
-        W->>W: Randomize Column B
-        W->>UI: Display Shuffled Items
-    end
-    W->>UI: Create SVG Canvas
-    W->>UI: Initialize Draggable
-    Student->>UI: Click Column A Item
-    UI->>W: Mark as Active
-    W->>UI: Highlight Selection
-    alt Single Choice Mode
-        Student->>UI: Click Column B Item
-        UI->>W: Create Single Match
-        W->>UI: Draw SVG Line
-    else Multiple Choice Mode
-        Student->>UI: Click First Column B Item
-        UI->>W: Create First Match
-        W->>UI: Draw First Line
-        Student->>UI: Click Second Column B Item
-        UI->>W: Create Second Match
-        W->>UI: Draw Second Line
-        opt Third Match
-            Student->>UI: Click Third Column B Item
-            UI->>W: Create Third Match
-            W->>UI: Draw Third Line
-        end
-    end
-    W->>SCORM: Save Current State
-    loop Match All Pairs
-        Student->>UI: Create Connections
-        W->>SCORM: Update State
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate All Matches
-    loop For Each Pair
-        V->>V: Get Column A Item
-        V->>V: Get Connected Column B Items
-        alt Single Choice
-            V->>V: Check 1-to-1 Match
-        else Multiple Choice
-            V->>V: Check All Required Matches
-            V->>V: Verify No Extra Matches
-        end
-    end
-    V-->>W: Return Validation Results
-    alt Individual Feedback Enabled
-        loop For Each Pair
-            alt Correct
-                W->>UI: Display Correct Feedback
-                W->>UI: Green Lines
-            else Incorrect
-                W->>UI: Display Incorrect Feedback
-                W->>UI: Red Lines
-            end
-        end
-    else Generic Feedback
-        alt All Correct
-            W->>UI: Display Success Message
-            W->>UI: All Lines Green
-        else Some Incorrect
-            W->>UI: Display Error Message
-            W->>UI: Color-code Lines
-        end
-    end
-    alt Attempts Remaining
-        W->>UI: Enable Try Again
-        Student->>W: Try Again
-        W->>UI: Clear Incorrect Lines
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Draw All Correct Connections
-        W->>UI: Disable Interaction
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitMTPM[Initialize MTP Multiple]
-    InitMTPM --> ChoiceMode{Choose Pairing Mode}
-    ChoiceMode -->|1-to-1| SetSingle[Single Choice Mode]
-    ChoiceMode -->|1-to-n| SetMultiple[Multiple Choice Mode]
-    SetSingle --> AddPairs
-    SetMultiple --> AddPairs[Add Pairs 2-20]
-    AddPairs --> ConfigPair[Configure Each Pair]
-    ConfigPair --> SetColA[Set Column A Content]
-    SetColA --> ColAType{Type}
-    ColAType -->|Text| AddTextA[Add Text]
-    ColAType -->|Image| AddImageA[Upload Image]
-    AddTextA --> SetColB
-    AddImageA --> SetColB[Set Column B Items]
-    SetColB --> AddColBItems[Add 1-3 Items for Column B]
-    AddColBItems --> ColBType{Type}
-    ColBType -->|Text| AddTextB[Add Text]
-    ColBType -->|Image| AddImageB[Upload Image]
-    AddTextB --> LinkCorrect
-    AddImageB --> LinkCorrect[Link Correct Associations]
-    LinkCorrect --> NextPair{More Pairs?}
-    NextPair -->|Yes| ConfigPair
-    NextPair -->|No| ChooseStyle[Select Style 1-4]
-    ChooseStyle --> ConfigSettings[Configure Settings]
-    ConfigSettings --> SaveMTPM[Save Configuration]
-    
-    SaveMTPM --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderColumns[Render Columns A & B]
-    RenderColumns --> CheckShuffle{Shuffle Column B?}
-    CheckShuffle -->|Yes| ShuffleColumnB[Shuffle Column B Items]
-    CheckShuffle -->|No| DisplayColumns
-    ShuffleColumnB --> DisplayColumns[Display Both Columns]
-    DisplayColumns --> ShowDots[Show Connection Dots]
-    ShowDots --> StudentConnect{Student Connects}
-    
-    StudentConnect -->|Drag| DragDot[Drag Dot from A to B]
-    StudentConnect -->|Click| ClickSequence[Click A, then Click B]
-    DragDot --> DrawLine[Draw SVG Connection Line]
-    ClickSequence --> DrawLine
-    DrawLine --> StoreMapping[Store Connection Mapping]
-    StoreMapping --> CheckMode{Pairing Mode}
-    CheckMode -->|1-to-1| CheckSingleComplete{All A Items Connected?}
-    CheckMode -->|1-to-n| CheckMultipleComplete{All A Items Have 1-3 Connections?}
-    CheckSingleComplete -->|No| StudentConnect
-    CheckSingleComplete -->|Yes| EnableSubmit[Enable Submit]
-    CheckMultipleComplete -->|No| StudentConnect
-    CheckMultipleComplete -->|Yes| EnableSubmit
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateConnections[Validate All Connections]
-    ValidateConnections --> LoopPairs[Loop Through Each Pair]
-    LoopPairs --> CheckPairConnections{Connections Correct?}
-    CheckPairConnections -->|All Correct| MarkPairCorrect[Green Border, Checkmark]
-    CheckPairConnections -->|Partial/Incorrect| MarkPairIncorrect[Red Border, Cross]
-    MarkPairCorrect --> ShowPairFB{Individual Feedback?}
-    MarkPairIncorrect --> ShowPairFB
-    ShowPairFB -->|Yes| DisplayPairFeedback[Show Pair-Specific Feedback]
-    ShowPairFB -->|No| NextPairVal
-    DisplayPairFeedback --> NextPairVal{More Pairs?}
-    NextPairVal -->|Yes| LoopPairs
-    NextPairVal -->|No| CalculateScore[Calculate Overall Score]
-    
-    CalculateScore --> ShowGenericFB{Generic Feedback?}
-    ShowGenericFB -->|Yes| DisplayGeneric[Show Overall Feedback Message]
-    ShowGenericFB -->|No| DecrementAttempts
-    DisplayGeneric --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
-    CheckAttempts -->|All Correct| SaveFinal
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearIncorrectLines[Clear Incorrect Connection Lines]
-    ClearIncorrectLines --> StudentConnect
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> DrawAllCorrect[Draw All Correct Connections]
-    DrawAllCorrect --> SaveFinal[Save Final State to SCORM]
-    
-    StoreMapping --> DataFlow[Data Flow: Connections â†’ Model]
-    DataFlow --> UpdateMappingObject[Update pairMappings Object]
-    UpdateMappingObject --> TrackLineColors[Track Line States]
-    TrackLineColors --> SyncSCORM[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors choose pairing mode (1-to-1 or 1-to-n), create pairs (2-20) with text or image content in both columns, add multiple Column B items (1-3) per Column A item, link correct associations, and select from 4 visual styles.</li>
-                <li><strong>Student Flow:</strong> Students connect items by dragging dots or clicking sequential pairs, creating multiple connections per Column A item in 1-to-n mode, with SVG lines visualizing all relationships.</li>
-                <li><strong>Validation:</strong> Connections are validated with support for partial correctness in 1-to-n mode, displaying visual feedback (green/checkmarks for all correct, red/crosses for incorrect or partial), with both individual pair and generic feedback options.</li>
-                <li><strong>Data Flow:</strong> Pair mappings object tracks all connections with line states, synchronized with SCORM, with Try Again clearing only incorrect lines or Show Me drawing all correct connections across complex 1-to-many relationships.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/MTP Multiple/MTP_MULTIPLE_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+  ]
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>mtp-multiple/
++-- templates/
+¦   +-- mtp-multiple/
+¦       +-- mtp-multiple.html                # Main template
+¦       +-- mtp-multiple-settings-panel.html # Settings panel
+¦       +-- media-template2.html            # Media sub-template
++-- scripts/
+¦   +-- mtp-multiple-directive.js            # Core (~30KB)
+¦   +-- mtp-multiple-preview1.js             # Preview (~27KB)
+¦   +-- mtp-multiple-line-preview1.js        # SVG lines (~16KB)
++-- styles/
+¦   +-- mtp-multiple-template.css           # Styles (~29KB)
++-- default/
+    +-- mtp-multiple.json                   # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Per-pair Match Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle per pair</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Single (1 match) or Multiple (up to 3 matches) per Column A item</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">4 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">mtpStyle1 through mtpStyle4 (same as standard MTP)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Shuffle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Fisher-Yates shuffle Column B items</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Generic Feedback</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox + Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Single message for all correct/incorrect matches</td></tr><tr><td style="padding:9px 12px;">Image Config</td><td style="padding:9px 12px;">Display mode + ratio</td><td style="padding:9px 12px;">Image display configuration when isImageEnable=true</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>pair2 as Array:</strong> Unlike standard MTP where pair2 is a single object, MTP Multiple always stores pair2 as an array. Even single-match pairs have a one-element array, allowing the data structure to scale without schema changes.</li><li><strong>subIdentifier uniqueness:</strong> Each pair2 item in the array has a subIdentifier (e.g., B1-1, B1-2) that uniquely identifies it within the pair group for SCORM state tracking.</li><li><strong>displaceFromBottom() alignment:</strong> When a Column A item has multiple Column B matches, displaceFromBottom() calculates the vertical offset to center-align the Column A item with its multiple targets.</li><li><strong>Feedback color borders:</strong> Correct matches get a 5px left border in #EBF6E7 (light green); incorrect matches get #FBE3E3 (light red) — applied as inline CSS after submission.</li><li><strong>Max 20 total elements:</strong> The combined total of all Column A and Column B items across all pairs cannot exceed 20 elements due to SVG rendering performance constraints.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/MTP Multiple/MTP_MULTIPLE_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

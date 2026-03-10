@@ -1,374 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Highlighter | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Highlighter Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Highlighter Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Highlighter</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Highlighter Component</h1><p class="page-subtitle">Text selection assessment widget where authors pre-mark correct words/phrases and students highlight matching text. Validates selections using window.getSelection() with color-coded correct/incorrect feedback.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Highlighter Component presents reading passages where students click and drag to highlight text they identify as correct. Authors pre-mark the correct words/phrases in the authoring tool. On submission, student selections are compared to correct spans, with green styling for correct highlights and red for incorrect. The window.getSelection() and Range API handle selection detection.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Authors pre-mark correct text via highLightStrike() in editor</li><li>Students select text via click-and-drag (mouseup/touchend)</li><li>Correct selections shown as .myWords (green) — wrong as .wrongWords (red)</li><li>1-5 configurable attempt limit</li><li>Group activity detection via parent container class check</li><li>isActivityInprogress flag blocks all interaction during processing</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">highlight-template</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">Highlight</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">highLightInfo[]: statement with pre-marked correct text</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">6 files</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainHighlight()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">window.getSelection() Range API</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class HighlightController {
+        +settings: HighlightSettings
+        +addSentenceClick()
+        +removeSentenceClick()
+        +setenceClick()
+        +highLightStrike()
+        +highLightStrikeRemove()
+        +attemptsChange()
+        +SubmitAnswerhighlight()
+        +showAnswerhighlight()
+        +resetAnswerhighlight()
+        +tryagainhighlight()
+        +wordSelectonmouseupandtouchend()
+        +stateMainatainHighlight()
+    }
+    class HighlightSettings {
+        +maxTries: Number
+        +allowRestart: Boolean
+        +showmecheckbox: Boolean
+        +isHeaderVisible: Boolean
+        +highLightInfo: HighlightSentence[]
+    }
+    class HighlightSentence {
+        +id: String
+        +statement: String
+        +responseList: Object[]
+    }
+    HighlightController --> HighlightSettings
+    HighlightSettings --> HighlightSentence</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as HighlightController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Highlighter</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Highlighter</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Highlighter Component</h1>
-        <p class="page-subtitle">Text highlighting tool for marking important content sections.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The Highlighter component allows users to select and highlight specific text passages with different colors. It's useful for marking important information, identifying key concepts, or categorizing content by color-coding.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class HighlighterComponent {
-        -textContent: String
-        -highlights: Array~Highlight~
-        -availableColors: Array~Color~
-        -selectedColor: Color
-        -selectionMode: Boolean
-        +initialize()
-        +onTextSelect()
-        +applyHighlight(selection, color)
-        +removeHighlight(highlightId)
-        +changeColor(highlightId, newColor)
-        +clearAllHighlights()
-        +validateHighlights()
-    }
-    
-    class Highlight {
-        -id: String
-        -startOffset: Number
-        -endOffset: Number
-        -color: Color
-        -text: String
-        -isCorrect: Boolean
-        +render()
-        +updateColor()
-        +remove()
-    }
-    
-    class Color {
-        -name: String
-        -hexValue: String
-        -category: String
-    }
-    
-    class SelectionManager {
-        -currentSelection: Range
-        +captureSelection()
-        +validateSelection()
-        +getSelectionBounds()
-    }
-    
-    class ValidationEngine {
-        -expectedHighlights: Array
-        +compare(userHighlights)
-        +calculateScore()
-        +provideFeedback()
-    }
-    
-    HighlighterComponent "1" --> "*" Highlight : manages
-    HighlighterComponent --> SelectionManager : uses
-    HighlighterComponent --> ValidationEngine : validates with
-    Highlight --> Color : has
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Highlighter Widget
-    participant UI as UI Layer
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Add Sentence (up to 10)
-    Author->>W: Enter Sentence Text
-    Author->>W: Select Text to Highlight
-    W->>UI: Show Highlight Toolbar
-    Author->>UI: Click Highlight
-    UI->>W: Mark Text as Correct Answer
-    W->>UI: Apply Yellow Highlight
-    W->>W: Store Selection Metadata
-    loop For Each Sentence
-        Author->>W: Add/Edit Sentence
-        Author->>W: Mark Correct Highlights
-    end
-    Author->>W: Set Max Attempts
-    Author->>W: Configure Buttons
-    Author->>W: Set Appearance Color
-    W->>UI: Save Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Sentences
-    W->>UI: Enable Text Selection
-    Student->>UI: Select Text
-    UI->>W: Capture Selection
-    W->>UI: Show Highlight Popup
-    Student->>UI: Click MyHighLight
-    UI->>W: Apply Highlight
-    W->>UI: Add Yellow Background
-    W->>W: Store Selection
-    W->>SCORM: Save Current State
-    loop Highlight Multiple Phrases
-        Student->>UI: Select and Highlight
-        W->>SCORM: Update State
-    end
-    opt Remove Highlight
-        Student->>UI: Click Highlighted Text
-        UI->>W: Show Delete Popup
-        Student->>UI: Click Delete
-        UI->>W: Remove Highlight
-        W->>UI: Remove Background
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate Highlights
-    loop For Each Sentence
-        V->>V: Get Student Highlights
-        V->>V: Get Correct Highlights
-        V->>V: Compare Selections
-        loop For Each Selection
-            V->>V: Check Start/End Position
-            V->>V: Match Text Content
-        end
-    end
-    V-->>W: Return Validation Results
-    alt All Correct
-        W->>UI: Display Success Message
-        W->>UI: Apply Green Color to Highlights
-        W->>UI: Disable Selection
-    else Some/All Incorrect
-        W->>UI: Display Error Message
-        W->>UI: Apply Green to Correct
-        W->>UI: Apply Red to Incorrect
-        W->>UI: Show Missing Highlights
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-            Student->>W: Try Again
-            W->>UI: Clear Incorrect Highlights
-            W->>UI: Keep Correct Highlights
-        end
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Display All Correct Highlights
-        W->>UI: Apply Highlights to Text
-        W->>UI: Disable Further Selection
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitHighlighter[Initialize Highlighter]
-    InitHighlighter --> AddParagraph[Add Paragraph Text]
-    AddParagraph --> MarkSentences[Mark Sentences to Highlight 1-10]
-    MarkSentences --> SetCorrect[Designate Correct Sentences]
-    SetCorrect --> ChooseColor[Select Highlight Color]
-    ChooseColor --> ConfigAttempts[Configure Max Attempts]
-    ConfigAttempts --> SetFeedback[Configure Feedback]
-    SetFeedback --> ChooseStyle[Select Visual Style]
-    ChooseStyle --> SaveHighlighter[Save Configuration]
-    
-    SaveHighlighter --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayText[Display Text Paragraph]
-    DisplayText --> EnableHighlight[Enable Click-to-Highlight]
-    EnableHighlight --> StudentClick{Student Clicks Sentence}
-    StudentClick --> CheckHighlighted{Already Highlighted?}
-    CheckHighlighted -->|Yes| RemoveHighlight[Remove Highlight]
-    CheckHighlighted -->|No| ApplyHighlight[Apply Highlight Color]
-    ApplyHighlight --> MarkSelected[Mark Sentence as Selected]
-    RemoveHighlight --> UnmarkSelected[Unmark Sentence]
-    MarkSelected --> UpdateCount[Update Selected Count]
-    UnmarkSelected --> UpdateCount
-    UpdateCount --> CheckAnySelected{Any Sentences Selected?}
-    CheckAnySelected -->|Yes| EnableSubmit[Enable Submit Button]
-    CheckAnySelected -->|No| DisableSubmit[Disable Submit Button]
-    EnableSubmit --> StudentClick
-    DisableSubmit --> StudentClick
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateSelections[Compare Selected vs Correct]
-    ValidateSelections --> LoopSentences[Loop Through Sentences]
-    LoopSentences --> CheckSentence{Sentence Correct?}
-    CheckSentence -->|Correctly Selected| MarkCorrect[Keep Highlight, Show Checkmark]
-    CheckSentence -->|Incorrectly Selected| MarkIncorrect[Change to Red, Show Cross]
-    CheckSentence -->|Should Be Selected| ShowMissed[Show as Missed]
-    MarkCorrect --> NextSentence{More Sentences?}
-    MarkIncorrect --> NextSentence
-    ShowMissed --> NextSentence
-    NextSentence -->|Yes| LoopSentences
-    NextSentence -->|No| CalculateScore[Calculate Score]
-    
-    CalculateScore --> ShowFeedback[Display Feedback Message]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again Button]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me Button]
-    CheckAttempts -->|All Correct| FinalSave
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearIncorrect[Clear Incorrect Highlights]
-    ClearIncorrect --> KeepCorrect[Keep Correct Highlights]
-    KeepCorrect --> StudentClick
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> RevealAll[Highlight All Correct Sentences]
-    RevealAll --> FinalSave[Save Final State to SCORM]
-    
-    MarkSelected --> DataFlow[Data Flow: Selection â†’ Model]
-    DataFlow --> UpdateSelectedArray[Update highlightedSentences Array]
-    UpdateSelectedArray --> SyncState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors add paragraph text, mark sentences to be interactive (1-10), designate correct sentences for highlighting, select highlight color, and configure max attempts with feedback messages.</li>
-                <li><strong>Student Flow:</strong> Students click sentences to toggle highlighting on/off, with submit button enabled only when at least one sentence is selected, allowing iterative selection refinement before submission.</li>
-                <li><strong>Validation:</strong> Selected sentences are validated against correct answers with visual feedback (green highlights/checkmarks for correct, red highlights/crosses for incorrect, indicators for missed sentences), with scoring calculated.</li>
-                <li><strong>Data Flow:</strong> Highlighted sentences array is maintained and synchronized with SCORM, with Try Again clearing only incorrect highlights while preserving correct ones, or Show Me highlighting all correct sentences automatically.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Highlighter/HIGHLIGHTER_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: addSentenceClick() add passage
+    A->>C: Select correct text in editor
+    C->>C: highLightStrike() wraps in span.highLighter
+    A->>C: Configure attempts, Show Me
+    A->>C: Save component
+    S->>C: View passage
+    S->>C: Click and drag over text
+    C->>C: wordSelectonmouseupandtouchend()
+    C->>C: window.getSelection() + Range API
+    C->>C: Store selection as student answer
+    S->>C: Click Submit
+    C->>C: SubmitAnswerhighlight()
+    C->>C: Compare selections vs correct spans
+    C->>C: Apply .myWords green or .wrongWords red
+    C->>C: stateMainatainHighlight() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Highlighter]) --> B[Add 1+ reading passages]
+    B --> C[Select correct text in editor]
+    C --> D[highLightStrike wraps in span.highLighter]
+    D --> E[Configure attempts and Show Me]
+    E --> F([Student Views Component])
+    F --> G[Read passage text]
+    G --> H[Click and drag to highlight text]
+    H --> I[wordSelectonmouseupandtouchend fires]
+    I --> J[window.getSelection captures range]
+    J --> K[Selection stored]
+    K --> L[Student clicks Submit]
+    L --> M[SubmitAnswerhighlight]
+    M --> N{Selection matches .highLighter span?}
+    N -->|Yes| O[Apply .myWords green]
+    N -->|No| P[Apply .wrongWords red]
+    O --> Q[SCORM state saved]
+    P --> Q</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">highlight-template</div></div><div class="info-card"><div class="info-card__label">Selection API</div><div class="info-card__value">window.getSelection() + Range</div></div><div class="info-card"><div class="info-card__label">Correct CSS</div><div class="info-card__value">.myWords (green highlight)</div></div><div class="info-card"><div class="info-card__label">Incorrect CSS</div><div class="info-card__value">.wrongWords (red highlight)</div></div><div class="info-card"><div class="info-card__label">Author Mark</div><div class="info-card__value">span.highLighter</div></div><div class="info-card"><div class="info-card__label">Group Detection</div><div class="info-card__value">.group-interactivity-container parent check</div></div><div class="info-card"><div class="info-card__label">Interaction Lock</div><div class="info-card__value">isActivityInprogress flag</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainHighlight() via saveAction()</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "maxTries": 3,
+    "allowRestart": true,
+    "showmecheckbox": true,
+    "isHeaderVisible": true,
+    "isInstructionVisible": true,
+    "outline": "outline",
+    "highLightInfo": [
+      {
+        "id": "h1",
+        "statement": "The <span class=\"highLighter\">quick brown fox</span> jumped over the lazy dog.",
+        "responseList": []
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>highlighter/
++-- templates/
+¦   +-- highlightTemplate.html          # Main component template
+¦   +-- highlightTemplateSettings.html  # Settings panel
++-- scripts/
+¦   +-- highlightTemplate.js            # Core directive (510 lines)
+¦   +-- highlightTemplatepreview1.js    # Preview renderer (857 lines)
++-- styles/
+¦   +-- highlight-template.css         # Component styles
++-- default/
+    +-- highlightTemplate.json         # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Allow Restart</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable complete activity restart (allowRestart)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show Me</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable show correct answer button (showmecheckbox)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Header Visibility</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show/hide header section (isHeaderVisible)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Instruction Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show/hide instruction section (isInstructionVisible)</td></tr><tr><td style="padding:9px 12px;">Outline</td><td style="padding:9px 12px;">Radio</td><td style="padding:9px 12px;">No Outline or Outline border around component</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Author pre-marks correct text:</strong> In the authoring UI, authors select text and click highLightStrike() which wraps the selection in span.highLighter elements — these define the answer key.</li><li><strong>window.getSelection() validation:</strong> Student selections are captured via the browser Selection API on mouseup and touchend events, supporting both desktop and mobile.</li><li><strong>Color feedback:</strong> Correct student selections (matching .highLighter spans) get class .myWords (green); incorrect selections (non-matching) get .wrongWords (red).</li><li><strong>isActivityInprogress lock:</strong> During submit processing and animation, isActivityInprogress=true blocks all new text selection events, preventing race conditions.</li><li><strong>Group activity detection:</strong> The component checks for a .group-interactivity-container ancestor to adjust its submit behavior when embedded in a Group Activity.</li><li><strong>SCORM via saveAction():</strong> State is persisted through the generic saveAction() function which normalizes SCORM data across different SCORM versions.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Highlighter/HIGHLIGHTER_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

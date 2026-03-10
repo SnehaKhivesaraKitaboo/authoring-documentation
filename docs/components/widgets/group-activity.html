@@ -1,483 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Group Activity (Multipart) | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Group Activity (Multipart) Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Group Activity (Multipart) Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Group Activity</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Group Activity (Multipart) Component</h1><p class="page-subtitle">Container widget holding up to 35 assessment widgets with centralized submit/reset controls. Supports 3 layouts (vertical scroll, horizontal slider, worked example) with proportional scoring across child widgets.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Group Activity Component is a container widget that holds up to 35 other assessment widgets (those with enableGroupInteractivity:true). It provides centralized submit, reset, and try-again controls that operate all child widgets simultaneously. Three layout styles support different pedagogical approaches: vertical scroll, horizontal slider with bullet navigation, and worked example with collapsible sections.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Holds up to 35 child widgets</li><li>3 layout styles: vertical scroll, horizontal slider, worked example</li><li>Child submit buttons hidden — parent controls all</li><li>Proportional scoring: MCQ/FIB/MTP partial credit</li><li>Background color, border radius, outline customization</li><li>Shuffle questions option (Fisher-Yates)</li><li>CL client special-cased (window.client == CL)</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">groupInteractivity</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">group-interactivity-template</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">styleClass: style1/style2/workedExample</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">6 files</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainGroupActiviy()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Angular compile, CSS translateX</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class GroupActivityController {
+        +settings: GASettings
+        +questionBank: ChildWidget[]
+        +onDropComplete(index, data, evt)
+        +pastecomp(e)
+        +compileAndAppendHtml()
+        +toggleContent()
+        +SubmitAnswerGroupActivity()
+        +showAnswerGroupActivity()
+        +resetAnswerGroupActivity()
+        +stateMainatainGroupActiviy()
+    }
+    class GASettings {
+        +styleClass: String
+        +maxTries: Number
+        +allowRestart: Boolean
+        +shuffleQuestionCheckbox: Boolean
+        +isInteractive: String
+        +grpBorder_radius: Number
+        +pagebgcolor: String
+        +headerBgColor: String
+        +metaTags: String[]
+    }
+    class ChildWidget {
+        +questionType: String
+        +questionTemplate: String
+    }
+    GroupActivityController </div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as GAController
+    participant Ch as ChildWidgets
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Group Activity (Multipart)</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Group Activity (Multipart)</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Group Activity Component</h1>
-        <p class="page-subtitle">Multi-step collaborative activity component for group learning.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The Group Activity component enables multi-user collaborative learning through structured multi-part activities with role assignments, individual submissions, and group coordination.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "Group Activity System"
-        GA[Group Activity Container]
-        Parts[Activity Parts]
-        Users[User Management]
-        Submissions[Submission System]
-        Roles[Role Manager]
-        
-        GA --> Parts
-        GA --> Users
-        GA --> Submissions
-        GA --> Roles
-        
-        Parts --> Part1[Part 1: Setup]
-        Parts --> Part2[Part 2: Individual Work]
-        Parts --> Part3[Part 3: Collaboration]
-        Parts --> Part4[Part 4: Review]
-        
-        Users --> User1[Student 1]
-        Users --> User2[Student 2]
-        Users --> User3[Student 3]
-        
-        Roles --> Leader[Group Leader]
-        Roles --> Contributor[Contributors]
-        Roles --> Reviewer[Reviewers]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the multi-user collaborative activity system:</p>
-            <div class="mermaid">
-classDiagram
-    class GroupActivity {
-        +String activityId
-        +String title
-        +Array~ActivityPart~ parts
-        +UserManager userManager
-        +SubmissionManager submissions
-        +RoleManager roles
-        +initialize()
-        +startActivity()
-        +endActivity()
-        +getProgress()
-    }
-    
-    class ActivityPart {
-        +String partId
-        +Number sequence
-        +String title
-        +String description
-        +String type
-        +Object content
-        +Boolean isCompleted
-        +render()
-        +validate()
-        +submit()
-    }
-    
-    class UserManager {
-        +Array~User~ users
-        +String groupId
-        +addUser()
-        +removeUser()
-        +assignRole()
-        +getUserProgress()
-        +synchronize()
-    }
-    
-    class User {
-        +String userId
-        +String name
-        +Role role
-        +Array~Submission~ submissions
-        +String status
-        +joinActivity()
-        +leaveActivity()
-        +submitWork()
-    }
-    
-    class SubmissionManager {
-        +Array~Submission~ submissions
-        +addSubmission()
-        +updateSubmission()
-        +getSubmission()
-        +validateSubmission()
-        +aggregateResults()
-    }
-    
-    class Submission {
-        +String submissionId
-        +String userId
-        +String partId
-        +Object content
-        +DateTime timestamp
-        +String status
-        +save()
-        +validate()
-        +share()
-    }
-    
-    class RoleManager {
-        +Array~Role~ roles
-        +assignRole()
-        +removeRole()
-        +getPermissions()
-        +validateRole()
-    }
-    
-    class Role {
-        +String roleId
-        +String name
-        +Array~String~ permissions
-        +Boolean canEdit
-        +Boolean canReview
-        +Boolean canSubmit
-    }
-    
-    class CollaborationSpace {
-        +String spaceId
-        +Array~User~ participants
-        +Array~Message~ messages
-        +Object sharedState
-        +broadcast()
-        +synchronize()
-    }
-    
-    GroupActivity --> ActivityPart
-    GroupActivity --> UserManager
-    GroupActivity --> SubmissionManager
-    GroupActivity --> RoleManager
-    GroupActivity --> CollaborationSpace
-    UserManager --> User
-    SubmissionManager --> Submission
-    RoleManager --> Role
-    User --> Role
-    User --> Submission
-    Submission --> ActivityPart
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Group Activity Widget
-    participant UI as UI Layer
-    participant Child as Child Widgets
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,Child: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Select Style (Vertical/Horizontal/Worked Example)
-    Author->>W: Drag Widget to Drop Zone
-    W->>UI: Create Widget Container
-    loop Add Child Widgets (up to 35)
-        Author->>W: Drop Assessment Widget
-        alt MCQ
-            W->>Child: Initialize MCQ Widget
-            Author->>Child: Configure MCQ
-        else FIB
-            W->>Child: Initialize FIB Widget
-            Author->>Child: Configure FIB
-        else True/False
-            W->>Child: Initialize T/F Widget
-            Author->>Child: Configure T/F
-        else Match-the-Pairs
-            W->>Child: Initialize MTP Widget
-            Author->>Child: Configure MTP
-        else Other Assessment Widget
-            W->>Child: Initialize Widget
-            Author->>Child: Configure Widget
-        end
-        Author->>W: Save Widget Configuration
-    end
-    Author->>W: Set Max Attempts
-    Author->>W: Configure Buttons (Show Me, Reset, Try Again)
-    opt Gradable Activity
-        Author->>W: Enable Gradable Mode
-        Author->>W: Set Time Limit
-        Author->>W: Set Passing Score
-    end
-    W->>UI: Save Group Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Container
-    alt Style: Horizontal Slider
-        W->>UI: Initialize Slider Navigation
-        W->>UI: Display Question 1
-    else Style: Vertical
-        W->>UI: Stack All Questions
-    else Style: Worked Example
-        W->>UI: Two-Column Layout
-    end
-    opt Gradable Activity
-        W->>UI: Start Timer
-        W->>UI: Display Timer
-    end
-    loop For Each Child Widget
-        Student->>Child: Interact with Widget
-        Child->>Child: Process Student Input
-        Child->>W: Report State
-        W->>SCORM: Save Individual State
-    end
-    alt Horizontal Style
-        Student->>UI: Click Next/Previous
-        UI->>W: Navigate Questions
-        W->>UI: Display Question
-    end
-    Student->>W: Submit All Answers
-    W->>V: Validate All Child Widgets
-    loop For Each Child Widget
-        V->>Child: Validate Widget
-        Child-->>V: Return Result
-        V->>V: Calculate Score
-    end
-    V-->>W: Return Overall Results
-    W->>UI: Display Feedback Alert
-    W->>UI: Show Questions Attempted
-    W->>UI: Show Correct Count
-    W->>UI: Show Incorrect Count
-    W->>UI: Show Partial Count
-    alt All Correct
-        W->>UI: Display Success Message
-    else Some Incorrect
-        W->>UI: Display Error Message
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-            Student->>W: Try Again
-            W->>UI: Reset Incorrect Answers
-        end
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        loop For Each Child Widget
-            W->>Child: Reveal Answer
-            Child->>UI: Display Correct Answer
-        end
-    end
-    W->>SCORM: Save Final Group State
-    W->>SCORM: Save Completion Status
-    opt Gradable Activity
-        W->>SCORM: Save Score
-        W->>SCORM: Save Time Taken
-    end
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitGA[Initialize Group Activity]
-    InitGA --> ChooseStyle[Select Container Style 1-3]
-    ChooseStyle --> SetHeader[Set Activity Header]
-    SetHeader --> SetInstructions[Set Instructions]
-    SetInstructions --> AddComponents[Add Child Components]
-    AddComponents --> DragWidget{Drag Assessment Widget}
-    DragWidget -->|MCQ| AddMCQ[Add MCQ Component]
-    DragWidget -->|FIB| AddFIB[Add FIB Component]
-    DragWidget -->|True/False| AddTF[Add True/False Component]
-    DragWidget -->|Others| AddOther[Add Other Assessment]
-    AddMCQ --> ConfigChild[Configure Child Component]
-    AddFIB --> ConfigChild
-    AddTF --> ConfigChild
-    AddOther --> ConfigChild
-    ConfigChild --> NextComponent{More Components?}
-    NextComponent -->|Yes| AddComponents
-    NextComponent -->|No| ConfigButtons[Configure Unified Buttons]
-    ConfigButtons --> SetAttempts[Set Max Attempts]
-    SetAttempts --> SaveGA[Save Group Activity]
-    
-    SaveGA --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderContainer[Render Activity Container]
-    RenderContainer --> LoadChildren[Load Child Components]
-    LoadChildren --> RenderChild1[Render First Child]
-    RenderChild1 --> RenderChild2[Render Second Child]
-    RenderChild2 --> RenderMore[Render Additional Children]
-    RenderMore --> ShowButtons[Show Unified Control Buttons]
-    ShowButtons --> WaitInteraction[Wait for Student Interaction]
-    
-    WaitInteraction --> StudentAnswers{Student Interacts with Children}
-    StudentAnswers --> UpdateChild[Update Child Component State]
-    UpdateChild --> CheckAllAnswered{All Children Answered?}
-    CheckAllAnswered -->|No| StudentAnswers
-    CheckAllAnswered -->|Yes| EnableSubmit[Enable Submit Button]
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateAll[Validate All Child Components]
-    ValidateAll --> LoopChildren[Loop Through Each Child]
-    LoopChildren --> ValidateChild[Validate Child Answers]
-    ValidateChild --> ChildCorrect{Child Correct?}
-    ChildCorrect -->|Yes| MarkChildCorrect[Mark Child as Correct]
-    ChildCorrect -->|No| MarkChildIncorrect[Mark Child as Incorrect]
-    MarkChildCorrect --> NextChildCheck{More Children?}
-    MarkChildIncorrect --> NextChildCheck
-    NextChildCheck -->|Yes| LoopChildren
-    NextChildCheck -->|No| CalculateGroupScore[Calculate Overall Score]
-    
-    CalculateGroupScore --> ShowFeedback[Display Consolidated Feedback]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again for Incorrect]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me for All]
-    CheckAttempts -->|All Correct| SaveFinal
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ResetIncorrectChildren[Reset Incorrect Children Only]
-    ResetIncorrectChildren --> StudentAnswers
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> RevealAllAnswers[Reveal Correct Answers for All Children]
-    RevealAllAnswers --> SaveFinal[Save Final State to SCORM]
-    
-    UpdateChild --> DataFlow[Data Flow: Child States â†’ Parent]
-    DataFlow --> AggregateScores[Aggregate Child Scores]
-    AggregateScores --> UpdateGroupState[Update Group Activity State]
-    UpdateGroupState --> SyncSCORM[Sync Consolidated State to SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors select container styles (1-3), set headers and instructions, drag multiple assessment widgets (MCQ, FIB, True/False, etc.) into the container, configure each child component, and set unified control buttons with max attempts.</li>
-                <li><strong>Student Flow:</strong> Students interact with multiple child assessment components within a single container, completing all required responses before unified submission becomes available.</li>
-                <li><strong>Validation:</strong> All child components are validated simultaneously upon submission, with individual marking and consolidated feedback, aggregating scores across all children for overall assessment results.</li>
-                <li><strong>Data Flow:</strong> Child component states are aggregated to parent Group Activity state, with consolidated SCORM synchronization, Try Again resetting only incorrect children, or Show Me revealing all correct answers across components.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Group Activity  (Multipart)/GROUP_ACTIVITY_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Drag compatible widget into Group Activity
+    C->>C: onDropComplete appends child HTML
+    C->>C: compileAndAppendHtml() Angular compile
+    A->>C: Select layout style1/style2/workedExample
+    A->>C: Configure attempts, restart, shuffle
+    A->>C: Save component
+    S->>C: View Group Activity
+    C->>Ch: Hide all child submit buttons
+    S->>Ch: Interact with each child widget
+    S->>C: Click parent Submit button
+    C->>Ch: Click each child .submit-btn via CSS class
+    C->>C: Read CSS classes to determine scores
+    C->>C: stateMainatainGroupActiviy() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Group Activity]) --> B[Select layout style]
+    B --> C{Layout?}
+    C -->|style1| D[Vertical scroll layout]
+    C -->|style2| E[Horizontal slider with bullet nav]
+    C -->|workedExample| F[Collapsible sections forced non-interactive]
+    D --> G[Drag up to 35 compatible widgets]
+    E --> G
+    F --> G
+    G --> H[Configure grouping settings]
+    H --> I[Set attempts, restart, shuffle]
+    I --> J([Student Views Group Activity])
+    J --> K[highlightGroupBullets setInterval 1s]
+    K --> L[Student interacts with child widgets]
+    L --> M{Style2?}
+    M -->|Yes| N[Show Submit only on last slide]
+    M -->|No| O[Submit always visible]
+    N --> P[Student clicks parent Submit]
+    O --> P
+    P --> Q[Parent triggers all child .submit-btn]
+    Q --> R[Proportional score calculated]
+    R --> S[stateMainatainGroupActiviy SCORM]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">groupInteractivity</div></div><div class="info-card"><div class="info-card__label">Max Children</div><div class="info-card__value">35 widgets</div></div><div class="info-card"><div class="info-card__label">Layout Styles</div><div class="info-card__value">style1, style2, workedExample</div></div><div class="info-card"><div class="info-card__label">Slider</div><div class="info-card__value">CSS translateX(-X%)</div></div><div class="info-card"><div class="info-card__label">Scoring</div><div class="info-card__value">Proportional per child type</div></div><div class="info-card"><div class="info-card__label">Highlight Loop</div><div class="info-card__value">setInterval 1s (performance concern)</div></div><div class="info-card"><div class="info-card__label">Child Detection</div><div class="info-card__value">enableGroupInteractivity: true</div></div><div class="info-card"><div class="info-card__label">Special Client</div><div class="info-card__value">window.client == CL exceptions</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "identifier": "group-interactivity-template",
+  "settings": {
+    "styleClass": "style1",
+    "maxTries": 1,
+    "allowRestart": false,
+    "shuffleQuestionCheckbox": false,
+    "isInteractive": "yes",
+    "grpBorder_radius": 16,
+    "align": "left",
+    "pagebgcolor": "#ffffff",
+    "outline": "outline",
+    "sidebarBgColor": "#f5f5f5",
+    "headerBgColor": "#e0e0e0",
+    "allowGroupActivityBackgroundColor": false,
+    "allowGroupActivityBorderRadius": true,
+    "isContentVisible": true,
+    "metaTags": [],
+    "questionBank": [
+      {
+        "questionType": "MCQ",
+        "questionTemplate": "<div class=\"mcq-template-data\">...</div>"
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>group-activity/
++-- templates/
+¦   +-- group-activity/
+¦       +-- group-activity.html          # Main template
+¦       +-- group-activity-settings.html # Settings panel
++-- scripts/
+¦   +-- group-activity-directive.js      # Core directive
+¦   +-- group-activity-preview1.js       # Preview renderer
++-- styles/
+¦   +-- group-activity-template.css     # Component styles
++-- default/
+    +-- group-activity.json             # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Layout Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">3 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">style1 vertical, style2 horizontal slider, workedExample collapsible</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Interactive</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio yes/no</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">isInteractive: workedExample forces no automatically</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of group submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Shuffle Questions</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Fisher-Yates shuffle child widget order on load</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Background Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle + Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">allowGroupActivityBackgroundColor + pagebgcolor</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Border Radius</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle + 0-99px</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">allowGroupActivityBorderRadius + grpBorder_radius (default 16)</td></tr><tr><td style="padding:9px 12px;">Header BG Color</td><td style="padding:9px 12px;">Color Picker</td><td style="padding:9px 12px;">headerBgColor — only visible for workedExample style</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Child submit hidden:</strong> All submit/reset/try-again buttons in child widgets are hidden via CSS; the parent Group Activity controls provide unified submit, reset, and try-again actions.</li><li><strong>Submit via CSS class reading:</strong> Parent submit clicks each child element matching .submit-btn, then reads CSS classes (.correct, .incorrect) on answer elements to calculate the score.</li><li><strong>highlightGroupBullets performance:</strong> A setInterval running every 1 second continuously checks and updates bullet navigation state for style2. This runs even when no style2 exists on the page.</li><li><strong>Worked Example forces non-interactive:</strong> workedExample styleClass automatically sets isInteractive=no, hiding the submit button and making all child content display-only.</li><li><strong>CL client special-casing:</strong> Multiple behaviors differ when window.client=="CL", including Submit visibility rules in style2 and SCORM reporting format.</li><li><strong>enableGroupInteractivity required:</strong> Only widgets with enableGroupInteractivity:true in their configuration can be dropped into a Group Activity container.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Group Activity/GROUP_ACTIVITY_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

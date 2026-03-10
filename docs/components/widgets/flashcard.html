@@ -1,358 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Flashcard | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flashcard Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Flashcard Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Flashcard</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Flashcard Component</h1><p class="page-subtitle">Flip-card widget with configurable front and back sides supporting text and media. Authors build decks of 2-20 cards with independent front/back content, 2 visual styles, and optional auto-advance.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Flashcard Component presents a deck of 2-20 flip cards. Each card has an independently configurable front and back face, each supporting text, images, audio, or video. Students click a card to flip it. Navigation between cards uses bxSlider. Two style variants control the navigation UI (arrows vs. progress bar).</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>2-20 cards per deck</li><li>Independent front/back content (text or media)</li><li>Media types: image, audio, video per face</li><li>2 visual styles: style-1 (arrows) and style-2 (progress bar)</li><li>Auto-advance with configurable pause duration (default 3s)</li><li>Card text limited to 150 characters</li><li>Theme color and card background color customization</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">flashCardTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">flashcard</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">slides[]: isBackCardActive, flashCardStyleType: style-1/style-2</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files (~1135+lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">Non-gradable (content widget)</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">bxSlider, CSS 3D flip</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class FlashcardController {
+        +slides: Flashcard[]
+        +settings: FlashcardSettings
+        +addSlideClick()
+        +deleteSlideClick()
+        +flipCard(val)
+        +resizeSlideHeight()
+        +setFrontMediaType()
+        +setBackMediaType()
+        +SlideshowOutlineChanged()
+    }
+    class Flashcard {
+        +isBackCardActive: Boolean
+        +frontCard: CardFace
+        +backCard: CardFace
+    }
+    class CardFace {
+        +cardTitle: String
+        +cardText: String
+        +cardType: String
+        +isMediaEnable: Boolean
+        +isTitleEnable: Boolean
+        +imageSetting: Object
+        +audioSetting: Object
+        +videoSetting: Object
+    }
+    class FlashcardSettings {
+        +flashCardStyleType: String
+        +autoSlide: Boolean
+        +pauseDuration: Number
+        +cardColour: String
+        +isHeaderVisible: Boolean
+        +activeSlide: Number
+    }
+    FlashcardController --> Flashcard
+    Flashcard --> CardFace
+    FlashcardController --> FlashcardSettings</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as FlashcardController
+    participant bx as bxSlider
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Flashcard</span>
-        </div>
-      </nav>
-      <h1 class="header__title">Flashcard</h1>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Flashcard Component</h1>
-        <p class="page-subtitle">Flip-card interface for memorization and quick review.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The Flashcard component provides a digital flip-card interface for memorization and self-paced learning. Users can click or tap to flip between front and back of cards, making it ideal for vocabulary, definitions, and quick review sessions.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class FlashcardComponent {
-        -cards: Array~Card~
-        -currentIndex: Number
-        -studyMode: StudyMode
-        -progress: Progress
-        +initialize()
-        +nextCard()
-        +previousCard()
-        +flipCard()
-        +shuffle()
-        +markAsKnown(cardId)
-        +resetProgress()
+    A->>C: addSlideClick() build deck 2-20
+    A->>C: Set front card type text or media
+    A->>C: Set back card type text or media
+    A->>C: Select style-1 or style-2
+    A->>C: Enable auto-advance pauseDuration
+    C->>bx: window.applystyleflashcard()
+    bx-->>C: Slider initialized
+    S->>bx: View card 1 front
+    S->>C: Click card to flip
+    C->>C: flipCard() toggles .flipped CSS class
+    Note over C: Media stops on flip via postMessage
+    S->>bx: Click next arrow or progress dot
+    bx->>S: Navigate to next card</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Flashcard Deck]) --> B[Add 2-20 cards]
+    B --> C[Configure front face per card]
+    C --> D{Front type?}
+    D -->|Text| E[Set cardTitle and cardText max 150]
+    D -->|Media| F[Upload image/audio/video]
+    E --> G[Configure back face]
+    F --> G
+    G --> H[Select style-1 arrows or style-2 progress]
+    H --> I[Set auto-advance optional]
+    I --> J[Set theme and card background color]
+    J --> K([Student Views Flashcard])
+    K --> L[Card front shown]
+    L --> M[Student clicks card]
+    M --> N[CSS 3D flip animation]
+    N --> O[Back face revealed]
+    O --> P[Media stops on flip]
+    P --> Q[Student navigates to next card]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">flashCardTemplate</div></div><div class="info-card"><div class="info-card__label">Card Range</div><div class="info-card__value">2-20 cards</div></div><div class="info-card"><div class="info-card__label">Style-1</div><div class="info-card__value">Arrow navigation</div></div><div class="info-card"><div class="info-card__label">Style-2</div><div class="info-card__value">Progress bar navigation</div></div><div class="info-card"><div class="info-card__label">Text Limit</div><div class="info-card__value">150 chars (keydown only, not paste)</div></div><div class="info-card"><div class="info-card__label">Auto-advance</div><div class="info-card__value">pauseDuration default 3s</div></div><div class="info-card"><div class="info-card__label">Memory Leak</div><div class="info-card__value">Global keydown never removed</div></div><div class="info-card"><div class="info-card__label">Slider</div><div class="info-card__value">bxSlider touchEnabled false in editor</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "identifier": "flashcard",
+  "introductionText": "Study these flashcards.",
+  "instructionText": "Click each card to flip it.",
+  "slides": [
+    {
+      "isBackCardActive": false,
+      "frontCard": {
+        "cardTitle": "Question",
+        "cardText": "What is photosynthesis?",
+        "cardType": "text",
+        "isTitleEnable": true,
+        "isMediaEnable": false
+      },
+      "backCard": {
+        "cardTitle": "Answer",
+        "cardText": "The process by which plants convert light to energy.",
+        "cardType": "text",
+        "isTitleEnable": true,
+        "isMediaEnable": false
+      }
     }
-    
-    class Card {
-        -id: String
-        -frontContent: String
-        -backContent: String
-        -isFlipped: Boolean
-        -difficulty: Difficulty
-        -timesReviewed: Number
-        +flip()
-        +render()
-        +animate()
-    }
-    
-    class StudyMode {
-        <<enumeration>>
-        SEQUENTIAL
-        RANDOM
-        SPACED_REPETITION
-    }
-    
-    class Difficulty {
-        <<enumeration>>
-        EASY
-        MEDIUM
-        HARD
-    }
-    
-    class Progress {
-        -cardsReviewed: Number
-        -cardsRemaining: Number
-        -knownCards: Set
-        +update()
-        +calculate()
-    }
-    
-    FlashcardComponent "1" --> "*" Card : manages
-    FlashcardComponent --> StudyMode : uses
-    FlashcardComponent --> Progress : tracks
-    Card --> Difficulty : has
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Flashcard Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Add Flashcard (2-20 cards)
-    loop For Each Card
-        Author->>W: Configure Front Card
-        alt Text Mode
-            Author->>W: Enter Front Text (150 chars)
-        else Media Mode
-            Author->>W: Select Media Type
-            alt Image
-                Author->>W: Upload Image
-                W->>API: Upload Image
-                API-->>W: Return URL
-            else Video
-                Author->>W: Upload/Link Video
-                W->>API: Save Video
-            else Audio
-                Author->>W: Upload Audio
-                W->>API: Save Audio
-            end
-            Author->>W: Add Title/Caption
-        end
-        Author->>W: Configure Back Card
-        Author->>W: Set Content (Text/Media)
-    end
-    Author->>W: Select Style (Style-1/Style-2)
-    Author->>W: Set Card Color
-    Author->>W: Configure Auto-Play (optional)
-    Author->>W: Set Pause Duration
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,UI: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render First Card (Front Face)
-    W->>UI: Initialize Slider
-    alt Style-2 Selected
-        W->>UI: Display Progress Bar
-    end
-    Student->>UI: Click Card to Flip
-    UI->>W: Handle Flip Event
-    W->>UI: Animate Card Flip
-    W->>UI: Show Back Face
-    alt Media on Back
-        W->>UI: Initialize Media Player
-    end
-    Student->>UI: Click Card Again
-    UI->>W: Handle Flip Event
-    W->>UI: Flip to Front Face
-    Student->>UI: Click Next Arrow
-    UI->>W: Navigate to Next Card
-    W->>UI: Transition to Next Card
-    alt Style-2 Active
-        W->>UI: Update Progress Bar
-    end
-    alt Auto-Play Enabled
-        W->>W: Start Auto-Play Timer
-        loop Auto Progression
-            W->>UI: Advance to Next Card
-            W->>UI: Update Progress
-        end
-    end
-    Student->>UI: Click Previous Arrow
-    UI->>W: Navigate to Previous Card
-    W->>UI: Show Previous Card
-    Student->>UI: Click Slide Indicator
-    UI->>W: Jump to Specific Card
-    W->>UI: Display Selected Card
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitFlashcard[Initialize Flashcard Editor]
-    InitFlashcard --> AddCards[Add Cards 2-20]
-    AddCards --> ConfigCard[Configure Each Card]
-    ConfigCard --> SetFront[Set Front Side Content]
-    SetFront --> AddFrontMedia{Add Front Media?}
-    AddFrontMedia -->|Yes| UploadFront[Upload Image/Video]
-    AddFrontMedia -->|No| SetBack
-    UploadFront --> SetBack[Set Back Side Content]
-    SetBack --> AddBackMedia{Add Back Media?}
-    AddBackMedia -->|Yes| UploadBack[Upload Image/Video]
-    AddBackMedia -->|No| NextCard
-    UploadBack --> NextCard{More Cards?}
-    NextCard -->|Yes| ConfigCard
-    NextCard -->|No| ChooseStyle[Select Visual Style 1-2]
-    ChooseStyle --> ConfigColors[Configure Card Colors]
-    ConfigColors --> SaveFlashcard[Save Configuration]
-    
-    SaveFlashcard --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayCard1[Display First Card - Front Side]
-    DisplayCard1 --> ShowNavigation[Show Navigation Controls]
-    ShowNavigation --> WaitAction{Student Action}
-    
-    WaitAction -->|Click Card| FlipCard[Flip to Back Side]
-    FlipCard --> ShowBack[Display Back Side Content]
-    ShowBack --> WaitBackAction{Student Action on Back}
-    WaitBackAction -->|Click Card| FlipToFront[Flip to Front Side]
-    FlipToFront --> WaitAction
-    
-    WaitAction -->|Click Next| NextCardNav[Move to Next Card]
-    WaitBackAction -->|Click Next| NextCardNav
-    NextCardNav --> CheckLastCard{Last Card?}
-    CheckLastCard -->|No| DisplayNextCard[Display Next Card Front]
-    CheckLastCard -->|Yes| WrapToFirst[Wrap to First Card]
-    DisplayNextCard --> ShowNavigation
-    WrapToFirst --> ShowNavigation
-    
-    WaitAction -->|Click Previous| PrevCardNav[Move to Previous Card]
-    WaitBackAction -->|Click Previous| PrevCardNav
-    PrevCardNav --> CheckFirstCard{First Card?}
-    CheckFirstCard -->|No| DisplayPrevCard[Display Previous Card Front]
-    CheckFirstCard -->|Yes| WrapToLast[Wrap to Last Card]
-    DisplayPrevCard --> ShowNavigation
-    WrapToLast --> ShowNavigation
-    
-    FlipCard --> TrackFlip[Track Card Flip]
-    TrackFlip --> DataFlow[Data Flow: Card State â†’ Model]
-    DataFlow --> UpdateViewedCards[Update Viewed Cards Array]
-    UpdateViewedCards --> CheckAllViewed{All Cards Viewed?}
-    CheckAllViewed -->|Yes| MarkComplete[Mark Activity Complete]
-    CheckAllViewed -->|No| SaveProgress
-    MarkComplete --> SaveProgress[Save Progress to SCORM]
-    SaveProgress --> UpdateIndicator[Update Progress Indicator]
-    UpdateIndicator --> WaitBackAction
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors create flashcard sets (2-20 cards) with front and back content, optionally add images or videos to either side, select from 2 visual styles, and configure card colors for branding.</li>
-                <li><strong>Student Flow:</strong> Students navigate through cards using previous/next controls, click cards to flip between front and back sides, with automatic wrapping from last to first card for continuous study.</li>
-                <li><strong>Validation:</strong> Non-assessed learning tool focuses on content exploration, tracking which cards have been viewed and flipped to measure engagement and completion status.</li>
-                <li><strong>Data Flow:</strong> Card viewing and flip states are tracked in a viewed cards array, synchronized with SCORM for progress persistence, with progress indicators updated as students explore content.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Flashcard/FLASHCARD_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+  ],
+  "settings": {
+    "isHeaderVisible": true,
+    "flashCardStyleType": "style-1",
+    "autoSlide": false,
+    "pauseDuration": 3,
+    "cardColour": "#f0f0f0",
+    "activeSlide": 1
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>flashcard/
++-- templates/
+¦   +-- flashcard/
+¦       +-- flashcard.html                       # Main template
+¦       +-- flashcard-media-template.html        # Media sub-template
+¦       +-- flashcard-template-setting-panel.html # Settings panel
++-- scripts/
+¦   +-- flashcard-directive.js                   # Core (1135 lines)
+¦   +-- flashcard-template-preview1.js           # Preview (91 lines)
++-- styles/
+¦   +-- flashcard-template.css                  # Styles (1760 lines)
++-- default/
+    +-- flashcard.json                          # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">2 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">style-1 (arrows) or style-2 (progress bar)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Card Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio per face</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text or Media (image/audio/video) per front/back face</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Auto Slide</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable automatic card advancement</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Pause Duration</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Seconds between auto-advance (default 3)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Theme Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Primary theme color for arrows/controls</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Card Background</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Background color applied to both card faces (cardColour)</td></tr><tr><td style="padding:9px 12px;">Front/Back Title</td><td style="padding:9px 12px;">Toggle per face</td><td style="padding:9px 12px;">isFrontCardTitleVisible / isBackCardTitleVisible</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>isBackCardActive context:</strong> The settings panel switches context between front and back card configuration via isBackCardActive flag. Controls shown change based on which face is active.</li><li><strong>Text limit via keydown:</strong> The 150-character limit is enforced on keydown events only — paste operations bypass the limit, allowing longer text to be pasted in.</li><li><strong>Media stops on flip/navigation:</strong> When a card is flipped or the slider navigates, active videos are paused via YouTube postMessage and audio elements are paused directly.</li><li><strong>Global keydown memory leak:</strong> A global keydown event listener is registered but never removed when the component is destroyed, accumulating with each component on the page.</li><li><strong>bxSlider touchEnabled:</strong> Touch swiping is disabled (touchEnabled:false) in the editor environment; enabled in reader mode for mobile users.</li><li><strong>Non-gradable:</strong> Flashcards are content presentation tools; no SCORM scoring or student interaction state is tracked.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Flashcard/FLASHCARD_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

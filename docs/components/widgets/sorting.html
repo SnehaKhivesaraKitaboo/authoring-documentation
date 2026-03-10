@@ -1,380 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Sorting | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sorting Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Sorting Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Sorting</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Sorting Component</h1><p class="page-subtitle">Drag-and-drop sorting activity where students arrange words, phrases, or images into correct order within sentences. Supports 1-5 sentences with embedded drag items and 3 visual styles.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Sorting Component presents sentences with word or image drag items that students must arrange into the correct order. Drag items are embedded within the sentence HTML using a special data-id format (DI_{rowNo}_{blankNo}). Preview clones items into drop zones using Fisher-Yates shuffle. Supports 1-5 sentences with up to 5 drag items each (25 total maximum).</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>1-5 sentences with embedded drag items (max 25 total)</li><li>Text or image drag items (configurable per activity)</li><li>3 visual style variants (sort-style1, sort-style2, sort-style3)</li><li>Fisher-Yates shuffle on each load</li><li>On non-final TryAgain: incorrect items removed, correct stay locked</li><li>Drop zones implemented via jQuery UI Droppable .sort-with-row</li><li>eval() used for button handlers (security risk)</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">sortTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">Sorting</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">SortingStatementInfo[]: max 5 sentences with embedded drag items</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainSort()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">jQuery UI Droppable, Fisher-Yates</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class SortingController {
+        +settings: SortSettings
+        +addSentenceClick()
+        +removeSentenceClick()
+        +insertDragItem()
+        +loadBlanks()
+        +dragradioChange()
+        +pasteprevent()
+        +Applystylesorting()
+        +SubmitAnswerSort()
+        +showAnswerSort()
+        +tryagainSort()
+        +resetAnswerSort()
+        +dragAndDropSorting()
+    }
+    class SortSettings {
+        +isText: String
+        +maxTries: Number
+        +allowRestart: Boolean
+        +SortingStatementInfo: SortSentence[]
+        +style: StyleConfig
+    }
+    class SortSentence {
+        +id: String
+        +statement: String
+        +DragItemText: String
+        +responseList: SortItem[]
+    }
+    class SortItem {
+        +choiceList: Choice[]
+        +isTextorImage: Boolean
+    }
+    SortingController --> SortSettings
+    SortSettings --> SortSentence
+    SortSentence --> SortItem</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as SortingController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <h1 class="header__title">Sorting Component</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Sorting</span>
-        </div>
-      </nav>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Sorting Component</h1>
-        <p class="page-subtitle">Drag-and-drop sorting component for ordering items sequentially.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The Sorting component enables users to arrange items in a specific order through an intuitive drag-and-drop interface. It validates the sequence and provides immediate feedback on correct positioning.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class SortingComponent {
-        -items: Array~SortableItem~
-        -correctOrder: Array~Number~
-        -currentOrder: Array~Number~
-        -dragState: DragState
-        -isValidated: Boolean
-        +initialize()
-        +shuffle()
-        +onDragStart(itemId)
-        +onDragOver(targetId)
-        +onDrop(itemId, position)
-        +validateOrder()
-        +checkCorrectness()
-        +provideFeedback()
-        +reset()
-    }
-    
-    class SortableItem {
-        -id: String
-        -content: String
-        -position: Number
-        -correctPosition: Number
-        -isDragging: Boolean
-        +render()
-        +updatePosition()
-        +highlight()
-    }
-    
-    class DragState {
-        -draggedItem: SortableItem
-        -dragOverItem: SortableItem
-        -startPosition: Number
-        +reset()
-    }
-    
-    class FeedbackEngine {
-        +compareOrders()
-        +highlightCorrect()
-        +highlightIncorrect()
-        +calculateScore()
-    }
-    
-    SortingComponent "1" --> "*" SortableItem : manages
-    SortingComponent --> DragState : tracks
-    SortingComponent --> FeedbackEngine : uses
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Sorting Widget
-    participant UI as UI Layer
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Select Item Type (Text/Image)
-    Author->>W: Add Sentence (1-5 sentences)
-    loop For Each Sentence
-        alt Text Type
-            Author->>W: Enter Drag Item Text (max 150 chars)
-        else Image Type
-            Author->>W: Upload Drag Item Image
-            Author->>W: Set Alt Text
-        end
-        Author->>W: Set Correct Position (sequence order)
-    end
-    Author->>W: Select Style (sort-style1/2/3)
-    Author->>W: Set Max Attempts
-    Author->>W: Configure Buttons
-    Author->>W: Set Appearance Color
-    W->>UI: Save Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Container
-    W->>UI: Randomize Item Order
-    alt Text Type
-        W->>UI: Display Text Drag Items
-    else Image Type
-        W->>UI: Display Image Drag Items
-    end
-    W->>UI: Create Drop Zones (numbered)
-    W->>UI: Initialize jQuery UI Draggable
-    W->>UI: Initialize jQuery UI Droppable
-    Student->>UI: Drag Item
-    UI->>W: Track Drag Movement
-    Student->>UI: Drop on Zone
-    UI->>W: Handle Drop Event
-    W->>W: Validate Drop Zone
-    W->>UI: Place Item in Zone
-    W->>UI: Update Visual State
-    W->>SCORM: Save Current Order
-    loop Sort All Items
-        Student->>UI: Drag and Drop Items
-        W->>SCORM: Update State
-    end
-    Student->>W: Submit Answer
-    W->>V: Validate Sequence
-    loop For Each Item
-        V->>V: Get Current Position
-        V->>V: Get Correct Position
-        V->>V: Compare Positions
-    end
-    V-->>W: Return Validation Results
-    alt All Correct
-        W->>UI: Display Success Message
-        W->>UI: Apply Green Highlights
-        W->>UI: Disable Dragging
-    else Some/All Incorrect
-        W->>UI: Display Error Message
-        W->>UI: Apply Green to Correct Positions
-        W->>UI: Apply Red to Incorrect Positions
-        alt Attempts Remaining
-            W->>UI: Enable Try Again
-            Student->>W: Try Again
-            W->>UI: Clear Incorrect Items
-            W->>UI: Keep Correct Items
-        end
-    end
-    opt Show Me Clicked
-        Student->>W: Show Me
-        W->>UI: Auto-arrange in Correct Order
-        W->>UI: Disable Dragging
-    end
-    opt Reset Clicked
-        Student->>W: Reset
-        W->>UI: Randomize Order Again
-        W->>UI: Clear All Positions
-        W->>UI: Enable Dragging
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitSorting[Initialize Sorting Component]
-    InitSorting --> AddSentences[Add Sentences/Statements 1-5]
-    AddSentences --> ConfigSentence[Configure Each Sentence]
-    ConfigSentence --> InsertDragItem[Insert Drag Item]
-    InsertDragItem --> ChooseItemType{Choose Item Type}
-    ChooseItemType -->|Text| AddTextItem[Add Text Content Max 150 chars]
-    ChooseItemType -->|Image| AddImageItem[Upload Image with Alt Text]
-    AddTextItem --> SetCorrectOrder[Set Correct Sequential Order]
-    AddImageItem --> SetCorrectOrder
-    SetCorrectOrder --> NextSentence{More Sentences?}
-    NextSentence -->|Yes| ConfigSentence
-    NextSentence -->|No| ChooseStyle[Select Visual Style 1-3]
-    ChooseStyle --> ConfigSettings[Configure Attempts, Buttons]
-    ConfigSettings --> SaveSorting[Save Configuration]
-    
-    SaveSorting --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderTemplate[Render Sorting Template]
-    RenderTemplate --> CloneDragItems[Clone Drag Items to Preview Area]
-    CloneDragItems --> RandomizeOrder[Randomize Item Order]
-    RandomizeOrder --> InitDraggable[Initialize jQuery UI Draggable]
-    InitDraggable --> InitDroppable[Initialize jQuery UI Droppable]
-    InitDroppable --> DisplayItems[Display Shuffled Items]
-    DisplayItems --> StudentDrag{Student Drags Item}
-    
-    StudentDrag --> DragStart[Drag Start - Create Helper Clone]
-    DragStart --> DragMove[Drag Over Drop Zones]
-    DragMove --> DropValidate{Valid Drop Zone?}
-    DropValidate -->|No| RejectDrop[Reject Drop, Snap Back]
-    DropValidate -->|Yes| AcceptDrop[Accept Drop]
-    AcceptDrop --> PlaceInZone[Place Item in Drop Zone]
-    PlaceInZone --> MarkAdded[Mark Item as Added]
-    MarkAdded --> CheckAllPlaced{All Items Placed?}
-    CheckAllPlaced -->|No| StudentDrag
-    CheckAllPlaced -->|Yes| EnableSubmit[Enable Submit Button]
-    RejectDrop --> StudentDrag
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> ValidateOrder[Validate Sequence Order]
-    ValidateOrder --> LoopSentences[Loop Through Sentences]
-    LoopSentences --> CheckSequence{Order Correct?}
-    CheckSequence -->|Yes| MarkCorrectSentence[Green Border, Checkmark]
-    CheckSequence -->|No| MarkIncorrectSentence[Red Border, Cross]
-    MarkCorrectSentence --> NextSentenceVal{More Sentences?}
-    MarkIncorrectSentence --> NextSentenceVal
-    NextSentenceVal -->|Yes| LoopSentences
-    NextSentenceVal -->|No| CalculateScore[Calculate Total Score]
-    
-    CalculateScore --> ShowFeedback[Display Feedback Message]
-    ShowFeedback --> DecrementAttempts[Decrement Attempts]
-    DecrementAttempts --> CheckAttempts{Attempts Remaining?}
-    CheckAttempts -->|Yes| EnableTryAgain[Enable Try Again]
-    CheckAttempts -->|No| EnableShowMe[Enable Show Me]
-    CheckAttempts -->|All Correct| SaveFinal
-    
-    EnableTryAgain --> TryAgainClick([Click Try Again])
-    TryAgainClick --> ClearIncorrect[Clear Incorrect Sequences]
-    ClearIncorrect --> ReturnToBank[Return Items to Item Pool]
-    ReturnToBank --> Reshuffle[Reshuffle Items]
-    Reshuffle --> StudentDrag
-    
-    EnableShowMe --> ShowMeClick([Click Show Me])
-    ShowMeClick --> ShowCorrectOrder[Display All Correct Sequences]
-    ShowCorrectOrder --> DisableInteraction[Disable Drag & Drop]
-    DisableInteraction --> SaveFinal[Save Final State to SCORM]
-    
-    PlaceInZone --> DataFlow[Data Flow: Placement â†’ Model]
-    DataFlow --> UpdateSequenceArray[Update itemSequence Array]
-    UpdateSequenceArray --> StoreIdentifiers[Store Item Identifiers]
-    StoreIdentifiers --> SyncState[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors create sentences/statements (1-5) with drag items, choose item types (text up to 150 chars or images with alt text), set correct sequential order, and select from 3 visual styles.</li>
-                <li><strong>Student Flow:</strong> Students drag randomized items using jQuery UI into drop zones in correct sequence order, with helper clones for drag feedback and validation preventing invalid placements.</li>
-                <li><strong>Validation:</strong> Sequence order is validated for each sentence with visual feedback (green borders/checkmarks for correct sequences, red borders/crosses for incorrect), calculating aggregate scoring across all sentences.</li>
-                <li><strong>Data Flow:</strong> Item sequence array tracks placement order with item identifiers, synchronized with SCORM, with Try Again returning incorrect items to the pool with reshuffling, or Show Me displaying all correct sequences.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Sorting/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: addSentenceClick() up to 5
+    A->>C: Type sentence text with blanks
+    A->>C: insertDragItem() embeds data-id=DI_row_blank
+    A->>C: Configure Text or Image drag items
+    A->>C: Select style 1-3
+    A->>C: Save component
+    S->>C: View component
+    C->>C: Fisher-Yates shuffle clones into .preview-sort
+    S->>C: Drag item to drop zone .sort-with-row
+    C->>C: dragAndDropSorting() validates position
+    S->>C: Submit
+    C->>C: SubmitAnswerSort() checks data-id match
+    C->>C: stateMainatainSort() SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Sorting]) --> B[Add 1-5 sentences]
+    B --> C[Type sentence with blank positions]
+    C --> D[insertDragItem adds data-id=DI_row_blank]
+    D --> E[Select Text or Image items]
+    E --> F[Select visual style 1-3]
+    F --> G([Student Views Component])
+    G --> H[Items cloned to bank with Fisher-Yates shuffle]
+    H --> I[Student drags item to drop zone]
+    I --> J[dragAndDropSorting validates]
+    J --> K[Submit]
+    K --> L{Correct position?}
+    L -->|Yes| M[Item locked in place]
+    L -->|No| N[Item returned to bank on TryAgain]
+    M --> O[stateMainatainSort SCORM]
+    N --> O</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">sortTemplate</div></div><div class="info-card"><div class="info-card__label">Max Sentences</div><div class="info-card__value">5</div></div><div class="info-card"><div class="info-card__label">Max Drag Items</div><div class="info-card__value">25 total (5 per sentence)</div></div><div class="info-card"><div class="info-card__label">Item ID Format</div><div class="info-card__value">DI_{rowNo}_{blankNo}</div></div><div class="info-card"><div class="info-card__label">Style Variants</div><div class="info-card__value">sort-style1, sort-style2, sort-style3</div></div><div class="info-card"><div class="info-card__label">Security Risk</div><div class="info-card__value">eval() for button handlers</div></div><div class="info-card"><div class="info-card__label">Shuffle</div><div class="info-card__value">Fisher-Yates on load</div></div><div class="info-card"><div class="info-card__label">Drop Zone</div><div class="info-card__value">jQuery UI Droppable .sort-with-row</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "isText": "with-Text",
+    "maxTries": 3,
+    "allowRestart": true,
+    "showmecheckbox": true,
+    "isHeaderVisible": true,
+    "style": {"selected_style": "sort-style1"},
+    "SortingStatementInfo": [
+      {
+        "id": "s1",
+        "statement": "The [DI_1_1] sat on the [DI_1_2].",
+        "DragItemText": "cat,mat",
+        "responseList": [
+          {
+            "choiceList": [{"choiceInfo": {"choice": {"textData": {"text": "cat"}, "media": null}}}],
+            "isTextorImage": true
+          },
+          {
+            "choiceList": [{"choiceInfo": {"choice": {"textData": {"text": "mat"}, "media": null}}}],
+            "isTextorImage": true
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>sorting/
++-- templates/
+¦   +-- sorting/
+¦       +-- sorting.html             # Main template (1118 lines)
+¦       +-- sorting-settings.html   # Settings panel
+¦       +-- sort-image.html         # Image drag item template
++-- scripts/
+¦   +-- sorting.js                  # Core directive (1118 lines)
+¦   +-- sorting-preview1.js         # Preview (508 lines)
++-- styles/
+¦   +-- sorting-template.css       # Styles (1053 lines)
++-- default/
+    +-- sorting.json               # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Drag Item Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text items or Image items (isText: with-Text/with-Image)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">3 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">sort-style1, sort-style2, sort-style3</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Max Attempts</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Dropdown 1-5</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number of submission attempts (maxTries)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Allow Restart</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable complete activity restart (allowRestart)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show Me</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable show correct answer button (showmecheckbox)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Drag Item Alt Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Accessibility alt text for image drag items</td></tr><tr><td style="padding:9px 12px;">Outline</td><td style="padding:9px 12px;">Radio</td><td style="padding:9px 12px;">No Outline or Outline border around component</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Drag item ID format:</strong> Each drag item is embedded in the sentence HTML using the format data-id="DI_{rowNo}_{blankNo}" — e.g., DI_1_1 for the first blank in the first sentence. This ID drives matching on submit.</li><li><strong>Fisher-Yates shuffle per load:</strong> The preview renderer clones drag items into .preview-sort containers using a Fisher-Yates shuffle. Shuffle is applied on every page load — students see different orders each time.</li><li><strong>TryAgain partial credit:</strong> On non-final attempts, correctly placed items remain locked (cannot be moved); incorrect items are returned to the bank for re-attempt.</li><li><strong>eval() security risk:</strong> Button click handlers in the sorting template use eval() to execute dynamic function strings — a known security anti-pattern that could allow code injection if input is not sanitized.</li><li><strong>dragradioChange:</strong> Switching between Text and Image modes calls dragradioChange() which rebuilds the entire drag item list, clearing any unsaved configuration.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Sorting/TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

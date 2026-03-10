@@ -1,288 +1,165 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLIC Component | Documentation Portal</title>
+  <meta name="description" content="CLIC Component - External sketchpad embedding Carnegie Learning Interactive Content via iframe.">
+  <title>CLIC Component (Sketchpad) | Documentation Portal</title>
   <link rel="stylesheet" href="../../assets/css/main.css">
   <link rel="stylesheet" href="../../assets/css/sidebar.css">
   <link rel="stylesheet" href="../../assets/css/components.css">
   <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
 </head>
 <body>
   <aside class="sidebar" id="sidebar"></aside>
   <div class="sidebar-overlay"></div>
   <main class="main-content">
     <header class="header">
-      <h1 class="header__title">CLIC Component</h1>
+      <h1 class="header__title">CLIC Component (Sketchpad)</h1>
       <nav class="breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">CLIC Component</span>
-        </div>
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">CLIC</span></div>
       </nav>
     </header>
     <div class="content-wrapper">
       <section class="section">
-        <h1 class="page-title">CLIC Component</h1>
-        <p class="page-subtitle">Click-responsive interactive learning component for engaging content interactions.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-      <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The CLIC (Click-Interaction Learning Component) enables interactive content that responds to user clicks. It supports hotspots, clickable regions, and progressive content revelation to create engaging learning experiences.</p>
-          </div>
-        </div>
-      </section>
-      <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class CLICComponent {
-        -hotspots: Array~Hotspot~
-        -content: ContentArea
-        -interactionMode: InteractionMode
-        -state: ComponentState
-        +initialize()
-        +registerHotspot(region)
-        +onHotspotClick(hotspotId)
-        +showContent(contentId)
-        +hideContent(contentId)
-        +trackInteraction()
-        +reset()
-    }
-    
-    class Hotspot {
-        -id: String
-        -coordinates: Coordinates
-        -shape: Shape
-        -linkedContent: Content
-        -isActive: Boolean
-        -isClicked: Boolean
-        +render()
-        +activate()
-        +deactivate()
-        +highlight()
-    }
-    
-    class Content {
-        -id: String
-        -text: String
-        -media: Media
-        -isVisible: Boolean
-        +show()
-        +hide()
-        +render()
-    }
-    
-    class InteractionMode {
-        <<enumeration>>
-        SINGLE_CLICK
-        MULTI_CLICK
-        ORDERED_SEQUENCE
-    }
-    
-    class Shape {
-        <<enumeration>>
-        CIRCLE
-        RECTANGLE
-        POLYGON
-    }
-    
-    CLICComponent "1" --> "*" Hotspot : manages
-    CLICComponent --> InteractionMode : uses
-    Hotspot --> Content : triggers
-    Hotspot --> Shape : has
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as CLIC Widget
-    participant UI as UI Layer
-    participant Student
-    participant CLIC as CLIC Server
-    participant Iframe
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Configuration Form
-    Author->>W: Enter CLIC UID
-    Author->>W: Enter Instance Name
-    W->>W: Validate Form Fields
-    Author->>W: Submit Configuration
-    W->>W: Set issubmitted = true
-    W->>UI: Hide Form, Show Iframe
-    W->>UI: Save Configuration
-    
-    Note over Student,Iframe: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>W: Build CLIC URL
-    W->>W: baseUrl + ?clicid=UID&instancename=NAME
-    W->>Iframe: Create Iframe Element
-    Iframe->>CLIC: Load CLIC Component
-    CLIC->>CLIC: Load library.js
-    CLIC->>CLIC: Load polyfills.js
-    CLIC->>CLIC: Load styles.css
-    CLIC-->>Iframe: Render CLIC Content
-    Iframe->>UI: Display CLIC Component
-    Student->>Iframe: Interact with CLIC
-    Note right of Student: All interactions handled<br>by CLIC system internally
-    Iframe->>CLIC: Send Interaction Data
-    CLIC->>CLIC: Process Student Input
-    CLIC-->>Iframe: Return Results
-    Iframe->>Student: Display Feedback
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <h1 class="page-title">CLIC Component (Sketchpad)</h1>
+        <p class="page-subtitle">External sketchpad integration widget embedding Carnegie Learning Interactive Content (CLIC) via iframe. Authors provide a CLIC UID; students interact within the embedded CLIC environment.</p>
+        <div class="quick-links"><a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a><a href="#uml" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>UML Class</a><a href="#usecase" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>Sequence</a><a href="#flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a><a href="#features" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Features</a><a href="#technical" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>Technical</a><a href="#data-model" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>Data Model</a><a href="#files" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>Files</a><a href="#settings" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>Settings</a><a href="#behaviors" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Behaviors</a></div>
       </section>
 
-      <!-- Component Flow Diagram Section -->
+      <section class="section" id="overview">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><h2 class="section__title">Overview</h2></div>
+        <div class="card"><div class="card__content"><p>The CLIC Component (Sketchpad) embeds an external Carnegie Learning Interactive Content environment within the Kitaboo reader via iframe. Authors provide a CLIC UID that maps to a specific Carnegie Learning activity. Students interact entirely within the embedded iframe; Kitaboo only manages the iframe URL construction and submit state.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Embeds Carnegie Learning via unique CLIC UID</li><li>Two-state UI: form input → iframe embed (no revert)</li><li>Production and staging environment URL routing</li><li>Auto-submits if clicuid is pre-populated (10ms setTimeout)</li><li>Introduction text and caption configurable</li><li>Submit state persisted via issubmitted flag</li><li>Environment detected via window.clicBaseUrl or platform attribute</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">sketchpad</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">sketchpad</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">clicuid: String</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">None (external)</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Carnegie Learning iframe</div></div></div></div></div>
+      </section>
+
+      <section class="section" id="uml">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg><h2 class="section__title">UML Class Diagram</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class SketchpadController {
+        +clicuid: String
+        +instancename: String
+        +introductionText: String
+        +paragraph: String
+        +settings: SketchpadSettings
+        +getIframeUrl()
+        +submitCLIC()
+        +updateText(event, keyName)
+        +introclick()
+    }
+    class SketchpadSettings {
+        +fullwidth: Boolean
+        +issubmitted: Boolean
+    }
+    class CLICFrame {
+        +src: String
+        +Production: String
+        +Staging: String
+    }
+    SketchpadController --> SketchpadSettings
+    SketchpadController --> CLICFrame : builds URL</div></div></div>
+      </section>
+
+      <section class="section" id="usecase">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><h2 class="section__title">Sequence Diagram</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as SketchpadController
+    participant CL as Carnegie Learning
+    participant S as Student
+
+    A->>C: Enter CLIC UID
+    C->>C: getIframeUrl() builds src URL
+    A->>C: Save component
+    S->>C: View component (form state)
+    C->>C: Check if clicuid populated
+    C->>C: 10ms setTimeout auto-submit
+    C->>C: submitCLIC() sets issubmitted=true
+    C->>CL: Render iframe with clicid param
+    CL-->>S: CLIC activity loaded in iframe
+    S->>CL: Interact within CLIC environment
+    Note over C,CL: All scoring handled by Carnegie Learning</div></div></div>
+      </section>
+
       <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> ConfigCLIC[Configure CLIC Component]
-    ConfigCLIC --> SetURL[Set Carnegie Learning URL]
-    SetURL --> ConfigDimensions[Set iframe Dimensions]
-    ConfigDimensions --> SetLabels[Set Question Labels]
-    SetLabels --> SaveCLIC[Save CLIC Configuration]
-    
-    SaveCLIC --> StudentLoad([Student Opens Widget])
-    StudentLoad --> InitIframe[Initialize External iframe]
-    InitIframe --> LoadExternal[Load Carnegie Learning Content]
-    LoadExternal --> RenderExternal[Render External Interface]
-    RenderExternal --> StudentInteract[Student Interacts with External System]
-    StudentInteract --> ExternalProcess[Carnegie Learning Processes Data]
-    ExternalProcess --> ExternalValidation[External System Validates]
-    ExternalValidation --> PassbackData{Data Available?}
-    PassbackData -->|Yes| ReceiveData[Receive External Results]
-    PassbackData -->|No| MonitorState[Monitor iframe Events]
-    ReceiveData --> UpdateLocal[Update Local State]
-    UpdateLocal --> DisplayStatus[Display Completion Status]
-    DisplayStatus --> SaveState[Save State to SCORM]
-    MonitorState --> StudentInteract
-    
-    SaveState --> DataFlow[Data Flow: External System → KITABOO]
-    DataFlow --> PostMessage[PostMessage Communication]
-    PostMessage --> ParseResponse[Parse External Response]
-    ParseResponse --> MapToSCORM[Map to SCORM Data Model]
-    MapToSCORM --> PersistState[Persist to LMS]
-    
-    PersistState --> Complete([Activity Complete])
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors configure the external Carnegie Learning URL, set iframe dimensions for proper display, and define question labels for the integration.</li>
-                <li><strong>Student Flow:</strong> Students interact directly with the embedded Carnegie Learning interface through an iframe, with all processing handled by the external system.</li>
-                <li><strong>Validation:</strong> External system performs all validation and scoring, with results passed back to KITABOO via PostMessage API communication protocol.</li>
-                <li><strong>Data Flow:</strong> Bidirectional communication between KITABOO and Carnegie Learning systems, mapping external results to SCORM data model for LMS persistence and tracking.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="section__title">Component Flow</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates CLIC Widget]) --> B[Enter CLIC UID]
+    B --> C[Set introduction text optional]
+    C --> D[Save component]
+    D --> E([Student Opens Page])
+    E --> F{issubmitted?}
+    F -->|No| G[Show form state]
+    G --> H[10ms setTimeout fires]
+    H --> I{clicuid populated?}
+    I -->|Yes| J[Auto-submit]
+    I -->|No| K[Wait for manual submit]
+    K --> J
+    F -->|Yes| L[Show iframe directly]
+    J --> L
+    L --> M{Environment?}
+    M -->|Production| N[https://apps.carnegielearning.com/clic/?clicid=UID]
+    M -->|Staging| O[https://apps.qa-cli.net/clic/?clicid=UID]
+    N --> P([CLIC activity renders in iframe])
+    O --> P</div></div></div>
       </section>
 
       <section class="section" id="features">
-        <div class="section__header">
-          <h2 class="section__title">Feature Specification</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><h2 class="section__title">Features</h2></div>
+        <div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div>
+      </section>
+
+      <section class="section" id="technical">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg><h2 class="section__title">Technical Details</h2></div>
+        <div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Framework</div><div class="info-card__value">AngularJS directive</div></div><div class="info-card"><div class="info-card__label">Integration</div><div class="info-card__value">iframe embed</div></div><div class="info-card"><div class="info-card__label">Prod URL</div><div class="info-card__value">apps.carnegielearning.com/clic</div></div><div class="info-card"><div class="info-card__label">Staging URL</div><div class="info-card__value">apps.qa-cli.net/clic</div></div><div class="info-card"><div class="info-card__label">Env Detection</div><div class="info-card__value">window.clicBaseUrl / platform attr</div></div><div class="info-card"><div class="info-card__label">Auto-submit</div><div class="info-card__value">10ms setTimeout on load</div></div><div class="info-card"><div class="info-card__label">Settings Panel</div><div class="info-card__value">Empty (known issue)</div></div><div class="info-card"><div class="info-card__label">Offline</div><div class="info-card__value">Non-functional</div></div></div></div></div>
+      </section>
+
+      <section class="section" id="data-model">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg><h2 class="section__title">Data Model</h2></div>
+        <div class="card"><div class="card__content"><pre><code>{
+  "identifier": "sketchpad",
+  "templateName": "CLIC Sketchpad",
+  "caption": "Interactive math sketchpad",
+  "clicuid": "abc123def456",
+  "instancename": "Lesson 3 Activity 2",
+  "introductionText": "Use the sketchpad to solve the problem.",
+  "paragraph": "Additional instructions here.",
+  "settings": {
+    "fullwidth": true,
+    "issubmitted": false
+  }
+}</code></pre></div></div>
+      </section>
+
+      <section class="section" id="files">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h2 class="section__title">File Structure</h2></div>
+        <div class="card"><div class="card__content"><pre><code>sketchpad/
+├── templates/
+│   └── sketch-pad/
+│       ├── sketchpad.html           # Main component template
+│       └── sketchpad-settings.html  # Settings panel (empty)
+├── scripts/
+│   ├── sketchpad-directive.js       # Core directive + URL builder
+│   └── sketchpad-preview1.js        # Preview renderer (empty)
+├── styles/
+│   └── sketchpad.css               # Component styles
+├── default/
+│   └── sketchpad.json              # Default configuration
+└── config.txt                      # Environment configuration</code></pre></div></div>
+      </section>
+
+      <section class="section" id="settings">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg><h2 class="section__title">Settings Panel</h2></div>
+        <div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">CLIC UID</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Carnegie Learning activity identifier (clicuid). No validation.</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Instance Name</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Display name for this CLIC instance (instancename)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Introduction Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Rich Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Introductory instructions shown above the embed</td></tr><tr><td style="padding:9px 12px;">Caption</td><td style="padding:9px 12px;">Text Input</td><td style="padding:9px 12px;">Caption displayed with the CLIC activity</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="section" id="behaviors">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg><h2 class="section__title">Behaviors and Constraints</h2></div>
+        <div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Two-state UI:</strong> The component has a form state (UID input) and an iframe state. Once submitted, there is no way to revert to the form state — issubmitted=true is permanent for the session.</li><li><strong>Auto-submit on load:</strong> A 10ms setTimeout fires on initialization; if clicuid is already populated, submitCLIC() is called automatically, bypassing the form state.</li><li><strong>No input validation:</strong> There is no validation on the CLIC UID. Invalid UIDs will load a broken iframe from Carnegie Learning with no error message in Kitaboo.</li><li><strong>No SCORM from Kitaboo:</strong> All scoring and state management is handled by Carnegie Learning. Kitaboo only tracks issubmitted=true.</li><li><strong>Offline non-functional:</strong> Since CLIC requires live Carnegie Learning servers, the component displays nothing in offline or packaged SCORM mode.</li><li><strong>Environment routing:</strong> The iframe URL is determined by window.clicBaseUrl, falling back to window.platform, then article[data-platform] attribute.</li></ul></div></div>
       </section>
     </div>
   </main>
@@ -294,8 +171,8 @@ flowchart TD
   <script src="../../assets/js/markdown-renderer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/CLIC/CLIC_COMPONENT_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+      renderMarkdown('../../../Components/Widgets/CLIC/CLIC_COMPONENT_TECHNICAL_DOCUMENTATION.md', 'feature-specification')
+        .catch(error => { document.getElementById('feature-specification').innerHTML = '<p>Documentation loading...</p>'; });
     });
   </script>
 </body>

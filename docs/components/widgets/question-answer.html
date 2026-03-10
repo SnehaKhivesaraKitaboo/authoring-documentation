@@ -1,483 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Question Answer | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Question Answer (Short/Long Answer) Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Question Answer (Short/Long Answer) Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Question Answer</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Question Answer (Short/Long Answer) Component</h1><p class="page-subtitle">Open-ended response widget supporting three input types: short answer (contenteditable), long answer (textarea), and rich text editor (Cazary basic or Jodit full WYSIWYG) with optional custom keyboard support.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Question Answer Component provides three answer input types: Short Answer (contenteditable div, 150 char default), Long Answer (textarea, 5000 char default), and Rich Text Editor (Cazary basic or Jodit advanced WYSIWYG). Content is persisted via data-pretext attribute as Base64-encoded HTML. No automated answer validation — open-ended only; SCORM completion is tracked.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Short answer: 150 char default via contenteditable</li><li>Long answer: 5000 char default via textarea</li><li>Rich Text: Basic (Cazary) or Advanced Jodit WYSIWYG</li><li>Jodit ELA toolbar: 30+ formatting buttons</li><li>Content persisted as Base64-encoded data-pretext attribute</li><li>Custom keyboard for Arabic and non-Latin languages</li><li>Math via MathLive web component</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">shortLongAnsTemplate</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">shortLongAns</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">answerType: shortAns/longAns/RTE</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">6 files (~4600 lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainShortLong()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Jodit, Cazary, MathLive</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class ShortLongController {
+        +settings: SLSettings
+        +submitAnswer()
+        +resetAnswer()
+        +stateMainatainShortLong()
+        +initJoditEditor()
+        +initCazaryEditor()
+        +initMathLive()
+        +setupCustomKeyboard()
+        +characterCountValidation()
+    }
+    class SLSettings {
+        +answerType: String
+        +keyboardType: String
+        +maxCharCount: Number
+        +isHeaderVisible: Boolean
+        +custKeyboardEnabled: Boolean
+        +formattingValue: String
+        +outline: String
+        +metaTags: String[]
+    }
+    class ContentState {
+        +data-pretext: String
+        +content: Base64HTML
+    }
+    ShortLongController --> SLSettings
+    ShortLongController --> ContentState</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as SLController
+    participant Ed as Jodit/Cazary
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <h1 class="header__title">Question Answer</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Question Answer</span>
-        </div>
-      </nav>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Question Answer Component</h1>
-        <p class="page-subtitle">Short and long answer question component with text input.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The Question Answer component provides text input fields for short-answer and long-answer responses with validation, character limits, and rubric-based scoring.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "Question Answer System"
-        QA[Question Answer Container]
-        Question[Question Display]
-        Input[Input Manager]
-        Validation[Validation System]
-        Scoring[Scoring Engine]
-        
-        QA --> Question
-        QA --> Input
-        QA --> Validation
-        QA --> Scoring
-        
-        Input --> Short[Short Answer Field]
-        Input --> Long[Long Answer Field]
-        Input --> Rich[Rich Text Editor]
-        
-        Validation --> Length[Length Check]
-        Validation --> Keywords[Keyword Match]
-        Validation --> Format[Format Check]
-        
-        Scoring --> Auto[Auto-scoring]
-        Scoring --> Manual[Manual Review]
-        Scoring --> Rubric[Rubric-based]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the text input and validation system:</p>
-            <div class="mermaid">
-classDiagram
-    class QuestionAnswer {
-        +String componentId
-        +Question question
-        +InputManager inputManager
-        +ValidationSystem validation
-        +ScoringEngine scoring
-        +initialize()
-        +render()
-        +submit()
-        +getAnswer()
-    }
-    
-    class Question {
-        +String questionId
-        +String text
-        +String type
-        +Object media
-        +Array~String~ rubric
-        +render()
-    }
-    
-    class InputManager {
-        +AnswerField answerField
-        +createField()
-        +getValue()
-        +setValue()
-        +clear()
-        +focus()
-    }
-    
-    class AnswerField {
-        +String fieldType
-        +String value
-        +Number minLength
-        +Number maxLength
-        +Boolean isRequired
-        +Object formatting
-        +render()
-        +update()
-        +validate()
-    }
-    
-    class ValidationSystem {
-        +Array~ValidationRule~ rules
-        +validateLength()
-        +validateKeywords()
-        +validateFormat()
-        +validateRequired()
-        +getErrors()
-    }
-    
-    class ValidationRule {
-        +String ruleType
-        +Object parameters
-        +String errorMessage
-        +validate()
-    }
-    
-    class ScoringEngine {
-        +String scoringMethod
-        +Rubric rubric
-        +autoScore()
-        +manualScore()
-        +calculateScore()
-        +provideFeedback()
-    }
-    
-    class Rubric {
-        +Array~Criterion~ criteria
-        +Number maxScore
-        +addCriterion()
-        +evaluateAnswer()
-        +getScore()
-    }
-    
-    class Criterion {
-        +String name
-        +Number points
-        +Array~String~ keywords
-        +String description
-        +evaluate()
-    }
-    
-    class CharacterCounter {
-        +Number currentCount
-        +Number minCount
-        +Number maxCount
-        +update()
-        +isValid()
-        +render()
-    }
-    
-    QuestionAnswer --> Question
-    QuestionAnswer --> InputManager
-    QuestionAnswer --> ValidationSystem
-    QuestionAnswer --> ScoringEngine
-    InputManager --> AnswerField
-    InputManager --> CharacterCounter
-    ValidationSystem --> ValidationRule
-    ScoringEngine --> Rubric
-    Rubric --> Criterion
-    AnswerField --> ValidationSystem
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Question Answer Widget
-    participant UI as UI Layer
-    participant RTE as Rich Text Editor
-    participant Student
-    participant V as Validation Engine
-    participant SCORM as SCORM API
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Enter Question Text
-    Author->>W: Select Answer Type
-    alt Short Answer
-        Author->>W: Set Character Limit (default 150)
-        W->>UI: Configure Single-line Input
-    else Long Answer
-        Author->>W: Set Character Limit (default 5000)
-        W->>UI: Configure Textarea
-    else RTE (Rich Text)
-        Author->>W: Select Editor Type (Basic/Jodit)
-        Author->>W: Set Character Limit (default 5000)
-        alt Basic RTE
-            W->>UI: Configure Cazary Editor
-        else Jodit RTE
-            W->>UI: Configure Jodit Editor
-            Author->>W: Select Subject (ELA/Math/Science)
-        end
-        opt Math Support
-            Author->>W: Enable MathLive
-        end
-    end
-    opt Answer Validation
-        Author->>W: Enable allowResponse
-        Author->>W: Enter Correct Answers
-        Author->>W: Enable Exact Match (optional)
-        Author->>W: Configure Feedback
-    end
-    opt Custom Keyboard
-        Author->>W: Enable Custom Keyboard
-        Author->>W: Select Language (FRA/ESP/GER/MATH)
-    end
-    W->>UI: Save Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Question
-    alt Short Answer
-        W->>UI: Display Single-line Input
-        Student->>UI: Type Answer
-        W->>UI: Show Character Count
-        alt Character Limit Reached
-            W->>UI: Prevent Further Input
-        end
-    else Long Answer
-        W->>UI: Display Textarea
-        Student->>UI: Type Multi-line Answer
-        W->>UI: Show Character Count
-    else RTE
-        alt Basic RTE
-            W->>RTE: Initialize Cazary
-            RTE->>UI: Display Basic Toolbar
-        else Jodit RTE
-            W->>RTE: Initialize Jodit
-            RTE->>UI: Display Full Toolbar
-        end
-        Student->>RTE: Format Text
-        Student->>UI: Apply Styling
-        opt Math Equations
-            Student->>RTE: Click Math Button
-            RTE->>RTE: Open MathLive Editor
-            Student->>RTE: Enter Equation
-            RTE->>UI: Render LaTeX
-        end
-    end
-    opt Custom Keyboard Active
-        W->>UI: Display Keyboard Panel
-        Student->>UI: Click Special Character
-        UI->>W: Insert Character
-    end
-    W->>SCORM: Save Draft Response
-    SCORM->>SCORM: Store latency data
-    alt Validation Enabled
-        Student->>W: Submit Answer
-        W->>V: Validate Response
-        V->>V: Normalize Answer
-        V->>V: Split by Pipe Separator
-        loop For Each Valid Answer
-            alt Exact Match Mode
-                V->>V: Exact String Compare
-            else Flexible Match
-                V->>V: Case-insensitive Compare
-                V->>V: Trim Whitespace
-            end
-        end
-        V-->>W: Return Validation Result
-        alt Correct
-            W->>UI: Display Success Feedback
-            W->>UI: Apply Green Border
-            W->>UI: Disable Input
-        else Incorrect
-            W->>UI: Display Error Feedback
-            W->>UI: Apply Red Border
-        end
-    else No Validation
-        Student->>W: Submit Response
-        W->>UI: Confirm Submission
-        W->>UI: Disable Input
-    end
-    W->>SCORM: Save Final Response
-    W->>SCORM: Set Completion Status
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitQA[Initialize Question Answer]
-    InitQA --> SetQuestion[Set Question Text]
-    SetQuestion --> ChooseAnswerType{Choose Answer Type}
-    ChooseAnswerType -->|Short Answer| ConfigShort[Configure Short Answer]
-    ChooseAnswerType -->|Long Answer| ConfigLong[Configure Long Answer]
-    ChooseAnswerType -->|RTE| ConfigRTE[Configure Rich Text Editor]
-    
-    ConfigShort --> SetCharLimit1[Set Char Limit Default 150]
-    ConfigLong --> SetCharLimit2[Set Char Limit Default 5000]
-    ConfigRTE --> ChooseKeyboard{Choose Keyboard Type}
-    ChooseKeyboard -->|Basic| SetBasicRTE[Basic RTE - Cazary Editor]
-    ChooseKeyboard -->|Jodit| SetJoditRTE[Jodit Advanced Editor]
-    
-    SetCharLimit1 --> CustomKeyboard{Enable Custom Keyboard?}
-    SetCharLimit2 --> CustomKeyboard
-    SetBasicRTE --> CustomKeyboard
-    SetJoditRTE --> CustomKeyboard
-    CustomKeyboard -->|Yes| SelectLanguage[Select Language Keyboard FRA/ESP/GER]
-    CustomKeyboard -->|No| ConfigLabels
-    SelectLanguage --> ConfigLabels[Configure Labels]
-    ConfigLabels --> SaveQA[Save Configuration]
-    
-    SaveQA --> StudentLoad([Student Opens Widget])
-    StudentLoad --> DisplayQuestion[Display Question Text]
-    DisplayQuestion --> InitEditor{Answer Type}
-    InitEditor -->|Short Answer| ShowTextInput[Show Single-Line Text Input]
-    InitEditor -->|Long Answer| ShowTextarea[Show Multi-Line Textarea]
-    InitEditor -->|RTE| InitRTEEditor[Initialize RTE Editor]
-    
-    ShowTextInput --> ShowKeyboard{Custom Keyboard?}
-    ShowTextarea --> ShowKeyboard
-    InitRTEEditor --> ShowKeyboard
-    ShowKeyboard -->|Yes| RenderKeyboard[Render Special Character Keyboard]
-    ShowKeyboard -->|No| EnableTyping
-    RenderKeyboard --> EnableTyping[Enable Text Entry]
-    
-    EnableTyping --> StudentTypes{Student Types Response}
-    StudentTypes --> CountCharacters[Count Characters]
-    CountCharacters --> UpdateCounter[Update Character Counter Display]
-    UpdateCounter --> CheckLimit{Within Character Limit?}
-    CheckLimit -->|Yes| CheckEmpty{Text Empty?}
-    CheckLimit -->|No| TruncateText[Truncate to Max Length]
-    TruncateText --> UpdateCounter
-    CheckEmpty -->|No| EnableSubmit[Enable Submit Button]
-    CheckEmpty -->|Yes| DisableSubmit[Disable Submit Button]
-    EnableSubmit --> StudentTypes
-    DisableSubmit --> StudentTypes
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> CaptureResponse[Capture Student Response Text]
-    CaptureResponse --> EncodeResponse[Encode Response Base64]
-    EncodeResponse --> DisableEditor[Disable Text Input/Editor]
-    DisableEditor --> MarkSubmitted[Mark Form as Submitted]
-    MarkSubmitted --> SaveToSCORM[Save Response to SCORM suspend_data]
-    SaveToSCORM --> TrackLatency[Track Response Time Latency]
-    TrackLatency --> ShowConfirmation[Show Submission Confirmation]
-    ShowConfirmation --> Complete([Activity Complete - Manual Grading Required])
-    
-    StudentTypes --> DataFlow[Data Flow: Text Input â†’ State]
-    DataFlow --> ValidateHTML[Sanitize HTML if RTE]
-    ValidateHTML --> StoreInMemory[Store in fieldData.answerText]
-    StoreInMemory --> SetDirtyFlag[Set Dirty Bit for Unsaved Changes]
-    SetDirtyFlag --> PrepareForSCORM[Prepare SCORM Payload]
-    PrepareForSCORM --> APISetValue[Call apiHandle.SetValue]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors set question text, choose answer type (short, long, or RTE), configure character limits (default 150 for short, 5000 for long), select keyboard type (basic Cazary or advanced Jodit for RTE), and optionally enable custom language keyboards (French, Spanish, German).</li>
-                <li><strong>Student Flow:</strong> Students type responses in text fields, textareas, or rich text editors with character counting, special character keyboards when configured, and submit button enabled only when text is present.</li>
-                <li><strong>Validation:</strong> No automated scoring; responses are captured and submitted for manual teacher grading, with HTML sanitization for RTE content and character limit enforcement via truncation.</li>
-                <li><strong>Data Flow:</strong> Student text responses are stored in fieldData.answerText, encoded as Base64, saved to SCORM suspend_data with response time latency tracking, and marked with dirty flags for unsaved changes until API submission confirms persistence.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Question Answer  (short Long Ans Component )/SHORT_LONG_ANSWER_COMPONENT_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Select answer type Short/Long/RTE
+    A->>C: Configure char limit
+    A->>C: Enable custom keyboard optional
+    A->>C: Save component
+    S->>C: View question
+    S->>Ed: Type response
+    Ed->>C: Content change event
+    C->>C: Count characters vs maxCharCount
+    S->>C: Submit
+    C->>C: Encode content as Base64
+    C->>C: Set data-pretext attribute
+    C->>C: stateMainatainShortLong SCORM
+    Note over C,S: No answer validation - completion only</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates QA Widget]) --> B[Select answer type]
+    B --> C{Type?}
+    C -->|Short| D[contenteditable div 150 chars]
+    C -->|Long| E[textarea 5000 chars]
+    C -->|RTE| F{RTE editor?}
+    F -->|Basic| G[Cazary iframe editor]
+    F -->|Advanced| H[Jodit WYSIWYG]
+    D --> I[Configure char limit]
+    E --> I
+    G --> I
+    H --> I
+    I --> J[Enable custom keyboard optional]
+    J --> K([Student Views Component])
+    K --> L[Student types response]
+    L --> M{Char limit exceeded?}
+    M -->|Yes| N[Input blocked]
+    M -->|No| O[Content accepted]
+    O --> P[Submit]
+    P --> Q[Base64 encode content to data-pretext]
+    Q --> R[stateMainatainShortLong SCORM completion]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">shortLongAnsTemplate</div></div><div class="info-card"><div class="info-card__label">Short Limit</div><div class="info-card__value">150 chars (configurable)</div></div><div class="info-card"><div class="info-card__label">Long Limit</div><div class="info-card__value">5000 chars (configurable)</div></div><div class="info-card"><div class="info-card__label">Basic RTE</div><div class="info-card__value">Cazary iframe editor</div></div><div class="info-card"><div class="info-card__label">Advanced RTE</div><div class="info-card__value">Jodit WYSIWYG (30+ buttons ELA)</div></div><div class="info-card"><div class="info-card__label">Persistence</div><div class="info-card__value">data-pretext Base64-encoded</div></div><div class="info-card"><div class="info-card__label">Validation</div><div class="info-card__value">None - open-ended only</div></div><div class="info-card"><div class="info-card__label">Custom Keyboard</div><div class="info-card__value">Arabic / non-Latin support</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "settings": {
+    "answerType": "shortAns",
+    "keyboardType": "BASIC",
+    "maxCharCount": 150,
+    "isHeaderVisible": true,
+    "isInstructionVisible": true,
+    "custKeyboardEnabled": false,
+    "formattingValue": "ELA",
+    "outline": "outline",
+    "metaTags": []
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>question-answer/
++-- templates/
+¦   +-- shortLongAns/
+¦       +-- shortLongAns.html                # Main template
+¦       +-- shortLongAns-settings-pannel.html # Settings panel
++-- scripts/
+¦   +-- shortLongAns-directive.js            # Core (2163 lines)
+¦   +-- shortLongAns-preview1.js             # Preview (2499 lines)
++-- styles/
+¦   +-- shortLongAns-template.css           # Component styles
++-- default/
+    +-- shortLongAns.json                   # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Answer Type</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Short Answer, Long Answer, or Rich Text Editor (answerType)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">RTE Editor</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">BASIC (Cazary) or JODIT (advanced WYSIWYG) when RTE selected</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Character Limit</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Number</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">maxCharCount — 150 for short, 5000 for long (configurable)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Custom Keyboard</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable custom on-screen keyboard for non-Latin languages</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Header Visibility</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show/hide component header section (isHeaderVisible)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Outline</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Radio</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">No Outline or Outline border around component</td></tr><tr><td style="padding:9px 12px;">Formatting Mode</td><td style="padding:9px 12px;">Radio</td><td style="padding:9px 12px;">formattingValue: ELA (30+ buttons) or other (basic) Jodit toolbar</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>No automated validation:</strong> The component only tracks completion (SCORM) — there is no mechanism to validate student answers against a model answer. It is a pure open-ended capture tool.</li><li><strong>Base64 persistence:</strong> Student content is saved as Base64-encoded HTML in the data-pretext attribute, allowing HTML formatting to be preserved across page navigations.</li><li><strong>Jodit ELA toolbar:</strong> When formattingValue=ELA, Jodit is configured with 30+ toolbar buttons including bold, italic, lists, tables, and MathLive equation input. Other modes show a reduced toolbar.</li><li><strong>Cazary iframe editor:</strong> The BASIC RTE (Cazary) is an iframe-based editor using document.designMode="on", with simpler formatting options than Jodit.</li><li><strong>Character count scope:</strong> For Jodit/Cazary editors, character counting includes HTML tags in the raw content string, potentially allowing fewer visible characters than the limit suggests.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Question Answer/SHORT_LONG_ANSWER_COMPONENT_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

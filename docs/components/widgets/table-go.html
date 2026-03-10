@@ -1,504 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Table GO | Documentation Portal</title>
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/sidebar.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Table GO Component | Documentation Portal</title><link rel="stylesheet" href="../../assets/css/main.css"><link rel="stylesheet" href="../../assets/css/sidebar.css"><link rel="stylesheet" href="../../assets/css/components.css"><link rel="stylesheet" href="../../assets/css/markdown.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script></head><body><aside class="sidebar" id="sidebar"></aside><div class="sidebar-overlay"></div><main class="main-content"><header class="header"><h1 class="header__title">Table GO Component</h1><nav class="breadcrumb"><div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div><div class="breadcrumb__item"><span class="breadcrumb__current">Table GO</span></div></nav></header><div class="content-wrapper"><section class="section"><h1 class="page-title">Table GO Component</h1><p class="page-subtitle">Structured data table widget with full row/column management, cell merging, Excel paste support, and optional student-editable cells with modal editors. Supports 4 visual themes and Jodit rich text for student input.</p><div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div></section><section class="section" id="overview"><div class="section__header"><h2 class="section__title">Overview</h2></div><div class="card"><div class="card__content"><p>The Table GO Component provides a full-featured structured data table with up to 20 rows and 20 columns. Features include cell merging (rowspan/colspan), Excel paste via clipboard sanitization, alternating row colors, and student-editable cells that open a draggable modal editor with optional Jodit rich text. Authors use a right-click context menu to insert/delete/merge cells.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>Up to 20 rows x 20 columns</li><li>Cell merge (rowspan/colspan) tracking in mergedCellsList{}</li><li>Excel paste sanitizes mso-* styles, preserves bold/italic/colors</li><li>Student-editable cells with draggable Bootstrap modal (2000 char limit)</li><li>4 visual themes (style1-4-theme)</li><li>Right-click context menu: insert/delete rows/columns, merge/unmerge</li><li>Alternating row colors with 2 independent color pickers</li></ul><div class="info-grid" style="margin-top:20px;"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">tableGoInit</div></div><div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">tableGO</div></div><div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">studentEnabledCells[]: editable cells with modal</div></div><div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files (tableGO-directive.js 2926 lines)</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">stateMainatainTableGO()</div></div><div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">Jodit, right-click context menu</div></div></div></div></div></section><section class="section" id="uml"><div class="section__header"><h2 class="section__title">UML Class Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class TableGOController {
+        +noOfRows: Number
+        +noOfCol: Number
+        +headervalues: String[]
+        +celldata: String[]
+        +mergedCellsList: Object
+        +studentEnabledCells: CellConfig[]
+        +onNoOfRowsColsChanged()
+        +appendRow()
+        +deleteRows()
+        +appendColumn()
+        +deleteColumns()
+        +mergeAll()
+        +unmergeAll()
+        +pasteExcelGrid()
+        +sanitizeCellHTML()
+        +submitAnswerTableGO()
+        +stateMainatainTableGO()
+    }
+    class TableSettings {
+        +theme: String
+        +enableSubmit: Boolean
+        +advancedFormatting: Boolean
+        +headerColor: String
+        +rowAlternate: Boolean
+        +rowAlternateColor1: String
+        +rowAlternateColor2: String
+        +verticalLines: Boolean
+        +altText: String
+    }
+    class CellConfig {
+        +cellIndex: Number
+        +labelText: String
+    }
+    class MergedCell {
+        +row-col-key: String
+        +rowspan: Number
+        +colspan: Number
+        +originalRow: Number
+        +originalCol: Number
+    }
+    TableGOController --> TableSettings
+    TableGOController --> CellConfig
+    TableGOController --> MergedCell</div></div></div></section><section class="section" id="usecase"><div class="section__header"><h2 class="section__title">Sequence Diagram</h2></div><div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as TableGOController
+    participant S as Student
 
-</head>
-<body>
-  <aside class="sidebar" id="sidebar"></aside>
-  <div class="sidebar-overlay"></div>
-  <main class="main-content">
-    <header class="header">
-      <h1 class="header__title">Table GO</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Table GO</span>
-        </div>
-      </nav>
-    </header>
-    <div class="content-wrapper">
-      <section class="section">
-        <h1 class="page-title">Table GO Component</h1>
-        <p class="page-subtitle">Table-based graphic organizer for structured data visualization.</p>
-        
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
-      </section>
-
-      <section class="section" id="overview">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Component Overview</h2>
-          </div>
-          <div class="card__content">
-            <p>The Table GO component provides a structured table interface for organizing data with customizable rows, columns, cells, and data entry capabilities.</p>
-            <div class="mermaid">
-graph TB
-    subgraph "Table GO System"
-        TGO[Table GO Container]
-        Structure[Table Structure]
-        Rows[Row Manager]
-        Columns[Column Manager]
-        Cells[Cell Manager]
-        
-        TGO --> Structure
-        Structure --> Rows
-        Structure --> Columns
-        Structure --> Cells
-        
-        Rows --> R1[Header Row]
-        Rows --> R2[Data Row 1]
-        Rows --> R3[Data Row 2]
-        
-        Columns --> C1[Column 1]
-        Columns --> C2[Column 2]
-        Columns --> C3[Column 3]
-        
-        Cells --> Cell1[Editable Cell]
-        Cells --> Cell2[Read-only Cell]
-        Cells --> Cell3[Media Cell]
-    end
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="uml">
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">UML Class Diagram</h2>
-          </div>
-          <div class="card__content">
-            <p>Architecture showing the table structure and cell management system:</p>
-            <div class="mermaid">
-classDiagram
-    class TableGO {
-        +String componentId
-        +TableStructure structure
-        +RowManager rowManager
-        +ColumnManager columnManager
-        +CellManager cellManager
-        +initialize()
-        +render()
-        +exportData()
-        +importData()
-    }
-    
-    class TableStructure {
-        +Number rows
-        +Number columns
-        +Array~Row~ rowArray
-        +Array~Column~ columnArray
-        +createStructure()
-        +resize()
-        +render()
-    }
-    
-    class RowManager {
-        +Array~Row~ rows
-        +addRow()
-        +removeRow()
-        +insertRow()
-        +moveRow()
-        +getRow()
-    }
-    
-    class Row {
-        +String rowId
-        +Number index
-        +String type
-        +Array~Cell~ cells
-        +Object style
-        +render()
-        +update()
-        +delete()
-    }
-    
-    class ColumnManager {
-        +Array~Column~ columns
-        +addColumn()
-        +removeColumn()
-        +insertColumn()
-        +moveColumn()
-        +getColumn()
-    }
-    
-    class Column {
-        +String columnId
-        +Number index
-        +String header
-        +Number width
-        +String dataType
-        +Object style
-        +render()
-        +resize()
-    }
-    
-    class CellManager {
-        +Array~Cell~ cells
-        +updateCell()
-        +getCellValue()
-        +setCellValue()
-        +validateCell()
-    }
-    
-    class Cell {
-        +String cellId
-        +Number rowIndex
-        +Number columnIndex
-        +String value
-        +String type
-        +Boolean isEditable
-        +Object validation
-        +render()
-        +edit()
-        +save()
-        +validate()
-    }
-    
-    class DataValidator {
-        +validateCell()
-        +validateRow()
-        +validateTable()
-        +checkRequired()
-        +checkFormat()
-    }
-    
-    class StyleManager {
-        +Object tableStyle
-        +Object cellStyle
-        +applyStyle()
-        +applyConditionalStyle()
-        +resetStyle()
-    }
-    
-    TableGO --> TableStructure
-    TableGO --> RowManager
-    TableGO --> ColumnManager
-    TableGO --> CellManager
-    TableGO --> DataValidator
-    TableGO --> StyleManager
-    TableStructure --> Row
-    TableStructure --> Column
-    RowManager --> Row
-    ColumnManager --> Column
-    CellManager --> Cell
-    Row --> Cell
-    Cell --> DataValidator
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Sequence Diagram Section -->
-      <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Table GO Widget
-    participant UI as UI Layer
-    participant Student
-    participant RTE as Jodit Editor
-    participant SCORM as SCORM API
-    
-    Note over Author,UI: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Show Create Table Dialog
-    Author->>W: Enter Row Count
-    Author->>W: Enter Column Count
-    Author->>W: Create Table
-    W->>UI: Generate Table Structure
-    W->>UI: Render Table Grid
-    loop Configure Table
-        Author->>UI: Click Cell
-        UI->>W: Select Cell
-        Author->>W: Enter Cell Content
-        opt Advanced Formatting
-            Author->>W: Enable Jodit Editor
-            W->>RTE: Initialize Rich Text Editor
-            Author->>RTE: Format Cell Content
-        end
-        opt Merge Cells
-            Author->>UI: Select Multiple Cells
-            Author->>W: Merge Cells
-            W->>UI: Combine Cells
-            W->>W: Store Merge Metadata
-        end
-        opt Student Editable Cell
-            Author->>W: Enable for Student
-            W->>W: Mark Cell as Editable
-            Author->>W: Set Placeholder Text
-        end
-    end
-    Author->>W: Select Style Theme (1-4)
-    Author->>W: Set Header Row Color
-    Author->>W: Enable Row Alternation
-    Author->>W: Set Alternating Colors
-    Author->>W: Configure Vertical Lines
-    Author->>W: Set Column Alignment
-    opt Resize Columns
-        Author->>UI: Drag Column Border
-        UI->>W: Adjust Column Width
-    end
-    Author->>W: Enable Submit (optional)
-    W->>UI: Save Configuration
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Table Structure
-    W->>UI: Apply Selected Style Theme
-    W->>UI: Apply Colors and Formatting
-    alt Submit Enabled (Interactive Mode)
-        loop For Each Editable Cell
-            W->>UI: Highlight Editable Cells
-            Student->>UI: Click Editable Cell
-            UI->>W: Focus Cell
-            alt Basic Input
-                W->>UI: Enable Contenteditable
-                Student->>W: Enter Text
-            else Advanced Formatting
-                W->>RTE: Initialize Jodit
-                RTE->>UI: Display Toolbar
-                Student->>RTE: Enter Formatted Content
-                opt Math Equations
-                    Student->>RTE: Insert Equation
-                    RTE->>UI: Render Math
-                end
-            end
-            W->>SCORM: Save Cell Data
-        end
-        Student->>W: Submit Table
-        W->>SCORM: Save Final Table State
-        W->>UI: Disable Editing
-        W->>UI: Show Confirmation
-    else Display Only Mode
-        W->>UI: Render Static Table
-        Note right of Student: Read-only display<br>No interaction enabled
-    end
-    opt Reset Clicked
-        Student->>W: Reset Table
-        W->>UI: Clear Editable Cells
-        W->>UI: Restore Placeholder Text
-    end
-    W->>SCORM: Save Final State
-    SCORM-->>W: State Persisted
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Component Flow Diagram Section -->
-      <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitTableGO[Initialize Table GO]
-    InitTableGO --> CreateTable[Create Table Dialog]
-    CreateTable --> SetDimensions[Set Rows 1-20, Columns 1-20]
-    SetDimensions --> GenerateTable[Generate Table Structure]
-    GenerateTable --> EditCells[Edit Cell Content]
-    EditCells --> CellOperations{Cell Operations}
-    
-    CellOperations -->|Right Click| ShowContextMenu[Show Context Menu]
-    ShowContextMenu --> MenuChoice{Menu Choice}
-    MenuChoice -->|Insert Row| InsertRowAboveBelow[Insert Row Above/Below]
-    MenuChoice -->|Delete Row| DeleteSelectedRow[Delete Row Min 1]
-    MenuChoice -->|Insert Column| InsertColumnLeftRight[Insert Column Left/Right]
-    MenuChoice -->|Delete Column| DeleteSelectedColumn[Delete Column Min 1]
-    MenuChoice -->|Merge Cells| MergeCells[Merge Selected Cells]
-    MenuChoice -->|Unmerge| UnmergeCells[Unmerge Cells]
-    
-    InsertRowAboveBelow --> EditCells
-    DeleteSelectedRow --> EditCells
-    InsertColumnLeftRight --> EditCells
-    DeleteSelectedColumn --> EditCells
-    MergeCells --> EditCells
-    UnmergeCells --> EditCells
-    
-    CellOperations -->|Paste Excel| PasteExcel[Paste Excel Data]
-    PasteExcel --> SanitizeHTML[Sanitize MS Office Markup]
-    SanitizeHTML --> ExpandTable{Data Exceeds Table?}
-    ExpandTable -->|Yes| AddRowsCols[Auto-add Rows/Columns]
-    ExpandTable -->|No| FillCells
-    AddRowsCols --> FillCells[Fill Cells with Data]
-    FillCells --> PreserveMerges[Preserve/Handle Merged Cells]
-    PreserveMerges --> EditCells
-    
-    CellOperations -->|Enable Student Edit| SelectCell[Select Cell for Student Editing]
-    SelectCell --> AddLabel[Add Label Text for Student]
-    AddLabel --> MarkStudentEnabled[Mark Cell as Student-Editable]
-    MarkStudentEnabled --> EditCells
-    
-    EditCells -->|Resize Column| DragColumnBorder[Drag Column Border]
-    DragColumnBorder --> SetMinWidth[Enforce Min Width 50px]
-    SetMinWidth --> StoreResize[Store Column Width]
-    StoreResize --> EditCells
-    
-    EditCells -->|Choose Style| SelectStyle[Select Style Theme 1-4]
-    SelectStyle --> ConfigSettings[Configure Header Color, Row Colors]
-    ConfigSettings --> SetAlignment[Set Vertical Alignment Top/Mid/Bottom]
-    SetAlignment --> ToggleAdvanced{Enable Advanced Formatting?}
-    ToggleAdvanced -->|Yes| EnableJodit[Enable Jodit Editor]
-    ToggleAdvanced -->|No| SaveTableGO
-    EnableJodit --> SaveTableGO[Save Table Configuration]
-    
-    SaveTableGO --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderTable[Render Table with Styles]
-    RenderTable --> CheckEditEnabled{Student Editing Enabled?}
-    CheckEditEnabled -->|No| ViewOnly[Display Read-Only Table]
-    CheckEditEnabled -->|Yes| ShowEditableCells[Highlight Student-Editable Cells]
-    ViewOnly --> ViewComplete([View Complete])
-    
-    ShowEditableCells --> StudentClick{Student Clicks Editable Cell}
-    StudentClick --> OpenModal[Open Modal Popup Editor]
-    OpenModal --> ShowLabel[Display Label Text]
-    ShowLabel --> InitModalEditor{Advanced Formatting?}
-    InitModalEditor -->|Yes| InitJoditModal[Initialize Jodit in Modal]
-    InitModalEditor -->|No| ShowPlainEditor[Show Plain Text Editor]
-    InitJoditModal --> EnableTextEntry
-    ShowPlainEditor --> EnableTextEntry[Enable Text Entry]
-    
-    EnableTextEntry --> StudentTypesTable{Student Types}
-    StudentTypesTable --> CountChars[Count Characters Max 2000]
-    CountChars --> UpdateCharCounter[Update Character Counter]
-    UpdateCharCounter --> ValidateLength{Within Limit?}
-    ValidateLength -->|Yes| CheckEmptyTable{Text Empty?}
-    ValidateLength -->|No| TruncateTable[Truncate to 2000 chars]
-    TruncateTable --> UpdateCharCounter
-    CheckEmptyTable -->|No| EnableAddButton[Enable Add Button]
-    CheckEmptyTable -->|Yes| DisableAddButton[Disable Add Button]
-    EnableAddButton --> StudentTypesTable
-    DisableAddButton --> StudentTypesTable
-    
-    EnableAddButton --> AddClick([Student Clicks Add])
-    AddClick --> UpdateCell[Update Cell Content]
-    UpdateCell --> MarkSubmittedCell[Mark Cell as Submitted]
-    MarkSubmittedCell --> CloseModal[Close Modal]
-    CloseModal --> CheckAllCellsFilled{All Student Cells Filled?}
-    CheckAllCellsFilled -->|No| StudentClick
-    CheckAllCellsFilled -->|Yes| EnableTableSubmit[Enable Submit Button]
-    
-    EnableTableSubmit --> TableSubmitClick([Student Clicks Submit])
-    TableSubmitClick --> DisableAllEditing[Disable All Cell Editing]
-    DisableAllEditing --> SaveTableState[Save All Cell Responses to SCORM]
-    SaveTableState --> ShowTableConfirm[Show Submission Confirmation]
-    ShowTableConfirm --> CompleteTable([Activity Complete])
-    
-    UpdateCell --> DataFlow[Data Flow: Cell Data â†’ Model]
-    DataFlow --> UpdateCellArray[Update celldata Array]
-    UpdateCellArray --> UpdateColors[Update cellcolors Array]
-    UpdateColors --> UpdateWidths[Update cellwidth Array]
-    UpdateWidths --> StoreMerged[Store mergedCellsList Object]
-    StoreMerged --> SyncTableSCORM[Sync with SCORM]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors create tables (1-20 rows/columns), edit cells with right-click context menus for row/column operations and cell merging, paste Excel data with MS Office markup sanitization, enable specific cells for student editing with labels, resize columns (min 50px), and select from 4 style themes with advanced Jodit formatting options.</li>
-                <li><strong>Student Flow:</strong> Students view tables in read-only mode or click editable cells to open modal editors, type responses with character counting (max 2000), using plain text or Jodit rich text editors based on configuration, and submit when all required cells are filled.</li>
-                <li><strong>Validation:</strong> No automated answer validation; student responses are captured for manual grading, with character limit enforcement and HTML sanitization for rich text content ensuring data integrity.</li>
-                <li><strong>Data Flow:</strong> Multiple arrays track cell data (celldata), colors (cellcolors), widths (cellwidth), and merged cells (mergedCellsList object), all synchronized with SCORM for persistence, with modal editing updating individual cell states before final submission.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="features">
-      </section>
-      <section class="section">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../../assets/js/utils.js"></script>
-  <script src="../../assets/js/sidebar-loader.js"></script>
-  <script src="../../assets/js/mermaid-init.js"></script>
-  <script src="../../assets/js/navigation.js"></script>
-  <script src="../../assets/js/markdown-renderer.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Table GO/TABLE_GO_TECHNICAL_DOCUMENTATION.md', 'feature-specification');
-    });
-  </script>
-</body>
-</html>
+    A->>C: Select noOfRows and noOfCol in dialog
+    C->>C: onNoOfRowsColsChanged creates grid
+    A->>C: Enter header and cell data
+    A->>C: Right-click cell for context menu
+    C->>C: mergeAll mergedCellsList tracks rowspan/colspan
+    A->>C: Paste Excel data
+    C->>C: pasteExcelGrid sanitizeCellHTML
+    A->>C: Mark cells as student-enabled
+    C->>C: studentEnabledCells[] with blue #113e9a border
+    A->>C: Select theme 1-4
+    A->>C: Save component
+    S->>C: Click student-enabled cell
+    C->>C: Open draggable Bootstrap modal
+    S->>C: Type response max 2000 chars
+    C->>C: stateMainatainTableGO SCORM</div></div></div></section><section class="section" id="flow"><div class="section__header"><h2 class="section__title">Component Flow</h2></div><div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates Table GO]) --> B[Creation dialog: select rows and columns]
+    B --> C[Grid created noOfRows=-1 check required]
+    C --> D[Enter header values and cell data]
+    D --> E{Excel paste?}
+    E -->|Yes| F[pasteExcelGrid sanitizes mso- styles]
+    F --> G[Auto-expand table if data exceeds size]
+    E -->|No| H[Type cell content directly]
+    G --> I[Right-click for context menu]
+    H --> I
+    I --> J[Insert/delete rows or columns]
+    J --> K[Merge cells mergedCellsList tracks]
+    K --> L[Mark cells as student-enabled blue border]
+    L --> M[Select theme 1-4]
+    M --> N([Student Views Table])
+    N --> O[Click student-enabled cell]
+    O --> P[Draggable Bootstrap modal opens]
+    P --> Q[Student types max 2000 chars optional Jodit]
+    Q --> R[stateMainatainTableGO SCORM]</div></div></div></section><section class="section" id="features"><div class="section__header"><h2 class="section__title">Features</h2></div><div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div></section><section class="section" id="technical"><div class="section__header"><h2 class="section__title">Technical Details</h2></div><div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">tableGoInit</div></div><div class="info-card"><div class="info-card__label">Max Size</div><div class="info-card__value">20 rows x 20 columns</div></div><div class="info-card"><div class="info-card__label">Core Script</div><div class="info-card__value">tableGO-directive.js (2926 lines)</div></div><div class="info-card"><div class="info-card__label">Cell Input</div><div class="info-card__value">Draggable Bootstrap modal</div></div><div class="info-card"><div class="info-card__label">Student Char Limit</div><div class="info-card__value">2000 per cell</div></div><div class="info-card"><div class="info-card__label">Excel Paste</div><div class="info-card__value">mso-* stripped, formatting kept</div></div><div class="info-card"><div class="info-card__label">Student Cell Color</div><div class="info-card__value">#113e9a blue border</div></div><div class="info-card"><div class="info-card__label">Selected Cell</div><div class="info-card__value">#dedede + #714cda border</div></div></div></div></div></section><section class="section" id="data-model"><div class="section__header"><h2 class="section__title">Data Model</h2></div><div class="card"><div class="card__content"><pre><code>{
+  "noOfRows": 3,
+  "noOfCol": 3,
+  "rowInput": 3,
+  "colInput": 3,
+  "headervalues": ["Column A", "Column B", "Column C"],
+  "celldata": ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6"],
+  "cellcolors": ["#ffffff", "#ffffff", "#ffffff", "#f5f5f5", "#f5f5f5", "#f5f5f5"],
+  "mergedCellsList": {},
+  "studentEnabledCells": [
+    {"cellIndex": 4, "labelText": "Enter your answer here"}
+  ],
+  "theme": "style1-theme",
+  "settings": {
+    "enableSubmit": true,
+    "advancedFormatting": false,
+    "headerColor": "#CFBA99",
+    "rowAlternate": true,
+    "rowAlternateColor1": "#ffffff",
+    "rowAlternateColor2": "#f5f5f5",
+    "verticalLines": false,
+    "altText": "Data comparison table",
+    "outline": "outline"
+  }
+}</code></pre></div></div></section><section class="section" id="files"><div class="section__header"><h2 class="section__title">File Structure</h2></div><div class="card"><div class="card__content"><pre><code>table-go/
++-- templates/
+¦   +-- tableGO/
+¦       +-- tableGO.html                 # Main template
+¦       +-- tableGO-settings-panel.html  # Settings panel
++-- scripts/
+¦   +-- tableGO-directive.js             # Core (2926 lines)
+¦   +-- tableGO-preview1.js              # Preview (605 lines)
+¦   +-- resizable.js                    # Column resizing
++-- styles/
+¦   +-- tableGO-template.css            # Component styles
++-- default/
+    +-- tableGO.json                    # Default configuration</code></pre></div></div></section><section class="section" id="settings"><div class="section__header"><h2 class="section__title">Settings Panel</h2></div><div class="card"><div class="card__content"><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead><tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Theme</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">4 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">style1-4-theme visual appearance variants</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Header Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Header row background color (default #CFBA99)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Alternating Rows</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle + 2 Color Pickers</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">rowAlternate with rowAlternateColor1 and Color2</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Vertical Lines</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Show/hide vertical column separator lines</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Submit Button</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">enableSubmit shows submit button for student cells</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Advanced Formatting</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable Jodit WYSIWYG in student cell modal</td></tr><tr><td style="padding:9px 12px;">Alt Text</td><td style="padding:9px 12px;">Textarea</td><td style="padding:9px 12px;">Accessibility description for the table</td></tr></tbody></table></div></div></section><section class="section" id="behaviors"><div class="section__header"><h2 class="section__title">Behaviors and Constraints</h2></div><div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>Creation dialog required:</strong> A dialog prompts for noOfRows and noOfCol before the grid renders. The check noOfRows==-1 detects first-time creation vs. existing data load.</li><li><strong>Excel paste sanitization:</strong> pasteExcelGrid() strips all mso-* CSS properties (Microsoft Office inline styles) while preserving bold, italic, and color formatting. Auto-expands the table if pasted data exceeds current dimensions.</li><li><strong>Cell merge tracking:</strong> mergedCellsList{} uses "row-col" string keys to store rowspan/colspan values and the original cell coordinates for unmerge operations.</li><li><strong>Student-enabled cells:</strong> Cells marked as student-editable display a #113e9a blue border. Clicking opens a draggable Bootstrap modal with a 2000-character textarea and optional Jodit editor.</li><li><strong>Selected cell highlight:</strong> Author-selected cells during editing display a #dedede background with a #714cda purple border for visual selection state.</li><li><strong>Right-click context menu:</strong> A custom context menu replaces the browser context menu within the table editor, providing insert/delete row/column and merge/unmerge cell options.</li></ul></div></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="../../assets/js/utils.js"></script><script src="../../assets/js/sidebar-loader.js"></script><script src="../../assets/js/mermaid-init.js"></script><script src="../../assets/js/navigation.js"></script><script src="../../assets/js/markdown-renderer.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{renderMarkdown('../../../Components/Widgets/Table GO/TABLE_GO_TECHNICAL_DOCUMENTATION.md','feature-specification').catch(()=>{document.getElementById('feature-specification').innerHTML='<p>Documentation loading...</p>';});});</script></body></html>

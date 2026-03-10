@@ -1,313 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click to Reveal | Documentation Portal</title>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Click to Reveal Component - Progressive disclosure widget with 4 styles and media support.">
+  <title>Click to Reveal Component | Documentation Portal</title>
   <link rel="stylesheet" href="../../assets/css/main.css">
   <link rel="stylesheet" href="../../assets/css/sidebar.css">
   <link rel="stylesheet" href="../../assets/css/components.css">
   <link rel="stylesheet" href="../../assets/css/markdown.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ“š</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
 </head>
 <body>
   <aside class="sidebar" id="sidebar"></aside>
   <div class="sidebar-overlay"></div>
   <main class="main-content">
     <header class="header">
-      <h1 class="header__title">Click to Reveal</h1>
+      <h1 class="header__title">Click to Reveal Component</h1>
       <nav class="breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Click to Reveal</span>
-        </div>
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Click to Reveal</span></div>
       </nav>
     </header>
     <div class="content-wrapper">
       <section class="section">
         <h1 class="page-title">Click to Reveal Component</h1>
-        <p class="page-subtitle">Hide and reveal content sections with interactive click actions.</p>
-        <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-        </div>
+        <p class="page-subtitle">Progressive disclosure widget with a button that reveals hidden content on click. Supports 4 visual styles, optional media, and configurable color theming.</p>
+        <div class="quick-links"><a href="#overview" class="quick-link">Overview</a><a href="#uml" class="quick-link">UML Class</a><a href="#usecase" class="quick-link">Sequence</a><a href="#flow" class="quick-link">Component Flow</a><a href="#features" class="quick-link">Features</a><a href="#technical" class="quick-link">Technical</a><a href="#data-model" class="quick-link">Data Model</a><a href="#files" class="quick-link">Files</a><a href="#settings" class="quick-link">Settings</a><a href="#behaviors" class="quick-link">Behaviors</a></div>
       </section>
       <section class="section" id="overview">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Overview</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p>The Click to Reveal component provides an interactive way to progressively disclose information. Users click triggers or buttons to reveal hidden content, making it ideal for step-by-step instructions, spoilers, and gradual information disclosure.</p>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><h2 class="section__title">Overview</h2></div>
+        <div class="card"><div class="card__content">
+          <p>The Click to Reveal Component presents a configurable reveal button that students click to expose hidden content. Authors configure button text, media placement, color theming across 7 color pickers, and one of 4 visual styles. The reveal is one-way — content cannot be re-hidden once shown. No SCORM state is tracked; the revealed state resets on page reload.</p><h3 style='margin:16px 0 8px;'>Key Capabilities</h3><ul style='list-style:disc;padding-left:20px;line-height:1.8;'><li>4 distinct visual styles (CTR_Style1 through CTR_Style4)</li><li>7 color pickers: card background, header, line, outline, button background, outline, text</li><li>Optional media: image, video, or audio with 4 placement options</li><li>Button text configurable up to 50 characters</li><li>Left/Right placement only available for images (not video/audio)</li><li>Video closed caption and transcript support with VTT upload</li></ul>
+          <div class="info-grid" style="margin-top:20px;">
+            <div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">clickToRevealTemplate</div></div>
+            <div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">clickToReveal</div></div>
+            <div class="info-card"><div class="info-card__label">Key Property</div><div class="info-card__value">styleOption: CTR_Style1-4</div></div>
+            <div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">7 files</div></div>
+            <div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">No SCORM (state lost on refresh)</div></div>
+            <div class="info-card"><div class="info-card__label">Library</div><div class="info-card__value">AngularJS</div></div>
           </div>
-        </div>
+        </div></div>
       </section>
       <section class="section" id="uml">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
-          <h2 class="section__title">UML Class Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">Component architecture and relationships:</p>
-            <div class="mermaid">
-classDiagram
-    class ClickToRevealComponent {
-        -reveals: Array~RevealPanel~
-        -revealMode: RevealMode
-        -animationStyle: AnimationStyle
-        +initialize()
-        +revealContent(panelId)
-        +hideContent(panelId)
-        +toggleContent(panelId)
-        +revealAll()
-        +hideAll()
-        +reset()
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg><h2 class="section__title">UML Class Diagram</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">classDiagram
+    class ClickToRevealController {
+        +introduction: String
+        +instruction: String
+        +descriptionText: String
+        +settings: CTRSettings
+        +introClick()
+        +handleKeyDown(event)
+        +addMediaClickCTR(state)
+        +setMediaToUpload(type)
+        +placementChange()
+        +ApplystyleCTR(event, styleOption, styleType, index, parentIndex)
     }
-    
-    class RevealPanel {
-        -id: String
-        -trigger: Trigger
-        -content: Content
-        -isRevealed: Boolean
-        -animationDuration: Number
-        +reveal()
-        +hide()
-        +toggle()
-        +animate()
+    class CTRSettings {
+        +templateName: String
+        +transcriptText: String
+        +textLength: Number
+        +styleOption: String
+        +selectedStyle: String
+        +mediaCheckbox: Boolean
+        +placement: String
+        +CardBackgroundColor: String
+        +ButtonBackgroundColor: String
+        +ButtonTextColor: String
     }
-    
-    class Trigger {
-        -text: String
-        -icon: String
-        -position: Position
-        +render()
-        +onClick()
+    class MediaConfig {
+        +imageUrl: String
+        +uploadtype: String
+        +videoUploadOrReplace: String
+        +youtubeVideoName: String
+        +audioName: String
     }
-    
-    class Content {
-        -html: String
-        -media: Media
-        +render()
-        +show()
-        +hide()
-    }
-    
-    class RevealMode {
-        <<enumeration>>
-        TOGGLE
-        ACCORDION
-        SEQUENTIAL
-    }
-    
-    ClickToRevealComponent "1" --> "*" RevealPanel : manages
-    ClickToRevealComponent --> RevealMode : uses
-    RevealPanel --> Trigger : has
-    RevealPanel --> Content : contains
-            </div>
-          </div>
-        </div>
+    ClickToRevealController --> CTRSettings
+    CTRSettings --> MediaConfig</div></div></div>
       </section>
-      <!-- Sequence Diagram Section -->
       <section class="section" id="usecase">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
-          <h2 class="section__title">Sequence Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
-sequenceDiagram
-    participant Author
-    participant W as Click to Reveal Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Enter Header Text
-    Author->>W: Enter Instruction Text
-    Author->>W: Enter Description Text (hidden content)
-    Author->>W: Select Style (CTR_Style1-4)
-    Author->>W: Configure Button Label
-    Author->>W: Select Media Type
-    alt Image Selected
-        Author->>W: Upload Image
-        W->>API: Upload Image
-        API-->>W: Return Image URL
-    else Video Selected
-        Author->>W: Upload/Link Video
-        W->>API: Save Video Reference
-    else Audio Selected
-        Author->>W: Upload Audio
-        W->>API: Save Audio File
-    end
-    Author->>W: Select Media Placement
-    Author->>W: Set Colors/Appearance
-    W->>API: Save Configuration
-    API-->>W: Configuration Saved
-    
-    Note over Student,UI: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Header
-    W->>UI: Render Instruction
-    W->>UI: Render Reveal Button
-    W->>UI: Hide Description Content
-    W->>UI: Hide Media (if present)
-    Student->>UI: Click Reveal Button
-    UI->>W: Handle Button Click
-    W->>UI: Show Description Content
-    W->>UI: Animate Content Reveal
-    alt Media Present
-        W->>UI: Display Media
-        alt Video
-            W->>UI: Initialize Video.js Player
-            Student->>UI: Play Video
-        else Audio
-            W->>UI: Initialize Audio Player
-            Student->>UI: Play Audio
-        end
-    end
-    W->>UI: Hide Reveal Button
-    Student->>W: Read Revealed Content
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><h2 class="section__title">Sequence Diagram</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">sequenceDiagram
+    participant A as Author
+    participant C as CTRController
+    participant S as Student
 
-      <!-- Component Flow Diagram Section -->
+    A->>C: Select style CTR_Style1-4
+    C->>C: ApplystyleCTR adjusts color properties
+    A->>C: Set button text max 50 chars
+    A->>C: Toggle media, set type and placement
+    A->>C: Configure 7 color pickers
+    A->>C: Save component
+    S->>C: View page with reveal button
+    S->>C: Click button
+    C->>C: introClick() fires
+    C->>C: Hide button element
+    C->>C: Show .ClickToRevealData div
+    Note over C,S: One-way reveal - cannot re-hide
+    Note over S: State lost on page reload</div></div></div>
+      </section>
       <section class="section" id="flow">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
-flowchart TD
-    Start([Author Opens Editor]) --> InitCTR[Initialize Click to Reveal]
-    InitCTR --> AddSections[Add Reveal Sections 1-10]
-    AddSections --> ConfigSection[Configure Each Section]
-    ConfigSection --> SetQuestion[Set Question/Trigger Text]
-    SetQuestion --> SetAnswer[Set Hidden Answer Content]
-    SetAnswer --> AddMedia{Add Media?}
-    AddMedia -->|Yes| UploadMedia[Upload Image/Video/Audio]
-    AddMedia -->|No| ChooseStyle
-    UploadMedia --> ChooseStyle[Select Visual Style 1-4]
-    ChooseStyle --> ConfigLayout[Configure Layout Options]
-    ConfigLayout --> SaveCTR[Save Configuration]
-    
-    SaveCTR --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderCollapsed[Display All Sections Collapsed]
-    RenderCollapsed --> ShowTriggers[Show Click Trigger Buttons]
-    ShowTriggers --> StudentClick{Student Clicks Trigger}
-    StudentClick --> ExpandSection[Expand Selected Section]
-    ExpandSection --> RevealContent[Display Hidden Content]
-    RevealContent --> PlayMedia{Media Present?}
-    PlayMedia -->|Yes| InitMedia[Initialize Media Player]
-    PlayMedia -->|No| TrackView
-    InitMedia --> TrackView[Track Section Viewed]
-    TrackView --> WaitAction[Wait for Next Action]
-    
-    WaitAction --> NextAction{Next Action}
-    NextAction -->|Click Another| CollapseOthers{Accordion Mode?}
-    NextAction -->|Click Same| CollapseSection[Collapse Current Section]
-    CollapseOthers -->|Yes| CollapseAll[Collapse Other Sections]
-    CollapseOthers -->|No| KeepOpen[Keep Others Open]
-    CollapseAll --> ExpandSection
-    KeepOpen --> ExpandSection
-    CollapseSection --> HideContent[Hide Section Content]
-    HideContent --> ShowTriggers
-    
-    TrackView --> DataFlow[Data Flow: View State â†’ Model]
-    DataFlow --> UpdateViewed[Update Viewed Sections Array]
-    UpdateViewed --> CheckComplete{All Sections Viewed?}
-    CheckComplete -->|Yes| MarkComplete[Mark Activity Complete]
-    CheckComplete -->|No| SaveProgress
-    MarkComplete --> SaveProgress[Save Progress to SCORM]
-    SaveProgress --> NextAction
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Authors create reveal sections (1-10) with trigger text and hidden content, optionally add media (images, videos, audio), and select from 4 visual styles with layout customization.</li>
-                <li><strong>Student Flow:</strong> Students click trigger buttons to expand sections and reveal hidden content, with accordion or multi-expand modes supporting flexible navigation patterns.</li>
-                <li><strong>Validation:</strong> Non-assessed content delivery focuses on exploration tracking, marking sections as viewed and checking completion status when all sections have been accessed.</li>
-                <li><strong>Data Flow:</strong> Tracks viewed sections array and completion progress, persisting view state to SCORM with media initialization for embedded audio/video players.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="section__title">Component Flow</h2></div>
+        <div class="card"><div class="card__content"><div class="mermaid">flowchart TD
+    A([Author Creates CTR Widget]) --> B[Select visual style 1-4]
+    B --> C[Set button text max 50 chars]
+    C --> D{Add media?}
+    D -->|Yes| E[Choose image/video/audio]
+    E --> F[Set placement above/below/left/right]
+    F --> G[Left/Right only for images]
+    D -->|No| H[Configure color pickers x7]
+    G --> H
+    H --> I[Save component]
+    I --> J([Student Views Page])
+    J --> K[Reveal button displayed]
+    K --> L[Student clicks button]
+    L --> M[introClick fires]
+    M --> N[Button hidden]
+    N --> O[Content revealed]
+    O --> P[No way to re-hide]
+    P --> Q[Page refresh resets state]</div></div></div>
       </section>
-
       <section class="section" id="features">
-        <div class="card">
-          <div class="card__content">
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
-          </div>
-        </div>
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><h2 class="section__title">Features</h2></div>
+        <div class="card"><div class="card__content"><div id="feature-specification" class="loading"><div class="spinner"></div><p>Loading feature specification...</p></div></div></div>
+      </section>
+      <section class="section" id="technical">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg><h2 class="section__title">Technical Details</h2></div>
+        <div class="card"><div class="card__content"><div class="info-grid"><div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">clickToRevealTemplate</div></div><div class="info-card"><div class="info-card__label">Style Variants</div><div class="info-card__value">4 (CTR_Style1-4)</div></div><div class="info-card"><div class="info-card__label">Color Pickers</div><div class="info-card__value">7 distinct color controls</div></div><div class="info-card"><div class="info-card__label">Button Text Limit</div><div class="info-card__value">50 characters</div></div><div class="info-card"><div class="info-card__label">Default Button Text</div><div class="info-card__value">"View more"</div></div><div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">None - state lost on refresh</div></div><div class="info-card"><div class="info-card__label">Left/Right Media</div><div class="info-card__value">Images only</div></div><div class="info-card"><div class="info-card__label">Video Auth</div><div class="info-card__value">Token-based for tracks/CC</div></div></div></div></div>
+      </section>
+      <section class="section" id="data-model">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg><h2 class="section__title">Data Model</h2></div>
+        <div class="card"><div class="card__content"><pre><code>{
+  "identifier": "Click To Reveal",
+  "introduction": "Click the button to see the answer.",
+  "instruction": "Read the question then reveal.",
+  "descriptionText": "This is the hidden content revealed on click.",
+  "settings": {
+    "templateName": "Click To Reveal",
+    "transcriptText": "View more",
+    "textLength": 40,
+    "isHeaderVisible": true,
+    "styleOption": "CTR_Style1",
+    "outline": "outline",
+    "CardBackgroundColor": "#ffffff",
+    "CardHeaderColor": "#f5f5f5",
+    "ButtonBackgroundColor": "#0066cc",
+    "ButtonOutlineColor": "#0066cc",
+    "ButtonTextColor": "#ffffff",
+    "mediaCheckbox": false,
+    "placement": "belowText",
+    "uploadtype": "system"
+  }
+}</code></pre></div></div>
+      </section>
+      <section class="section" id="files">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg><h2 class="section__title">File Structure</h2></div>
+        <div class="card"><div class="card__content"><pre><code>click-to-reveal/
++-- templates/
+¦   +-- clickToReveal/
+¦       +-- clickToReveal.html           # Main component template
+¦       +-- clickToReveal-settings.html  # Settings panel
+¦       +-- clickToReveal-media-template.html  # Media sub-template
++-- scripts/
+¦   +-- clickToReveal.js                 # Core directive logic
+¦   +-- clickToRevealpreview1.js         # Preview renderer
++-- styles/
+¦   +-- click-to-reveal-template.css    # Component styles
++-- default/
+    +-- clickToReveal.json              # Default configuration</code></pre></div></div>
+      </section>
+      <section class="section" id="settings">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg><h2 class="section__title">Settings Panel</h2></div>
+        <div class="card"><div class="card__content">
+          <table style="width:100%;border-collapse:collapse;"><thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead>
+          <tbody><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Visual Style</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">4 Thumbnails</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">CTR_Style1 through CTR_Style4</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Button Text</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text (max 50)</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Label on reveal button (transcriptText, default: View more)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Media Toggle</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable image, video, or audio attachment</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Media Placement</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">4 Icon Buttons</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">aboveText, belowText, leftSide, rightSide (left/right images only)</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Card BG Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">CardBackgroundColor for the content area</td></tr><tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Button Colors</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">3 Color Pickers</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">ButtonBackgroundColor, ButtonOutlineColor, ButtonTextColor</td></tr><tr><td style="padding:9px 12px;">Header/Instruction</td><td style="padding:9px 12px;">Toggles</td><td style="padding:9px 12px;">Show/hide header and instruction sections</td></tr></tbody></table>
+        </div></div>
+      </section>
+      <section class="section" id="behaviors">
+        <div class="section__header"><svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg><h2 class="section__title">Behaviors and Constraints</h2></div>
+        <div class="card"><div class="card__content"><ul style="list-style:disc;padding-left:20px;line-height:2;"><li><strong>One-way reveal:</strong> Once introClick() fires, the button is hidden and .ClickToRevealData is shown. There is no mechanism to re-hide the content. Page refresh returns to initial state.</li><li><strong>No SCORM:</strong> The component does not track revealed state via SCORM. Each page load starts with the button visible regardless of prior interaction.</li><li><strong>Left/Right placement restriction:</strong> Left and rightSide placement options are only functional for image media. Selecting them for video or audio has no effect.</li><li><strong>Style color adjustment:</strong> ApplystyleCTR() recalculates and applies color variables when the style variant changes, potentially overriding custom color picker values.</li><li><strong>Video tracks token auth:</strong> Video closed-caption track files use token-based authentication URLs; tokens may expire for offline/packaged content.</li></ul></div></div>
       </section>
     </div>
   </main>
@@ -319,8 +195,8 @@ flowchart TD
   <script src="../../assets/js/markdown-renderer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const renderer = new MarkdownRenderer();
-      renderer.renderFile('../../../Components/Widgets/Click to Reveal/TECHNICAL_DOCUMENTATION.md', 'feature-specification');
+      renderMarkdown('../../../Components/Widgets/Click to Reveal/TECHNICAL_DOCUMENTATION.md', 'feature-specification')
+        .catch(() => { document.getElementById('feature-specification').innerHTML = '<p>Documentation loading...</p>'; });
     });
   </script>
 </body>

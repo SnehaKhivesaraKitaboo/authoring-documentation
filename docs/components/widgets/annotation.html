@@ -1,510 +1,321 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Annotation Component - Interactive annotation and commenting system">
+  <meta name="description" content="Annotation Component – Interactive text annotation tool for configuring highlight and outline color sets.">
   <title>Annotation Component | Documentation Portal</title>
-  
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="../../assets/css/main.css">
   <link rel="stylesheet" href="../../assets/css/sidebar.css">
   <link rel="stylesheet" href="../../assets/css/components.css">
   <link rel="stylesheet" href="../../assets/css/markdown.css">
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-  
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Mermaid for Diagrams -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
 </head>
 <body>
-  
-  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar"></aside>
-  
-  <!-- Mobile Sidebar Overlay -->
   <div class="sidebar-overlay"></div>
-  
-  <!-- Main Content -->
   <main class="main-content">
-    <!-- Header -->
     <header class="header">
       <h1 class="header__title">Annotation Component</h1>
       <nav class="breadcrumb">
-        <div class="breadcrumb__item">
-          <a href="../../index.html" class="breadcrumb__link">Home</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a>
-          <span class="breadcrumb__separator">/</span>
-        </div>
-        <div class="breadcrumb__item">
-          <span class="breadcrumb__current">Annotation</span>
-        </div>
+        <div class="breadcrumb__item"><a href="../../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../../index.html#widgets" class="breadcrumb__link">Widgets</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Annotation</span></div>
       </nav>
     </header>
-    
-    <!-- Content -->
     <div class="content-wrapper">
-      <!-- Component Overview -->
       <section class="section">
         <h1 class="page-title">Annotation Component</h1>
-        <p class="page-subtitle">
-          Interactive annotation system that allows users to add comments, notes, and highlights to content. Perfect for collaborative learning and document review.
-        </p>
-        
-        <!-- Quick Links -->
+        <p class="page-subtitle">Interactive text annotation tool for configuring highlight and outline color sets. Authors define color palettes; students annotate reading passages with color-coded highlights and outlines.</p>
         <div class="quick-links">
-          <a href="#overview" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Overview
-          </a>
-          <a href="#uml" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            UML Class Diagram
-          </a>
-          <a href="#usecase" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            Sequence Diagram
-          </a>
-          <a href="#flow" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            Component Flow
-          </a>
-          <a href="#features" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Features
-          </a>
-          <a href="#technical" class="quick-link">
-            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            Technical Details
-          </a>
+          <a href="#overview" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Overview</a>
+          <a href="#uml" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>UML Class</a>
+          <a href="#usecase" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>Sequence</a>
+          <a href="#flow" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>Component Flow</a>
+          <a href="#features" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Features</a>
+          <a href="#technical" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>Technical</a>
+          <a href="#data-model" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>Data Model</a>
+          <a href="#files" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>Files</a>
+          <a href="#settings" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>Settings</a>
+          <a href="#behaviors" class="quick-link"><svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Behaviors</a>
         </div>
       </section>
-      
-      <!-- Overview Section -->
+
       <section class="section" id="overview">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <h2 class="section__title">Overview</h2>
         </div>
-        <div class="card">
-          <div class="card__content">
-            <p>
-              The Annotation Component provides a rich, interactive interface for adding contextual notes, comments, and highlights to educational content. 
-              It supports multiple annotation types including text notes, inline comments, and highlighted sections.
-            </p>
-            <p class="mt-md">
-              <strong>Key Capabilities:</strong>
-            </p>
-            <ul>
-              <li>Add inline text annotations</li>
-              <li>Create comment threads</li>
-              <li>Highlight important sections</li>
-              <li>Collaborative annotation support</li>
-              <li>Export annotations as summary</li>
-            </ul>
+        <div class="card"><div class="card__content">
+          <p>The Annotation Component enables authors to configure two independent color palettes — one for text highlights and one for text outlines. Students use these palettes to annotate reading passages, marking important words or phrases with up to 5 highlight colors and up to 5 outline colors. The component integrates directly with page-level metadata rather than component-level JSON, making annotation data part of the page's activity metadata.</p>
+          <h3 style="margin:16px 0 8px;">Key Capabilities</h3>
+          <ul style="list-style:disc;padding-left:20px;line-height:1.8;">
+            <li>Up to 5 highlight colors and 5 outline colors, each with a custom label</li>
+            <li>Independent enable/disable toggles for highlights and outlines</li>
+            <li>Alt text support for accessibility (max 2000 characters)</li>
+            <li>Debounced auto-save (1 second) plus explicit save on navigation</li>
+            <li>Metadata stored in page activityMetadata.colorObj (not component JSON)</li>
+            <li>Live color preview rendered via createPreviewForAnnotation()</li>
+            <li>Pastel palette for highlights; dark palette for outlines</li>
+          </ul>
+          <div class="info-grid" style="margin-top:20px;">
+            <div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">annotationHighlightOutline</div></div>
+            <div class="info-card"><div class="info-card__label">Data Type</div><div class="info-card__value">annotationHighlightOutline</div></div>
+            <div class="info-card"><div class="info-card__label">Max Colors</div><div class="info-card__value">5 highlights + 5 outlines</div></div>
+            <div class="info-card"><div class="info-card__label">Source Files</div><div class="info-card__value">6 files</div></div>
+            <div class="info-card"><div class="info-card__label">SCORM</div><div class="info-card__value">Via page metadata PUT</div></div>
+            <div class="info-card"><div class="info-card__label">Save Strategy</div><div class="info-card__value">Debounced 1s + on-nav</div></div>
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- UML Class Diagram Section -->
+
       <section class="section" id="uml">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-          </svg>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
           <h2 class="section__title">UML Class Diagram</h2>
         </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the class structure, properties, and methods of the Annotation Component:</p>
-            <div class="mermaid">
+        <div class="card"><div class="card__content">
+          <div class="mermaid">
 classDiagram
-    class AnnotationComponent {
-        -annotations: Array~Annotation~
-        -selectedText: String
-        -activeAnnotationId: String
-        -userId: String
-        -highlightColor: String
-        -isEditing: Boolean
-        +initialize()
-        +selectText(range)
-        +createAnnotation(text, position)
-        +editAnnotation(id, newText)
-        +deleteAnnotation(id)
-        +highlightText(start, end, color)
-        +removeHighlight(id)
-        +showAnnotation(id)
-        +hideAnnotation()
-        +exportAnnotations()
-        +importAnnotations(data)
+    class AnnotationController {
+        +showHighlights: Boolean
+        +showOutline: Boolean
+        +highlightsInputBox: ColorEntry[]
+        +outlineInputBox: ColorEntry[]
+        +altText: String
+        +addHighlight()
+        +removeHighlight(index)
+        +addOutline()
+        +removeOutline(index)
+        +selectHighlightsColor(color)
+        +changeHighlightsColor(color, index)
+        +checkHighlightsToggle(ev)
+        +saveAnnotationInit()
     }
-    
-    class Annotation {
-        -id: String
-        -text: String
-        -position: Object
-        -author: String
-        -timestamp: Date
-        -color: String
-        -replies: Array~Comment~
-        +addReply(comment)
-        +removeReply(id)
-        +toJSON()
+    class ColorEntry {
+        +color: String
+        +label: String
     }
-    
-    class Comment {
-        -id: String
-        -text: String
-        -author: String
-        -timestamp: Date
-        +edit(newText)
-        +delete()
+    class PageMetadata {
+        +activityMetadata: ActivityMetadata
     }
-    
-    class StorageManager {
-        +saveAnnotations(annotations)
-        +loadAnnotations()
-        +clearAnnotations()
+    class ActivityMetadata {
+        +colorObj: ColorObj
     }
-    
-    AnnotationComponent "1" --> "*" Annotation : manages
-    Annotation "1" --> "*" Comment : contains
-    AnnotationComponent --> StorageManager : uses
-            </div>
+    class ColorObj {
+        +highlightsInputBox: ColorEntry[]
+        +outlineInputBox: ColorEntry[]
+        +showHighlights: Boolean
+        +showOutline: Boolean
+        +altText: String
+    }
+    AnnotationController "1" --> "0..5" ColorEntry : highlights
+    AnnotationController "1" --> "0..5" ColorEntry : outlines
+    AnnotationController --> PageMetadata : updates
+    PageMetadata --> ActivityMetadata
+    ActivityMetadata --> ColorObj
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- Sequence Diagram Section -->
+
       <section class="section" id="usecase">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-          </svg>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
           <h2 class="section__title">Sequence Diagram</h2>
         </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram shows the interaction sequence between different actors and system components:</p>
-            <div class="mermaid">
+        <div class="card"><div class="card__content">
+          <div class="mermaid">
 sequenceDiagram
-    participant Author
-    participant W as Annotation Widget
-    participant UI as UI Layer
-    participant API as Backend API
-    participant Student
-    participant SCORM as SCORM API
-    
-    Note over Author,API: Authoring Phase
-    Author->>W: Open Editor
-    W->>UI: Render Settings Panel
-    Author->>W: Enable Highlights/Outlines
-    Author->>W: Select Colors (up to 5 each)
-    Author->>W: Add Custom Labels
-    Author->>W: Set Alt Text
-    W->>W: Validate Configuration
-    W->>API: Update Annotation Metadata
-    API->>API: Save colorObj to activityMetadata
-    API-->>W: Configuration Saved
-    
-    Note over Student,SCORM: Student Interaction Phase
-    Student->>W: Load Widget in Reader
-    W->>UI: Render Annotation Options
-    UI->>Student: Display Color Palette
-    Student->>W: Select Text
-    W->>UI: Show Annotation Menu
-    Student->>W: Choose Highlight/Outline Color
-    W->>UI: Apply Annotation Style
-    W->>SCORM: Save Annotation State
-    SCORM-->>W: State Persisted
-    Student->>W: Continue Annotating
-    loop Multiple Annotations
-        Student->>W: Select and Annotate Text
-        W->>SCORM: Update State
-    end
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Interaction Flow:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Authoring Phase:</strong> Author configures widget settings, uploads content, and saves configuration to backend</li>
-                <li><strong>Student Phase:</strong> Student loads widget, interacts with content, and submits answers for validation</li>
-                <li><strong>Validation Phase:</strong> System validates student input, provides feedback, and manages attempt tracking</li>
-                <li><strong>Persistence:</strong> State is continuously saved to SCORM API for progress tracking and session recovery</li>
-              </ul>
-            </div>
+    participant A as Author
+    participant UI as Annotation Settings
+    participant C as AnnotationController
+    participant API as PUT Page API
+    participant S as Student
+
+    A->>UI: Enable Highlights checkbox
+    UI->>C: checkHighlightsToggle(ev)
+    C->>C: Enforce min 1 type enabled
+    A->>UI: Click Add Highlight
+    UI->>C: addHighlight()
+    C->>C: Push {color, label} to highlightsInputBox
+    A->>UI: Pick color from pastel palette
+    UI->>C: selectHighlightsColor(color)
+    C->>C: saveAnnotationInit() debounce 1s
+    C->>API: PUT activityMetadata.colorObj
+    API-->>C: 200 OK
+    S->>UI: Select text in passage
+    UI->>C: Apply highlight color from palette
+    C->>C: Wrap selection in colored span
+    S->>UI: Navigate away
+    C->>API: PUT (on-nav save)
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- Component Flow Diagram Section -->
+
       <section class="section" id="flow">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <h2 class="section__title">Component Flow Diagram</h2>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <h2 class="section__title">Component Flow</h2>
         </div>
-        <div class="card">
-          <div class="card__content">
-            <p class="mb-md">This diagram illustrates the complete user interaction flow from authoring to student engagement:</p>
-            <div class="mermaid">
+        <div class="card"><div class="card__content">
+          <div class="mermaid">
 flowchart TD
-    Start([Author Opens Editor]) --> LoadDefault[Load Default Configuration]
-    LoadDefault --> SelectType{Select Annotation Type}
-    SelectType -->|Highlights| ConfigHighlight[Configure Highlights]
-    SelectType -->|Outlines| ConfigOutline[Configure Outlines]
-    ConfigHighlight --> SetColors1[Choose Colors for Options]
-    ConfigOutline --> SetColors2[Choose Colors for Options]
-    SetColors1 --> AddOptions[Add Options 1-5]
-    SetColors2 --> AddOptions
-    AddOptions --> SetLabels[Configure Labels Primary/Secondary]
-    SetLabels --> SaveConfig[Save Configuration]
-    
-    SaveConfig --> StudentLoad([Student Opens Widget])
-    StudentLoad --> RenderOptions[Display Annotation Options]
-    RenderOptions --> StudentSelect{Student Selects Option}
-    StudentSelect --> HighlightMode{Annotation Type?}
-    HighlightMode -->|Highlights| ApplyHighlight[Apply Background Color]
-    HighlightMode -->|Outlines| ApplyOutline[Apply Border Color]
-    ApplyHighlight --> MarkSelected[Mark as Selected]
-    ApplyOutline --> MarkSelected
-    MarkSelected --> CheckComplete{All Required Selected?}
-    CheckComplete -->|No| StudentSelect
-    CheckComplete -->|Yes| EnableSubmit[Enable Submit Button]
-    
-    EnableSubmit --> SubmitClick([Student Clicks Submit])
-    SubmitClick --> LockAnswers[Disable Further Selection]
-    LockAnswers --> SaveState[Save State to SCORM]
-    SaveState --> Complete([Activity Complete])
-    
-    MarkSelected --> DataFlow[Data Flow: DOM → State Object]
-    DataFlow --> UpdateModel[Update Internal Model]
-    UpdateModel --> SyncSCORM[Sync with SCORM API]
-    SyncSCORM --> PersistState[Persist Student Selections]
-            </div>
-            <div class="mt-lg">
-              <h4 class="flow-summary__title">Flow Summary:</h4>
-              <ul class="flow-summary__list">
-                <li><strong>Editor Flow:</strong> Author configures annotation type → Sets colors → Adds options → Saves configuration</li>
-                <li><strong>Student Flow:</strong> Opens widget → Views options → Selects annotations → Submits → State saved to LMS</li>
-                <li><strong>Data Flow:</strong> User selections → Internal state object → SCORM API → LMS persistence</li>
-                <li><strong>Validation:</strong> Checks if all required annotations are selected before enabling submit</li>
-              </ul>
-            </div>
+    A([Author Opens Page]) --> B[Add Annotation Widget]
+    B --> C{Enable Highlights?}
+    C -->|Yes| D[Add up to 5 highlight colors]
+    C -->|No| E{Enable Outlines?}
+    D --> E
+    E -->|Yes| F[Add up to 5 outline colors]
+    E -->|No| G[At least 1 must be enabled]
+    F --> H[Set labels for each color]
+    H --> I[Set Alt Text up to 2000 chars]
+    I --> J[saveAnnotationInit debounced 1s]
+    J --> K[PUT activityMetadata.colorObj]
+    K --> L[Strip $$hashKey from payload]
+    L --> M([Student Views Page])
+    M --> N[Annotation palette rendered]
+    N --> O[Student selects text]
+    O --> P[Pick highlight or outline color]
+    P --> Q[Color applied to selection]
+    Q --> R[Navigate away triggers save]
+    R --> S([State persisted in metadata])
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- Feature Specification Section (Markdown) -->
+
       <section class="section" id="features">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          <h2 class="section__title">Feature Specification</h2>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <h2 class="section__title">Features</h2>
         </div>
-        <div class="card">
-          <div class="card__content">
-            <!-- Markdown content will be rendered here -->
-            <div id="feature-specification" class="loading">
-              <div class="spinner"></div>
-            </div>
+        <div class="card"><div class="card__content">
+          <div id="feature-specification" class="loading">
+            <div class="spinner"></div><p>Loading feature specification...</p>
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- Technical Details Section -->
+
       <section class="section" id="technical">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-          </svg>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
           <h2 class="section__title">Technical Details</h2>
         </div>
-        
-        <div class="tech-details">
-          <div class="tech-details__grid">
-            <div class="tech-details__item">
-              <div class="tech-details__label">Component Type</div>
-              <div class="tech-details__value">Widget</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Category</div>
-              <div class="tech-details__value">Interactive Widget</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Status</div>
-              <div class="tech-details__value">Active</div>
-            </div>
-            <div class="tech-details__item">
-              <div class="tech-details__label">Documentation</div>
-              <div class="tech-details__value">Complete</div>
-            </div>
+        <div class="card"><div class="card__content">
+          <div class="info-grid">
+            <div class="info-card"><div class="info-card__label">Framework</div><div class="info-card__value">AngularJS (NgController)</div></div>
+            <div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">annotationHighlightOutline</div></div>
+            <div class="info-card"><div class="info-card__label">Controller Line</div><div class="info-card__value">NGController line 7065</div></div>
+            <div class="info-card"><div class="info-card__label">Save Debounce</div><div class="info-card__value">1000ms</div></div>
+            <div class="info-card"><div class="info-card__label">API Method</div><div class="info-card__value">PUT {serverIp}{updatePhysicalPageUrl}</div></div>
+            <div class="info-card"><div class="info-card__label">Data Storage</div><div class="info-card__value">Page metadata (not component JSON)</div></div>
+            <div class="info-card"><div class="info-card__label">Color Limit</div><div class="info-card__value">5 per type (highlight/outline)</div></div>
+            <div class="info-card"><div class="info-card__label">Alt Text Limit</div><div class="info-card__value">2000 characters</div></div>
           </div>
-        </div>
+        </div></div>
       </section>
-      
-      <!-- Features List -->
-      <section class="section">
+
+      <section class="section" id="data-model">
         <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h2 class="section__title">Key Features</h2>
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+          <h2 class="section__title">Data Model</h2>
         </div>
-        
-        <div class="feature-list">
-          <ul class="feature-list__items">
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Text Selection & Annotation</div>
-                <div class="feature-list__description">Users can select any text and add contextual annotations with custom notes</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Color-Coded Highlights</div>
-                <div class="feature-list__description">Support for multiple highlight colors to categorize different types of annotations</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Comment Threads</div>
-                <div class="feature-list__description">Create threaded discussions on specific text sections for collaborative review</div>
-              </div>
-            </li>
-            <li class="feature-list__item">
-              <svg class="feature-list__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div class="feature-list__content">
-                <div class="feature-list__name">Export Functionality</div>
-                <div class="feature-list__description">Export all annotations as a summary document for offline review</div>
-              </div>
-            </li>
+        <div class="card"><div class="card__content">
+<pre><code>{
+  "activityMetadata": {
+    "colorObj": {
+      "showHighlights": true,
+      "showOutline": true,
+      "highlightsInputBox": [
+        { "color": "#FFD700", "label": "Important" },
+        { "color": "#90EE90", "label": "Evidence" },
+        { "color": "#ADD8E6", "label": "Key Term" }
+      ],
+      "outlineInputBox": [
+        { "color": "#8B0000", "label": "Error" },
+        { "color": "#00008B", "label": "Focus" }
+      ],
+      "altText": "Annotation palette for reading activity"
+    }
+  }
+}</code></pre>
+        </div></div>
+      </section>
+
+      <section class="section" id="files">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+          <h2 class="section__title">File Structure</h2>
+        </div>
+        <div class="card"><div class="card__content">
+<pre><code>annotation/
+├── templates/
+│   └── annotation/
+│       ├── annotation.html          # Main component template
+│       └── annotation-setting.html  # Settings panel
+├── scripts/
+│   ├── annotation.js                # Core directive logic
+│   └── annotation-preview1.js       # Preview renderer
+├── styles/
+│   └── annotation-template.css      # Component styles
+└── default/
+    └── annotation.json              # Default configuration</code></pre>
+        </div></div>
+      </section>
+
+      <section class="section" id="settings">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+          <h2 class="section__title">Settings Panel</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead><tr style="background:var(--bg-secondary);"><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Setting</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Type</th><th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th></tr></thead>
+            <tbody>
+              <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable Highlights</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enables the text highlight palette for students (showHighlights)</td></tr>
+              <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enable Outlines</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Checkbox</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enables the text outline palette for students (showOutline)</td></tr>
+              <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Add Highlight Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Button + Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Adds a pastel color to highlights palette (max 5). Label editable.</td></tr>
+              <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Add Outline Color</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Button + Color Picker</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Adds a dark color to outlines palette (max 5). Label editable.</td></tr>
+              <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Color Label</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Text Input</td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Descriptive label for each color entry (string)</td></tr>
+              <tr><td style="padding:9px 12px;">Alt Text</td><td style="padding:9px 12px;">Textarea</td><td style="padding:9px 12px;">Accessibility description for the annotation widget (max 2000 chars)</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+      </section>
+
+      <section class="section" id="behaviors">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <h2 class="section__title">Behaviors &amp; Constraints</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <ul style="list-style:disc;padding-left:20px;line-height:2;">
+            <li><strong>Minimum 1 type enforced:</strong> checkHighlightsToggle() prevents both showHighlights and showOutline from being false simultaneously.</li>
+            <li><strong>Unique colors per type:</strong> Each color within highlights or outlines must be unique; duplicate prevention enforced in selectHighlightsColor().</li>
+            <li><strong>Page-level storage:</strong> Color data is stored in activityMetadata.colorObj on the page, NOT in the component JSON file — missing in component exports.</li>
+            <li><strong>$$hashKey stripped:</strong> AngularJS $$hashKey properties are removed from the payload before the PUT API call to prevent server-side issues.</li>
+            <li><strong>Debounced save:</strong> saveAnnotationInit() uses a 1-second debounce; additionally triggers on page navigation events.</li>
+            <li><strong>Pastel vs dark palettes:</strong> Highlight colors use a pastel color palette; outline colors use a dark/saturated palette for visual contrast.</li>
+            <li><strong>updateAnnotationMetadata():</strong> Defined at NGController line 7065; called by the directive to push colorObj changes to the page metadata store.</li>
           </ul>
-        </div>
-      </section>
-      
-      <!-- Dependencies Section -->
-      <section class="section" id="dependencies">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-          </svg>
-          <h2 class="section__title">Dependencies</h2>
-        </div>
-        
-        <div class="dependencies">
-          <div class="dependencies__list">
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Base Component</span>
-            </div>
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Text Selection API</span>
-            </div>
-            <div class="dependency-tag">
-              <svg class="dependency-tag__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-              <span>Storage Module</span>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Code Reference Section -->
-      <section class="section" id="code">
-        <div class="section__header">
-          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          <h2 class="section__title">Code Reference</h2>
-        </div>
-        <div class="card">
-          <div class="card__content">
-            <p><strong>Implementation Location:</strong></p>
-            <pre><code>Components/Widgets/Annotation/</code></pre>
-            
-            <p class="mt-md"><strong>Key Files:</strong></p>
-            <ul>
-              <li><code>ANNOTATION_COMPONENT_TECHNICAL_DOCUMENTATION.md</code> - Technical specification</li>
-              <li><code>Prompt messages.md</code> - User-facing messages and prompts</li>
-            </ul>
-          </div>
-        </div>
+        </div></div>
       </section>
     </div>
   </main>
-  
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="../../assets/js/utils.js"></script>
   <script src="../../assets/js/sidebar-loader.js"></script>
   <script src="../../assets/js/mermaid-init.js"></script>
   <script src="../../assets/js/navigation.js"></script>
   <script src="../../assets/js/markdown-renderer.js"></script>
-  
   <script>
-    // Load and render feature specification from markdown file
     document.addEventListener('DOMContentLoaded', () => {
-      // Path to the actual markdown documentation file
-      const markdownFilePath = '../../../Components/Widgets/Annotation/ANNOTATION_COMPONENT_TECHNICAL_DOCUMENTATION.md';
-      
-      // Render the markdown file
-      renderMarkdown(markdownFilePath, 'feature-specification')
+      renderMarkdown('../../../Components/Widgets/Annotation/ANNOTATION_COMPONENT_TECHNICAL_DOCUMENTATION.md', 'feature-specification')
         .catch(error => {
-          console.error('Error loading documentation:', error);
-          document.getElementById('feature-specification').innerHTML = `
-            <div class="alert alert-info">
-              <strong>Documentation File:</strong><br>
-              This section will automatically load content from:<br>
-              <code>${markdownFilePath}</code>
-              <p class="mt-md">
-                The component will render your existing Markdown documentation files without modification.
-                Simply ensure the file path is correct and the file is accessible.
-              </p>
-            </div>
-          `;
+          document.getElementById('feature-specification').innerHTML = '<p>Documentation loading...</p>';
         });
     });
   </script>
