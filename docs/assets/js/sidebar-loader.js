@@ -93,6 +93,7 @@
 
     const dashboardHref = prefix + 'index.html';
     const layoutHref = prefix + 'components/layout/layout.html';
+    const tocHref = prefix + 'components/TOC/toc.html';
 
     return `
     <div class="sidebar__header">
@@ -140,6 +141,25 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
               </svg>
               <span class="nav-item__text">Layout Component</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <button class="nav-group__toggle" data-target="toc-group" aria-label="Toggle TOC section">
+          <span class="nav-group__title">TOC</span>
+          <svg class="nav-group__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <ul class="nav-list" id="toc-group">
+          <li class="nav-item">
+            <a href="${tocHref}" class="nav-item__link${activeClass(tocHref)}">
+              <svg class="nav-item__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h7"></path>
+              </svg>
+              <span class="nav-item__text">Table of Contents</span>
             </a>
           </li>
         </ul>

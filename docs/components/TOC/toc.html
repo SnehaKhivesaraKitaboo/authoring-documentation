@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Table of Contents (TOC) - Authoring panel for managing lesson structure, steps, and pages">
+  <title>Table of Contents (TOC) | Documentation Portal</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Mermaid for Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">Table of Contents (TOC)</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item">
+          <a href="../../index.html" class="breadcrumb__link">Home</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <a href="../../index.html#toc" class="breadcrumb__link">TOC</a>
+          <span class="breadcrumb__separator">/</span>
+        </div>
+        <div class="breadcrumb__item">
+          <span class="breadcrumb__current">Table of Contents</span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="content-wrapper">
+
+      <!-- Component Overview -->
+      <section class="section">
+        <h1 class="page-title">Table of Contents (TOC) Component</h1>
+        <p class="page-subtitle">
+          The TOC is the central navigation panel in KITABOO Authoring that manages the full lesson
+          structure — Instructions pages, Steps, Level-of-Support (LOS) variants, and chapter headings.
+          It drives page creation, ordering, deletion, and content persistence across the authoring session.
+        </p>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Overview
+          </a>
+          <a href="#architecture" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+            Architecture
+          </a>
+          <a href="#data-model" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+            </svg>
+            Data Model
+          </a>
+          <a href="#uml-class" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            UML Class Diagram
+          </a>
+          <a href="#sequence" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Sequence Diagram
+          </a>
+          <a href="#component-flow" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Component Flow
+          </a>
+          <a href="#api" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            API Endpoints
+          </a>
+          <a href="#operations" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+            </svg>
+            CRUD Operations
+          </a>
+          <a href="#files" class="quick-link">
+            <svg class="quick-link__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+            </svg>
+            File Structure
+          </a>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section class="section" id="overview">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>
+              The <strong>Table of Contents (TOC)</strong> is the left-hand navigation panel in KITABOO Authoring.
+              It is activated when <code>TOCFlag === 'flat'</code> and driven entirely by the AngularJS
+              <code>newToc</code> directive defined in <code>editor/ngdragdrop.js</code>.
+            </p>
+            <p class="mt-md">
+              The TOC renders a hierarchical view of the lesson content:
+            </p>
+            <ul>
+              <li><strong>Instructions for Students</strong> — fixed first entry.</li>
+              <li><strong>Instructions for Teacher</strong> — fixed second entry.</li>
+              <li><strong>Steps</strong> — dynamically grouped by <code>metadata.stepid</code>; each step can have
+                multiple Level-of-Support (LOS) page variants: CORE, LIGHT, MODERATE, INTENSIVE.</li>
+              <li><strong>Chapter Headings</strong> — canvas-side headings persisted back to TOC via <code>saveTOCtoBackend()</code>.</li>
+            </ul>
+            <p class="mt-md"><strong>Key Capabilities:</strong></p>
+            <ul>
+              <li>Click any TOC row to navigate to that page (auto-saves current page first)</li>
+              <li>Add new steps via "+ Add" dropdown</li>
+              <li>Import steps from the Asset Library</li>
+              <li>Drag-and-drop reordering of steps</li>
+              <li>Clone a step into a new LOS level</li>
+              <li>Edit step metadata (title, type, LOS)</li>
+              <li>Delete a page (CORE only if no other LOS variants exist)</li>
+              <li>Move pages Up / Down within a step</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="info-grid mt-lg">
+          <div class="info-card">
+            <div class="info-card__label">Directive</div>
+            <div class="info-card__value">newToc</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__label">Selector</div>
+            <div class="info-card__value">[new-toc]</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__label">Activation Flag</div>
+            <div class="info-card__value">TOCFlag === 'flat'</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__label">Primary Controller</div>
+            <div class="info-card__value">ngcontroller.js</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__label">LOS Variants</div>
+            <div class="info-card__value">CORE, LIGHT, MODERATE, INTENSIVE</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card__label">Drag-Sort Library</div>
+            <div class="info-card__value">jQuery UI Sortable</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section class="section" id="architecture">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+          <h2 class="section__title">Architecture</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p>The TOC system is distributed across four primary source files:</p>
+            <div class="info-grid mt-md">
+              <div class="info-card">
+                <div class="info-card__label">index.html (lines 983–1177)</div>
+                <div class="info-card__value">TOC panel HTML template with AngularJS bindings</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card__label">editor/ngcontroller.js</div>
+                <div class="info-card__value">All lifecycle functions: fetch, save, group, sort, delete</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card__label">editor/ngdragdrop.js</div>
+                <div class="info-card__value">newToc directive + tocPageClick navigation handler</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card__label">js/page-tray.js</div>
+                <div class="info-card__value">Step-level operations: add LOS, edit metadata, clone, delete guard</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card__label">config/config.js</div>
+                <div class="info-card__value">TocFlatStepIcon registry mapping step types to SVG icons</div>
+              </div>
+              <div class="info-card">
+                <div class="info-card__label">css/authoring/authoring-style.css</div>
+                <div class="info-card__value">All TOC visual styles (.toc-container, .activeTocItem, .losTag, etc.)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOC Structure Diagram -->
+        <div class="card mt-md">
+          <div class="card__content">
+            <p class="mb-md"><strong>Structural Hierarchy Visible in the Panel:</strong></p>
+            <div class="mermaid">
+graph TD
+    TOC["📋 TOC Panel (new-toc directive)"]
+    SI["📘 Instructions for Students"]
+    TI["📗 Instructions for Teacher"]
+    SL["📂 Steps List (drag-sortable)"]
+    S1["Step 1"]
+    S2["Step 2"]
+    SN["Step N..."]
+    P1C["Page (CORE)"]
+    P1L["Page (LIGHT)"]
+    P1M["Page (MODERATE)"]
+    ADD["➕ + Add Dropdown"]
+    NS["Add New Step"]
+    IL["Import From Library"]
+
+    TOC --> SI
+    TOC --> TI
+    TOC --> SL
+    TOC --> ADD
+    ADD --> NS
+    ADD --> IL
+    SL --> S1
+    SL --> S2
+    SL --> SN
+    S1 --> P1C
+    S1 --> P1L
+    S1 --> P1M
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Model -->
+      <section class="section" id="data-model">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+          </svg>
+          <h2 class="section__title">Data Model</h2>
+        </div>
+
+        <div class="card">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">Flat Page Object (<code>$rootScope.tocInfo[]</code>)</h3>
+            <p class="mb-sm">Each entry returned by the backend and stored in <code>tocInfo</code>:</p>
+            <pre><code>{
+  id: &lt;pageDbId&gt;,
+  pageSequence: &lt;number&gt;,
+  originalPageSequence: &lt;number&gt;,
+  pageReferenceId: &lt;string&gt;,
+  pageType: "studentInstructions" | "teacherInstructions" | &lt;step-page&gt;,
+  metadata: {
+    identifier: "fill-in-the-blank" | "multiple-choice-template" | ...,
+    name: "Fill in the Blanks" | ...,
+    stepTitle: "Step title text",
+    stepid: &lt;number&gt;,          // Groups pages into Steps
+    levelsOfSupport: ["CORE" | "LIGHT" | "MODERATE" | "INTENSIVE"],
+    pageTrayIcon: &lt;optional override SVG path&gt;,
+    studentInstructions: "&lt;text&gt;",
+    supportContentJson: [...],
+    clicData: [...]
+  },
+  headers: [...]              // Chapter heading objects on this page
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">Grouped TOC (<code>$rootScope.grouptoc</code>)</h3>
+            <p class="mb-sm">The UI-facing model built by <code>createGroupTOC()</code>:</p>
+            <pre><code>$rootScope.grouptoc = {
+  studentInstructions: { id, pageSequence, originalPageSequence, ... },
+  teacherInstructions: { id, pageSequence, originalPageSequence, ... },
+  steps: [
+    // Step 1 — array of LOS variants
+    [ pageObj_CORE, pageObj_LIGHT, pageObj_MODERATE ],
+    // Step 2
+    [ pageObj_CORE ],
+    // Step N...
+  ]
+}</code></pre>
+            <p class="mt-sm">
+              The template iterates: <code>ng-repeat="step in grouptoc.steps"</code> for the outer step rows
+              and <code>ng-repeat="pages in step"</code> for the LOS page rows within each step.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">Icon Registry (<code>TocFlatStepIcon</code> in config.js)</h3>
+            <p class="mb-sm">Maps <code>metadata.identifier</code> to SVG icon paths in <code>assets/image_library/TOC/</code>:</p>
+            <div class="info-grid">
+              <div class="info-card"><div class="info-card__label">Instruction.svg</div><div class="info-card__value">Instructions pages</div></div>
+              <div class="info-card"><div class="info-card__label">genericStep.svg</div><div class="info-card__value">Generic step pages</div></div>
+              <div class="info-card"><div class="info-card__label">FillintheBlanks.svg</div><div class="info-card__value">FIB widget steps</div></div>
+              <div class="info-card"><div class="info-card__label">DragnDrop.svg</div><div class="info-card__value">Drag &amp; Drop steps</div></div>
+              <div class="info-card"><div class="info-card__label">Annotation.svg</div><div class="info-card__value">Annotation steps</div></div>
+              <div class="info-card"><div class="info-card__label">Customstep.svg</div><div class="info-card__value">Custom step types</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UML Class Diagram -->
+      <section class="section" id="uml-class">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h2 class="section__title">UML Class Diagram</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">Class structure of the TOC system — controllers, directives, and data objects:</p>
+            <div class="mermaid">
+classDiagram
+    class TOCController {
+        +tocData: Object
+        +TOCFlag: String
+        +getTOCData(bookId)
+        +createGroupTOC()
+        +flattenTocArray(data) Array
+        +getIndividualTocHeaderObject(data) Object
+        +createRefidmap()
+        +setupSortableTOCList()
+        +reArrangeGroupTOC()
+        +saveTOCtoBackend()
+        +tocSectionDeletePopup(event)
+        +tocSectionDeleteConfirmationPopup()
+        +tocSectionUp(event)
+        +tocSectionDown(event)
+        +fetchTOCforInternal()
+    }
+
+    class NewTocDirective {
+        +pagedbid: String
+        +pagesequence: Number
+        +originalPageSequence: Number
+        +tocPageClick(event, isLoad)
+        +link(scope, element, attrs)
+    }
+
+    class PageTrayService {
+        +toinsertNewLevelSupport(event, pages)
+        +capitalizeLOS(str) String
+        +canDeletePage(pages) Boolean
+        +tocSectionEditPopup(event, pages)
+        +tocSectionClonePopup(event, pages)
+        +addActivityFromLibrary()
+    }
+
+    class TocInfo {
+        +id: String
+        +pageSequence: Number
+        +originalPageSequence: Number
+        +pageReferenceId: String
+        +pageType: String
+        +metadata: TocMetadata
+        +headers: Array
+    }
+
+    class TocMetadata {
+        +identifier: String
+        +name: String
+        +stepTitle: String
+        +stepid: Number
+        +levelsOfSupport: Array
+        +pageTrayIcon: String
+        +studentInstructions: String
+        +supportContentJson: Array
+        +clicData: Array
+    }
+
+    class GroupToc {
+        +studentInstructions: TocInfo
+        +teacherInstructions: TocInfo
+        +steps: Array~Array~TocInfo~~
+    }
+
+    class TocFlatStepIcon {
+        +identifier: String
+        +path: String
+    }
+
+    TOCController --> GroupToc : builds
+    TOCController --> TocInfo : manages array
+    NewTocDirective --> TOCController : calls tocPageClick
+    PageTrayService --> GroupToc : reads steps
+    TocInfo --> TocMetadata : contains
+    GroupToc --> TocInfo : references
+    TocFlatStepIcon --> TocInfo : icon lookup
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Diagram -->
+      <section class="section" id="sequence">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <h2 class="section__title">Sequence Diagram</h2>
+        </div>
+
+        <!-- Load TOC -->
+        <div class="card">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">1. Initial TOC Load</h3>
+            <div class="mermaid">
+sequenceDiagram
+    participant App as AngularJS App
+    participant Ctrl as ngcontroller.js
+    participant BE as Backend API
+    participant TOC as TOC Panel (newToc directive)
+    participant Canvas as Authoring Canvas
+
+    App->>Ctrl: $scope.getTOCData(bookId)
+    Ctrl->>BE: GET /services/tocServices/v1/fetchTOC
+    BE-->>Ctrl: { pages: [...] }
+    Ctrl->>Ctrl: flattenTocArray(data) → $rootScope.tocInfo[]
+    Ctrl->>Ctrl: createRefidmap() — builds orgSequenceRefidmap
+    Ctrl->>Ctrl: createGroupTOC() — builds $rootScope.grouptoc
+    Ctrl->>TOC: AngularJS digest updates ng-repeat bindings
+    TOC-->>App: Renders Instructions + Steps in sidebar
+    Ctrl->>BE: GET fetchContent(firstPageId)
+    BE-->>Canvas: Page HTML content
+    Canvas-->>App: First page rendered
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Navigation -->
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">2. TOC Page Click (Navigation)</h3>
+            <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant TOC as TOC Row (newToc directive)
+    participant Ctrl as ngcontroller.js
+    participant BE as Backend API
+    participant Canvas as Authoring Canvas
+
+    User->>TOC: Click page row
+    TOC->>Ctrl: tocPageClick(event, isLoad=true)
+    Ctrl->>Ctrl: savePageContent() — serialize canvas HTML
+    Ctrl->>BE: POST /services/tocServices/v1/saveContent
+    Ctrl->>Ctrl: saveTOCtoBackend() — scan .chapter-headingNew-h1 elements
+    Ctrl->>BE: POST /services/tocServices/v1/saveAndEditTOC (for each heading)
+    Ctrl->>TOC: Update [new-toc] attrs: pagedbid, pagesequence
+    Ctrl->>TOC: Set .activeTocItem on clicked row
+    Ctrl->>BE: GET /services/tocServices/v1/fetchContent/{pageId}
+    BE-->>Canvas: New page HTML
+    Canvas-->>User: New page rendered on canvas
+            </div>
+          </div>
+        </div>
+
+        <!-- Add New Step -->
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">3. Add New Step</h3>
+            <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant TOC as TOC Panel
+    participant Modal as #widget-popup Modal
+    participant Ctrl as ngcontroller.js
+    participant BE as Backend API
+
+    User->>TOC: Click "+ Add" → "Add New Step"
+    TOC->>Modal: Open #widget-popup with step type options
+    User->>Modal: Select step type + metadata + LOS
+    Modal->>Ctrl: savePhysicalPage(metadata)
+    Ctrl->>BE: POST /services/tocServices/v1/savePhysicalPage
+    BE-->>Ctrl: { newPageId, pageSequence }
+    Ctrl->>Ctrl: getTOCData(bookId) — refresh full TOC
+    Ctrl->>Ctrl: createGroupTOC() — rebuild grouptoc
+    Ctrl->>TOC: ng-repeat updates — new Step appears
+    Ctrl->>BE: GET fetchContent(newPageId)
+    BE-->>TOC: Navigate to new page
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Page -->
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">4. Delete Page</h3>
+            <div class="mermaid">
+sequenceDiagram
+    participant User
+    participant TOC as TOC Panel
+    participant Guard as canDeletePage()
+    participant Popup as .tocSectionDeletePopup
+    participant Ctrl as ngcontroller.js
+    participant BE as Backend API
+
+    User->>TOC: Click 3-dot menu → "Delete"
+    TOC->>Guard: canDeletePage(pages)
+    Guard-->>TOC: true (CORE with no other LOS variants)
+    TOC->>Popup: tocSectionDeletePopup(event) — store pageId
+    User->>Popup: Confirm delete
+    Popup->>Ctrl: tocSectionDeleteConfirmationPopup()
+    Ctrl->>Ctrl: deletePhysicalPage(pageId)
+    Ctrl->>BE: DELETE /services/tocServices/v1/deletePage/{pageId}
+    BE-->>Ctrl: 200 OK
+    Ctrl->>Ctrl: getTOCData() — refresh TOC
+    Ctrl->>TOC: ng-repeat removes deleted step
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Flow -->
+      <section class="section" id="component-flow">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <h2 class="section__title">Component Flow</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <p class="mb-md">End-to-end flow of the TOC system from boot to user interaction:</p>
+            <div class="mermaid">
+flowchart TD
+    A([App Bootstrap]) --> B{TOCFlag === 'flat'?}
+    B -- No --> C([Non-TOC mode])
+    B -- Yes --> D[Render newTocPanel div\nwith new-toc directive]
+    D --> E[getTOCData called\nfetch from backend]
+    E --> F[flattenTocArray\n→ tocInfo array]
+    F --> G[createRefidmap\norgSequenceRefidmap built]
+    G --> H[createGroupTOC\n→ grouptoc object]
+    H --> I[ng-repeat renders\nInstructions + Steps]
+    I --> J[setupSortableTOCList\njQuery UI drag-sort enabled]
+    J --> K([TOC Panel Ready])
+
+    K --> L{User Action}
+    L --> M[Click TOC Row]
+    L --> N[Click + Add]
+    L --> O[Drag-reorder Step]
+    L --> P[3-dot menu on Page]
+
+    M --> M1[tocPageClick]
+    M1 --> M2[savePageContent + saveTOCtoBackend]
+    M2 --> M3[fetchPageContent new page]
+    M3 --> M4[Update .activeTocItem]
+
+    N --> N1[Add New Step OR Import Library]
+    N1 --> N2[savePhysicalPage POST]
+    N2 --> N3[getTOCData refresh]
+    N3 --> N4[createGroupTOC rebuild]
+    N4 --> N5[Navigate to new page]
+
+    O --> O1[jQuery UI sortable update]
+    O1 --> O2[reArrangeGroupTOC]
+    O2 --> O3[PUT updateTheSectionSequence]
+
+    P --> P1{Action}
+    P1 --> P2[Clone New Level]
+    P1 --> P3[Edit Metadata]
+    P1 --> P4[Delete Page]
+    P2 --> PA[tocSectionClonePopup → savePhysicalPage]
+    P3 --> PB[tocSectionEditPopup → savePhysicalPage]
+    P4 --> PC[canDeletePage guard\n→ deletePhysicalPage DELETE]
+    PA --> N3
+    PB --> N3
+    PC --> N3
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Endpoints -->
+      <section class="section" id="api">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <h2 class="section__title">API Endpoints</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg-secondary);">
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Scope Variable</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Endpoint URL</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Method</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>fetchTOCUrl</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/fetchTOC</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">GET</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Load all TOC pages for a book</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>saveTOCUrl</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/saveAndEditTOC</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Persist canvas chapter headings to TOC</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>deleteTOCUrl</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/deletTOCHeader/{pageId}</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">DELETE</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Remove a chapter heading from TOC</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>savePhysicalPage</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/savePhysicalPage</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Create a new step page or clone an existing one</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>deletePhysicalPage</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/deletePage/{pageId}</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">DELETE</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Permanently remove a page from the lesson</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>saveContent</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/saveContent</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Save current canvas HTML content for a page</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>fetchContent</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/tocServices/v1/fetchContent/{pageId}</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">GET</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Load saved HTML content for a page onto canvas</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionSequence</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>/services/htmlEditorServices/v1/updateTheSectionSequence</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">PUT</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Persist reordered step/page sequences</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;"><code>deletePageUrl</code></td>
+                  <td style="padding:9px 12px;"><code>/services/htmlEditorServices/deleteTocContent</code></td>
+                  <td style="padding:9px 12px;">DELETE</td>
+                  <td style="padding:9px 12px;">Remove TOC heading content from HTML editor</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CRUD Operations -->
+      <section class="section" id="operations">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+          </svg>
+          <h2 class="section__title">CRUD Operations</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg-secondary);">
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Operation</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Trigger</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Handler Function</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Backend Call</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Add Step</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">+ Add → "Add New Step"</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>savePhysicalPage()</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST savePhysicalPage</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Import from Library</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">+ Add → "Import From Library"</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>openAssetLibrary() → addActivityFromLibrary()</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">duplicatePhysicalPage()</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Edit Step Metadata</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Page 3-dot → "Edit Metadata"</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionEditPopup(event, pages)</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST savePhysicalPage</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Clone Step (new LOS)</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Page 3-dot → "Clone New Level"</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionClonePopup(event, pages)</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">POST savePhysicalPage (clone)</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Add Duplicate LOS</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Step 3-dot → "Duplicate New level"</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>toinsertNewLevelSupport(event, step)</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Opens Asset Library modal</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Delete Page</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Page 3-dot → "Delete" (if canDeletePage)</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionDeletePopup() → deletePhysicalPage()</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">DELETE deletePhysicalPage</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Reorder Steps</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Drag-and-drop step rows</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>reArrangeGroupTOC()</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">PUT tocSectionSequence</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><strong>Move Page Up / Down</strong></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Arrow buttons on page row</td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionUp() / tocSectionDown()</code></td>
+                  <td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">PUT tocSectionSequence</td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 12px;"><strong>Delete Canvas Heading</strong></td>
+                  <td style="padding:9px 12px;">Delete a heading element on canvas</td>
+                  <td style="padding:9px 12px;"><code>ngdragdrop.js direct AJAX</code></td>
+                  <td style="padding:9px 12px;">DELETE deleteTOCUrl</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Delete Guard -->
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">Delete Guard: <code>canDeletePage(pages)</code></h3>
+            <p>Returns <code>false</code> (delete hidden) when the page is the CORE variant and other LOS variants
+              exist within the same step. CORE is the canonical page — it cannot be removed while dependent LOS
+              pages (LIGHT, MODERATE, INTENSIVE) remain. Delete is allowed only for:</p>
+            <ul>
+              <li>Non-CORE LOS pages at any time</li>
+              <li>CORE page only when it is the <em>sole</em> page in that step</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- File Structure -->
+      <section class="section" id="files">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+          </svg>
+          <h2 class="section__title">File Structure</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <pre><code>KITABOO_Authoring/
+├── index.html                         ← TOC panel HTML (lines 983–1177)
+│   └── [new-toc directive host]
+│
+├── editor/
+│   ├── ngcontroller.js                ← All TOC lifecycle functions
+│   │   ├── getTOCData()
+│   │   ├── createGroupTOC()
+│   │   ├── flattenTocArray()
+│   │   ├── createRefidmap()
+│   │   ├── setupSortableTOCList()
+│   │   ├── reArrangeGroupTOC()
+│   │   ├── saveTOCtoBackend()
+│   │   ├── tocSectionDeletePopup()
+│   │   ├── tocSectionUp() / tocSectionDown()
+│   │   └── fetchTOCforInternal()
+│   │
+│   └── ngdragdrop.js                  ← newToc directive + tocPageClick
+│       ├── App.directive('newToc')
+│       ├── tocPageClick(event, isLoad)
+│       └── updateActivePageToc(index)
+│
+├── js/
+│   └── page-tray.js                   ← Step-level page operations
+│       ├── toinsertNewLevelSupport()
+│       ├── capitalizeLOS()
+│       ├── canDeletePage()
+│       ├── tocSectionEditPopup()
+│       └── tocSectionClonePopup()
+│
+├── config/
+│   └── config.js                      ← TocFlatStepIcon registry
+│
+├── templates/
+│   └── toc-delete-modal.html          ← Delete confirmation modal stub
+│
+├── css/
+│   └── authoring/
+│       └── authoring-style.css        ← All TOC visual styles
+│           ├── .toc-container
+│           ├── .newTocPanel
+│           ├── .toc-outer-container
+│           ├── .subTocName
+│           ├── .activeTocItem
+│           ├── .pageTypeTitle
+│           ├── .losTag / .losTagTitle
+│           └── .tocSectionDeletePopup
+│
+└── assets/
+    └── image_library/
+        └── TOC/                       ← Step type icons
+            ├── Instruction.svg
+            ├── genericStep.svg
+            ├── Customstep.svg
+            ├── OfflineStep.svg
+            ├── Annotation.svg
+            ├── FillintheBlanks.svg
+            ├── DragnDrop.svg
+            ├── edit.svg
+            ├── delete.svg
+            ├── menu.svg
+            └── Vector.svg</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Functions Reference -->
+      <section class="section" id="key-functions">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <h2 class="section__title">Key Functions Reference</h2>
+        </div>
+
+        <div class="card">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">ngcontroller.js — Core TOC Functions</h3>
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg-secondary);">
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Function</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>getTOCData(id)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Fetches TOC from backend, flattens into tocInfo, calls createGroupTOC + fetchPageContent</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>createGroupTOC()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Builds grouptoc from tocInfo — groups pages by stepid, separates instructions</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>flattenTocArray(data)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Converts nested page object returned by backend into a flat array</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>createRefidmap()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Builds window.orgSequenceRefidmap for internal hyperlink referencing</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>setupSortableTOCList()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Enables jQuery UI drag-sort on .toc-steps-list</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>reArrangeGroupTOC()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Reads new DOM order after drag, updates originalPageSequence, PUTs to backend</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>saveTOCtoBackend()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Scans canvas for .chapter-headingNew-h1 / [data-type="header"], POSTs each to saveTOCUrl</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionDeletePopup(event)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Shows delete confirm popup; stores targeted pageId</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionDeleteConfirmationPopup()</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Executes deletePhysicalPage after user confirms</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionUp(event)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Swaps originalPageSequence with preceding page; PUTs to backend</td></tr>
+                <tr><td style="padding:9px 12px;"><code>tocSectionDown(event)</code></td><td style="padding:9px 12px;">Swaps originalPageSequence with following page; PUTs to backend</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card mt-md">
+          <div class="card__content">
+            <h3 class="font-semibold mb-sm">page-tray.js — Step Operations</h3>
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg-secondary);">
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Function</th>
+                  <th style="padding:10px 12px;text-align:left;border-bottom:2px solid var(--border-light);">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>toinsertNewLevelSupport(event, pages)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Opens Asset Library to add a new LOS variant to an existing step</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>capitalizeLOS(str)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Formats "LIGHT-MULTILINGUAL" → "Light-Multilingual" for display</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>canDeletePage(pages)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Guard: returns false if page is CORE and sibling LOS variants exist</td></tr>
+                <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);"><code>tocSectionEditPopup(event, pages)</code></td><td style="padding:9px 12px;border-bottom:1px solid var(--border-light);">Opens #formsModal pre-filled with existing step metadata for editing</td></tr>
+                <tr><td style="padding:9px 12px;"><code>tocSectionClonePopup(event, pages)</code></td><td style="padding:9px 12px;">Opens modal to clone step into a new LOS level</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Known Behaviors -->
+      <section class="section" id="behaviors">
+        <div class="section__header">
+          <svg class="section__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+          <h2 class="section__title">Known Behaviors &amp; Design Notes</h2>
+        </div>
+        <div class="card">
+          <div class="card__content">
+            <ul>
+              <li><strong>Auto-save on navigate:</strong> Clicking any TOC row triggers <code>savePageContent()</code> and <code>saveTOCtoBackend()</code> before the new page loads — no explicit "Save" button needed.</li>
+              <li><strong>Heading sync:</strong> Canvas headings (<code>.chapter-headingNew-h1</code>, <code>[data-type="header"]</code>) are scanned and synced to TOC on every page save, keeping the TOC chapter list in sync with canvas content.</li>
+              <li><strong>CORE-first rule:</strong> The CORE LOS variant must always be the first page created in a step. Other LOS variants (LIGHT, MODERATE) are derived from or cloned after CORE.</li>
+              <li><strong>Drag-sort scope:</strong> Only the Steps list (<code>.toc-steps-list</code>) is drag-sortable. The Instructions for Students and Instructions for Teacher entries are fixed positions.</li>
+              <li><strong>Internal hyperlinks:</strong> <code>createRefidmap()</code> populates <code>window.orgSequenceRefidmap</code> used by the internal hyperlink picker to display page titles by reference ID.</li>
+              <li><strong>Full refresh after mutation:</strong> Every add, delete, or clone operation calls <code>getTOCData()</code> again to reload the authoritative server state — there is no optimistic local update.</li>
+              <li><strong>TOCFlag check:</strong> The entire TOC panel is wrapped in <code>ng-if="TOCFlag==='flat'"</code> — books configured with a different TOC mode will not render this panel.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end content-wrapper -->
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../../assets/js/utils.js"></script>
+  <script src="../../assets/js/sidebar-loader.js"></script>
+  <script src="../../assets/js/mermaid-init.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+  <script src="../../assets/js/markdown-renderer.js"></script>
+
+</body>
+</html>
