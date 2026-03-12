@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Author Top Bar (Docked Text Editor Panel) – Shared RTE toolbar for formatting text in Elements, Layout, and Widgets.">
+  <title>Author Top Bar | Documentation Portal</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/markdown.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay"></div>
+  <main class="main-content">
+    <header class="header">
+      <h1 class="header__title">Author Top Bar (Docked Text Editor Panel)</h1>
+      <nav class="breadcrumb">
+        <div class="breadcrumb__item"><a href="../index.html" class="breadcrumb__link">Home</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><a href="../index.html#components" class="breadcrumb__link">Components</a><span class="breadcrumb__separator">/</span></div>
+        <div class="breadcrumb__item"><span class="breadcrumb__current">Author Top Bar</span></div>
+      </nav>
+    </header>
+    <div class="content-wrapper">
+      <section class="section">
+        <h1 class="page-title">Author Top Bar</h1>
+        <p class="page-subtitle">Shared Rich Text Editor (RTE) toolbar that appears when authors select or focus text in contenteditable areas. Used by Elements, Layout content, and Widgets for formatting (font, size, bold, italic, alignment, lists, links, image, equation, special characters).</p>
+        <div class="quick-links">
+          <a href="#overview" class="quick-link">Overview</a>
+          <a href="#architecture" class="quick-link">Architecture</a>
+          <a href="#features-flow" class="quick-link">Features Flow</a>
+          <a href="#integration" class="quick-link">Integration</a>
+          <a href="#files" class="quick-link">Files</a>
+          <a href="#behaviors" class="quick-link">Behaviors</a>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="section__header">
+          <h2 class="section__title">Overview</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <p>The Author Top Bar is implemented as the <strong>Docked Text Editor Panel</strong>: an AngularJS element <code>&lt;dockedtexteditorpanel id="editor" class="docked-text-editor"&gt;</code> that loads the template <code>templates/textEditor.html</code>. It provides a horizontal bar of controls for font family, font size, bold, italic, underline, text/background color, alignment, line height, lists, indent, hyperlinks (internal/external/glossary), insert image, math equation, split text, and special character insertion. Formatting is applied via <code>document.execCommand</code> and shared logic in <code>editor/floatingTextPanel.js</code>.</p>
+          <div class="info-grid" style="margin-top:20px;">
+            <div class="info-card"><div class="info-card__label">Directive</div><div class="info-card__value">dockedtexteditorpanel</div></div>
+            <div class="info-card"><div class="info-card__label">Template</div><div class="info-card__value">templates/textEditor.html</div></div>
+            <div class="info-card"><div class="info-card__label">Script</div><div class="info-card__value">editor/floatingTextPanel.js</div></div>
+            <div class="info-card"><div class="info-card__label">CSS</div><div class="info-card__value">css/authoring/floatingTextPanel.css</div></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section__header">
+          <h2 class="section__title">Architecture</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <pre class="mermaid">
+flowchart LR
+  subgraph Host
+    A[index.html]
+  end
+  subgraph Directive
+    B[dockedtexteditorpanel]
+  end
+  subgraph Template
+    C[textEditor.html]
+  end
+  subgraph Logic
+    D[floatingTextPanel.js]
+    E[ngcontroller.js]
+  end
+  A --> B
+  B --> C
+  C --> D
+  C --> E
+  D --> F[document.execCommand]
+  E --> G[Color / Link / Math / Split / Special]
+          </pre>
+        </div></div>
+      </section>
+
+      <section class="section" id="features-flow">
+        <div class="section__header">
+          <h2 class="section__title">Features Flow</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <table class="doc-table">
+            <thead>
+              <tr><th>Feature</th><th>Control</th><th>Action / Flow</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Font family</td><td>#font-family select</td><td>editDoc('fontname', value) → execCommand / fontChange()</td></tr>
+              <tr><td>Font size</td><td>#font-size select</td><td>editDoc('fontSize', value) → onfontSizeChange → changefontSize (rem)</td></tr>
+              <tr><td>Bold / Italic / Underline</td><td>Buttons</td><td>editDoc('bold'|'italic'|'underline') → floatingPanelApply → execCommand (italic has custom span)</td></tr>
+              <tr><td>Text color</td><td>#color1 + picker</td><td>editDoc('foreColor', color)</td></tr>
+              <tr><td>Background color</td><td>.bgColor1 + picker</td><td>editDoc('backColor', color)</td></tr>
+              <tr><td>Strikethrough / Sub / Super</td><td>Buttons</td><td>editDoc('strikethrough'|'subscript'|'superscript') → execCommand</td></tr>
+              <tr><td>Clear formatting</td><td>#removeFormat</td><td>editDoc('removeFormat') → clickRemoveFormat()</td></tr>
+              <tr><td>Alignment</td><td>.align-left/center/right/justify</td><td>editDoc('justifyleft'|'justifycenter'|'justifyright'|'justifyFull')</td></tr>
+              <tr><td>Line height</td><td>Dropdown 1, 1.15, 1.5, 2</td><td>changeLineHeight(value) → CSS line-height on parents</td></tr>
+              <tr><td>Ordered / Unordered list</td><td>Buttons</td><td>editDoc('insertOrderedList'|'insertUnorderedList')</td></tr>
+              <tr><td>Indent / Outdent</td><td>Buttons</td><td>editDoc('indent'|'outdent') with nesting guards</td></tr>
+              <tr><td>Hyperlink</td><td>Link dropdown</td><td>addEditHyperLink(event, 'internal'|'external'|'glossary')</td></tr>
+              <tr><td>Insert image</td><td>#inline-plain-image (uploadfiles)</td><td>File picker → inline image in contenteditable</td></tr>
+              <tr><td>Math Editor</td><td>#equation</td><td>onMathLiveClick(event) → equation popup</td></tr>
+              <tr><td>Split text</td><td>#splitParaButton</td><td>splitPara() — split paragraph at cursor</td></tr>
+              <tr><td>Special character</td><td>#specialcharacter</td><td>specialcharcall → insertChar(rowItem)</td></tr>
+              <tr><td>Format painter</td><td>Paint format icon</td><td>allowCopyFormat() → on next apply formatPainter()</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+      </section>
+
+      <section class="section" id="integration">
+        <div class="section__header">
+          <h2 class="section__title">Integration with Elements, Layout, TOC, Widgets</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <ul style="list-style:disc;padding-left:20px;line-height:1.8;">
+            <li><strong>Elements</strong> — Title, Header, Text (paragraph), Callout Box, Thumbs Card Header, Lesson Opener use contenteditable; selecting text shows the top bar and formatting applies to their fieldData (e.g. header, body, title).</li>
+            <li><strong>Layout</strong> — Layout column content that is contenteditable uses the same RTE; the panel appears when focus is inside that content.</li>
+            <li><strong>TOC</strong> — TOC does not use the top bar; TOC entries are plain text synced from canvas headings.</li>
+            <li><strong>Widgets</strong> — Extended Response (ITC), Table GO, Graphic Organizer, Annotation, and other widgets with rich-text fields show the top bar when the author selects text. Some buttons are disabled in certain contexts (e.g. Math in ITC, alignment in Title) via classes like <code>cursorNotAllowedInPanel</code>, <code>disableOnlyTable</code>.</li>
+          </ul>
+        </div></div>
+      </section>
+
+      <section class="section" id="files">
+        <div class="section__header">
+          <h2 class="section__title">File Structure</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <pre style="background:#f5f5f5;padding:12px;border-radius:6px;overflow:auto;">
+KITABOO_Authoring/
+├── index.html                    ← &lt;dockedtexteditorpanel&gt; host
+├── editor/
+│   ├── ngdragdrop.js             ← directive definition
+│   └── floatingTextPanel.js      ← editDoc, floatingPanelApply, changeLineHeight, etc.
+├── templates/
+│   └── textEditor.html           ← toolbar markup
+└── css/authoring/
+    └── floatingTextPanel.css     ← .docked-text-editor, .editing-container</pre>
+        </div></div>
+      </section>
+
+      <section class="section" id="behaviors">
+        <div class="section__header">
+          <h2 class="section__title">Known Behaviors &amp; Notes</h2>
+        </div>
+        <div class="card"><div class="card__content">
+          <ul style="list-style:disc;padding-left:20px;line-height:1.8;">
+            <li>Single global panel instance; active contenteditable is determined by <code>document.getSelection()</code> and parent <code>data-type</code>.</li>
+            <li>Panel can be hidden with <code>$(".docked-text-editor").hide()</code> (e.g. preview mode).</li>
+            <li>Open dropdowns (".open") are closed when clicking outside or applying format.</li>
+            <li>Font family and font size selects are reset on certain selection changes (#font-family → "NA", #font-size → " ").</li>
+            <li>Title element can disable alignment/justify via <code>cursorNotAllowedInPane</code>.</li>
+            <li>Apply All: applying format may set <code>ignoreApplyAll = true</code> and strip inline formatting so the element follows global style.</li>
+            <li>Italic uses custom span (.italics/.nonItalics) in some code paths.</li>
+            <li>After format, <code>refreshMathFieldsForStyleChange('#target')</code> and ng-model trigger keep saved JSON in sync.</li>
+          </ul>
+        </div></div>
+      </section>
+    </div>
+  </main>
+  <script src="../assets/js/marked.min.js"></script>
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/sidebar-loader.js"></script>
+  <script src="../assets/js/mermaid-init.js"></script>
+  <script src="../assets/js/navigation.js"></script>
+  <script src="../assets/js/markdown-renderer.js"></script>
+</body>
+</html>
