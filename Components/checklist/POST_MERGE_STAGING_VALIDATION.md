@@ -15,6 +15,58 @@ This document describes the verification workflow developers must follow after m
 
 **Main development branch:** `carnegie_master`
 
+**Interactive report:** After deploying Author to staging, open the step-by-step validation report in your browser:  
+**https://qapartnerportal.kitaboo.com/Author-Staging-Deployment-Validation-Report.html**  
+
+- **Local:** Open `KITABOO_Authoring/Author-Staging-Deployment-Validation-Report.html` in your browser, or run a local server (e.g. `npx serve .` from `KITABOO_Authoring`) and open `http://localhost:3000/Author-Staging-Deployment-Validation-Report.html`.
+- **Commit ID/message:** Filled automatically. Run once from closify root: `node scripts/install-git-hooks.js` — then the report updates after every `git commit`. Or run manually: `npm run inject-report`.
+- **Build:** The report is included in `gulp build` output (dist/ and archive.zip); Jenkins build injects the current commit before publishing.
+
+---
+
+## Validation Flow Diagram
+
+The following diagram shows the end-to-end flow of the post-merge staging validation process:
+
+```mermaid
+flowchart TD
+    Start([Merge to carnegie_master]) --> A[1. Build Verification]
+    A --> |Jenkins: html_authoring_QC-2_carnegie| A1{Build success?}
+    A1 --> |No| FixBuild[Fix & re-run build]
+    FixBuild --> A
+    A1 --> |Yes| B[2. Author Workspace Validation]
+    B --> B1[Access Author staging]
+    B1 --> B2[Verify feature/bug fix in Author UI]
+    B2 --> C[3. Book Publishing Process]
+    C --> C1[Publish book from Author staging]
+    C1 --> C2[Capture REG ID]
+    C2 --> D[4. Reader / CLP Validation]
+    D --> D1[Open saltire.lti.app/platform]
+    D1 --> D2[Launch book with REG ID]
+    D2 --> D3[Test as Student]
+    D2 --> D4[Test as Teacher]
+    D3 --> E[5. Reader Workspace Validation]
+    D4 --> E
+    E --> E1[Verify Author changes in Reader]
+    E1 --> E2[Test affected components]
+    E2 --> F[6. Final Validation Checklist]
+    F --> F1{All 6 items checked?}
+    F1 --> |No| Review[Review failed items]
+    Review --> B
+    F1 --> |Yes| Done([Sign off - Validation Complete])
+```
+
+### Steps at a Glance
+
+| Step | Phase | Key action |
+|------|--------|------------|
+| 1 | Build Verification | Run Jenkins build for `carnegie_master` → confirm SUCCESS |
+| 2 | Author Validation | Verify feature/fix on Author staging server |
+| 3 | Book Publishing | Publish book from Author staging → save **REG ID** |
+| 4 | Reader / CLP | Open CLP → launch book with REG ID as **Student** and **Teacher** |
+| 5 | Reader Validation | Confirm Author changes in Reader; test components; check for regressions |
+| 6 | Final Checklist | Complete all 6 sign-off items before closing validation |
+
 ---
 
 ## 1. Build Verification
@@ -176,7 +228,3 @@ Use this summary checklist before considering staging validation complete.
 - **Publishing fails:** Check Author staging logs and browser console; ensure all required content and configuration are present.
 - **Book does not launch on CLP:** Verify REG ID, user roles, and that the book was published successfully; retry with a new publish if necessary.
 - **Reader behavior differs from Author:** Re-publish the book after Author changes and validate again with a new REG ID.
-
----
-
-*Last updated: March 2025. Use this guide for every post-merge validation on staging after merging into `carnegie_master`.*
